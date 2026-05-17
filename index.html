@@ -3,26 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Etéreo Lab Studio | La ciencia detrás de un sentimiento</title>
-    <meta name="description" content="Convertimos memorias intangibles en piezas de arte físico y digital para que perduren.">
+    <title>Etéreo Lab Studio | Cápsulas del Tiempo</title>
     
     <meta property="og:title" content="Etéreo Lab Studio">
-    <meta property="og:description" content="Diseñamos cápsulas del tiempo. Arte físico y digital.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800"> <meta property="og:url" content="https://etereolabstudio.github.io/etereo-landing/">
-    <meta property="og:type" content="website">
+    <meta property="og:description" content="La ciencia detrás de un sentimiento. Arte físico y digital.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400&family=Playfair+Display:ital,wght@0,400;0,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* =========================================
+           1. MOTOR DE COLOR (MODO OSCURO / CLARO)
+           ========================================= */
+        :root {
+            /* Modo Oscuro (Espacial / Elegante) */
+            --bg-color: #070707;
+            --text-color: #B0B0B0;
+            --title-color: #FFFFFF;
+            --accent-color: #2A2A2A;
+            --nav-bg: rgba(7, 7, 7, 0.85);
+        }
+
+        [data-theme="light"] {
+            /* Modo Claro (Beige Editorial Papel de Algodón) */
+            --bg-color: #F7F5F0; 
+            --text-color: #555555;
+            --title-color: #1A1A1A;
+            --accent-color: #DCD8CC;
+            --nav-bg: rgba(247, 245, 240, 0.85);
+        }
+
+        /* Transiciones fluidas para el cambio de modo */
+        body, nav, header, section, footer, div, h1, h2, h3, p, button {
+            transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
+        }
+
+        /* =========================================
+           2. RESETEO Y TIPOGRAFÍA BASE
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: var(--title-color);
+        }
+
+        /* =========================================
+           3. NAVEGACIÓN CRISTAL (GLASSMORPHISM)
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--accent-color);
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .theme-btn {
+            background: transparent;
+            color: var(--title-color);
+            border: 1px solid var(--accent-color);
+            padding: 8px 16px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .theme-btn:hover {
+            border-color: var(--title-color);
+        }
+
+        /* =========================================
+           4. SECCIONES Y ESTRUCTURA EDITORIAL
+           ========================================= */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p.slogan {
+            font-size: 1.2rem;
+            max-width: 650px;
+            font-style: italic;
+        }
+
+        section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
+
+        h2.section-title {
+            font-size: 2.8rem;
+            letter-spacing: 4px;
+            margin-bottom: 80px;
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 30px;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            align-items: center;
+        }
+
+        @media (min-width: 900px) {
+            .collection-grid { grid-template-columns: 1fr 1fr; }
+            /* Efecto revista: alterna imagen izquierda/derecha */
+            .collection-grid:nth-child(even) .img-container { order: 2; }
+            .collection-grid:nth-child(even) .text-container { order: 1; }
+        }
+
+        .text-container h3 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+        }
+
+        .text-container p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Contenedores de imagen perfectos */
+        .img-container {
+            width: 100%;
+            height: 500px; /* Altura uniforme para todas las fotos */
+            overflow: hidden;
+            border: 1px solid var(--accent-color);
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Evita que las imágenes se deformen */
+            transition: transform 1.5s ease;
+        }
+
+        .img-container:hover img { transform: scale(1.05); }
+
+        /* =========================================
+           5. BOTONES Y DETALLES PREMIUM
+           ========================================= */
+        /* El botón de audio rediseñado */
+        .audio-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--title-color);
+            border: 1px solid var(--title-color);
+            font-family: 'Lato', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .audio-btn:hover {
+            background: var(--title-color);
+            color: var(--bg-color);
+        }
+
+        .icon { font-size: 1.2rem; }
+
+        footer {
+            text-align: center;
+            padding: 100px 20px;
+            border-top: 1px solid var(--accent-color);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background-color: var(--title-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            transition: opacity 0.3s;
+        }
+
+        .cta-btn:hover { opacity: 0.8; }
+
+        /* =========================================
+           6. ANIMACIONES (FADE-IN SUTIL)
+           ========================================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-brand">Etéreo Lab</div>
-        <button class="theme-toggle-btn" id="theme-btn">MODO CLARO</button>
+        <button class="theme-btn" id="theme-btn">Modo Claro</button>
     </nav>
 
     <header class="hero fade-in">
@@ -31,39 +254,108 @@
     </header>
 
     <section>
-        <h2 class="fade-in">Nuestro Portafolio</h2>
+        <h2 class="section-title fade-in">Nuestro Portafolio</h2>
 
         <div class="collection-grid fade-in">
-            <div class="placeholder-img">
-                <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&q=80&w=800" alt="Mapa Estelar Astronómico">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800" alt="Mapa Estelar">
             </div>
-            <div class="collection-text">
+            <div class="text-container">
                 <h3>Colección Astronómica</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en el que tu vida cambió para siempre.</p>
-                <p><strong>Mapas Estelares:</strong> La bóveda celeste exacta de tu fecha especial con coordenadas precisas.</p>
+                <p><strong>Mapas Estelares:</strong> La bóveda celeste exacta de tu fecha especial con latitud y coordenadas precisas.</p>
             </div>
         </div>
 
         <div class="collection-grid fade-in">
-            <div class="placeholder-img">
-                <img src="https://images.unsplash.com/photo-1516280440502-a2f72a048d8b?auto=format&fit=crop&q=80&w=800" alt="Onda Sonora">
-            </div>
-            <div class="collection-text">
+            <div class="text-container">
                 <h3>Colección Sonora</h3>
                 <p>Transformamos un "te amo", el latido de tu bebé o su primera canción en una onda de sonido visual y elegante.</p>
+                <p>Cada onda de sonido es una huella dactilar acústica, única e irrepetible.</p>
                 
                 <audio id="audio-sample" src="https://actions.google.com/sounds/v1/human_voices/human_heartbeat.ogg"></audio>
-                <button id="play-audio-btn" class="audio-btn">▶ Escuchar el latido</button>
+                <button id="play-audio-btn" class="audio-btn">
+                    <span id="audio-icon" class="icon">▶</span> 
+                    <span id="audio-text">Escuchar el latido</span>
+                </button>
+            </div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1516280440502-a2f72a048d8b?auto=format&fit=crop&q=80&w=800" alt="Onda Sonora">
+            </div>
+        </div>
+
+        <div class="collection-grid fade-in">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&q=80&w=800" alt="Tecnología NFC">
+            </div>
+            <div class="text-container">
+                <h3>La Dimensión Oculta</h3>
+                <p>Integramos tecnología NFC invisible directamente en el cuadro. No alteramos el diseño minimalista.</p>
+                <p>Solo acerca tu celular desbloqueado y la memoria cobrará vida digitalmente al instante. El puente definitivo entre el arte físico y tus emociones digitales.</p>
             </div>
         </div>
     </section>
 
     <footer class="fade-in">
-        <h2>¿Listo para enmarcar tu historia?</h2>
-        <a href="https://wa.me/523332227033" class="cta-button">Contactar Ahora</a>
-        <p>Instagram: @Etereolabstudio</p>
+        <h2 class="section-title" style="border: none; margin-bottom: 40px;">¿Listo para enmarcar tu historia?</h2>
+        <a href="https://wa.me/523332227033" class="cta-btn">Contactar Ahora</a>
+        <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem;">Instagram: @Etereolabstudio</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // 1. MODO CLARO / OSCURO (CON CAMBIO DE TEXTO)
+        const themeBtn = document.getElementById('theme-btn');
+        const htmlElement = document.documentElement;
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                htmlElement.setAttribute('data-theme', 'light');
+                themeBtn.textContent = 'Modo Oscuro';
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = 'Modo Claro';
+            }
+        });
+
+        // 2. ANIMACIONES AL HACER SCROLL
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => appearOnScroll.observe(fader));
+
+        // 3. AUDIO PLAYER MEJORADO
+        const audioBtn = document.getElementById('play-audio-btn');
+        const audioSample = document.getElementById('audio-sample');
+        const audioIcon = document.getElementById('audio-icon');
+        const audioText = document.getElementById('audio-text');
+
+        if(audioBtn && audioSample) {
+            audioBtn.addEventListener('click', () => {
+                if (audioSample.paused) {
+                    audioSample.play();
+                    audioIcon.textContent = '■';
+                    audioText.textContent = 'Pausar audio';
+                } else {
+                    audioSample.pause();
+                    audioIcon.textContent = '▶';
+                    audioText.textContent = 'Escuchar el latido';
+                }
+            });
+            // Cuando termine el audio, resetear el botón
+            audioSample.onended = function() {
+                audioIcon.textContent = '▶';
+                audioText.textContent = 'Escuchar el latido';
+            };
+        }
+    </script>
 </body>
 </html>
