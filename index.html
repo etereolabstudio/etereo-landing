@@ -259,15 +259,21 @@
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <div class="carousel-slide">
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800" alt="Mapa Estelar" loading="lazy"></div>
+                        <div class="img-container">
+                            <img src="./mapa-estelar.jpg" alt="Mapa Estelar" loading="lazy">
+                        </div>
                         <div class="slide-caption">Mapas Estelares</div>
                     </div>
                     <div class="carousel-slide">
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?auto=format&fit=crop&q=80&w=800" alt="Fases Lunares" loading="lazy"></div>
+                        <div class="img-container">
+                            <img src="./fase-lunar.jpg" alt="Fases Lunares" loading="lazy">
+                        </div>
                         <div class="slide-caption">Fases Lunares</div>
                     </div>
                     <div class="carousel-slide">
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&q=80&w=800" alt="Alineación Planetaria" loading="lazy"></div>
+                        <div class="img-container">
+                            <img src="./alineacion-planetaria.jpg" alt="Alineación Planetaria" loading="lazy">
+                        </div>
                         <div class="slide-caption">Alineación Planetaria</div>
                     </div>
                 </div>
@@ -472,7 +478,6 @@
         function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
         
-        // Cerrar modal al dar clic fuera de ella
         document.querySelectorAll('.modal-overlay').forEach(overlay => {
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) { overlay.classList.remove('active'); document.body.style.overflow = 'auto'; }
