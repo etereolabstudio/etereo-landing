@@ -13,36 +13,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
+    <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
+
     <style>
         /* =========================================
-           1. MOTOR DE COLOR (MODO OSCURO / CLARO)
+           1. VARIABLES Y MOTOR DE COLOR
            ========================================= */
         :root {
-            /* Modo Oscuro (Espacial / Elegante) */
             --bg-color: #070707;
             --text-color: #B0B0B0;
             --title-color: #FFFFFF;
             --accent-color: #2A2A2A;
             --nav-bg: rgba(7, 7, 7, 0.85);
+            --card-hover: 0 20px 40px rgba(255,255,255,0.05);
         }
 
         [data-theme="light"] {
-            /* Modo Claro (Beige Editorial Papel de Algodón) */
             --bg-color: #F7F5F0; 
             --text-color: #555555;
             --title-color: #1A1A1A;
             --accent-color: #DCD8CC;
             --nav-bg: rgba(247, 245, 240, 0.85);
+            --card-hover: 0 20px 40px rgba(0,0,0,0.08);
         }
 
-        /* Transiciones fluidas para el cambio de modo */
         body, nav, header, section, footer, div, h1, h2, h3, p, button {
-            transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
+            transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
         }
 
-        /* =========================================
-           2. RESETEO Y TIPOGRAFÍA BASE
-           ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -61,7 +59,7 @@
         }
 
         /* =========================================
-           3. NAVEGACIÓN CRISTAL (GLASSMORPHISM)
+           2. NAVBAR CRISTAL
            ========================================= */
         .navbar {
             position: fixed;
@@ -72,17 +70,13 @@
             justify-content: space-between;
             align-items: center;
             background: var(--nav-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--accent-color);
             z-index: 1000;
         }
 
-        .nav-brand {
-            font-size: 1.3rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
+        .nav-brand { font-size: 1.3rem; letter-spacing: 3px; text-transform: uppercase; }
 
         .theme-btn {
             background: transparent;
@@ -94,14 +88,13 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
+            border-radius: 4px;
         }
 
-        .theme-btn:hover {
-            border-color: var(--title-color);
-        }
+        .theme-btn:hover { border-color: var(--title-color); }
 
         /* =========================================
-           4. SECCIONES Y ESTRUCTURA EDITORIAL
+           3. HERO Y ANIMACIÓN DE SCROLL
            ========================================= */
         .hero {
             height: 100vh;
@@ -111,21 +104,50 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: clamp(3rem, 5vw, 5rem); /* Se adapta al tamaño de pantalla */
             letter-spacing: 8px;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
 
-        .hero p.slogan {
-            font-size: 1.2rem;
-            max-width: 650px;
-            font-style: italic;
+        .hero p.slogan { font-size: 1.2rem; max-width: 650px; font-style: italic; }
+
+        /* Icono animado del ratón para indicar bajar */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--title-color);
+            border-radius: 15px;
+            opacity: 0.7;
+        }
+        
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: var(--title-color);
+            border-radius: 50%;
+            animation: scroll-down 2s infinite;
         }
 
+        @keyframes scroll-down {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 20px); }
+        }
+
+        /* =========================================
+           4. SECCIONES Y EFECTO DE LEVITACIÓN
+           ========================================= */
         section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
 
         h2.section-title {
@@ -142,77 +164,90 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 60px;
-            margin-bottom: 100px;
+            margin-bottom: 120px;
             align-items: center;
         }
 
         @media (min-width: 900px) {
-            .collection-grid { grid-template-columns: 1fr 1fr; }
-            /* Efecto revista: alterna imagen izquierda/derecha */
+            .collection-grid { grid-template-columns: 1fr 1fr; gap: 80px;}
             .collection-grid:nth-child(even) .img-container { order: 2; }
             .collection-grid:nth-child(even) .text-container { order: 1; }
         }
 
-        .text-container h3 {
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-        }
+        .text-container h3 { font-size: 2.2rem; margin-bottom: 25px; }
+        .text-container p { margin-bottom: 20px; font-size: 1.1rem; }
 
-        .text-container p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        /* Contenedores de imagen perfectos */
+        /* Contenedor de imagen con efecto WOW (Levitación) */
         .img-container {
             width: 100%;
-            height: 500px; /* Altura uniforme para todas las fotos */
+            height: 550px; 
             overflow: hidden;
             border: 1px solid var(--accent-color);
+            border-radius: 8px; /* Bordes ligeramente redondeados */
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
         }
 
         .img-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Evita que las imágenes se deformen */
+            object-fit: cover;
             transition: transform 1.5s ease;
+        }
+
+        .img-container:hover {
+            transform: translateY(-10px); /* El cuadro flota hacia arriba */
+            box-shadow: var(--card-hover);
         }
 
         .img-container:hover img { transform: scale(1.05); }
 
         /* =========================================
-           5. BOTONES Y DETALLES PREMIUM
+           5. REPRODUCTOR WAVESURFER PREMIUM
            ========================================= */
-        /* El botón de audio rediseñado */
-        .audio-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 20px;
-            padding: 14px 28px;
-            background: transparent;
-            color: var(--title-color);
-            border: 1px solid var(--title-color);
-            font-family: 'Lato', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s ease;
+        .audio-player-wrapper {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.02);
         }
 
-        .audio-btn:hover {
+        #waveform { margin-bottom: 20px; }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             background: var(--title-color);
             color: var(--bg-color);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
         }
 
-        .icon { font-size: 1.2rem; }
+        .play-btn:hover { transform: scale(1.1); }
 
-        footer {
-            text-align: center;
-            padding: 100px 20px;
-            border-top: 1px solid var(--accent-color);
+        .audio-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--title-color);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
         }
+
+        /* =========================================
+           6. FOOTER Y ANIMACIONES
+           ========================================= */
+        footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--accent-color); }
 
         .cta-btn {
             display: inline-block;
@@ -225,14 +260,12 @@
             letter-spacing: 3px;
             font-size: 0.9rem;
             margin-bottom: 40px;
-            transition: opacity 0.3s;
+            border-radius: 4px;
+            transition: opacity 0.3s, transform 0.3s;
         }
 
-        .cta-btn:hover { opacity: 0.8; }
+        .cta-btn:hover { opacity: 0.8; transform: translateY(-3px); }
 
-        /* =========================================
-           6. ANIMACIONES (FADE-IN SUTIL)
-           ========================================= */
         .fade-in {
             opacity: 0;
             transform: translateY(40px);
@@ -251,6 +284,7 @@
     <header class="hero fade-in">
         <h1>Etéreo Lab Studio</h1>
         <p class="slogan">La ciencia detrás de un sentimiento. Convertimos memorias intangibles en piezas de arte físico y digital para que perduren.</p>
+        <div class="scroll-indicator"></div>
     </header>
 
     <section>
@@ -271,13 +305,15 @@
             <div class="text-container">
                 <h3>Colección Sonora</h3>
                 <p>Transformamos un "te amo", el latido de tu bebé o su primera canción en una onda de sonido visual y elegante.</p>
-                <p>Cada onda de sonido es una huella dactilar acústica, única e irrepetible.</p>
                 
-                <audio id="audio-sample" src="https://actions.google.com/sounds/v1/human_voices/human_heartbeat.ogg"></audio>
-                <button id="play-audio-btn" class="audio-btn">
-                    <span id="audio-icon" class="icon">▶</span> 
-                    <span id="audio-text">Escuchar el latido</span>
-                </button>
+                <div class="audio-player-wrapper">
+                    <div id="waveform"></div>
+                    <div class="audio-controls">
+                        <button class="play-btn" id="play-btn">▶</button>
+                        <span class="audio-title">El latido de su historia</span>
+                    </div>
+                </div>
+
             </div>
             <div class="img-container">
                 <img src="https://images.unsplash.com/photo-1516280440502-a2f72a048d8b?auto=format&fit=crop&q=80&w=800" alt="Onda Sonora">
@@ -303,22 +339,55 @@
     </footer>
 
     <script>
-        // 1. MODO CLARO / OSCURO (CON CAMBIO DE TEXTO)
+        // 1. INICIALIZAR EL REPRODUCTOR WAVESURFER (LA MAGIA VISUAL)
+        // Usamos un archivo mp3 genérico seguro. Para tu producción, cámbialo por "latido.mp3"
+        const wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            waveColor: '#B0B0B0',      // Color de la onda sin reproducir
+            progressColor: '#FFFFFF',  // Color de la onda al avanzar
+            cursorColor: 'transparent',
+            barWidth: 3,               // Grosor de las barras
+            barRadius: 3,              // Bordes redondeados de las barras
+            height: 60,                // Altura del reproductor
+            url: 'https://raw.githubusercontent.com/rafaelreis-hotmart/Audio-Sample/main/sample.mp3'
+        });
+
+        // Controles de Play/Pause del audio
+        const playBtn = document.getElementById('play-btn');
+        playBtn.addEventListener('click', () => {
+            wavesurfer.playPause();
+            if (wavesurfer.isPlaying()) {
+                playBtn.textContent = '■'; // Cuadrado de Stop
+            } else {
+                playBtn.textContent = '▶'; // Triángulo de Play
+            }
+        });
+
+        wavesurfer.on('finish', () => {
+            playBtn.textContent = '▶';
+        });
+
+        // 2. LÓGICA DE MODO CLARO / OSCURO (Conexión con Wavesurfer)
         const themeBtn = document.getElementById('theme-btn');
         const htmlElement = document.documentElement;
 
         themeBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
+            
             if (currentTheme === 'dark') {
                 htmlElement.setAttribute('data-theme', 'light');
                 themeBtn.textContent = 'Modo Oscuro';
+                // Cambiar los colores de la onda de sonido para el fondo claro
+                wavesurfer.setOptions({ waveColor: '#DCD8CC', progressColor: '#1A1A1A' });
             } else {
                 htmlElement.setAttribute('data-theme', 'dark');
                 themeBtn.textContent = 'Modo Claro';
+                // Regresar los colores para el fondo oscuro espacial
+                wavesurfer.setOptions({ waveColor: '#B0B0B0', progressColor: '#FFFFFF' });
             }
         });
 
-        // 2. ANIMACIONES AL HACER SCROLL
+        // 3. ANIMACIONES AL HACER SCROLL
         const faders = document.querySelectorAll('.fade-in');
         const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
 
@@ -331,31 +400,6 @@
         }, appearOptions);
 
         faders.forEach(fader => appearOnScroll.observe(fader));
-
-        // 3. AUDIO PLAYER MEJORADO
-        const audioBtn = document.getElementById('play-audio-btn');
-        const audioSample = document.getElementById('audio-sample');
-        const audioIcon = document.getElementById('audio-icon');
-        const audioText = document.getElementById('audio-text');
-
-        if(audioBtn && audioSample) {
-            audioBtn.addEventListener('click', () => {
-                if (audioSample.paused) {
-                    audioSample.play();
-                    audioIcon.textContent = '■';
-                    audioText.textContent = 'Pausar audio';
-                } else {
-                    audioSample.pause();
-                    audioIcon.textContent = '▶';
-                    audioText.textContent = 'Escuchar el latido';
-                }
-            });
-            // Cuando termine el audio, resetear el botón
-            audioSample.onended = function() {
-                audioIcon.textContent = '▶';
-                audioText.textContent = 'Escuchar el latido';
-            };
-        }
     </script>
 </body>
 </html>
