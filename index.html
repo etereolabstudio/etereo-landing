@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etéreo Lab Studio | La ciencia detrás de un sentimiento</title>
     <style>
         /* =========================================
-           VARIABLES Y FUNDAMENTOS CSS
-           Usamos variables para mantener consistencia.
+           1. VARIABLES CSS (EL CEREBRO DEL COLOR)
            ========================================= */
         :root {
+            /* Modo Oscuro (Por defecto) */
             --bg-color: #0a0a0a;
-            --text-color: #f4f4f4;
-            --accent-color: #8c8c8c;
-            --font-main: 'Helvetica Neue', Arial, sans-serif;
-            --font-serif: 'Georgia', serif;
+            --text-color: #e0e0e0;
+            --title-color: #ffffff;
+            --accent-color: #333333;
+            --btn-bg: #ffffff;
+            --btn-text: #000000;
         }
 
-        /* Reseteo básico para que se vea igual en todos los navegadores */
+        [data-theme="light"] {
+            /* Modo Claro (Inspirado en tu PDF editorial beige) */
+            --bg-color: #F5F2EB; /* Un beige muy elegante y limpio */
+            --text-color: #333333; /* Gris oscuro para lectura, no negro puro */
+            --title-color: #111111;
+            --accent-color: #D1C9B8; /* Beige más oscuro para bordes/detalles */
+            --btn-bg: #111111;
+            --btn-text: #ffffff;
+        }
+
+        /* Transición suave para todos los colores de la página */
+        body, header, section, footer, div, h1, h2, h3, p {
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* =========================================
+           2. TIPOGRAFÍA Y RESETEO
+           ========================================= */
         * {
             margin: 0;
             padding: 0;
@@ -27,186 +45,268 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: var(--font-main);
+            font-family: 'Times New Roman', Times, serif; /* Tipografía editorial */
             line-height: 1.6;
-            overflow-x: hidden; /* Evita scroll horizontal indeseado */
+            overflow-x: hidden;
+        }
+
+        /* Botón flotante para cambiar de tema */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            color: var(--title-color);
+            border: 1px solid var(--title-color);
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 0.9rem;
+            z-index: 1000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--title-color);
+            color: var(--bg-color);
         }
 
         /* =========================================
-           SECCIÓN HERO (La primera pantalla)
+           3. ANIMACIONES (CLASES BASE)
+           ========================================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px); /* Empieza 30px más abajo */
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0); /* Sube a su posición original */
+        }
+
+        /* =========================================
+           4. ESTRUCTURA VISUAL
            ========================================= */
         .hero {
-            height: 100vh; /* Ocupa el 100% de la pantalla del celular */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 20px;
-            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
         }
 
         .hero h1 {
-            font-size: 3rem;
-            letter-spacing: 4px;
+            color: var(--title-color);
+            font-size: 3.5rem;
+            letter-spacing: 5px;
             margin-bottom: 20px;
-            font-weight: 300;
+            font-weight: normal;
         }
 
         .hero p.slogan {
             font-size: 1.2rem;
             max-width: 600px;
-            color: var(--accent-color);
+            color: var(--text-color);
             margin-bottom: 40px;
-        }
-
-        .quote {
-            font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.1rem;
-            color: #ffffff;
-            opacity: 0.8;
         }
 
-        /* =========================================
-           SECCIONES COMUNES Y PORTAFOLIO
-           ========================================= */
         section {
-            padding: 80px 20px;
-            max-width: 1000px;
+            padding: 100px 20px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         h2 {
-            font-size: 2rem;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
+            color: var(--title-color);
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            margin-bottom: 60px;
             text-align: center;
-            font-weight: 400;
+            font-weight: normal;
             text-transform: uppercase;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 20px;
         }
 
-        /* Grid para las colecciones (Imagen a un lado, texto al otro) */
         .collection-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 40px;
-            margin-bottom: 60px;
+            gap: 50px;
+            margin-bottom: 80px;
             align-items: center;
         }
 
-        /* En pantallas más grandes (PC), dividimos en 2 columnas */
         @media (min-width: 768px) {
-            .collection-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .placeholder-img {
-            width: 100%;
-            height: 300px;
-            background-color: #222;
-            border: 1px solid #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #555;
-            font-size: 0.9rem;
-            border-radius: 4px;
-            transition: transform 0.4s ease;
-        }
-
-        /* Efecto elegante al pasar el mouse */
-        .placeholder-img:hover {
-            transform: scale(1.02); 
+            .collection-grid { grid-template-columns: 1fr 1fr; }
+            /* Alternar el orden en pantallas grandes para que sea estilo revista */
+            .collection-grid:nth-child(even) .placeholder-img { order: 2; }
+            .collection-grid:nth-child(even) .collection-text { order: 1; }
         }
 
         .collection-text h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #fff;
+            color: var(--title-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: normal;
         }
 
         .collection-text p {
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
-        /* =========================================
-           FOOTER (Contacto)
-           ========================================= */
+        /* El contenedor temporal de tus imágenes */
+        .placeholder-img {
+            width: 100%;
+            height: 400px;
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: transform 0.6s ease;
+            overflow: hidden; /* Importante para que la imagen real no se salga del borde */
+        }
+
+        .placeholder-img:hover {
+            transform: scale(1.03); 
+        }
+
+        /* Estilo base para cuando insertes la etiqueta img real */
+        .placeholder-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Hace que la imagen llene el cuadro sin deformarse */
+        }
+
         footer {
             text-align: center;
-            padding: 60px 20px;
-            border-top: 1px solid #222;
-            margin-top: 40px;
+            padding: 80px 20px;
+            border-top: 1px solid var(--accent-color);
         }
 
         .cta-button {
             display: inline-block;
-            padding: 15px 30px;
-            border: 1px solid #fff;
-            color: #fff;
+            padding: 15px 40px;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 0.9rem;
-            transition: background 0.3s, color 0.3s;
+            font-size: 1rem;
+            transition: all 0.3s;
             margin-bottom: 30px;
+            border: 1px solid var(--btn-bg);
         }
 
         .cta-button:hover {
-            background: #fff;
-            color: #000;
+            opacity: 0.8;
+            transform: translateY(-3px);
         }
     </style>
 </head>
 <body>
 
-    <header class="hero">
+    <button class="theme-toggle-btn" id="theme-btn">Modo Claro</button>
+
+    <header class="hero fade-in">
         <h1>ETÉREO LAB STUDIO</h1>
-        <p class="slogan">La ciencia detrás de un sentimiento. Convertimos memorias intangibles. En piezas de arte físico y digital para que perduren.</p>
-        <p class="quote">"No vendemos papel, posters ni marcos; Diseñamos cápsulas del tiempo."</p>
+        <p class="slogan">La ciencia detrás de un sentimiento. Convertimos memorias intangibles en piezas de arte físico y digital para que perduren.</p>
     </header>
 
     <section>
-        <h2>Nuestro Portafolio</h2>
+        <h2 class="fade-in">Nuestro Portafolio</h2>
 
-        <div class="collection-grid">
-            <div class="placeholder-img">[Aquí irá el Mapa Estelar]</div>
+        <div class="collection-grid fade-in">
+            <div class="placeholder-img">
+                [ ESPACIO PARA MAPA ESTELAR ]
+            </div>
             <div class="collection-text">
                 <h3>Colección Astronómica</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en el que tu vida cambió para siempre.</p>
-                <p><strong>Mapas Estelares:</strong> La bóveda celeste exacta de tu fecha especial.</p>
+                <p><strong>Mapas Estelares:</strong> La bóveda celeste exacta de tu fecha especial con coordenadas precisas.</p>
             </div>
         </div>
 
-        <div class="collection-grid">
+        <div class="collection-grid fade-in">
+            <div class="placeholder-img">
+                [ ESPACIO PARA ONDA SONORA ]
+            </div>
             <div class="collection-text">
                 <h3>Colección Sonora</h3>
                 <p>Transformamos un "te amo", el latido del corazón de tu bebé o la primera canción que bailaron en una onda de sonido visual y elegante.</p>
                 <p>Cada onda de sonido es una huella dactilar acústica, única e irrepetible.</p>
             </div>
-            <div class="placeholder-img">[Aquí irá el Cuadro de Audio]</div>
         </div>
 
-        <div class="collection-grid">
-            <div class="placeholder-img">[Aquí irá detalle del chip NFC]</div>
+        <div class="collection-grid fade-in">
+            <div class="placeholder-img">
+                [ ESPACIO PARA CHIP NFC ]
+            </div>
             <div class="collection-text">
                 <h3>La Dimensión Oculta</h3>
-                <p>Transformamos cualquier cuadro de nuestra colección en un portal digital. Integramos tecnología invisible (Chips NFC) en el cuadro.</p>
-                <p>Solo acerca tu celular y la canción de su boda o una nota de voz comenzará a reproducirse al instante.</p>
+                <p>Integramos tecnología NFC invisible en el cuadro. Solo acerca tu celular y la memoria cobrará vida digitalmente al instante.</p>
+                <p>El puente definitivo entre el arte físico y tus emociones digitales.</p>
             </div>
         </div>
     </section>
 
-    <footer>
+    <footer class="fade-in">
         <h2>¿Listo para enmarcar tu historia?</h2>
         <a href="https://wa.me/523332227033" class="cta-button">Contactar Ahora</a>
         <p>Instagram: @Etereolabstudio</p>
         <p>Tel: +52 33 3222 7033</p>
     </footer>
+
+    <script>
+        /* 1. Lógica del Modo Claro/Oscuro */
+        const themeBtn = document.getElementById('theme-btn');
+        const htmlElement = document.documentElement; // Selecciona la etiqueta <html>
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                htmlElement.setAttribute('data-theme', 'light');
+                themeBtn.textContent = 'Modo Oscuro';
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = 'Modo Claro';
+            }
+        });
+
+        /* 2. Lógica de Animaciones al hacer Scroll (Intersection Observer) */
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.2, // El elemento debe estar al menos 20% visible en pantalla para animarse
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return; // Si no está en pantalla, no hace nada
+                } else {
+                    entry.target.classList.add('visible'); // Le inyecta la clase que activa el CSS
+                    observer.unobserve(entry.target); // Deja de observarlo para no repetir la animación
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
 
 </body>
 </html>
