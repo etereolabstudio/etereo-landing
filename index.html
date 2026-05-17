@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etéreo Lab Studio | Cápsulas del Tiempo</title>
     
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    
     <meta property="og:title" content="Etéreo Lab Studio">
     <meta property="og:description" content="La ciencia detrás de un sentimiento. Arte físico y digital.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800">
@@ -80,7 +82,7 @@
         .quote-author { font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-color); }
 
         /* =========================================
-           4. PILARES CON EFECTO LINTERNA (SPOTLIGHT)
+           4. PILARES CON EFECTO LINTERNA
            ========================================= */
         .pilares-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--accent-color); }
         .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
@@ -160,11 +162,10 @@
         .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--title-color); }
         
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 25px; font-size: 0.95rem; color: var(--text-color); }
-        /* Aumentado a 250px para soportar textos descriptivos fluidos en pantallas móviles */
         .faq-item.active .faq-answer { max-height: 250px; padding: 0 25px 25px 25px; }
 
         /* =========================================
-           7. FOOTER Y LEGALES
+           7. FOOTER Y MODALES LEGALES
            ========================================= */
         footer { text-align: center; padding: 100px 20px 40px 20px; }
         .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 60px 0; width: 100%; }
@@ -177,9 +178,33 @@
 
         .micro-footer { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--card-border); font-size: 0.7rem; color: var(--text-color); display: flex; flex-direction: column; gap: 12px; align-items: center; letter-spacing: 1px; }
         .legal-links { display: flex; gap: 15px; align-items: center; }
-        .legal-links a { color: var(--text-color); text-decoration: none; transition: color 0.3s; }
-        .legal-links a:hover { color: var(--title-color); }
+        .legal-links button { background: none; border: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 1px; cursor: pointer; transition: color 0.3s; font-family: 'Lato', sans-serif; }
+        .legal-links button:hover { color: var(--title-color); }
         .made-in { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; margin-top: 5px; opacity: 0.8; }
+
+        /* ESTILOS DE LA VENTANA MODAL */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            z-index: 100002; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .modal-content {
+            background: var(--bg-color); border: 1px solid var(--card-border); border-radius: 12px;
+            width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;
+            padding: 40px 30px; position: relative; transform: translateY(30px); transition: transform 0.4s ease;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        
+        .modal-close {
+            position: absolute; top: 20px; right: 20px; background: transparent; border: none;
+            color: var(--title-color); cursor: pointer; transition: transform 0.3s;
+        }
+        .modal-close:hover { transform: scale(1.1); }
+        .modal-content h3 { font-size: 1.8rem; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 15px; }
+        .modal-content p { font-size: 0.9rem; margin-bottom: 15px; line-height: 1.6; }
 
         .fade-in { opacity: 0; transform: translateY(20px); transition: 1s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -303,7 +328,7 @@
                 <div class="img-container"><img src="https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&q=80&w=800" alt="Tecnología NFC" loading="lazy"></div>
             </div>
             <div class="text-container">
-                <h3>La Dimension Oculta</h3>
+                <h3>La Dimensión Oculta</h3>
                 <p>Integramos tecnología NFC invisible. Solo acerca tu celular desbloqueado al cuadro y la memoria cobrará vida al instante.</p>
             </div>
         </div>
@@ -313,16 +338,24 @@
         <h2 class="section-title" style="border: none; margin-bottom: 40px; font-size: 1.8rem;">Preguntas Frecuentes</h2>
         <div class="faq-container">
             <div class="faq-item">
+                <button class="faq-question">¿El cuadro incluye marco y cristal? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Absolutamente. Tu cápsula del tiempo se entrega completamente ensamblada con un marco minimalista de alta calidad, cristal protector y lista para ser exhibida en tu espacio.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Puedo revisar el diseño antes de imprimir? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Sí, la exactitud es nuestro pilar. Antes de pasar a manufactura física, te enviaremos una previsualización digital del diseño (coordenadas, ondas o mapas) para tu autorización final.</p></div>
+            </div>
+            <div class="faq-item">
                 <button class="faq-question">¿Cuánto tiempo tardan en entregar mi pedido? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
                 <div class="faq-answer"><p>Al ser piezas únicas de alta precisión, nuestro tiempo estimado de diseño y manufactura es de 2 a 5 días hábiles, contados a partir de la confirmación del pago del anticipo de tu pieza.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-question">¿Realizan entregas fuera de Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Por el momento, nuestras entregas se realizan de manera exclusiva dentro de la Zona Metropolitana de Guadalajara. La opción de envíos nacionales estará disponible próximamente en nuestro ecosistema.</p></div>
+                <div class="faq-answer"><p>Por el momento, nuestras entregas se realizan de manera exclusiva dentro de la Zona Metropolitana de Guadalajara. La opción de envíos nacionales estará disponible próximamente.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-question">¿Qué requisitos necesita mi celular para leer el cuadro? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Es indispensable que tu smartphone cuente con tecnología NFC integrada y activa (característica estándar en la gran mayoría de dispositivos modernos iOS y Android). El chip del cuadro es pasivo, por lo que no requiere baterías ni instalar aplicaciones externas; solo necesitas acercar tu teléfono desbloqueado.</p></div>
+                <div class="faq-answer"><p>Es indispensable que tu smartphone cuente con tecnología NFC activa (estándar en la mayoría de dispositivos modernos). El chip del cuadro es pasivo, por lo que no requiere baterías; solo necesitas acercar tu teléfono desbloqueado.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-question">¿Cuáles son los métodos de pago aceptados? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
@@ -345,23 +378,44 @@
         <div class="micro-footer">
             <p>&copy; 2026 Etéreo Lab Studio. Todos los derechos reservados.</p>
             <div class="legal-links">
-                <a href="#">Aviso de Privacidad</a><span>|</span><a href="#">Términos y Condiciones</a>
+                <button onclick="openModal('modal-privacidad')">Aviso de Privacidad</button>
+                <span>|</span>
+                <button onclick="openModal('modal-terminos')">Términos y Condiciones</button>
             </div>
             <p class="made-in">Diseñado y manufacturado en Guadalajara, México.</p>
         </div>
     </footer>
 
-    <script>
-        lucide.createIcons();
+    <div class="modal-overlay" id="modal-privacidad">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-privacidad')"><i data-lucide="x" size="24"></i></button>
+            <h3>Aviso de Privacidad</h3>
+            <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas, ubicaciones geográficas y archivos de audio que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tu cápsula del tiempo.</p>
+            <p>Tus memorias son tratadas con estricta confidencialidad. No almacenamos tus archivos de audio ni tus coordenadas en bases de datos públicas, ni comercializamos tu información con terceros.</p>
+            <p>Al utilizar nuestros servicios, aceptas que procesemos los datos necesarios para entregarte una pieza de arte precisa y personalizada.</p>
+        </div>
+    </div>
 
+    <div class="modal-overlay" id="modal-terminos">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-terminos')"><i data-lucide="x" size="24"></i></button>
+            <h3>Términos y Condiciones</h3>
+            <p><strong>1. Procesamiento de Pedidos:</strong> Cada pieza es diseñada de manera única. El proceso de manufactura comienza únicamente tras la recepción del anticipo acordado.</p>
+            <p><strong>2. Revisiones de Diseño:</strong> Se proporcionará un (1) previo digital para tu revisión. Una vez aprobado, el diseño pasa a impresión y no se aceptarán modificaciones.</p>
+            <p><strong>3. Políticas de Devolución:</strong> Dada la naturaleza 100% personalizada de nuestros productos (mapas estelares, ondas sonoras, coordenadas específicas), no se aceptan cambios ni devoluciones una vez que la pieza ha sido manufacturada y entregada en óptimas condiciones.</p>
+            <p><strong>4. Tecnología NFC:</strong> Etéreo Lab Studio garantiza la funcionalidad del chip NFC al momento de la entrega. El usuario es responsable de contar con un dispositivo compatible para su lectura.</p>
+        </div>
+    </div>
+
+    <script>
+        // Inicialización
+        lucide.createIcons();
         window.addEventListener('load', () => {
-            setTimeout(() => { 
-                document.getElementById('preloader').classList.add('preloader-hidden');
-                lucide.createIcons();
-            }, 1600);
+            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1600);
             initParticles();
         });
 
+        // Configuración de Partículas
         function initParticles() {
             if (typeof particlesJS !== 'undefined') {
                 particlesJS('particles-js', {
@@ -384,6 +438,7 @@
             }
         }
 
+        // Lógica de Scroll Progress y Navbar
         let lastScroll = 0; const navbar = document.getElementById('navbar'), progress = document.getElementById('scroll-progress');
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -394,16 +449,16 @@
             lastScroll = currentScroll;
         });
 
+        // Efecto Spotlight para Pilares
         document.querySelectorAll('.pilar-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
             });
         });
 
+        // Lógica del Acordeón FAQ
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const item = button.parentElement;
@@ -413,6 +468,18 @@
             });
         });
 
+        // Lógica de Ventanas Modales (Legales)
+        function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
+        
+        // Cerrar modal al dar clic fuera de ella
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) { overlay.classList.remove('active'); document.body.style.overflow = 'auto'; }
+            });
+        });
+
+        // Wavesurfer (Audio Player)
         const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#A3A3A3', progressColor: '#FFFFFF', barWidth: 3, barRadius: 3, height: 60, url: './teamodrstrange.mp3' });
         const playBtn = document.getElementById('play-btn'); const timeDisp = document.getElementById('time-display');
         const formatT = (s) => { const m = Math.floor(s / 60); const sc = Math.floor(s % 60); return `${m}:${sc < 10 ? '0' : ''}${sc}`; };
@@ -427,6 +494,7 @@
             lucide.createIcons();
         });
 
+        // Theme Toggle
         const themeBtn = document.getElementById('theme-btn'); const htmlElement = document.documentElement;
         themeBtn.addEventListener('click', () => {
             if (navigator.vibrate) navigator.vibrate(50);
@@ -437,6 +505,7 @@
             lucide.createIcons();
         });
 
+        // Fade in observer
         const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(f => obs.observe(f));
         setTimeout(lucide.createIcons, 2500);
