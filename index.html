@@ -3,223 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Etéreo Lab Studio | La ciencia detrás de un sentimiento</title>
-    <style>
-        /* =========================================
-           1. VARIABLES CSS (EL CEREBRO DEL COLOR)
-           ========================================= */
-        :root {
-            /* Modo Oscuro (Por defecto) */
-            --bg-color: #0a0a0a;
-            --text-color: #e0e0e0;
-            --title-color: #ffffff;
-            --accent-color: #333333;
-            --btn-bg: #ffffff;
-            --btn-text: #000000;
-        }
+    <meta name="description" content="Convertimos memorias intangibles en piezas de arte físico y digital para que perduren.">
+    
+    <meta property="og:title" content="Etéreo Lab Studio">
+    <meta property="og:description" content="Diseñamos cápsulas del tiempo. Arte físico y digital.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800"> <meta property="og:url" content="https://etereolabstudio.github.io/etereo-landing/">
+    <meta property="og:type" content="website">
 
-        [data-theme="light"] {
-            /* Modo Claro (Inspirado en tu PDF editorial beige) */
-            --bg-color: #F5F2EB; /* Un beige muy elegante y limpio */
-            --text-color: #333333; /* Gris oscuro para lectura, no negro puro */
-            --title-color: #111111;
-            --accent-color: #D1C9B8; /* Beige más oscuro para bordes/detalles */
-            --btn-bg: #111111;
-            --btn-text: #ffffff;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400&family=Playfair+Display:ital,wght@0,400;0,600&display=swap" rel="stylesheet">
 
-        /* Transición suave para todos los colores de la página */
-        body, header, section, footer, div, h1, h2, h3, p {
-            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
-        }
-
-        /* =========================================
-           2. TIPOGRAFÍA Y RESETEO
-           ========================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Times New Roman', Times, serif; /* Tipografía editorial */
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Botón flotante para cambiar de tema */
-        .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            color: var(--title-color);
-            border: 1px solid var(--title-color);
-            padding: 8px 16px;
-            cursor: pointer;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 0.9rem;
-            z-index: 1000;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle-btn:hover {
-            background: var(--title-color);
-            color: var(--bg-color);
-        }
-
-        /* =========================================
-           3. ANIMACIONES (CLASES BASE)
-           ========================================= */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px); /* Empieza 30px más abajo */
-            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0); /* Sube a su posición original */
-        }
-
-        /* =========================================
-           4. ESTRUCTURA VISUAL
-           ========================================= */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .hero h1 {
-            color: var(--title-color);
-            font-size: 3.5rem;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
-            font-weight: normal;
-        }
-
-        .hero p.slogan {
-            font-size: 1.2rem;
-            max-width: 600px;
-            color: var(--text-color);
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-
-        section {
-            padding: 100px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            color: var(--title-color);
-            font-size: 2.5rem;
-            letter-spacing: 3px;
-            margin-bottom: 60px;
-            text-align: center;
-            font-weight: normal;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--accent-color);
-            padding-bottom: 20px;
-        }
-
-        .collection-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 50px;
-            margin-bottom: 80px;
-            align-items: center;
-        }
-
-        @media (min-width: 768px) {
-            .collection-grid { grid-template-columns: 1fr 1fr; }
-            /* Alternar el orden en pantallas grandes para que sea estilo revista */
-            .collection-grid:nth-child(even) .placeholder-img { order: 2; }
-            .collection-grid:nth-child(even) .collection-text { order: 1; }
-        }
-
-        .collection-text h3 {
-            color: var(--title-color);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            font-weight: normal;
-        }
-
-        .collection-text p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        /* El contenedor temporal de tus imágenes */
-        .placeholder-img {
-            width: 100%;
-            height: 400px;
-            background-color: transparent;
-            border: 1px solid var(--accent-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: transform 0.6s ease;
-            overflow: hidden; /* Importante para que la imagen real no se salga del borde */
-        }
-
-        .placeholder-img:hover {
-            transform: scale(1.03); 
-        }
-
-        /* Estilo base para cuando insertes la etiqueta img real */
-        .placeholder-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Hace que la imagen llene el cuadro sin deformarse */
-        }
-
-        footer {
-            text-align: center;
-            padding: 80px 20px;
-            border-top: 1px solid var(--accent-color);
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: var(--btn-bg);
-            color: var(--btn-text);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            margin-bottom: 30px;
-            border: 1px solid var(--btn-bg);
-        }
-
-        .cta-button:hover {
-            opacity: 0.8;
-            transform: translateY(-3px);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <button class="theme-toggle-btn" id="theme-btn">Modo Claro</button>
+    <nav class="navbar">
+        <div class="nav-brand">Etéreo Lab</div>
+        <button class="theme-toggle-btn" id="theme-btn">MODO CLARO</button>
+    </nav>
 
     <header class="hero fade-in">
-        <h1>ETÉREO LAB STUDIO</h1>
+        <h1>Etéreo Lab Studio</h1>
         <p class="slogan">La ciencia detrás de un sentimiento. Convertimos memorias intangibles en piezas de arte físico y digital para que perduren.</p>
     </header>
 
@@ -228,7 +35,7 @@
 
         <div class="collection-grid fade-in">
             <div class="placeholder-img">
-                [ ESPACIO PARA MAPA ESTELAR ]
+                <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&q=80&w=800" alt="Mapa Estelar Astronómico">
             </div>
             <div class="collection-text">
                 <h3>Colección Astronómica</h3>
@@ -239,23 +46,14 @@
 
         <div class="collection-grid fade-in">
             <div class="placeholder-img">
-                [ ESPACIO PARA ONDA SONORA ]
+                <img src="https://images.unsplash.com/photo-1516280440502-a2f72a048d8b?auto=format&fit=crop&q=80&w=800" alt="Onda Sonora">
             </div>
             <div class="collection-text">
                 <h3>Colección Sonora</h3>
-                <p>Transformamos un "te amo", el latido del corazón de tu bebé o la primera canción que bailaron en una onda de sonido visual y elegante.</p>
-                <p>Cada onda de sonido es una huella dactilar acústica, única e irrepetible.</p>
-            </div>
-        </div>
-
-        <div class="collection-grid fade-in">
-            <div class="placeholder-img">
-                [ ESPACIO PARA CHIP NFC ]
-            </div>
-            <div class="collection-text">
-                <h3>La Dimensión Oculta</h3>
-                <p>Integramos tecnología NFC invisible en el cuadro. Solo acerca tu celular y la memoria cobrará vida digitalmente al instante.</p>
-                <p>El puente definitivo entre el arte físico y tus emociones digitales.</p>
+                <p>Transformamos un "te amo", el latido de tu bebé o su primera canción en una onda de sonido visual y elegante.</p>
+                
+                <audio id="audio-sample" src="https://actions.google.com/sounds/v1/human_voices/human_heartbeat.ogg"></audio>
+                <button id="play-audio-btn" class="audio-btn">▶ Escuchar el latido</button>
             </div>
         </div>
     </section>
@@ -264,49 +62,8 @@
         <h2>¿Listo para enmarcar tu historia?</h2>
         <a href="https://wa.me/523332227033" class="cta-button">Contactar Ahora</a>
         <p>Instagram: @Etereolabstudio</p>
-        <p>Tel: +52 33 3222 7033</p>
     </footer>
 
-    <script>
-        /* 1. Lógica del Modo Claro/Oscuro */
-        const themeBtn = document.getElementById('theme-btn');
-        const htmlElement = document.documentElement; // Selecciona la etiqueta <html>
-
-        themeBtn.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                htmlElement.setAttribute('data-theme', 'light');
-                themeBtn.textContent = 'Modo Oscuro';
-            } else {
-                htmlElement.setAttribute('data-theme', 'dark');
-                themeBtn.textContent = 'Modo Claro';
-            }
-        });
-
-        /* 2. Lógica de Animaciones al hacer Scroll (Intersection Observer) */
-        const faders = document.querySelectorAll('.fade-in');
-
-        const appearOptions = {
-            threshold: 0.2, // El elemento debe estar al menos 20% visible en pantalla para animarse
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return; // Si no está en pantalla, no hace nada
-                } else {
-                    entry.target.classList.add('visible'); // Le inyecta la clase que activa el CSS
-                    observer.unobserve(entry.target); // Deja de observarlo para no repetir la animación
-                }
-            });
-        }, appearOptions);
-
-        faders.forEach(fader => {
-            appearOnScroll.observe(fader);
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
