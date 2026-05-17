@@ -26,7 +26,7 @@
             --accent-color: rgba(255, 255, 255, 0.08); --nav-bg: rgba(5, 5, 5, 0.75);
             --card-border: rgba(255, 255, 255, 0.1); --card-hover-shadow: 0 40px 80px rgba(255, 255, 255, 0.06);
             --noise-opacity: 0; --progress-color: #FFFFFF; --pulse-color: rgba(255, 255, 255, 0.15);
-            --particles-opacity: 1; /* Estrellas encendidas */
+            --particles-opacity: 1;
         }
 
         [data-theme="light"] {
@@ -34,17 +34,15 @@
             --accent-color: rgba(0, 0, 0, 0.06); --nav-bg: rgba(248, 246, 240, 0.75);
             --card-border: rgba(0, 0, 0, 0.1); --card-hover-shadow: 0 40px 80px rgba(0, 0, 0, 0.06);
             --noise-opacity: 0.06; --progress-color: #121212; --pulse-color: rgba(0, 0, 0, 0.1);
-            --particles-opacity: 0; /* Estrellas apagadas en el día */
+            --particles-opacity: 0;
         }
 
         body, nav, header, section, footer, div, h1, h2, h3, p, button { transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden; position: relative; }
 
-        /* PARTICULAS (FONDO ESTELAR) */
         #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: var(--particles-opacity); transition: opacity 1s ease; pointer-events: auto; }
 
-        /* RUIDO TÁCTIL */
         body::after {
             content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; opacity: var(--noise-opacity); transition: opacity 0.7s ease;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
@@ -87,15 +85,10 @@
         .pilares-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--accent-color); }
         .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
         
-        .pilar-card {
-            position: relative; overflow: hidden; padding: 40px; border: 1px solid var(--card-border); border-radius: 8px;
-            text-align: left; background: rgba(0,0,0,0.2); transition: transform 0.3s;
-        }
+        .pilar-card { position: relative; overflow: hidden; padding: 40px; border: 1px solid var(--card-border); border-radius: 8px; text-align: left; background: rgba(0,0,0,0.2); transition: transform 0.3s; }
         [data-theme="light"] .pilar-card { background: rgba(255,255,255,0.4); }
-        
         .pilar-card:hover { transform: translateY(-5px); border-color: var(--title-color); }
         
-        /* La magia del Spotlight */
         .pilar-card::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;
             background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
@@ -103,8 +96,6 @@
         }
         [data-theme="light"] .pilar-card::before { background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 0, 0, 0.06), transparent 40%); }
         .pilar-card:hover::before { opacity: 1; }
-        
-        /* Proteger contenido del Spotlight */
         .pilar-card > * { position: relative; z-index: 1; }
 
         .pilar-icon { margin-bottom: 20px; color: var(--title-color); }
@@ -169,7 +160,8 @@
         .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--title-color); }
         
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 25px; font-size: 0.95rem; color: var(--text-color); }
-        .faq-item.active .faq-answer { max-height: 200px; padding: 0 25px 25px 25px; }
+        /* Aumentado a 250px para soportar textos descriptivos fluidos en pantallas móviles */
+        .faq-item.active .faq-answer { max-height: 250px; padding: 0 25px 25px 25px; }
 
         /* =========================================
            7. FOOTER Y LEGALES
@@ -196,7 +188,6 @@
 <body>
 
     <div id="particles-js"></div>
-
     <div id="scroll-progress"></div>
     <div id="preloader"><div class="preloader-text">La ciencia detrás de un sentimiento...</div></div>
     
@@ -312,7 +303,7 @@
                 <div class="img-container"><img src="https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&q=80&w=800" alt="Tecnología NFC" loading="lazy"></div>
             </div>
             <div class="text-container">
-                <h3>La Dimensión Oculta</h3>
+                <h3>La Dimension Oculta</h3>
                 <p>Integramos tecnología NFC invisible. Solo acerca tu celular desbloqueado al cuadro y la memoria cobrará vida al instante.</p>
             </div>
         </div>
@@ -322,16 +313,20 @@
         <h2 class="section-title" style="border: none; margin-bottom: 40px; font-size: 1.8rem;">Preguntas Frecuentes</h2>
         <div class="faq-container">
             <div class="faq-item">
-                <button class="faq-question">¿Cuánto tiempo tardan en manufacturar mi pedido? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Al ser un proceso meticuloso y personalizado, nuestro tiempo de diseño y manufactura es de 3 a 5 días hábiles posteriores a la confirmación de tus datos.</p></div>
+                <button class="faq-question">¿Cuánto tiempo tardan en entregar mi pedido? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Al ser piezas únicas de alta precisión, nuestro tiempo estimado de diseño y manufactura es de 2 a 5 días hábiles, contados a partir de la confirmación del pago del anticipo de tu pieza.</p></div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">¿Hacen envíos fuera de Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Sí. Hacemos envíos seguros a toda la República Mexicana empacados meticulosamente para proteger el cristal y el marco de tu cápsula del tiempo.</p></div>
+                <button class="faq-question">¿Realizan entregas fuera de Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Por el momento, nuestras entregas se realizan de manera exclusiva dentro de la Zona Metropolitana de Guadalajara. La opción de envíos nacionales estará disponible próximamente en nuestro ecosistema.</p></div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">¿El chip NFC necesita baterías? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>No. La tecnología NFC que ocultamos en nuestros cuadros es pasiva. Se activa magnéticamente al recibir la señal de tu celular, por lo que durará para siempre sin necesidad de recargas.</p></div>
+                <button class="faq-question">¿Qué requisitos necesita mi celular para leer el cuadro? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Es indispensable que tu smartphone cuente con tecnología NFC integrada y activa (característica estándar en la gran mayoría de dispositivos modernos iOS y Android). El chip del cuadro es pasivo, por lo que no requiere baterías ni instalar aplicaciones externas; solo necesitas acercar tu teléfono desbloqueado.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Cuáles son los métodos de pago aceptados? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Para facilitar tu proceso, aceptamos transferencias electrónicas interbancarias (SPEI), depósitos bancarios y pagos en efectivo al momento de coordinar el anticipo de la orden o la liquidación de la entrega.</p></div>
             </div>
         </div>
     </section>
@@ -357,14 +352,16 @@
     </footer>
 
     <script>
-        // Inicialización y Preloader
         lucide.createIcons();
+
         window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1600);
-            initParticles(); // Inicia las estrellas
+            setTimeout(() => { 
+                document.getElementById('preloader').classList.add('preloader-hidden');
+                lucide.createIcons();
+            }, 1600);
+            initParticles();
         });
 
-        // Configuración de Partículas (Estrellas interactivas)
         function initParticles() {
             if (typeof particlesJS !== 'undefined') {
                 particlesJS('particles-js', {
@@ -387,7 +384,6 @@
             }
         }
 
-        // Lógica de Scroll Progress y Navbar
         let lastScroll = 0; const navbar = document.getElementById('navbar'), progress = document.getElementById('scroll-progress');
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -398,7 +394,6 @@
             lastScroll = currentScroll;
         });
 
-        // Efecto Spotlight (Linterna) para las tarjetas de Pilares
         document.querySelectorAll('.pilar-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
@@ -409,17 +404,15 @@
             });
         });
 
-        // Lógica del Acordeón FAQ
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const item = button.parentElement;
                 const isActive = item.classList.contains('active');
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active')); // Cierra todos
-                if (!isActive) item.classList.add('active'); // Abre el seleccionado
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
             });
         });
 
-        // Wavesurfer (Audio Player)
         const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#A3A3A3', progressColor: '#FFFFFF', barWidth: 3, barRadius: 3, height: 60, url: './teamodrstrange.mp3' });
         const playBtn = document.getElementById('play-btn'); const timeDisp = document.getElementById('time-display');
         const formatT = (s) => { const m = Math.floor(s / 60); const sc = Math.floor(s % 60); return `${m}:${sc < 10 ? '0' : ''}${sc}`; };
@@ -434,7 +427,6 @@
             lucide.createIcons();
         });
 
-        // Theme Toggle (Modo Claro/Oscuro)
         const themeBtn = document.getElementById('theme-btn'); const htmlElement = document.documentElement;
         themeBtn.addEventListener('click', () => {
             if (navigator.vibrate) navigator.vibrate(50);
@@ -445,7 +437,6 @@
             lucide.createIcons();
         });
 
-        // Fade in observer
         const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(f => obs.observe(f));
         setTimeout(lucide.createIcons, 2500);
