@@ -16,9 +16,6 @@
     <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
 
     <style>
-        /* =========================================
-           1. VARIABLES Y MOTOR DE COLOR
-           ========================================= */
         :root {
             --bg-color: #070707;
             --text-color: #B0B0B0;
@@ -58,9 +55,6 @@
             color: var(--title-color);
         }
 
-        /* =========================================
-           2. NAVBAR CRISTAL
-           ========================================= */
         .navbar {
             position: fixed;
             top: 0;
@@ -93,9 +87,6 @@
 
         .theme-btn:hover { border-color: var(--title-color); }
 
-        /* =========================================
-           3. HERO Y ANIMACIÓN DE SCROLL
-           ========================================= */
         .hero {
             height: 100vh;
             display: flex;
@@ -144,9 +135,6 @@
             100% { opacity: 0; transform: translate(-50%, 20px); }
         }
 
-        /* =========================================
-           4. SECCIONES Y EFECTO DE LEVITACIÓN
-           ========================================= */
         section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
 
         h2.section-title {
@@ -199,9 +187,6 @@
 
         .img-container:hover img { transform: scale(1.05); }
 
-        /* =========================================
-           5. REPRODUCTOR WAVESURFER PREMIUM
-           ========================================= */
         .audio-player-wrapper {
             margin-top: 30px;
             padding: 20px;
@@ -210,7 +195,7 @@
             background: rgba(0,0,0,0.02);
         }
 
-        #waveform { margin-bottom: 20px; }
+        #waveform { margin-bottom: 20px; min-height: 60px; }
 
         .audio-controls {
             display: flex;
@@ -240,11 +225,9 @@
             color: var(--title-color);
             font-size: 1.1rem;
             letter-spacing: 1px;
+            font-style: italic;
         }
 
-        /* =========================================
-           6. FOOTER Y ANIMACIONES
-           ========================================= */
         footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--accent-color); }
 
         .cta-btn {
@@ -308,10 +291,9 @@
                     <div id="waveform"></div>
                     <div class="audio-controls">
                         <button class="play-btn" id="play-btn">▶</button>
-                        <span class="audio-title">El latido de su historia</span>
+                        <span class="audio-title">"Te amo en todos los universos"</span>
                     </div>
                 </div>
-
             </div>
             <div class="img-container">
                 <img src="https://images.unsplash.com/photo-1516280440502-a2f72a048d8b?auto=format&fit=crop&q=80&w=800" alt="Onda Sonora">
@@ -337,54 +319,53 @@
     </footer>
 
     <script>
-        // 1. INICIALIZAR EL REPRODUCTOR WAVESURFER (LA MAGIA VISUAL)
+        // Inicializar Wavesurfer
         const wavesurfer = WaveSurfer.create({
             container: '#waveform',
-            waveColor: '#B0B0B0',      // Color de la onda sin reproducir
-            progressColor: '#FFFFFF',  // Color de la onda al avanzar
+            waveColor: '#B0B0B0',
+            progressColor: '#FFFFFF',
             cursorColor: 'transparent',
-            barWidth: 3,               // Grosor de las barras
-            barRadius: 3,              // Bordes redondeados de las barras
-            height: 60,                // Altura del reproductor
-            url: 'teamodrstrange.mp3'  // <--- AQUÍ ESTÁ EL ENLACE DIRECTO A TU AUDIO
+            barWidth: 3,
+            barRadius: 3,
+            height: 60,
+            // Ruta explícita para asegurar que lo busque en la misma carpeta
+            url: './teamodrstrange.mp3' 
         });
 
-        // Controles de Play/Pause del audio
+        // DETECTOR DE ERRORES: Si el archivo no existe, te avisará
+        wavesurfer.on('error', function(e) {
+            console.error("Error de Wavesurfer: ", e);
+            document.getElementById('waveform').innerHTML = "<p style='color: #ff4a4a; font-size: 0.85rem; text-align: center; margin-top: 15px;'>El audio no fue encontrado. Revisa que el archivo en GitHub se llame exactamente 'teamodrstrange.mp3' (todo en minúsculas).</p>";
+        });
+
         const playBtn = document.getElementById('play-btn');
         playBtn.addEventListener('click', () => {
             wavesurfer.playPause();
             if (wavesurfer.isPlaying()) {
-                playBtn.textContent = '■'; // Cuadrado de Stop
+                playBtn.textContent = '■';
             } else {
-                playBtn.textContent = '▶'; // Triángulo de Play
+                playBtn.textContent = '▶';
             }
         });
 
-        wavesurfer.on('finish', () => {
-            playBtn.textContent = '▶';
-        });
+        wavesurfer.on('finish', () => { playBtn.textContent = '▶'; });
 
-        // 2. LÓGICA DE MODO CLARO / OSCURO (Conexión con Wavesurfer)
         const themeBtn = document.getElementById('theme-btn');
         const htmlElement = document.documentElement;
 
         themeBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
-            
             if (currentTheme === 'dark') {
                 htmlElement.setAttribute('data-theme', 'light');
                 themeBtn.textContent = 'Modo Oscuro';
-                // Cambiar los colores de la onda de sonido para el fondo claro
                 wavesurfer.setOptions({ waveColor: '#DCD8CC', progressColor: '#1A1A1A' });
             } else {
                 htmlElement.setAttribute('data-theme', 'dark');
                 themeBtn.textContent = 'Modo Claro';
-                // Regresar los colores para el fondo oscuro espacial
                 wavesurfer.setOptions({ waveColor: '#B0B0B0', progressColor: '#FFFFFF' });
             }
         });
 
-        // 3. ANIMACIONES AL HACER SCROLL
         const faders = document.querySelectorAll('.fade-in');
         const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
 
