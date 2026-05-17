@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etéreo Lab Studio | La ciencia detrás de un sentimiento</title>
+    <style>
+        /* =========================================
+           VARIABLES Y FUNDAMENTOS CSS
+           Usamos variables para mantener consistencia.
+           ========================================= */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f4f4f4;
+            --accent-color: #8c8c8c;
+            --font-main: 'Helvetica Neue', Arial, sans-serif;
+            --font-serif: 'Georgia', serif;
+        }
+
+        /* Reseteo básico para que se vea igual en todos los navegadores */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden; /* Evita scroll horizontal indeseado */
+        }
+
+        /* =========================================
+           SECCIÓN HERO (La primera pantalla)
+           ========================================= */
+        .hero {
+            height: 100vh; /* Ocupa el 100% de la pantalla del celular */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero p.slogan {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+        }
+
+        .quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #ffffff;
+            opacity: 0.8;
+        }
+
+        /* =========================================
+           SECCIONES COMUNES Y PORTAFOLIO
+           ========================================= */
+        section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        /* Grid para las colecciones (Imagen a un lado, texto al otro) */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+
+        /* En pantallas más grandes (PC), dividimos en 2 columnas */
+        @media (min-width: 768px) {
+            .collection-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 300px;
+            background-color: #222;
+            border: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            transition: transform 0.4s ease;
+        }
+
+        /* Efecto elegante al pasar el mouse */
+        .placeholder-img:hover {
+            transform: scale(1.02); 
+        }
+
+        .collection-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .collection-text p {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           FOOTER (Contacto)
+           ========================================= */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid #222;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 1px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            transition: background 0.3s, color 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .cta-button:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>ETÉREO LAB STUDIO</h1>
+        <p class="slogan">La ciencia detrás de un sentimiento. Convertimos memorias intangibles. En piezas de arte físico y digital para que perduren.</p>
+        <p class="quote">"No vendemos papel, posters ni marcos; Diseñamos cápsulas del tiempo."</p>
+    </header>
+
+    <section>
+        <h2>Nuestro Portafolio</h2>
+
+        <div class="collection-grid">
+            <div class="placeholder-img">[Aquí irá el Mapa Estelar]</div>
+            <div class="collection-text">
+                <h3>Colección Astronómica</h3>
+                <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en el que tu vida cambió para siempre.</p>
+                <p><strong>Mapas Estelares:</strong> La bóveda celeste exacta de tu fecha especial.</p>
+            </div>
+        </div>
+
+        <div class="collection-grid">
+            <div class="collection-text">
+                <h3>Colección Sonora</h3>
+                <p>Transformamos un "te amo", el latido del corazón de tu bebé o la primera canción que bailaron en una onda de sonido visual y elegante.</p>
+                <p>Cada onda de sonido es una huella dactilar acústica, única e irrepetible.</p>
+            </div>
+            <div class="placeholder-img">[Aquí irá el Cuadro de Audio]</div>
+        </div>
+
+        <div class="collection-grid">
+            <div class="placeholder-img">[Aquí irá detalle del chip NFC]</div>
+            <div class="collection-text">
+                <h3>La Dimensión Oculta</h3>
+                <p>Transformamos cualquier cuadro de nuestra colección en un portal digital. Integramos tecnología invisible (Chips NFC) en el cuadro.</p>
+                <p>Solo acerca tu celular y la canción de su boda o una nota de voz comenzará a reproducirse al instante.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h2>¿Listo para enmarcar tu historia?</h2>
+        <a href="https://wa.me/523332227033" class="cta-button">Contactar Ahora</a>
+        <p>Instagram: @Etereolabstudio</p>
+        <p>Tel: +52 33 3222 7033</p>
+    </footer>
+
+</body>
+</html>
