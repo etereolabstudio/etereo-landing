@@ -15,6 +15,7 @@
 
     <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
     <style>
         /* =========================================
@@ -25,6 +26,7 @@
             --accent-color: rgba(255, 255, 255, 0.08); --nav-bg: rgba(5, 5, 5, 0.75);
             --card-border: rgba(255, 255, 255, 0.1); --card-hover-shadow: 0 40px 80px rgba(255, 255, 255, 0.06);
             --noise-opacity: 0; --progress-color: #FFFFFF; --pulse-color: rgba(255, 255, 255, 0.15);
+            --particles-opacity: 1; /* Estrellas encendidas */
         }
 
         [data-theme="light"] {
@@ -32,48 +34,42 @@
             --accent-color: rgba(0, 0, 0, 0.06); --nav-bg: rgba(248, 246, 240, 0.75);
             --card-border: rgba(0, 0, 0, 0.1); --card-hover-shadow: 0 40px 80px rgba(0, 0, 0, 0.06);
             --noise-opacity: 0.06; --progress-color: #121212; --pulse-color: rgba(0, 0, 0, 0.1);
+            --particles-opacity: 0; /* Estrellas apagadas en el día */
         }
 
         body, nav, header, section, footer, div, h1, h2, h3, p, button { transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden; position: relative; }
 
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9998; opacity: var(--noise-opacity); transition: opacity 0.7s ease;
+        /* PARTICULAS (FONDO ESTELAR) */
+        #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: var(--particles-opacity); transition: opacity 1s ease; pointer-events: auto; }
+
+        /* RUIDO TÁCTIL */
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; opacity: var(--noise-opacity); transition: opacity 0.7s ease;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
-        
         h1, h2, h3, .nav-brand { font-family: 'Playfair Display', serif; font-weight: 400; color: var(--title-color); }
 
         /* =========================================
            2. PANTALLA CINEMÁTICA Y NAVBAR
            ========================================= */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color);
-            z-index: 100000; display: flex; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s;
-        }
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 100000; display: flex; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s; }
         .preloader-text { font-size: clamp(1.2rem, 3.5vw, 1.8rem); color: var(--title-color); letter-spacing: 2px; font-style: italic; animation: pulse-glow 2.5s infinite; text-align: center; font-family: 'Playfair Display', serif; padding: 30px; }
         @keyframes pulse-glow { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
         .preloader-hidden { opacity: 0 !important; visibility: hidden !important; }
 
         #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background-color: var(--progress-color); z-index: 100001; }
 
-        .navbar {
-            position: fixed; top: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center;
-            background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--accent-color); z-index: 9999; transition: transform 0.5s ease;
-        }
+        .navbar { position: fixed; top: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--accent-color); z-index: 9999; transition: transform 0.5s ease; }
         .navbar.nav-hidden { transform: translateY(-100%); }
         @media (min-width: 600px) { .navbar { padding: 20px 40px; } }
 
-        .theme-btn {
-            background: transparent; color: var(--title-color); border: 1px solid var(--card-border); padding: 8px 16px;
-            font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 30px; display: flex; align-items: center; gap: 8px; font-family: 'Lato', sans-serif;
-        }
+        .theme-btn { background: transparent; color: var(--title-color); border: 1px solid var(--card-border); padding: 8px 16px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 30px; display: flex; align-items: center; gap: 8px; font-family: 'Lato', sans-serif; }
 
         /* =========================================
            3. HERO Y FRASES
@@ -81,24 +77,36 @@
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
         .hero h1 { font-size: clamp(2.3rem, 6vw, 4.8rem); letter-spacing: 6px; margin-bottom: 25px; text-transform: uppercase; }
         
-        .quote-section {
-            min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 60px 20px; border-bottom: 1px solid var(--accent-color);
-        }
-        .quote-text {
-            font-size: clamp(1.6rem, 4vw, 2.8rem); font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color);
-            max-width: 850px; line-height: 1.4; margin-bottom: 25px;
-        }
+        .quote-section { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; border-bottom: 1px solid var(--accent-color); }
+        .quote-text { font-size: clamp(1.6rem, 4vw, 2.8rem); font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); max-width: 850px; line-height: 1.4; margin-bottom: 25px; }
         .quote-author { font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-color); }
 
         /* =========================================
-           4. PILARES
+           4. PILARES CON EFECTO LINTERNA (SPOTLIGHT)
            ========================================= */
         .pilares-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--accent-color); }
         .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
         
-        .pilar-card { padding: 40px; border: 1px solid var(--card-border); border-radius: 4px; text-align: left; background: rgba(0,0,0,0.01); transition: transform 0.3s; }
+        .pilar-card {
+            position: relative; overflow: hidden; padding: 40px; border: 1px solid var(--card-border); border-radius: 8px;
+            text-align: left; background: rgba(0,0,0,0.2); transition: transform 0.3s;
+        }
+        [data-theme="light"] .pilar-card { background: rgba(255,255,255,0.4); }
+        
         .pilar-card:hover { transform: translateY(-5px); border-color: var(--title-color); }
+        
+        /* La magia del Spotlight */
+        .pilar-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;
+            background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
+            opacity: 0; transition: opacity 0.5s;
+        }
+        [data-theme="light"] .pilar-card::before { background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 0, 0, 0.06), transparent 40%); }
+        .pilar-card:hover::before { opacity: 1; }
+        
+        /* Proteger contenido del Spotlight */
+        .pilar-card > * { position: relative; z-index: 1; }
+
         .pilar-icon { margin-bottom: 20px; color: var(--title-color); }
         .pilar-card h3 { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
         .pilar-card p { font-size: 0.95rem; }
@@ -128,56 +136,54 @@
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 2s ease; }
         .img-container:hover img { transform: scale(1.04); }
 
-        .slide-caption {
-            position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); padding: 7px 18px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
-            font-family: 'Playfair Display', serif; color: #fff; font-size: 0.9rem; font-style: italic; white-space: nowrap;
-        }
+        .slide-caption { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); padding: 7px 18px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); font-family: 'Playfair Display', serif; color: #fff; font-size: 0.9rem; font-style: italic; white-space: nowrap; }
         [data-theme="light"] .slide-caption { background: rgba(248, 246, 240, 0.8); color: #121212; border: 1px solid rgba(0,0,0,0.1); }
         .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
-        /* Reproductor de Audio */
-        .audio-player-wrapper { margin-top: 30px; padding: 25px; border: 1px solid var(--card-border); border-radius: 8px; background: var(--accent-color); }
+        .audio-player-wrapper { margin-top: 30px; padding: 25px; border: 1px solid var(--card-border); border-radius: 8px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+        [data-theme="light"] .audio-player-wrapper { background: rgba(255,255,255,0.4); }
         #waveform { margin-bottom: 15px; min-height: 60px; }
         .audio-controls { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
         .play-group { display: flex; align-items: center; gap: 12px; }
         .play-btn { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; border: none; background: var(--title-color); color: var(--bg-color); cursor: pointer; display: flex; justify-content: center; align-items: center; aspect-ratio: 1/1; flex-shrink: 0; padding: 0; }
         .time-display { font-size: 0.8rem; letter-spacing: 1px; }
 
-        /* NFC Pulse */
         .nfc-wrapper { position: relative; }
         .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; background: var(--pulse-color); animation: nfc-wave 3s infinite; pointer-events: none; }
         @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; } }
 
         /* =========================================
-           6. FOOTER, BOTONES Y MICRO-FOOTER (LEGALES)
+           6. ACORDEÓN DE PREGUNTAS FRECUENTES (FAQ)
            ========================================= */
-        footer { text-align: center; padding: 100px 20px 40px 20px; border-top: 1px solid var(--accent-color); }
+        .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 100px; border-bottom: 1px solid var(--accent-color); }
+        .faq-container { display: flex; flex-direction: column; gap: 15px; }
+        .faq-item { border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.2); }
+        [data-theme="light"] .faq-item { background: rgba(255,255,255,0.4); }
+        
+        .faq-question {
+            width: 100%; text-align: left; padding: 20px 25px; background: transparent; border: none;
+            color: var(--title-color); font-family: 'Lato', sans-serif; font-size: 1.05rem;
+            display: flex; justify-content: space-between; align-items: center; cursor: pointer; outline: none;
+        }
+        .faq-icon { transition: transform 0.4s ease; color: var(--text-color); }
+        .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--title-color); }
+        
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 25px; font-size: 0.95rem; color: var(--text-color); }
+        .faq-item.active .faq-answer { max-height: 200px; padding: 0 25px 25px 25px; }
+
+        /* =========================================
+           7. FOOTER Y LEGALES
+           ========================================= */
+        footer { text-align: center; padding: 100px 20px 40px 20px; }
         .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 60px 0; width: 100%; }
         @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 25px; } }
 
-        .cta-btn { 
-            display: inline-flex; align-items: center; justify-content: center; gap: 12px; 
-            padding: 16px 30px; text-decoration: none; border-radius: 30px; font-size: 0.8rem; 
-            letter-spacing: 2px; text-transform: uppercase; width: 100%; max-width: 290px; transition: 0.3s; font-family: 'Lato', sans-serif; 
-        }
+        .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 30px; text-decoration: none; border-radius: 30px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; width: 100%; max-width: 290px; transition: 0.3s; font-family: 'Lato', sans-serif; }
         .primary { background: var(--title-color); color: var(--bg-color); border: 1px solid var(--title-color); }
         .secondary { border: 1px solid var(--card-border); color: var(--title-color); }
         .primary:hover, .secondary:hover { transform: translateY(-3px); opacity: 0.9; }
 
-        /* Estilos del Micro-Footer */
-        .micro-footer {
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid var(--card-border);
-            font-size: 0.7rem;
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            align-items: center;
-            letter-spacing: 1px;
-        }
+        .micro-footer { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--card-border); font-size: 0.7rem; color: var(--text-color); display: flex; flex-direction: column; gap: 12px; align-items: center; letter-spacing: 1px; }
         .legal-links { display: flex; gap: 15px; align-items: center; }
         .legal-links a { color: var(--text-color); text-decoration: none; transition: color 0.3s; }
         .legal-links a:hover { color: var(--title-color); }
@@ -188,6 +194,8 @@
     </style>
 </head>
 <body>
+
+    <div id="particles-js"></div>
 
     <div id="scroll-progress"></div>
     <div id="preloader"><div class="preloader-text">La ciencia detrás de un sentimiento...</div></div>
@@ -310,38 +318,76 @@
         </div>
     </section>
 
+    <section class="faq-section fade-in">
+        <h2 class="section-title" style="border: none; margin-bottom: 40px; font-size: 1.8rem;">Preguntas Frecuentes</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">¿Cuánto tiempo tardan en manufacturar mi pedido? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Al ser un proceso meticuloso y personalizado, nuestro tiempo de diseño y manufactura es de 3 a 5 días hábiles posteriores a la confirmación de tus datos.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Hacen envíos fuera de Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Sí. Hacemos envíos seguros a toda la República Mexicana empacados meticulosamente para proteger el cristal y el marco de tu cápsula del tiempo.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿El chip NFC necesita baterías? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>No. La tecnología NFC que ocultamos en nuestros cuadros es pasiva. Se activa magnéticamente al recibir la señal de tu celular, por lo que durará para siempre sin necesidad de recargas.</p></div>
+            </div>
+        </div>
+    </section>
+
     <footer class="fade-in">
         <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 20px;">Enmarca tu historia</h3>
         <div class="btn-group">
-            <a href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo%20Lab." class="cta-btn primary">
-                <i data-lucide="message-circle" size="18"></i> WhatsApp
+            <a href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo%20Lab.%20Quiero%20enmarcar%20mi%20historia." class="cta-btn primary">
+                <i data-lucide="message-circle" size="18"></i> Contactar por WhatsApp
             </a>
             <a href="https://instagram.com/etereolabstudio" class="cta-btn secondary" target="_blank" id="ig-btn">
-                <i data-lucide="instagram" size="18"></i> Instagram
+                <i data-lucide="instagram" size="18"></i> Ver en Instagram
             </a>
         </div>
 
         <div class="micro-footer">
             <p>&copy; 2026 Etéreo Lab Studio. Todos los derechos reservados.</p>
             <div class="legal-links">
-                <a href="#">Aviso de Privacidad</a>
-                <span>|</span>
-                <a href="#">Términos y Condiciones</a>
+                <a href="#">Aviso de Privacidad</a><span>|</span><a href="#">Términos y Condiciones</a>
             </div>
             <p class="made-in">Diseñado y manufacturado en Guadalajara, México.</p>
         </div>
     </footer>
 
     <script>
+        // Inicialización y Preloader
         lucide.createIcons();
-
         window.addEventListener('load', () => {
-            setTimeout(() => { 
-                document.getElementById('preloader').classList.add('preloader-hidden');
-                lucide.createIcons();
-            }, 1600);
+            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1600);
+            initParticles(); // Inicia las estrellas
         });
 
+        // Configuración de Partículas (Estrellas interactivas)
+        function initParticles() {
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                        "color": { "value": "#ffffff" },
+                        "shape": { "type": "circle" },
+                        "opacity": { "value": 0.4, "random": true },
+                        "size": { "value": 2, "random": true },
+                        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                        "move": { "enable": true, "speed": 0.5, "direction": "none", "random": true, "out_mode": "out" }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 3 } }
+                    },
+                    "retina_detect": true
+                });
+            }
+        }
+
+        // Lógica de Scroll Progress y Navbar
         let lastScroll = 0; const navbar = document.getElementById('navbar'), progress = document.getElementById('scroll-progress');
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -352,11 +398,29 @@
             lastScroll = currentScroll;
         });
 
-        const wavesurfer = WaveSurfer.create({
-            container: '#waveform', waveColor: '#A3A3A3', progressColor: '#FFFFFF',
-            barWidth: 3, barRadius: 3, height: 60, url: './teamodrstrange.mp3'
+        // Efecto Spotlight (Linterna) para las tarjetas de Pilares
+        document.querySelectorAll('.pilar-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
         });
 
+        // Lógica del Acordeón FAQ
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active')); // Cierra todos
+                if (!isActive) item.classList.add('active'); // Abre el seleccionado
+            });
+        });
+
+        // Wavesurfer (Audio Player)
+        const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#A3A3A3', progressColor: '#FFFFFF', barWidth: 3, barRadius: 3, height: 60, url: './teamodrstrange.mp3' });
         const playBtn = document.getElementById('play-btn'); const timeDisp = document.getElementById('time-display');
         const formatT = (s) => { const m = Math.floor(s / 60); const sc = Math.floor(s % 60); return `${m}:${sc < 10 ? '0' : ''}${sc}`; };
 
@@ -370,6 +434,7 @@
             lucide.createIcons();
         });
 
+        // Theme Toggle (Modo Claro/Oscuro)
         const themeBtn = document.getElementById('theme-btn'); const htmlElement = document.documentElement;
         themeBtn.addEventListener('click', () => {
             if (navigator.vibrate) navigator.vibrate(50);
@@ -380,9 +445,9 @@
             lucide.createIcons();
         });
 
+        // Fade in observer
         const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(f => obs.observe(f));
-        
         setTimeout(lucide.createIcons, 2500);
     </script>
 </body>
