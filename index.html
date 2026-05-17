@@ -18,85 +18,92 @@
 
     <style>
         /* =========================================
-           1. MOTOR DE COLOR Y TEXTURAS
+           1. MOTOR DE COLOR Y TEXTURA
            ========================================= */
         :root {
-            --bg-color: #050505;
-            --text-color: #A3A3A3;
-            --title-color: #FFFFFF;
-            --accent-color: rgba(255, 255, 255, 0.08);
-            --nav-bg: rgba(5, 5, 5, 0.75);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --card-hover-shadow: 0 40px 80px rgba(255, 255, 255, 0.06);
-            --noise-opacity: 0;
-            --progress-color: #FFFFFF;
-            --pulse-color: rgba(255, 255, 255, 0.15);
+            --bg-color: #050505; --text-color: #A3A3A3; --title-color: #FFFFFF;
+            --accent-color: rgba(255, 255, 255, 0.08); --nav-bg: rgba(5, 5, 5, 0.75);
+            --card-border: rgba(255, 255, 255, 0.1); --card-hover-shadow: 0 40px 80px rgba(255, 255, 255, 0.06);
+            --noise-opacity: 0; --progress-color: #FFFFFF; --pulse-color: rgba(255, 255, 255, 0.15);
         }
 
         [data-theme="light"] {
-            --bg-color: #F8F6F0; 
-            --text-color: #4A4A4A;
-            --title-color: #121212;
-            --accent-color: rgba(0, 0, 0, 0.06);
-            --nav-bg: rgba(248, 246, 240, 0.75);
-            --card-border: rgba(0, 0, 0, 0.1);
-            --card-hover-shadow: 0 40px 80px rgba(0, 0, 0, 0.06);
-            --noise-opacity: 0.06;
-            --progress-color: #121212;
-            --pulse-color: rgba(0, 0, 0, 0.1);
+            --bg-color: #F8F6F0; --text-color: #4A4A4A; --title-color: #121212;
+            --accent-color: rgba(0, 0, 0, 0.06); --nav-bg: rgba(248, 246, 240, 0.75);
+            --card-border: rgba(0, 0, 0, 0.1); --card-hover-shadow: 0 40px 80px rgba(0, 0, 0, 0.06);
+            --noise-opacity: 0.06; --progress-color: #121212; --pulse-color: rgba(0, 0, 0, 0.1);
         }
 
-        body, nav, header, section, footer, div, h1, h2, h3, p, button {
-            transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease;
-        }
-
+        body, nav, header, section, footer, div, h1, h2, h3, p, button { transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden; }
 
-        body {
-            background-color: var(--bg-color); color: var(--text-color);
-            font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden;
-        }
-
-        /* EFECTO PAPEL (NOISE) */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9998; opacity: var(--noise-opacity); transition: opacity 0.7s ease;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+        
         h1, h2, h3, .nav-brand { font-family: 'Playfair Display', serif; font-weight: 400; color: var(--title-color); }
 
-        /* NAVEGACIÓN Y PRELOADER */
+        /* =========================================
+           2. NAVEGACIÓN Y PRELOADER
+           ========================================= */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color);
-            z-index: 100000; display: flex; justify-content: center; align-items: center;
-            transition: opacity 1s cubic-bezier(0.65, 0, 0.35, 1), visibility 1s;
+            z-index: 100000; display: flex; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s;
         }
-        .preloader-text { font-size: 1.5rem; color: var(--title-color); letter-spacing: 3px; font-style: italic; animation: pulse-glow 2s infinite; text-align: center; }
+        .preloader-text { font-size: 1.5rem; color: var(--title-color); letter-spacing: 3px; font-style: italic; animation: pulse-glow 2s infinite; text-align: center; font-family: 'Playfair Display', serif; }
         @keyframes pulse-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
         .preloader-hidden { opacity: 0 !important; visibility: hidden !important; }
 
-        #scroll-progress {
-            position: fixed; top: 0; left: 0; width: 0%; height: 3px; background-color: var(--progress-color); z-index: 100001;
-        }
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background-color: var(--progress-color); z-index: 100001; }
 
         .navbar {
             position: fixed; top: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
-            background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--accent-color); z-index: 9999; transition: transform 0.5s ease;
+            background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--accent-color); z-index: 9999; transition: transform 0.5s ease;
         }
         .navbar.nav-hidden { transform: translateY(-100%); }
-
         .theme-btn {
-            background: transparent; color: var(--title-color); border: 1px solid var(--card-border);
-            padding: 8px 18px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 30px; display: flex; align-items: center; gap: 8px;
+            background: transparent; color: var(--title-color); border: 1px solid var(--card-border); padding: 8px 18px;
+            font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 30px; display: flex; align-items: center; gap: 8px; font-family: 'Lato', sans-serif;
         }
 
-        /* HERO */
+        /* =========================================
+           3. HERO Y DECLARACIÓN DE IMPACTO
+           ========================================= */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
         .hero h1 { font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: 6px; margin-bottom: 25px; text-transform: uppercase; }
+        
+        .quote-section {
+            min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 40px 20px; border-bottom: 1px solid var(--accent-color);
+        }
+        .quote-text {
+            font-size: clamp(1.8rem, 4vw, 3rem); font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color);
+            max-width: 900px; line-height: 1.4; margin-bottom: 20px;
+        }
+        .quote-author { font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-color); }
 
-        /* PORTAFOLIO Y CARRUSEL */
+        /* =========================================
+           4. NUESTROS PILARES
+           ========================================= */
+        .pilares-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--accent-color); }
+        .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
+        
+        .pilar-card { padding: 40px; border: 1px solid var(--card-border); border-radius: 4px; text-align: left; background: rgba(0,0,0,0.02); transition: transform 0.3s; }
+        .pilar-card:hover { transform: translateY(-5px); border-color: var(--title-color); }
+        .pilar-icon { margin-bottom: 20px; color: var(--title-color); }
+        .pilar-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .pilar-card p { font-size: 0.95rem; }
+
+        /* =========================================
+           5. PORTAFOLIO Y COLECCIONES
+           ========================================= */
         section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
         h2.section-title { font-size: 2.2rem; letter-spacing: 5px; margin-bottom: 80px; text-align: center; text-transform: uppercase; border-bottom: 1px solid var(--accent-color); padding-bottom: 30px; }
 
@@ -107,66 +114,49 @@
             .collection-grid:nth-child(even) .text-container { order: 1; }
         }
 
+        .text-container h3 { font-size: 2.2rem; margin-bottom: 20px; letter-spacing: 1px; }
+        .text-container p { margin-bottom: 20px; font-size: 1.05rem; }
+
+        /* Carrusel Astronómico */
         .carousel-wrapper { width: 100%; position: relative; }
-        .carousel {
-            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; gap: 20px; scrollbar-width: none;
-        }
+        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; }
         .carousel::-webkit-scrollbar { display: none; }
         .carousel-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; }
         
-        .img-container {
-            width: 100%; height: 500px; overflow: hidden; border: 1px solid var(--card-border); border-radius: 4px;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); position: relative;
-        }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .img-container { width: 100%; height: 500px; overflow: hidden; border: 1px solid var(--card-border); border-radius: 4px; position: relative; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 2s ease; }
+        .img-container:hover img { transform: scale(1.04); }
 
-        /* GLASS CARD ETIQUETAS */
         .slide-caption {
             position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); padding: 8px 20px;
-            border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
             font-family: 'Playfair Display', serif; color: #fff; font-size: 0.95rem; font-style: italic;
         }
         [data-theme="light"] .slide-caption { background: rgba(255,255,255,0.7); color: #000; border: 1px solid rgba(0,0,0,0.1); }
-
         .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.6; text-transform: uppercase; }
 
-        /* REPRODUCTOR DE AUDIO */
+        /* Reproductor de Audio */
         .audio-player-wrapper { margin-top: 30px; padding: 25px; border: 1px solid var(--card-border); border-radius: 8px; background: var(--accent-color); }
         #waveform { margin-bottom: 15px; min-height: 60px; }
         .audio-controls { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
         .play-group { display: flex; align-items: center; gap: 12px; }
-        
-        .play-btn {
-            width: 50px; height: 50px; min-width: 50px; border-radius: 50%; border: none;
-            background: var(--title-color); color: var(--bg-color); cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
-            aspect-ratio: 1/1; flex-shrink: 0; padding: 0;
-        }
-
+        .play-btn { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; border: none; background: var(--title-color); color: var(--bg-color); cursor: pointer; display: flex; justify-content: center; align-items: center; aspect-ratio: 1/1; flex-shrink: 0; padding: 0; }
         .time-display { font-size: 0.8rem; letter-spacing: 1px; }
 
-        /* NFC PULSE */
+        /* NFC Pulse */
         .nfc-wrapper { position: relative; }
-        .nfc-pulse {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 80px; height: 80px; border-radius: 50%; background: var(--pulse-color);
-            animation: nfc-wave 3s infinite; pointer-events: none;
-        }
+        .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; background: var(--pulse-color); animation: nfc-wave 3s infinite; pointer-events: none; }
         @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(4); opacity: 0; } }
 
-        /* FOOTER */
+        /* =========================================
+           6. FOOTER Y BOTONES
+           ========================================= */
         footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--accent-color); }
         .btn-group { display: flex; flex-direction: column; gap: 20px; align-items: center; margin: 30px 0; }
         @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; } }
 
-        .cta-btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 15px 30px; text-decoration: none; border-radius: 30px; font-size: 0.8rem;
-            letter-spacing: 2px; text-transform: uppercase; width: 100%; max-width: 280px; transition: 0.3s;
-        }
-        .primary { background: var(--title-color); color: var(--bg-color); }
+        .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 30px; text-decoration: none; border-radius: 30px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; width: 100%; max-width: 280px; transition: 0.3s; font-family: 'Lato', sans-serif; }
+        .primary { background: var(--title-color); color: var(--bg-color); border: 1px solid var(--title-color); }
         .secondary { border: 1px solid var(--card-border); color: var(--title-color); }
 
         .fade-in { opacity: 0; transform: translateY(20px); transition: 1s ease-out; }
@@ -185,8 +175,34 @@
 
     <header class="hero fade-in">
         <h1>Etéreo Lab Studio</h1>
-        <p style="font-style: italic; opacity: 0.8; max-width: 600px;">La ciencia detrás de un sentimiento. Convertimos memorias intangibles en piezas de arte físico y digital para que perduren.</p>
+        <p style="font-style: italic; opacity: 0.8; max-width: 600px; font-size: 1.2rem;">La ciencia detrás de un sentimiento. Convertimos memorias intangibles en piezas de arte físico y digital para que perduren.</p>
     </header>
+
+    <section class="quote-section fade-in">
+        <h2 class="quote-text">"No vendemos papel, posters ni marcos;<br> Diseñamos cápsulas del tiempo."</h2>
+        <p class="quote-author">— Etéreo Lab Studio</p>
+    </section>
+
+    <section class="pilares-section fade-in">
+        <h2 class="section-title" style="border: none; margin-bottom: 20px;">Nuestros Pilares</h2>
+        <div class="pilares-grid">
+            <div class="pilar-card">
+                <i data-lucide="crosshair" size="32" class="pilar-icon"></i>
+                <h3>Precisión Tech</h3>
+                <p>Utilizamos algoritmos astrofísicos y análisis de frecuencias de audio para garantizar la exactitud matemática de cada coordenada estelar y onda de sonido.</p>
+            </div>
+            <div class="pilar-card">
+                <i data-lucide="pen-tool" size="32" class="pilar-icon"></i>
+                <h3>Diseño Etéreo</h3>
+                <p>Abrazamos el minimalismo y el lujo táctil. Menos ruido visual, más significado en cada trazo, en la tipografía y en los espacios en blanco.</p>
+            </div>
+            <div class="pilar-card">
+                <i data-lucide="heart" size="32" class="pilar-icon"></i>
+                <h3>El Sentimiento</h3>
+                <p>La ciencia y los datos transformados en una memoria palpable. Capturamos la esencia de tu historia para que perdure de forma elegante en el mundo físico.</p>
+            </div>
+        </div>
+    </section>
 
     <section>
         <h2 class="section-title fade-in">Nuestro Portafolio</h2>
@@ -212,11 +228,25 @@
             <div class="text-container">
                 <h3>Colección Astronómica</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en el que tu vida cambió para siempre.</p>
-                <p><strong>Tres variantes:</strong> La bóveda celeste completa, la iluminación exacta de la luna o la alineación de nuestro sistema solar.</p>
+                <p><strong>Tres variantes:</strong> La bóveda celeste completa, la iluminación exacta de la luna o la alineación planetaria de ese día irrepetible.</p>
             </div>
         </div>
 
         <div class="collection-grid fade-in">
+            <div class="text-container">
+                <h3>Colección Terrenal</h3>
+                <p><strong>Geometría del Espacio:</strong> Inmortalizamos el lugar exacto donde sus caminos se cruzaron o donde la vida dio un giro inesperado.</p>
+                <p>Trazamos con extrema precisión las calles, avenidas y coordenadas geográficas de tu memoria para convertir un punto en el mapa en una obra de arte.</p>
+            </div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800" alt="Mapa Geográfico" loading="lazy">
+            </div>
+        </div>
+
+        <div class="collection-grid fade-in">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1516280440502-a2f72a048d8b?auto=format&fit=crop&q=80&w=800" alt="Onda Sonora" loading="lazy">
+            </div>
             <div class="text-container">
                 <h3>Colección Sonora</h3>
                 <p>Transformamos un "te amo", el latido de tu bebé o su primera canción en una onda de sonido visual y elegante.</p>
@@ -225,14 +255,22 @@
                     <div class="audio-controls">
                         <div class="play-group">
                             <button class="play-btn" id="play-btn"><i data-lucide="play" size="20" fill="currentColor"></i></button>
-                            <span style="font-family: 'Playfair Display'; font-style: italic;">"Te amo en todos..."</span>
+                            <span style="font-family: 'Playfair Display'; font-style: italic; color: var(--title-color);">"Te amo en todos..."</span>
                         </div>
                         <span class="time-display" id="time-display">0:00 / 0:00</span>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="collection-grid fade-in">
+            <div class="text-container">
+                <h3>El Archivo Confidencial</h3>
+                <p>Diseñamos cartas estructuradas como bitácoras o expedientes. Usamos papel de algodón de alto gramaje y sobres cerrados con sellos de cera.</p>
+                <p><strong>Un ritual táctil:</strong> Escribe tu historia hoy, séllala herméticamente y archívala. Nuestras cápsulas están diseñadas para no ser abiertas hasta una fecha estipulada en el futuro.</p>
+            </div>
             <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1516280440502-a2f72a048d8b?auto=format&fit=crop&q=80&w=800" alt="Onda Sonora" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800" alt="Sellos de cera" loading="lazy">
             </div>
         </div>
 
@@ -243,15 +281,16 @@
             </div>
             <div class="text-container">
                 <h3>La Dimensión Oculta</h3>
-                <p>Integramos tecnología NFC invisible. Solo acerca tu celular desbloqueado al cuadro y la memoria cobrará vida al instante.</p>
+                <p>Integramos tecnología NFC invisible. Creemos que una memoria no solo debe verse, sino que también escucharse.</p>
+                <p>Transformamos cualquier cuadro en un portal digital. Solo acerca tu celular y la memoria comenzará a reproducirse al instante.</p>
             </div>
         </div>
     </section>
 
     <footer class="fade-in">
-        <h3>Enmarca tu historia</h3>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--title-color); margin-bottom: 20px;">Enmarca tu historia</h3>
         <div class="btn-group">
-            <a href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo%20Lab." class="cta-btn primary">
+            <a href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo%20Lab%20Studio." class="cta-btn primary">
                 <i data-lucide="message-circle" size="18"></i> WhatsApp
             </a>
             <a href="https://instagram.com/etereolabstudio" class="cta-btn secondary" target="_blank">
@@ -261,42 +300,27 @@
     </footer>
 
     <script>
-        // Inicializar Iconos de Lucide inmediatamente
         lucide.createIcons();
 
-        // Preloader
-        window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); }, 1500);
-        });
-
-        // Scroll Logic
-        let lastScroll = 0;
-        const navbar = document.getElementById('navbar');
-        const progress = document.getElementById('scroll-progress');
-
+        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); }, 1500); });
+        
+        let lastScroll = 0; const navbar = document.getElementById('navbar'), progress = document.getElementById('scroll-progress');
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             progress.style.width = (currentScroll / height) * 100 + "%";
-
             if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add('nav-hidden');
             else navbar.classList.remove('nav-hidden');
             lastScroll = currentScroll;
         });
 
-        // Wavesurfer
         const wavesurfer = WaveSurfer.create({
             container: '#waveform', waveColor: '#A3A3A3', progressColor: '#FFFFFF',
             barWidth: 3, barRadius: 3, height: 60, url: './teamodrstrange.mp3'
         });
 
-        const playBtn = document.getElementById('play-btn');
-        const timeDisp = document.getElementById('time-display');
-
-        const formatT = (s) => {
-            const m = Math.floor(s / 60); const sc = Math.floor(s % 60);
-            return `${m}:${sc < 10 ? '0' : ''}${sc}`;
-        };
+        const playBtn = document.getElementById('play-btn'); const timeDisp = document.getElementById('time-display');
+        const formatT = (s) => { const m = Math.floor(s / 60); const sc = Math.floor(s % 60); return `${m}:${sc < 10 ? '0' : ''}${sc}`; };
 
         wavesurfer.on('ready', () => { timeDisp.textContent = `0:00 / ${formatT(wavesurfer.getDuration())}`; });
         wavesurfer.on('audioprocess', () => { timeDisp.textContent = `${formatT(wavesurfer.getCurrentTime())} / ${formatT(wavesurfer.getDuration())}`; });
@@ -308,20 +332,17 @@
             lucide.createIcons();
         });
 
-        // Theme Toggle
-        const themeBtn = document.getElementById('theme-btn');
+        const themeBtn = document.getElementById('theme-btn'); const htmlElement = document.documentElement;
         themeBtn.addEventListener('click', () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            if (navigator.vibrate) navigator.vibrate(50);
+            const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+            htmlElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
             themeBtn.innerHTML = isDark ? '<i data-lucide="moon" size="16"></i> Modo Oscuro' : '<i data-lucide="sun" size="16"></i> Modo Claro';
             wavesurfer.setOptions({ waveColor: isDark ? '#DCD8CC' : '#A3A3A3', progressColor: isDark ? '#121212' : '#FFFFFF' });
             lucide.createIcons();
         });
 
-        // Animations
-        const obs = new IntersectionObserver((es) => {
-            es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
+        const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(f => obs.observe(f));
     </script>
 </body>
