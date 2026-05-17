@@ -1,98 +1,86 @@
 /* =========================================
-   1. VARIABLES Y GOOGLE FONTS
+   1. MOTOR DE COLOR Y TEXTURAS
    ========================================= */
 :root {
-    /* Modo Oscuro (Por defecto) */
+    /* Modo Espacial */
     --bg-color: #050505;
-    --text-color: #e0e0e0;
-    --title-color: #ffffff;
-    --accent-color: #333333;
-    --btn-bg: #ffffff;
-    --btn-text: #000000;
-    --nav-bg: rgba(5, 5, 5, 0.7); /* Transparente para el Glassmorphism */
-    
-    /* Tipografías Premium */
-    --font-title: 'Playfair Display', serif;
-    --font-text: 'Lato', sans-serif;
+    --text-color: #A3A3A3;
+    --title-color: #FFFFFF;
+    --accent-color: rgba(255, 255, 255, 0.08);
+    --nav-bg: rgba(5, 5, 5, 0.75);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-hover-shadow: 0 30px 60px rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="light"] {
-    /* Modo Claro (Beige Editorial) */
-    --bg-color: #F5F2EB;
-    --text-color: #333333;
-    --title-color: #111111;
-    --accent-color: #D1C9B8;
-    --btn-bg: #111111;
-    --btn-text: #ffffff;
-    --nav-bg: rgba(245, 242, 235, 0.7);
+    /* Modo Opalina/Papel Mate */
+    --bg-color: #F8F6F0; 
+    --text-color: #5A5A5A;
+    --title-color: #121212;
+    --accent-color: rgba(0, 0, 0, 0.06);
+    --nav-bg: rgba(248, 246, 240, 0.75);
+    --card-border: rgba(0, 0, 0, 0.1);
+    --card-hover-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
 }
 
-/* Transición suave para todos los colores */
-body, section, footer, div, h1, h2, h3, p, nav {
-    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+body, nav, header, section, footer, div, h1, h2, h3, p, button {
+    transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease;
 }
 
-/* =========================================
-   2. RESETEO Y TIPOGRAFÍA BASE
-   ========================================= */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: var(--font-text);
-    line-height: 1.6;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
     overflow-x: hidden;
 }
 
-h1, h2, h3 { font-family: var(--font-title); font-weight: 400; }
+h1, h2, h3, .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    color: var(--title-color);
+}
 
 /* =========================================
-   3. NAVBAR (BARRA DE NAVEGACIÓN CRISTAL)
+   2. NAVEGACIÓN CRISTAL PREMIUM
    ========================================= */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 15px 30px;
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--nav-bg);
-    backdrop-filter: blur(10px); /* El efecto Glassmorphism */
-    -webkit-backdrop-filter: blur(10px); /* Soporte para iPhone */
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--accent-color);
     z-index: 1000;
 }
 
-.nav-brand {
-    font-family: var(--font-title);
-    font-size: 1.2rem;
-    color: var(--title-color);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+.nav-brand { font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase; }
 
-.theme-toggle-btn {
+.theme-btn {
     background: transparent;
     color: var(--title-color);
-    border: 1px solid var(--title-color);
-    padding: 6px 12px;
-    cursor: pointer;
-    font-family: var(--font-text);
-    font-size: 0.8rem;
+    border: 1px solid var(--card-border);
+    padding: 8px 18px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 30px;
 }
 
-.theme-toggle-btn:hover {
-    background: var(--title-color);
-    color: var(--bg-color);
-}
+.theme-btn:hover { border-color: var(--title-color); }
 
 /* =========================================
-   4. SECCIONES Y ESTRUCTURA
+   3. HERO SECTION
    ========================================= */
 .hero {
     height: 100vh;
@@ -101,16 +89,212 @@ h1, h2, h3 { font-family: var(--font-title); font-weight: 400; }
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 0 20px;
+    position: relative;
 }
 
 .hero h1 {
-    color: var(--title-color);
-    font-size: 4rem;
-    letter-spacing: 6px;
-    margin-bottom: 20px;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    letter-spacing: 8px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
 }
 
-.hero p.slogan {
+.hero p.slogan { 
+    font-size: 1.2rem; 
+    max-width: 600px; 
+    font-style: italic; 
+    opacity: 0.9;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    width: 26px;
+    height: 42px;
+    border: 1px solid var(--title-color);
+    border-radius: 15px;
+    opacity: 0.5;
+}
+
+.scroll-indicator::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--title-color);
+    border-radius: 50%;
+    animation: scroll-down 2s infinite cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes scroll-down {
+    0% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, 15px); }
+}
+
+/* =========================================
+   4. SECCIONES Y EFECTO DE LEVITACIÓN
+   ========================================= */
+section { padding: 140px 20px; max-width: 1200px; margin: 0 auto; }
+
+h2.section-title {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+    margin-bottom: 90px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 30px;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    margin-bottom: 140px;
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .collection-grid { grid-template-columns: 1fr 1fr; gap: 90px;}
+    .collection-grid:nth-child(even) .img-container { order: 2; }
+    .collection-grid:nth-child(even) .text-container { order: 1; }
+}
+
+.text-container h3 { font-size: 2.2rem; margin-bottom: 25px; letter-spacing: 1px; }
+.text-container p { margin-bottom: 20px; font-size: 1.05rem; }
+
+.img-container {
+    width: 100%;
+    height: 550px; 
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 2s ease;
+}
+
+.img-container:hover {
+    transform: translateY(-12px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.img-container:hover img { transform: scale(1.04); }
+
+/* =========================================
+   5. REPRODUCTOR PREMIUM (CORRECCIÓN FLEX-SHRINK)
+   ========================================= */
+.audio-player-wrapper {
+    margin-top: 35px;
+    padding: 25px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    background: var(--accent-color);
+}
+
+#waveform { margin-bottom: 25px; min-height: 60px; }
+
+.audio-controls { display: flex; align-items: center; gap: 20px; }
+
+.play-btn {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0; /* <--- LA REGLA MAESTRA PARA QUE NO SE HAGA ÓVALO */
+    border-radius: 50%;
+    background: var(--title-color);
+    color: var(--bg-color);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.2rem;
-    max-width: 60
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.play-btn:hover { transform: scale(1.08); }
+
+.audio-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--title-color);
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+/* =========================================
+   6. FOOTER Y BOTONES DUALES
+   ========================================= */
+footer { 
+    text-align: center; 
+    padding: 120px 20px 80px 20px; 
+    border-top: 1px solid var(--accent-color); 
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+@media (min-width: 600px) {
+    .btn-group { flex-direction: row; gap: 30px; }
+}
+
+.cta-btn-primary {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: var(--title-color);
+    color: var(--bg-color);
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    border: 1px solid var(--title-color);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 280px;
+}
+
+.cta-btn-primary:hover { opacity: 0.85; transform: translateY(-3px); }
+
+.cta-btn-secondary {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: transparent;
+    color: var(--title-color);
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    border: 1px solid var(--card-border);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 280px;
+}
+
+.cta-btn-secondary:hover { border-color: var(--title-color); transform: translateY(-3px); }
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
