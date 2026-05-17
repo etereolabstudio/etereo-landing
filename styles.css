@@ -1,0 +1,116 @@
+/* =========================================
+   1. VARIABLES Y GOOGLE FONTS
+   ========================================= */
+:root {
+    /* Modo Oscuro (Por defecto) */
+    --bg-color: #050505;
+    --text-color: #e0e0e0;
+    --title-color: #ffffff;
+    --accent-color: #333333;
+    --btn-bg: #ffffff;
+    --btn-text: #000000;
+    --nav-bg: rgba(5, 5, 5, 0.7); /* Transparente para el Glassmorphism */
+    
+    /* Tipografías Premium */
+    --font-title: 'Playfair Display', serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+[data-theme="light"] {
+    /* Modo Claro (Beige Editorial) */
+    --bg-color: #F5F2EB;
+    --text-color: #333333;
+    --title-color: #111111;
+    --accent-color: #D1C9B8;
+    --btn-bg: #111111;
+    --btn-text: #ffffff;
+    --nav-bg: rgba(245, 242, 235, 0.7);
+}
+
+/* Transición suave para todos los colores */
+body, section, footer, div, h1, h2, h3, p, nav {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+/* =========================================
+   2. RESETEO Y TIPOGRAFÍA BASE
+   ========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: var(--font-title); font-weight: 400; }
+
+/* =========================================
+   3. NAVBAR (BARRA DE NAVEGACIÓN CRISTAL)
+   ========================================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px); /* El efecto Glassmorphism */
+    -webkit-backdrop-filter: blur(10px); /* Soporte para iPhone */
+    border-bottom: 1px solid var(--accent-color);
+    z-index: 1000;
+}
+
+.nav-brand {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    color: var(--title-color);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.theme-toggle-btn {
+    background: transparent;
+    color: var(--title-color);
+    border: 1px solid var(--title-color);
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: var(--font-text);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    background: var(--title-color);
+    color: var(--bg-color);
+}
+
+/* =========================================
+   4. SECCIONES Y ESTRUCTURA
+   ========================================= */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    color: var(--title-color);
+    font-size: 4rem;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+}
+
+.hero p.slogan {
+    font-size: 1.2rem;
+    max-width: 60
