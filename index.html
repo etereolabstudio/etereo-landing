@@ -108,7 +108,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 5vw, 5rem); /* Se adapta al tamaño de pantalla */
+            font-size: clamp(3rem, 5vw, 5rem);
             letter-spacing: 8px;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -116,7 +116,6 @@
 
         .hero p.slogan { font-size: 1.2rem; max-width: 650px; font-style: italic; }
 
-        /* Icono animado del ratón para indicar bajar */
         .scroll-indicator {
             position: absolute;
             bottom: 40px;
@@ -177,13 +176,12 @@
         .text-container h3 { font-size: 2.2rem; margin-bottom: 25px; }
         .text-container p { margin-bottom: 20px; font-size: 1.1rem; }
 
-        /* Contenedor de imagen con efecto WOW (Levitación) */
         .img-container {
             width: 100%;
             height: 550px; 
             overflow: hidden;
             border: 1px solid var(--accent-color);
-            border-radius: 8px; /* Bordes ligeramente redondeados */
+            border-radius: 8px;
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
         }
 
@@ -195,7 +193,7 @@
         }
 
         .img-container:hover {
-            transform: translateY(-10px); /* El cuadro flota hacia arriba */
+            transform: translateY(-10px);
             box-shadow: var(--card-hover);
         }
 
@@ -340,7 +338,6 @@
 
     <script>
         // 1. INICIALIZAR EL REPRODUCTOR WAVESURFER (LA MAGIA VISUAL)
-        // Usamos un archivo mp3 genérico seguro. Para tu producción, cámbialo por "latido.mp3"
         const wavesurfer = WaveSurfer.create({
             container: '#waveform',
             waveColor: '#B0B0B0',      // Color de la onda sin reproducir
@@ -349,7 +346,7 @@
             barWidth: 3,               // Grosor de las barras
             barRadius: 3,              // Bordes redondeados de las barras
             height: 60,                // Altura del reproductor
-            url: 'https://raw.githubusercontent.com/rafaelreis-hotmart/Audio-Sample/main/sample.mp3'
+            url: 'teamodrstrange.mp3'  // <--- AQUÍ ESTÁ EL ENLACE DIRECTO A TU AUDIO
         });
 
         // Controles de Play/Pause del audio
