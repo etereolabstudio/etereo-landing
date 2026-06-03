@@ -9,8 +9,7 @@
     
     <meta property="og:title" content="Etéreo Lab Studio">
     <meta property="og:description" content="La ciencia detrás de un sentimiento. Arte físico y digital.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -82,7 +81,7 @@
         .quote-author { font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-color); }
 
         /* =========================================
-           4. PILARES CON EFECTO LINTERNA
+           4. PILARES
            ========================================= */
         .pilares-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--accent-color); }
         .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
@@ -111,42 +110,40 @@
         h2.section-title { font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 80px; text-align: center; text-transform: uppercase; border-bottom: 1px solid var(--accent-color); padding-bottom: 30px; }
 
         .collection-grid { display: grid; grid-template-columns: 1fr; gap: 50px; margin-bottom: 110px; align-items: center; }
+        
+        /* ALTERNANCIA AUTOMÁTICA EN DESKTOP */
         @media (min-width: 900px) {
             .collection-grid { grid-template-columns: 1fr 1fr; gap: 90px;}
-            .collection-grid:nth-child(even) .carousel-wrapper, .collection-grid:nth-child(even) .img-container, .collection-grid:nth-child(even) .nfc-wrapper { order: 2; }
+            /* Todos los elementos pares (2, 4, 6) invierten su orden */
+            .collection-grid:nth-child(even) .img-container, 
+            .collection-grid:nth-child(even) .carousel-wrapper, 
+            .collection-grid:nth-child(even) .nfc-wrapper { order: 2; }
             .collection-grid:nth-child(even) .text-container { order: 1; }
         }
 
         .text-container h3 { font-size: 2rem; margin-bottom: 20px; letter-spacing: 1px; }
         .text-container p { margin-bottom: 18px; font-size: 1rem; }
 
+        /* Carrusel */
         .carousel-wrapper { width: 100%; position: relative; }
         .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; }
         .carousel::-webkit-scrollbar { display: none; }
         .carousel-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; }
         
-        /* Contenedor estándar (Fotos rectangulares) */
+        /* Contenedor estándar */
         .img-container { width: 100%; height: 480px; overflow: hidden; border: 1px solid var(--card-border); border-radius: 4px; position: relative; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 2s ease; }
         .img-container:hover img { transform: scale(1.04); }
 
-        /* NUEVO: Contenedor Cuadrado Perfecto para Diseños 1080x1080 */
-        .img-square {
-            height: auto;
-            aspect-ratio: 1 / 1;
-            background-color: #FFFFFF; /* Obliga a que el fondo sea blanco */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .img-square img {
-            object-fit: contain; /* Garantiza que el 100% de la imagen sea visible sin cortes */
-        }
+        /* Contenedor Cuadrado 1:1 */
+        .img-square { height: auto; aspect-ratio: 1 / 1; background-color: #FFFFFF; display: flex; justify-content: center; align-items: center; }
+        .img-square img { object-fit: contain; }
 
         .slide-caption { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); padding: 7px 18px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); font-family: 'Playfair Display', serif; color: #fff; font-size: 0.9rem; font-style: italic; white-space: nowrap; }
         [data-theme="light"] .slide-caption { background: rgba(248, 246, 240, 0.8); color: #121212; border: 1px solid rgba(0,0,0,0.1); }
         .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
+        /* Audio Player */
         .audio-player-wrapper { margin-top: 30px; padding: 25px; border: 1px solid var(--card-border); border-radius: 8px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
         [data-theme="light"] .audio-player-wrapper { background: rgba(255,255,255,0.4); }
         #waveform { margin-bottom: 15px; min-height: 60px; }
@@ -167,11 +164,7 @@
         .faq-item { border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.2); }
         [data-theme="light"] .faq-item { background: rgba(255,255,255,0.4); }
         
-        .faq-question {
-            width: 100%; text-align: left; padding: 20px 25px; background: transparent; border: none;
-            color: var(--title-color); font-family: 'Lato', sans-serif; font-size: 1.05rem;
-            display: flex; justify-content: space-between; align-items: center; cursor: pointer; outline: none;
-        }
+        .faq-question { width: 100%; text-align: left; padding: 20px 25px; background: transparent; border: none; color: var(--title-color); font-family: 'Lato', sans-serif; font-size: 1.05rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; outline: none; }
         .faq-icon { transition: transform 0.4s ease; color: var(--text-color); }
         .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--title-color); }
         
@@ -196,26 +189,11 @@
         .legal-links button:hover { color: var(--title-color); }
         .made-in { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; margin-top: 5px; opacity: 0.8; }
 
-        /* ESTILOS DE LA VENTANA MODAL */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            z-index: 100002; display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 100002; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        
-        .modal-content {
-            background: var(--bg-color); border: 1px solid var(--card-border); border-radius: 12px;
-            width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;
-            padding: 40px 30px; position: relative; transform: translateY(30px); transition: transform 0.4s ease;
-        }
+        .modal-content { background: var(--bg-color); border: 1px solid var(--card-border); border-radius: 12px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 40px 30px; position: relative; transform: translateY(30px); transition: transform 0.4s ease; }
         .modal-overlay.active .modal-content { transform: translateY(0); }
-        
-        .modal-close {
-            position: absolute; top: 20px; right: 20px; background: transparent; border: none;
-            color: var(--title-color); cursor: pointer; transition: transform 0.3s;
-        }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: var(--title-color); cursor: pointer; transition: transform 0.3s; }
         .modal-close:hover { transform: scale(1.1); }
         .modal-content h3 { font-size: 1.8rem; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 15px; }
         .modal-content p { font-size: 0.9rem; margin-bottom: 15px; line-height: 1.6; }
@@ -273,21 +251,15 @@
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <div class="carousel-slide">
-                        <div class="img-container img-square">
-                            <img src="./mapa-estelar.jpg" alt="Mapa Estelar" loading="lazy">
-                        </div>
+                        <div class="img-container img-square"><img src="./mapa-estelar.jpg" alt="Mapa Estelar" loading="lazy"></div>
                         <div class="slide-caption">Mapas Estelares</div>
                     </div>
                     <div class="carousel-slide">
-                        <div class="img-container img-square">
-                            <img src="./fase-lunar.jpg" alt="Fases Lunares" loading="lazy">
-                        </div>
+                        <div class="img-container img-square"><img src="./fase-lunar.jpg" alt="Fases Lunares" loading="lazy"></div>
                         <div class="slide-caption">Fases Lunares</div>
                     </div>
                     <div class="carousel-slide">
-                        <div class="img-container img-square">
-                            <img src="./alineacion-planetaria.jpg" alt="Alineación Planetaria" loading="lazy">
-                        </div>
+                        <div class="img-container img-square"><img src="./alineacion-planetaria.jpg" alt="Alineación Planetaria" loading="lazy"></div>
                         <div class="slide-caption">Alineación Planetaria</div>
                     </div>
                 </div>
@@ -301,13 +273,13 @@
         </div>
 
         <div class="collection-grid fade-in">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800" alt="Mapa Geográfico" loading="lazy">
+            </div>
             <div class="text-container">
                 <h3>Colección Terrenal</h3>
                 <p><strong>Geometría del Espacio:</strong> Inmortalizamos el lugar exacto donde sus caminos se cruzaron o donde la vida dio un giro inesperado.</p>
                 <p>Trazamos con extrema precisión las calles, avenidas y coordenadas geográficas de tu memoria para convertir un punto en el mapa en una obra de arte.</p>
-            </div>
-            <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800" alt="Mapa Geográfico" loading="lazy">
             </div>
         </div>
 
@@ -332,13 +304,24 @@
         </div>
 
         <div class="collection-grid fade-in">
+            <div class="img-container img-square">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800" alt="Pet ID Inteligente" loading="lazy">
+            </div>
+            <div class="text-container">
+                <h3>Pet ID Inteligente</h3>
+                <p>La seguridad de tu mejor amigo rediseñada bajo la estética minimalista de Etéreo Lab Studio.</p>
+                <p><strong>NFC + QR integrados:</strong> Diseñamos placas de identificación de alta resistencia que ocultan un perfil digital completo. Quien encuentre a tu mascota solo debe acercar su celular o escanear el código para acceder al instante a tu información de contacto, historial médico y ubicación, sin descargar aplicaciones.</p>
+            </div>
+        </div>
+
+        <div class="collection-grid fade-in">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800" alt="Sellos de cera" loading="lazy">
+            </div>
             <div class="text-container">
                 <h3>El Archivo Confidencial</h3>
                 <p>Diseñamos cartas estructuradas como bitácoras o expedientes. Usamos papel de algodón de alto gramaje y sobres cerrados con sellos de cera.</p>
                 <p><strong>Un ritual táctil:</strong> Escribe tu historia hoy, séllala herméticamente y archívala. Nuestras cápsulas están diseñadas para no ser abiertas hasta una fecha estipulada en el futuro.</p>
-            </div>
-            <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800" alt="Sellos de cera" loading="lazy">
             </div>
         </div>
 
@@ -410,9 +393,9 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-privacidad')"><i data-lucide="x" size="24"></i></button>
             <h3>Aviso de Privacidad</h3>
-            <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas, ubicaciones geográficas y archivos de audio que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tu cápsula del tiempo.</p>
-            <p>Tus memorias son tratadas con estricta confidencialidad. No almacenamos tus archivos de audio ni tus coordenadas en bases de datos públicas, ni comercializamos tu información con terceros.</p>
-            <p>Al utilizar nuestros servicios, aceptas que procesemos los datos necesarios para entregarte una pieza de arte precisa y personalizada.</p>
+            <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas, ubicaciones geográficas y archivos de audio que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tu cápsula del tiempo y/o placas de identificación.</p>
+            <p>Tus memorias e información de contacto son tratadas con estricta confidencialidad. No almacenamos tus archivos ni tus coordenadas en bases de datos públicas, ni comercializamos tu información con terceros.</p>
+            <p>Al utilizar nuestros servicios, aceptas que procesemos los datos necesarios para entregarte un producto preciso y personalizado.</p>
         </div>
     </div>
 
@@ -422,43 +405,28 @@
             <h3>Términos y Condiciones</h3>
             <p><strong>1. Procesamiento de Pedidos:</strong> Cada pieza es diseñada de manera única. El proceso de manufactura comienza únicamente tras la recepción del anticipo acordado.</p>
             <p><strong>2. Revisiones de Diseño:</strong> Se proporcionará un (1) previo digital para tu revisión. Una vez aprobado, el diseño pasa a impresión y no se aceptarán modificaciones.</p>
-            <p><strong>3. Políticas de Devolución:</strong> Dada la naturaleza 100% personalizada de nuestros productos (mapas estelares, ondas sonoras, coordenadas específicas), no se aceptan cambios ni devoluciones una vez que la pieza ha sido manufacturada y entregada en óptimas condiciones.</p>
+            <p><strong>3. Políticas de Devolución:</strong> Dada la naturaleza 100% personalizada de nuestros productos, no se aceptan cambios ni devoluciones una vez que la pieza ha sido manufacturada y entregada en óptimas condiciones.</p>
             <p><strong>4. Tecnología NFC:</strong> Etéreo Lab Studio garantiza la funcionalidad del chip NFC al momento de la entrega. El usuario es responsable de contar con un dispositivo compatible para su lectura.</p>
         </div>
     </div>
 
     <script>
-        // Inicialización
         lucide.createIcons();
         window.addEventListener('load', () => {
             setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1600);
             initParticles();
         });
 
-        // Configuración de Partículas
         function initParticles() {
             if (typeof particlesJS !== 'undefined') {
                 particlesJS('particles-js', {
-                    "particles": {
-                        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                        "color": { "value": "#ffffff" },
-                        "shape": { "type": "circle" },
-                        "opacity": { "value": 0.4, "random": true },
-                        "size": { "value": 2, "random": true },
-                        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-                        "move": { "enable": true, "speed": 0.5, "direction": "none", "random": true, "out_mode": "out" }
-                    },
-                    "interactivity": {
-                        "detect_on": "canvas",
-                        "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 3 } }
-                    },
+                    "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.4, "random": true }, "size": { "value": 2, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 0.5, "direction": "none", "random": true, "out_mode": "out" } },
+                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 3 } } },
                     "retina_detect": true
                 });
             }
         }
 
-        // Lógica de Scroll Progress y Navbar
         let lastScroll = 0; const navbar = document.getElementById('navbar'), progress = document.getElementById('scroll-progress');
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -469,7 +437,6 @@
             lastScroll = currentScroll;
         });
 
-        // Efecto Spotlight para Pilares
         document.querySelectorAll('.pilar-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
@@ -478,7 +445,6 @@
             });
         });
 
-        // Lógica del Acordeón FAQ
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const item = button.parentElement;
@@ -488,7 +454,6 @@
             });
         });
 
-        // Lógica de Ventanas Modales (Legales)
         function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
         
@@ -498,7 +463,6 @@
             });
         });
 
-        // Wavesurfer (Audio Player)
         const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#A3A3A3', progressColor: '#FFFFFF', barWidth: 3, barRadius: 3, height: 60, url: './teamodrstrange.mp3' });
         const playBtn = document.getElementById('play-btn'); const timeDisp = document.getElementById('time-display');
         const formatT = (s) => { const m = Math.floor(s / 60); const sc = Math.floor(s % 60); return `${m}:${sc < 10 ? '0' : ''}${sc}`; };
@@ -513,7 +477,6 @@
             lucide.createIcons();
         });
 
-        // Theme Toggle
         const themeBtn = document.getElementById('theme-btn'); const htmlElement = document.documentElement;
         themeBtn.addEventListener('click', () => {
             if (navigator.vibrate) navigator.vibrate(50);
@@ -524,7 +487,6 @@
             lucide.createIcons();
         });
 
-        // Fade in observer
         const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(f => obs.observe(f));
         setTimeout(lucide.createIcons, 2500);
