@@ -7,7 +7,6 @@
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     
-    <!-- ETIQUETAS OPEN GRAPH -->
     <meta property="og:url" content="https://www.etereomx.com/">
     <meta property="og:title" content="Etéreo Lab Studio">
     <meta property="og:description" content="La ciencia detrás de un sentimiento. Arte físico y digital manufacturado en Guadalajara.">
@@ -17,7 +16,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-    <!-- LIBRERÍAS DE ICONOS Y PARTÍCULAS -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
@@ -43,7 +41,7 @@
 
         body, nav, header, section, footer, div, h1, h2, h3, p, button { transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden; position: relative; width: 100%; max-width: 100vw; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden; position: relative; width: 100%; }
 
         #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: var(--particles-opacity); transition: opacity 1s ease; pointer-events: auto; }
 
@@ -84,15 +82,14 @@
         .quote-author { font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-color); }
 
         /* =========================================
-           4. PILARES & MANUFACTURA
+           4. MANUFACTURA DE AUTOR
            ========================================= */
-        .pilares-section, .materials-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--accent-color); }
+        .materials-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--accent-color); }
         .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
         
         .pilar-card { position: relative; overflow: hidden; padding: 40px; border: 1px solid var(--card-border); border-radius: 8px; text-align: left; background: rgba(0,0,0,0.2); transition: transform 0.3s; }
         [data-theme="light"] .pilar-card { background: rgba(255,255,255,0.4); }
         .pilar-card:hover { transform: translateY(-5px); border-color: var(--title-color); }
-        
         .pilar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%); opacity: 0; transition: opacity 0.5s; }
         [data-theme="light"] .pilar-card::before { background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 0, 0, 0.06), transparent 40%); }
         .pilar-card:hover::before { opacity: 1; }
@@ -103,15 +100,20 @@
         .pilar-card p { font-size: 0.95rem; }
 
         /* =========================================
-           5. PORTAFOLIO Y COLECCIONES
+           5. PORTAFOLIO Y LÍNEAS DE NEGOCIO
            ========================================= */
-        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        h2.section-title { font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 80px; text-align: center; text-transform: uppercase; border-bottom: 1px solid var(--accent-color); padding-bottom: 30px; }
+        section.portfolio-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        
+        /* DIVISOR DE SECCIONES (LÍNEAS DE NEGOCIO) */
+        .section-divider { margin: 100px 0 60px 0; text-align: center; }
+        .section-divider h2 { font-size: 1.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--title-color); display: inline-block; padding-bottom: 15px; border-bottom: 1px solid var(--card-border); }
+        .section-divider span { display: block; font-size: 0.8rem; letter-spacing: 2px; color: var(--text-color); margin-bottom: 5px; text-transform: uppercase; }
 
-        .collection-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 100px; align-items: center; width: 100%; overflow: hidden; }
+        /* ESTRUCTURA FLEXIBLE PARA MÓVIL Y GRID PARA DESKTOP */
+        .collection-grid { display: flex; flex-direction: column; gap: 30px; margin-bottom: 80px; align-items: center; width: 100%; }
         
         @media (min-width: 900px) {
-            .collection-grid { grid-template-columns: 1fr 1fr; gap: 90px;}
+            .collection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; margin-bottom: 110px;}
             .collection-grid:nth-child(even) .img-container, 
             .collection-grid:nth-child(even) .carousel-wrapper, 
             .collection-grid:nth-child(even) .nfc-wrapper,
@@ -119,17 +121,18 @@
             .collection-grid:nth-child(even) .text-container { order: 1; }
         }
 
+        .text-container { width: 100%; }
         .text-container h3 { font-size: 2rem; margin-bottom: 15px; letter-spacing: 1px; }
         .text-container p { margin-bottom: 18px; font-size: 1rem; }
 
-        /* ETIQUETAS DE PRECIO (MEJORADAS PARA ESTRATEGIA DE OFERTA) */
+        /* ETIQUETAS DE PRECIO (ACTUALIZADAS CON NUEVA NOMENCLATURA) */
         .price-badge { display: inline-block; background: var(--title-color); color: var(--bg-color); padding: 8px 18px; font-size: 0.9rem; font-weight: bold; border-radius: 30px; margin-top: 10px; letter-spacing: 1px; font-family: 'Lato', sans-serif; text-transform: uppercase; }
         [data-theme="light"] .price-badge { background: #121212; color: #F8F6F0; }
         .price-strike { text-decoration: line-through; font-weight: 300; opacity: 0.7; margin-left: 8px; font-size: 0.8rem; }
-        .price-sizes { font-size: 0.85rem; margin-top: 12px; opacity: 0.7; font-weight: 300; }
-        .badge-soon { background: transparent; border: 1px solid var(--title-color); color: var(--title-color); padding: 4px 12px; font-size: 0.7rem; border-radius: 20px; display: inline-block; margin-bottom: 15px; letter-spacing: 2px; }
+        .price-sizes { font-size: 0.85rem; margin-top: 12px; opacity: 0.7; font-weight: 300; line-height: 1.6; }
+        .badge-soon { background: transparent; border: 1px solid var(--title-color); color: var(--title-color); padding: 4px 12px; font-size: 0.7rem; border-radius: 20px; display: inline-block; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase;}
 
-        /* CARRUSEL Y CONTENEDORES DE IMAGEN (ESTABILIZADOS PARA MÓVIL) */
+        /* CARRUSEL Y CONTENEDORES DE IMAGEN */
         .carousel-wrapper { width: 100%; position: relative; overflow: hidden; }
         .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; padding-bottom: 10px; }
         .carousel::-webkit-scrollbar { display: none; }
@@ -165,14 +168,11 @@
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 25px; font-size: 0.95rem; color: var(--text-color); }
         .faq-item.active .faq-answer { max-height: 400px; padding: 0 25px 25px 25px; }
         .faq-answer p { margin-bottom: 10px; }
-        .map-link { color: var(--title-color); text-decoration: underline; font-style: italic; opacity: 0.8; transition: opacity 0.3s; }
-        .map-link:hover { opacity: 1; }
 
         /* =========================================
            7. FOOTER Y LOGÍSTICA
            ========================================= */
         footer { text-align: center; padding: 100px 20px 40px 20px; width: 100%; }
-        
         .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 40px 0; width: 100%; }
         @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 25px; } }
 
@@ -181,10 +181,12 @@
         .secondary { border: 1px solid var(--card-border); color: var(--title-color); }
         .primary:hover, .secondary:hover { transform: translateY(-3px); opacity: 0.9; }
 
-        .delivery-info { display: flex; flex-direction: column; gap: 25px; align-items: center; justify-content: center; margin: 40px auto 60px auto; max-width: 700px; padding-top: 40px; border-top: 1px solid var(--accent-color); }
-        @media (min-width: 600px) { .delivery-info { flex-direction: row; gap: 40px; align-items: flex-start; } }
+        .delivery-info { display: flex; flex-direction: column; gap: 25px; align-items: center; justify-content: center; margin: 40px auto 60px auto; max-width: 700px; padding-top: 40px; border-top: 1px solid var(--accent-color); text-align: center; }
+        @media (min-width: 600px) { .delivery-info { flex-direction: row; gap: 40px; align-items: flex-start; text-align: left; } }
         
-        .delivery-item { display: flex; align-items: flex-start; gap: 15px; text-align: left; flex: 1; }
+        .delivery-item { display: flex; flex-direction: column; align-items: center; gap: 15px; flex: 1; }
+        @media (min-width: 600px) { .delivery-item { flex-direction: row; align-items: flex-start; } }
+        
         .delivery-item h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--title-color); margin-bottom: 5px; }
         .delivery-item p { font-size: 0.85rem; opacity: 0.8; line-height: 1.5; margin: 0; }
         .delivery-item a { color: var(--title-color); text-decoration: underline; transition: opacity 0.3s; }
@@ -254,8 +256,13 @@
         </div>
     </section>
 
-    <section>
-        <h2 class="section-title fade-in">El Catálogo</h2>
+    <section class="portfolio-section">
+        
+        <!-- DIVISOR LÍNEA I -->
+        <div class="section-divider fade-in">
+            <span>Línea I</span>
+            <h2>Arte Enmarcado</h2>
+        </div>
 
         <!-- 1. COLECCIÓN ASTRONÓMICA -->
         <div class="collection-grid fade-in">
@@ -286,7 +293,7 @@
                 <p>Desde el <strong>Minimalismo Clásico</strong> hasta nuestra <strong>Cúpula Superior</strong>, incluyendo la iluminación lunar y la alineación planetaria de ese día irrepetible.</p>
                 
                 <div class="price-badge">Oferta de Lanzamiento: $299 MXN <span class="price-strike">$399</span></div>
-                <p class="price-sizes">Edición Grande (20x25 cm).<br>También en formatos 10x15 cm ($179) y 13x18 cm ($239).</p>
+                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
             </div>
         </div>
 
@@ -298,7 +305,7 @@
                 <p><strong>Tres cartografías:</strong> Póster Clásico (un punto exacto), Ruta Terrestre (el camino entre dos direcciones) o Vuelo a Distancia (amor sin fronteras).</p>
                 
                 <div class="price-badge">Oferta de Lanzamiento: $299 MXN <span class="price-strike">$399</span></div>
-                <p class="price-sizes">Edición Grande (20x25 cm).<br>También en formatos 10x15 cm ($179) y 13x18 cm ($239).</p>
+                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
             </div>
             <div class="carousel-wrapper">
                 <div class="carousel">
@@ -325,11 +332,11 @@
                 <div class="nfc-pulse"></div>
                 <i data-lucide="smartphone-nfc" size="64" style="color: var(--title-color); position: relative; z-index: 2; margin-bottom: 20px;"></i>
                 <h4 style="font-size: 1.2rem; margin-bottom: 10px; position: relative; z-index: 2; font-family: 'Playfair Display';">Tecnología NFC Integrada</h4>
-                <p style="font-size: 0.9rem; position: relative; z-index: 2; opacity: 0.8;">Sin baterías. Incluido sin costo extra en todos los cuadros.</p>
+                <p style="font-size: 0.9rem; position: relative; z-index: 2; opacity: 0.8;">Incluido sin costo extra en todas las Ediciones.</p>
             </div>
             <div class="text-container">
                 <h3 style="font-family: 'Playfair Display'; font-style: italic;">El Toque Maestro: La Dimensión Oculta</h3>
-                <p>La personalización no termina en el papel. <strong>Todas las piezas de nuestras colecciones</strong> pueden convertirse en un portal digital inmersivo.</p>
+                <p>La personalización no termina en el papel. <strong>Todas las piezas de Arte Enmarcado</strong> se convierten en un portal digital inmersivo.</p>
                 <p>Ocultamos bajo el lienzo un microchip NFC de lectura pasiva. Solo necesitas acercar tu celular desbloqueado al marco de tu cuadro y la memoria cobrará vida al instante: abriendo una canción especial, un video en la nube, o una carta digital escrita por ti.</p>
             </div>
         </div>
@@ -338,13 +345,19 @@
         <div class="collection-grid fade-in">
             <div class="text-container">
                 <h3>El Ritual de Apertura</h3>
-                <p>No entregamos un paquete, entregamos una experiencia. Cada cápsula del tiempo viaja protegida y lista para regalar.</p>
-                <p>Nuestra caja de microcorrugado kraft envuelve tu pieza en papel seda, sellada con nuestro distintivo lacre de cera, e incluye una tarjeta de instrucciones para revelar la magia de la dimensión oculta al instante.</p>
+                <p>No entregamos un simple paquete, entregamos una experiencia diseñada para sorprender. Cada cápsula del tiempo viaja completamente protegida y lista para regalar.</p>
+                <p>Nuestra caja de microcorrugado kraft envuelve tu pieza en papel seda, sellada a mano con nuestro distintivo lacre de cera. Incluye una tarjeta de instrucciones para que la persona que lo reciba sepa cómo revelar la magia de la dimensión oculta con su celular.</p>
             </div>
             <div class="img-container img-square">
                 <!-- Sube una foto de tu empaque terminado con cera y listón nombrada como empaque.jpg -->
                 <img src="./empaque.jpg" alt="Empaque Aesthetic Etéreo Lab Studio" loading="lazy">
             </div>
+        </div>
+
+        <!-- DIVISOR LÍNEA II -->
+        <div class="section-divider fade-in">
+            <span>Línea II</span>
+            <h2>Accesorios Inteligentes</h2>
         </div>
 
         <!-- 5. PET ID -->
@@ -360,12 +373,18 @@
             </div>
         </div>
 
+        <!-- DIVISOR LÍNEA III -->
+        <div class="section-divider fade-in">
+            <span>Línea III</span>
+            <h2>Estudio Creativo</h2>
+        </div>
+
         <!-- 6. LIBRETAS ARTESANALES (PRÓXIMAMENTE) -->
         <div class="collection-grid fade-in" style="opacity: 0.6;">
             <div class="text-container">
                 <span class="badge-soon">Próximamente</span>
                 <h3>Encuadernación de Autor</h3>
-                <p>Libretas y bitácoras ensambladas con dominio artesanal. Papel de alta calidad, costuras expuestas y el toque Etéreo: tecnología NFC oculta en la contraportada para digitalizar tus notas o proteger tu diario con un candado virtual.</p>
+                <p>Libretas y bitácoras ensambladas con estricto dominio artesanal. Papel de alta calidad, costuras expuestas y el toque Etéreo: tecnología NFC oculta en la contraportada para digitalizar tus notas o proteger tu diario con un candado virtual.</p>
             </div>
             <div class="img-container img-square">
                 <!-- Sube una foto de referencia de libretas nombrada libreta-artesanal.jpg -->
@@ -380,8 +399,8 @@
         <h2 class="section-title" style="border: none; margin-bottom: 40px; font-size: 1.8rem;">Preguntas Frecuentes</h2>
         <div class="faq-container">
             <div class="faq-item">
-                <button class="faq-question">¿De qué materiales están fabricados? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Utilizamos papel fotográfico premium (Glossy o Mate) montado en un marco minimalista ligero con cristal de protección. Todo empacado meticulosamente para una experiencia de regalo inolvidable.</p></div>
+                <button class="faq-question">¿De qué materiales están fabricados los cuadros? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Utilizamos papel fotográfico premium (Glossy o Mate) montado en un marco minimalista ligero con cristal de protección. Todo empacado meticulosamente con sellos de cera para una experiencia de regalo inolvidable.</p></div>
             </div>
             
             <div class="faq-item">
@@ -434,7 +453,6 @@
                 <div>
                     <h4>Pick-Up Gratuito</h4>
                     <p>Recoge en <strong>Ciberdragon</strong> de 10:30am a 8:00pm.<br>
-                    <!-- ENLACE DE MAPS CORREGIDO PARA FUNCIONAR EN TODOS LOS CELULARES -->
                     <a href="https://www.google.com/maps/search/?api=1&query=Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">Ver ubicación en el mapa</a></p>
                 </div>
             </div>
