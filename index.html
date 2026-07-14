@@ -161,18 +161,16 @@
         .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--title-color); }
         
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 25px; font-size: 0.95rem; color: var(--text-color); }
-        /* Incremento en el tamaño del contenedor para la respuesta larga de logística */
         .faq-item.active .faq-answer { max-height: 400px; padding: 0 25px 25px 25px; }
         
         .faq-answer p { margin-bottom: 10px; }
-        .map-link { color: var(--title-color); text-decoration: underline; font-style: italic; opacity: 0.8; transition: opacity 0.3s; }
-        .map-link:hover { opacity: 1; }
 
         /* =========================================
-           7. FOOTER Y MODALES LEGALES
+           7. FOOTER Y LOGÍSTICA DE ENTREGA
            ========================================= */
         footer { text-align: center; padding: 100px 20px 40px 20px; }
-        .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 60px 0; width: 100%; }
+        
+        .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 40px 0; width: 100%; }
         @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 25px; } }
 
         .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 30px; text-decoration: none; border-radius: 30px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; width: 100%; max-width: 290px; transition: 0.3s; font-family: 'Lato', sans-serif; }
@@ -180,7 +178,18 @@
         .secondary { border: 1px solid var(--card-border); color: var(--title-color); }
         .primary:hover, .secondary:hover { transform: translateY(-3px); opacity: 0.9; }
 
-        .micro-footer { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--card-border); font-size: 0.7rem; color: var(--text-color); display: flex; flex-direction: column; gap: 12px; align-items: center; letter-spacing: 1px; }
+        /* ESTILOS DEL NUEVO BLOQUE DE ENTREGAS */
+        .delivery-info { display: flex; flex-direction: column; gap: 25px; align-items: center; justify-content: center; margin: 40px auto 60px auto; max-width: 700px; padding-top: 40px; border-top: 1px solid var(--accent-color); }
+        @media (min-width: 600px) { .delivery-info { flex-direction: row; gap: 40px; align-items: flex-start; } }
+        
+        .delivery-item { display: flex; align-items: flex-start; gap: 15px; text-align: left; flex: 1; }
+        .delivery-item h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--title-color); margin-bottom: 5px; }
+        .delivery-item p { font-size: 0.85rem; opacity: 0.8; line-height: 1.5; margin: 0; }
+        .delivery-item a { color: var(--title-color); text-decoration: underline; transition: opacity 0.3s; }
+        .delivery-item a:hover { opacity: 0.7; }
+        .delivery-icon { color: var(--text-color); margin-top: 3px; }
+
+        .micro-footer { padding-top: 40px; border-top: 1px solid var(--card-border); font-size: 0.7rem; color: var(--text-color); display: flex; flex-direction: column; gap: 12px; align-items: center; letter-spacing: 1px; }
         .legal-links { display: flex; gap: 15px; align-items: center; }
         .legal-links button { background: none; border: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 1px; cursor: pointer; transition: color 0.3s; font-family: 'Lato', sans-serif; }
         .legal-links button:hover { color: var(--title-color); }
@@ -345,13 +354,12 @@
                 <div class="faq-answer"><p>Utilizamos papel fotográfico premium (Glossy o Mate) montado en un marco minimalista ligero con cristal de protección. Todo empacado meticulosamente para una experiencia de regalo inolvidable.</p></div>
             </div>
             
-            <!-- RESPUESTA LOGÍSTICA ACTUALIZADA CON MAPA -->
             <div class="faq-item">
                 <button class="faq-question">¿Cómo y cuándo se entregan los pedidos en Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
                 <div class="faq-answer">
                     <p>Contamos con dos modalidades seguras para la entrega de tu pieza:</p>
                     <p><strong>1. Envío a Domicilio:</strong> Operamos nuestra logística exclusivamente a través de <em>Paquetería Casa Blanca</em> para garantizar la integridad del cristal. Los despachos se realizan todos los <strong>miércoles y sábados</strong>.</p>
-                    <p><strong>2. Recolección sin costo (Pick-Up):</strong> Puedes recoger tu cápsula directamente en nuestro punto de entrega aliado <strong>Ciberdragon</strong> <a href="https://maps.app.goo.gl/search/Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank" class="map-link">(Ver en Google Maps)</a>. El horario de atención es de 10:30 AM a 8:00 PM, sujeto a la disponibilidad del establecimiento.</p>
+                    <p><strong>2. Recolección sin costo (Pick-Up):</strong> Puedes recoger tu cápsula directamente en nuestro punto de entrega aliado <strong>Ciberdragon</strong>. El horario de atención es de Lunes a Sábado de 10:30 AM a 8:00 PM.</p>
                 </div>
             </div>
 
@@ -370,8 +378,10 @@
         </div>
     </section>
 
+    <!-- FOOTER CON BLOQUE LOGÍSTICO -->
     <footer class="fade-in">
         <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 20px;">Enmarca tu historia</h3>
+        
         <div class="btn-group">
             <a href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo%20Lab.%20Vengo%20de%20etereomx.com%20y%20quiero%20enmarcar%20mi%20historia." class="cta-btn primary">
                 <i data-lucide="message-circle" size="18"></i> Contactar por WhatsApp
@@ -379,6 +389,25 @@
             <a href="https://instagram.com/etereolabstudio" class="cta-btn secondary" target="_blank" id="ig-btn">
                 <i data-lucide="instagram" size="18"></i> Ver en Instagram
             </a>
+        </div>
+
+        <!-- NUEVO: BLOQUE DE ENTREGAS VISIBLE -->
+        <div class="delivery-info fade-in">
+            <div class="delivery-item">
+                <i data-lucide="package" size="24" class="delivery-icon"></i>
+                <div>
+                    <h4>Envíos Locales Seguros</h4>
+                    <p>Vía Paquetería Casa Blanca.<br>Entregas los Miércoles y Sábados.</p>
+                </div>
+            </div>
+            <div class="delivery-item">
+                <i data-lucide="map-pin" size="24" class="delivery-icon"></i>
+                <div>
+                    <h4>Pick-Up Gratuito</h4>
+                    <p>Recoge en <strong>Ciberdragon</strong> de 10:30am a 8:00pm.<br>
+                    <a href="https://maps.app.goo.gl/search/Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">Ver ubicación en el mapa</a></p>
+                </div>
+            </div>
         </div>
 
         <div class="micro-footer">
