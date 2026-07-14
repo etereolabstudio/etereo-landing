@@ -2,7 +2,7 @@
 <html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Etéreo Lab Studio | Cápsulas del Tiempo</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
@@ -43,7 +43,7 @@
 
         body, nav, header, section, footer, div, h1, h2, h3, p, button { transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden; position: relative; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lato', sans-serif; font-weight: 300; line-height: 1.8; overflow-x: hidden; position: relative; width: 100%; max-width: 100vw; }
 
         #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: var(--particles-opacity); transition: opacity 1s ease; pointer-events: auto; }
 
@@ -105,10 +105,10 @@
         /* =========================================
            5. PORTAFOLIO Y COLECCIONES
            ========================================= */
-        section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
         h2.section-title { font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 80px; text-align: center; text-transform: uppercase; border-bottom: 1px solid var(--accent-color); padding-bottom: 30px; }
 
-        .collection-grid { display: grid; grid-template-columns: 1fr; gap: 50px; margin-bottom: 110px; align-items: center; }
+        .collection-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 100px; align-items: center; width: 100%; overflow: hidden; }
         
         @media (min-width: 900px) {
             .collection-grid { grid-template-columns: 1fr 1fr; gap: 90px;}
@@ -119,37 +119,39 @@
             .collection-grid:nth-child(even) .text-container { order: 1; }
         }
 
-        .text-container h3 { font-size: 2rem; margin-bottom: 20px; letter-spacing: 1px; }
+        .text-container h3 { font-size: 2rem; margin-bottom: 15px; letter-spacing: 1px; }
         .text-container p { margin-bottom: 18px; font-size: 1rem; }
 
-        /* Etiqueta de Precio (Corporate Edition) */
-        .price-badge { display: inline-block; background: var(--title-color); color: var(--bg-color); padding: 6px 16px; font-size: 0.85rem; font-weight: bold; border-radius: 30px; margin-top: 15px; letter-spacing: 1px; font-family: 'Lato', sans-serif; text-transform: uppercase; }
+        /* ETIQUETAS DE PRECIO (MEJORADAS PARA ESTRATEGIA DE OFERTA) */
+        .price-badge { display: inline-block; background: var(--title-color); color: var(--bg-color); padding: 8px 18px; font-size: 0.9rem; font-weight: bold; border-radius: 30px; margin-top: 10px; letter-spacing: 1px; font-family: 'Lato', sans-serif; text-transform: uppercase; }
         [data-theme="light"] .price-badge { background: #121212; color: #F8F6F0; }
+        .price-strike { text-decoration: line-through; font-weight: 300; opacity: 0.7; margin-left: 8px; font-size: 0.8rem; }
+        .price-sizes { font-size: 0.85rem; margin-top: 12px; opacity: 0.7; font-weight: 300; }
+        .badge-soon { background: transparent; border: 1px solid var(--title-color); color: var(--title-color); padding: 4px 12px; font-size: 0.7rem; border-radius: 20px; display: inline-block; margin-bottom: 15px; letter-spacing: 2px; }
 
-        /* Carrusel General */
-        .carousel-wrapper { width: 100%; position: relative; }
-        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
+        /* CARRUSEL Y CONTENEDORES DE IMAGEN (ESTABILIZADOS PARA MÓVIL) */
+        .carousel-wrapper { width: 100%; position: relative; overflow: hidden; }
+        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; padding-bottom: 10px; }
         .carousel::-webkit-scrollbar { display: none; }
-        .carousel-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; }
+        .carousel-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; width: 100%; }
         
-        /* Contenedores de Imagen */
-        .img-container { width: 100%; overflow: hidden; border: 1px solid var(--card-border); border-radius: 4px; position: relative; }
-        .img-square { height: auto; aspect-ratio: 1 / 1; background-color: #FFFFFF; display: flex; justify-content: center; align-items: center; }
+        .img-container { width: 100%; border: 1px solid var(--card-border); border-radius: 4px; position: relative; overflow: hidden; }
+        .img-square { height: auto; width: 100%; aspect-ratio: 1 / 1; background-color: #FFFFFF; display: flex; justify-content: center; align-items: center; overflow: hidden; }
         .img-square img { object-fit: contain; width: 100%; height: 100%; transition: transform 2s ease; }
         .img-square:hover img { transform: scale(1.04); }
 
         .slide-caption { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); padding: 7px 18px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); font-family: 'Playfair Display', serif; color: #fff; font-size: 0.9rem; font-style: italic; white-space: nowrap; }
         [data-theme="light"] .slide-caption { background: rgba(248, 246, 240, 0.8); color: #121212; border: 1px solid rgba(0,0,0,0.1); }
-        .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
+        .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
-        /* Estilos Especiales para el NFC */
-        .feature-wrapper { position: relative; padding: 40px; border: 1px solid var(--title-color); border-radius: 8px; background: rgba(0,0,0,0.4); text-align: center; overflow: hidden; }
+        /* EFECTO NFC */
+        .feature-wrapper { position: relative; padding: 40px; border: 1px solid var(--title-color); border-radius: 8px; background: rgba(0,0,0,0.4); text-align: center; overflow: hidden; width: 100%; }
         [data-theme="light"] .feature-wrapper { background: rgba(255,255,255,0.8); }
         .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; border-radius: 50%; background: var(--pulse-color); animation: nfc-wave 3s infinite; pointer-events: none; }
         @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(4); opacity: 0; } }
 
         /* =========================================
-           6. ACORDEÓN DE PREGUNTAS FRECUENTES (FAQ)
+           6. ACORDEÓN DE PREGUNTAS FRECUENTES
            ========================================= */
         .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 100px; border-bottom: 1px solid var(--accent-color); }
         .faq-container { display: flex; flex-direction: column; gap: 15px; }
@@ -162,13 +164,14 @@
         
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 25px; font-size: 0.95rem; color: var(--text-color); }
         .faq-item.active .faq-answer { max-height: 400px; padding: 0 25px 25px 25px; }
-        
         .faq-answer p { margin-bottom: 10px; }
+        .map-link { color: var(--title-color); text-decoration: underline; font-style: italic; opacity: 0.8; transition: opacity 0.3s; }
+        .map-link:hover { opacity: 1; }
 
         /* =========================================
-           7. FOOTER Y LOGÍSTICA DE ENTREGA
+           7. FOOTER Y LOGÍSTICA
            ========================================= */
-        footer { text-align: center; padding: 100px 20px 40px 20px; }
+        footer { text-align: center; padding: 100px 20px 40px 20px; width: 100%; }
         
         .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 40px 0; width: 100%; }
         @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 25px; } }
@@ -178,7 +181,6 @@
         .secondary { border: 1px solid var(--card-border); color: var(--title-color); }
         .primary:hover, .secondary:hover { transform: translateY(-3px); opacity: 0.9; }
 
-        /* ESTILOS DEL NUEVO BLOQUE DE ENTREGAS */
         .delivery-info { display: flex; flex-direction: column; gap: 25px; align-items: center; justify-content: center; margin: 40px auto 60px auto; max-width: 700px; padding-top: 40px; border-top: 1px solid var(--accent-color); }
         @media (min-width: 600px) { .delivery-info { flex-direction: row; gap: 40px; align-items: flex-start; } }
         
@@ -247,7 +249,7 @@
             <div class="pilar-card">
                 <i data-lucide="package" size="28" class="pilar-icon"></i>
                 <h3>La Experiencia de Regalo</h3>
-                <p>Entregado en caja de microcorrugado kraft, envuelto en papel seda, cerrado con un distintivo listón y una tarjeta de instrucciones para revelar la magia del NFC. Listo para regalar.</p>
+                <p>Entregado en caja de microcorrugado kraft, envuelto en papel seda, cerrado con un distintivo listón y una tarjeta de instrucciones para revelar la magia del NFC.</p>
             </div>
         </div>
     </section>
@@ -282,7 +284,9 @@
                 <h3>Colección Astronómica</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en el que tu vida cambió para siempre.</p>
                 <p>Desde el <strong>Minimalismo Clásico</strong> hasta nuestra <strong>Cúpula Superior</strong>, incluyendo la iluminación lunar y la alineación planetaria de ese día irrepetible.</p>
-                <div class="price-badge">Desde $180 MXN</div>
+                
+                <div class="price-badge">Oferta de Lanzamiento: $299 MXN <span class="price-strike">$399</span></div>
+                <p class="price-sizes">Edición Grande (20x25 cm).<br>También en formatos 10x15 cm ($179) y 13x18 cm ($239).</p>
             </div>
         </div>
 
@@ -292,7 +296,9 @@
                 <h3>Colección Terrenal</h3>
                 <p><strong>Geometría del Espacio:</strong> Inmortalizamos el lugar exacto o el recorrido donde sus caminos se cruzaron. Trazamos con extrema precisión las calles, avenidas y rutas de tu memoria.</p>
                 <p><strong>Tres cartografías:</strong> Póster Clásico (un punto exacto), Ruta Terrestre (el camino entre dos direcciones) o Vuelo a Distancia (amor sin fronteras).</p>
-                <div class="price-badge">Desde $180 MXN</div>
+                
+                <div class="price-badge">Oferta de Lanzamiento: $299 MXN <span class="price-strike">$399</span></div>
+                <p class="price-sizes">Edición Grande (20x25 cm).<br>También en formatos 10x15 cm ($179) y 13x18 cm ($239).</p>
             </div>
             <div class="carousel-wrapper">
                 <div class="carousel">
@@ -313,33 +319,57 @@
             </div>
         </div>
 
-        <!-- 3. PET ID -->
+        <!-- 3. LA DIMENSIÓN OCULTA (NFC) -->
         <div class="collection-grid fade-in">
-            <div class="carousel-wrapper">
-                <div class="img-container img-square">
-                    <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
-                </div>
+            <div class="feature-wrapper">
+                <div class="nfc-pulse"></div>
+                <i data-lucide="smartphone-nfc" size="64" style="color: var(--title-color); position: relative; z-index: 2; margin-bottom: 20px;"></i>
+                <h4 style="font-size: 1.2rem; margin-bottom: 10px; position: relative; z-index: 2; font-family: 'Playfair Display';">Tecnología NFC Integrada</h4>
+                <p style="font-size: 0.9rem; position: relative; z-index: 2; opacity: 0.8;">Sin baterías. Incluido sin costo extra en todos los cuadros.</p>
             </div>
-            <div class="text-container">
-                <h3>Pet ID Inteligente</h3>
-                <p>La seguridad de tu mejor amigo rediseñada bajo la estética minimalista de Etéreo Lab Studio.</p>
-                <p>Diseñamos placas de identificación de alta resistencia. Quien encuentre a tu mascota solo debe acercar su celular (NFC) o escanear el código (QR) para acceder a tu información de contacto al instante.</p>
-                <div class="price-badge">Pregunta por diseños</div>
-            </div>
-        </div>
-
-        <!-- 4. LA DIMENSIÓN OCULTA (NFC) -->
-        <div class="collection-grid fade-in">
             <div class="text-container">
                 <h3 style="font-family: 'Playfair Display'; font-style: italic;">El Toque Maestro: La Dimensión Oculta</h3>
                 <p>La personalización no termina en el papel. <strong>Todas las piezas de nuestras colecciones</strong> pueden convertirse en un portal digital inmersivo.</p>
                 <p>Ocultamos bajo el lienzo un microchip NFC de lectura pasiva. Solo necesitas acercar tu celular desbloqueado al marco de tu cuadro y la memoria cobrará vida al instante: abriendo una canción especial, un video en la nube, o una carta digital escrita por ti.</p>
             </div>
-            <div class="feature-wrapper">
-                <div class="nfc-pulse"></div>
-                <i data-lucide="smartphone-nfc" size="64" style="color: var(--title-color); position: relative; z-index: 2; margin-bottom: 20px;"></i>
-                <h4 style="font-size: 1.2rem; margin-bottom: 10px; position: relative; z-index: 2; font-family: 'Playfair Display';">Tecnología NFC Integrada</h4>
-                <p style="font-size: 0.9rem; position: relative; z-index: 2; opacity: 0.8;">Sin baterías. Incluido en todos los cuadros.</p>
+        </div>
+
+        <!-- 4. EL EMPAQUE (VISUAL) -->
+        <div class="collection-grid fade-in">
+            <div class="text-container">
+                <h3>El Ritual de Apertura</h3>
+                <p>No entregamos un paquete, entregamos una experiencia. Cada cápsula del tiempo viaja protegida y lista para regalar.</p>
+                <p>Nuestra caja de microcorrugado kraft envuelve tu pieza en papel seda, sellada con nuestro distintivo lacre de cera, e incluye una tarjeta de instrucciones para revelar la magia de la dimensión oculta al instante.</p>
+            </div>
+            <div class="img-container img-square">
+                <!-- Sube una foto de tu empaque terminado con cera y listón nombrada como empaque.jpg -->
+                <img src="./empaque.jpg" alt="Empaque Aesthetic Etéreo Lab Studio" loading="lazy">
+            </div>
+        </div>
+
+        <!-- 5. PET ID -->
+        <div class="collection-grid fade-in">
+            <div class="img-container img-square">
+                <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
+            </div>
+            <div class="text-container">
+                <h3>Pet ID Inteligente</h3>
+                <p>La seguridad de tu mejor amigo rediseñada bajo la estética minimalista de Etéreo Lab Studio.</p>
+                <p>Diseñamos placas de identificación de alta resistencia. Quien encuentre a tu mascota solo debe acercar su celular (NFC) o escanear el código (QR) para acceder a tu información de contacto al instante.</p>
+                <div class="price-badge">Desde $199 MXN</div>
+            </div>
+        </div>
+
+        <!-- 6. LIBRETAS ARTESANALES (PRÓXIMAMENTE) -->
+        <div class="collection-grid fade-in" style="opacity: 0.6;">
+            <div class="text-container">
+                <span class="badge-soon">Próximamente</span>
+                <h3>Encuadernación de Autor</h3>
+                <p>Libretas y bitácoras ensambladas con dominio artesanal. Papel de alta calidad, costuras expuestas y el toque Etéreo: tecnología NFC oculta en la contraportada para digitalizar tus notas o proteger tu diario con un candado virtual.</p>
+            </div>
+            <div class="img-container img-square">
+                <!-- Sube una foto de referencia de libretas nombrada libreta-artesanal.jpg -->
+                <img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(100%);">
             </div>
         </div>
 
@@ -391,7 +421,6 @@
             </a>
         </div>
 
-        <!-- NUEVO: BLOQUE DE ENTREGAS VISIBLE -->
         <div class="delivery-info fade-in">
             <div class="delivery-item">
                 <i data-lucide="package" size="24" class="delivery-icon"></i>
@@ -405,7 +434,8 @@
                 <div>
                     <h4>Pick-Up Gratuito</h4>
                     <p>Recoge en <strong>Ciberdragon</strong> de 10:30am a 8:00pm.<br>
-                    <a href="https://maps.app.goo.gl/search/Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">Ver ubicación en el mapa</a></p>
+                    <!-- ENLACE DE MAPS CORREGIDO PARA FUNCIONAR EN TODOS LOS CELULARES -->
+                    <a href="https://www.google.com/maps/search/?api=1&query=Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">Ver ubicación en el mapa</a></p>
                 </div>
             </div>
         </div>
