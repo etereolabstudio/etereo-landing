@@ -7,6 +7,7 @@
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     
+    <!-- ETIQUETAS OPEN GRAPH -->
     <meta property="og:url" content="https://www.etereomx.com/">
     <meta property="og:title" content="Etéreo Lab Studio">
     <meta property="og:description" content="La ciencia detrás de un sentimiento. Arte físico y digital manufacturado en Guadalajara.">
@@ -16,10 +17,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
+    <!-- LIBRERÍAS DE ICONOS Y PARTÍCULAS -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
     <style>
+        /* =========================================
+           1. MOTOR DE COLOR Y TEXTURA
+           ========================================= */
         :root {
             --bg-color: #050505; --text-color: #A3A3A3; --title-color: #FFFFFF;
             --accent-color: rgba(255, 255, 255, 0.08); --nav-bg: rgba(5, 5, 5, 0.75);
@@ -52,6 +57,9 @@
         ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
         h1, h2, h3, .nav-brand { font-family: 'Playfair Display', serif; font-weight: 400; color: var(--title-color); }
 
+        /* =========================================
+           2. PANTALLA CINEMÁTICA Y NAVBAR
+           ========================================= */
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 100000; display: flex; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s; }
         .preloader-text { font-size: clamp(1.2rem, 3.5vw, 1.8rem); color: var(--title-color); letter-spacing: 2px; font-style: italic; animation: pulse-glow 2.5s infinite; text-align: center; font-family: 'Playfair Display', serif; padding: 30px; }
         @keyframes pulse-glow { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
@@ -65,6 +73,9 @@
 
         .theme-btn { background: transparent; color: var(--title-color); border: 1px solid var(--card-border); padding: 8px 16px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 30px; display: flex; align-items: center; gap: 8px; font-family: 'Lato', sans-serif; }
 
+        /* =========================================
+           3. HERO Y FRASES
+           ========================================= */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
         .hero h1 { font-size: clamp(2.3rem, 6vw, 4.8rem); letter-spacing: 6px; margin-bottom: 25px; text-transform: uppercase; }
         
@@ -72,6 +83,9 @@
         .quote-text { font-size: clamp(1.6rem, 4vw, 2.8rem); font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); max-width: 850px; line-height: 1.4; margin-bottom: 25px; }
         .quote-author { font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-color); }
 
+        /* =========================================
+           4. PILARES & MANUFACTURA
+           ========================================= */
         .pilares-section, .materials-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--accent-color); }
         .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
         
@@ -88,6 +102,9 @@
         .pilar-card h3 { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
         .pilar-card p { font-size: 0.95rem; }
 
+        /* =========================================
+           5. PORTAFOLIO Y COLECCIONES
+           ========================================= */
         section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
         h2.section-title { font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 80px; text-align: center; text-transform: uppercase; border-bottom: 1px solid var(--accent-color); padding-bottom: 30px; }
 
@@ -109,11 +126,13 @@
         .price-badge { display: inline-block; background: var(--title-color); color: var(--bg-color); padding: 6px 16px; font-size: 0.85rem; font-weight: bold; border-radius: 30px; margin-top: 15px; letter-spacing: 1px; font-family: 'Lato', sans-serif; text-transform: uppercase; }
         [data-theme="light"] .price-badge { background: #121212; color: #F8F6F0; }
 
+        /* Carrusel General */
         .carousel-wrapper { width: 100%; position: relative; }
         .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
         .carousel::-webkit-scrollbar { display: none; }
         .carousel-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; }
         
+        /* Contenedores de Imagen */
         .img-container { width: 100%; overflow: hidden; border: 1px solid var(--card-border); border-radius: 4px; position: relative; }
         .img-square { height: auto; aspect-ratio: 1 / 1; background-color: #FFFFFF; display: flex; justify-content: center; align-items: center; }
         .img-square img { object-fit: contain; width: 100%; height: 100%; transition: transform 2s ease; }
@@ -123,11 +142,15 @@
         [data-theme="light"] .slide-caption { background: rgba(248, 246, 240, 0.8); color: #121212; border: 1px solid rgba(0,0,0,0.1); }
         .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
+        /* Estilos Especiales para el NFC */
         .feature-wrapper { position: relative; padding: 40px; border: 1px solid var(--title-color); border-radius: 8px; background: rgba(0,0,0,0.4); text-align: center; overflow: hidden; }
         [data-theme="light"] .feature-wrapper { background: rgba(255,255,255,0.8); }
         .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; border-radius: 50%; background: var(--pulse-color); animation: nfc-wave 3s infinite; pointer-events: none; }
         @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(4); opacity: 0; } }
 
+        /* =========================================
+           6. ACORDEÓN DE PREGUNTAS FRECUENTES (FAQ)
+           ========================================= */
         .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 100px; border-bottom: 1px solid var(--accent-color); }
         .faq-container { display: flex; flex-direction: column; gap: 15px; }
         .faq-item { border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.2); }
@@ -136,9 +159,18 @@
         .faq-question { width: 100%; text-align: left; padding: 20px 25px; background: transparent; border: none; color: var(--title-color); font-family: 'Lato', sans-serif; font-size: 1.05rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; outline: none; }
         .faq-icon { transition: transform 0.4s ease; color: var(--text-color); }
         .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--title-color); }
+        
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 25px; font-size: 0.95rem; color: var(--text-color); }
-        .faq-item.active .faq-answer { max-height: 250px; padding: 0 25px 25px 25px; }
+        /* Incremento en el tamaño del contenedor para la respuesta larga de logística */
+        .faq-item.active .faq-answer { max-height: 400px; padding: 0 25px 25px 25px; }
+        
+        .faq-answer p { margin-bottom: 10px; }
+        .map-link { color: var(--title-color); text-decoration: underline; font-style: italic; opacity: 0.8; transition: opacity 0.3s; }
+        .map-link:hover { opacity: 1; }
 
+        /* =========================================
+           7. FOOTER Y MODALES LEGALES
+           ========================================= */
         footer { text-align: center; padding: 100px 20px 40px 20px; }
         .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 60px 0; width: 100%; }
         @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 25px; } }
@@ -188,7 +220,7 @@
         <p class="quote-author">— Etéreo Lab Studio</p>
     </section>
 
-    <!-- NUEVA SECCIÓN: MATERIALES Y MANUFACTURA -->
+    <!-- MANUFACTURA DE AUTOR -->
     <section class="materials-section fade-in">
         <h2 class="section-title" style="border: none; margin-bottom: 10px;">Manufactura de Autor</h2>
         <p style="text-align: center; max-width: 700px; margin: 0 auto 60px auto; opacity: 0.8;">Cada pieza es ensamblada meticulosamente a mano, fusionando componentes físicos de alta calidad con tecnología imperceptible.</p>
@@ -304,7 +336,7 @@
 
     </section>
 
-    <!-- ACORDEÓN DE PREGUNTAS FRECUENTES (ACTUALIZADO CON LOGÍSTICA) -->
+    <!-- ACORDEÓN DE PREGUNTAS FRECUENTES -->
     <section class="faq-section fade-in">
         <h2 class="section-title" style="border: none; margin-bottom: 40px; font-size: 1.8rem;">Preguntas Frecuentes</h2>
         <div class="faq-container">
@@ -312,10 +344,17 @@
                 <button class="faq-question">¿De qué materiales están fabricados? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
                 <div class="faq-answer"><p>Utilizamos papel fotográfico premium (Glossy o Mate) montado en un marco minimalista ligero con cristal de protección. Todo empacado meticulosamente para una experiencia de regalo inolvidable.</p></div>
             </div>
+            
+            <!-- RESPUESTA LOGÍSTICA ACTUALIZADA CON MAPA -->
             <div class="faq-item">
-                <button class="faq-question">¿Cómo y cuándo se realizan las entregas en Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Para garantizar la seguridad del cristal y la integridad del paquete, operamos nuestra logística local exclusivamente a través de <strong>Paquetería Casa Blanca</strong>. Realizamos los despachos en dos cortes semanales: <strong>Miércoles y Sábados</strong>. Recibirás tu rastreo en cuanto tu pieza salga de nuestro estudio.</p></div>
+                <button class="faq-question">¿Cómo y cuándo se entregan los pedidos en Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer">
+                    <p>Contamos con dos modalidades seguras para la entrega de tu pieza:</p>
+                    <p><strong>1. Envío a Domicilio:</strong> Operamos nuestra logística exclusivamente a través de <em>Paquetería Casa Blanca</em> para garantizar la integridad del cristal. Los despachos se realizan todos los <strong>miércoles y sábados</strong>.</p>
+                    <p><strong>2. Recolección sin costo (Pick-Up):</strong> Puedes recoger tu cápsula directamente en nuestro punto de entrega aliado <strong>Ciberdragon</strong> <a href="https://maps.app.goo.gl/search/Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank" class="map-link">(Ver en Google Maps)</a>. El horario de atención es de 10:30 AM a 8:00 PM, sujeto a la disponibilidad del establecimiento.</p>
+                </div>
             </div>
+
             <div class="faq-item">
                 <button class="faq-question">¿Puedo revisar el diseño antes de imprimir? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
                 <div class="faq-answer"><p>Sí, la exactitud es nuestro pilar. Antes de pasar a manufactura física, te enviaremos una previsualización digital del diseño para tu autorización final.</p></div>
