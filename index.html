@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
+    <!-- LIBRERÍAS DE ICONOS Y PARTÍCULAS (WAVESURFER ELIMINADO PARA MAYOR VELOCIDAD) -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
@@ -146,7 +147,7 @@
         .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
         /* =========================================
-           NUEVO: REPRODUCTOR CUSTOM (TIPO PLAY.ETEREOMX)
+           5. REPRODUCTOR NATIVO TIPO CANVAS
            ========================================= */
         .audio-player-wrapper { margin-top: 25px; padding: 40px 20px 20px 20px; border: 1px solid var(--card-border); border-radius: 8px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); position: relative; display: flex; flex-direction: column; align-items: center; }
         [data-theme="light"] .audio-player-wrapper { background: rgba(255,255,255,0.4); }
@@ -360,7 +361,7 @@
             </div>
         </div>
 
-        <!-- 3. COLECCIÓN SONORA (NUEVO REPRODUCTOR TIPO CANVAS) -->
+        <!-- 3. COLECCIÓN SONORA (NUEVO REPRODUCTOR NATIVO CON AUDIO REAL) -->
         <div class="collection-grid fade-in">
             <div class="img-container img-square">
                 <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
@@ -370,7 +371,7 @@
                 <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza visual de diseño matemático.</p>
                 <p>El latido de tu bebé en su ultrasonido, el ladrido de tu mejor amigo, o su primer "Te amo". Solo acerca tu celular al cuadro terminado y el audio original resonará al instante a través de nuestro reproductor digital oculto.</p>
                 
-                <!-- REPRODUCTOR POLIGONAL CUSTOM -->
+                <!-- REPRODUCTOR POLIGONAL CUSTOM VINCULADO AL AUDIO -->
                 <div class="audio-player-wrapper">
                     <p style="font-size: 0.70rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.7; width: 100%; text-align: center;">Demo del Reproductor Digital</p>
                     
@@ -385,6 +386,9 @@
                     </div>
                     
                     <p id="audio-status-text" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); font-size: 0.95rem; margin-top: 15px;">"Latido de bebé..."</p>
+                    
+                    <!-- AUDIO OCULTO REAL -->
+                    <audio id="demo-audio" src="./demo.mp3" preload="metadata"></audio>
                 </div>
 
                 <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
@@ -625,7 +629,7 @@
         });
 
         /* =========================================
-           REPRODUCTOR CUSTOM (CANVAS MATEMÁTICO)
+           REPRODUCTOR CUSTOM CON AUDIO REAL (demo.mp3)
            ========================================= */
         const waveformWrapper = document.getElementById('waveform-wrapper');
         const canvasBase = document.getElementById('canvas-base');
@@ -636,15 +640,14 @@
         const iconPlay = document.getElementById('icon-play');
         const iconPause = document.getElementById('icon-pause');
         const audioStatusText = document.getElementById('audio-status-text');
+        
+        const audioEl = document.getElementById('demo-audio'); // El audio nativo
 
         let peaks = [];
         let isPlaying = false;
-        let demoProgress = 0;
-        let lastTime = 0;
-        const demoDuration = 10000; // 10 segundos
         let animationFrame;
 
-        // Generar matemática del diamante (Fake Wave)
+        // Generamos la onda matemática de diseño
         for(let i = 0; i < 200; i++) {
             let wave = Math.abs(Math.sin(i * 0.1) * Math.cos(i * 0.05));
             let noise = Math.random() * 0.3;
@@ -667,7 +670,7 @@
             [canvasBase, canvasProgress].forEach(c => {
                 c.width = rect.width * dpr;
                 c.height = rect.height * dpr;
-                c.getContext('2d').setTransform(1, 0, 0, 1, 0, 0); // Reset
+                c.getContext('2d').setTransform(1, 0, 0, 1, 0, 0);
                 c.getContext('2d').scale(dpr, dpr);
             });
             drawWaveforms();
@@ -694,18 +697,16 @@
             ctx.fill();
         }
 
-        function drawWaveforms() {
+        function drawWaveforms(progress = 0) {
             const colors = getColors();
             const rect = waveformWrapper.getBoundingClientRect();
             
-            // Dibujar base
             drawPolygon(ctxBase, rect.width, rect.height, colors.base);
             
-            // Dibujar progreso
             ctxProgress.clearRect(0, 0, rect.width, rect.height);
             ctxProgress.save();
             ctxProgress.beginPath();
-            ctxProgress.rect(0, 0, rect.width * demoProgress, rect.height);
+            ctxProgress.rect(0, 0, rect.width * progress, rect.height);
             ctxProgress.clip();
             drawPolygon(ctxProgress, rect.width, rect.height, colors.progress);
             ctxProgress.restore();
@@ -714,39 +715,28 @@
         function updateProgress() {
             if (!isPlaying) return;
             
-            let now = Date.now();
-            let delta = now - lastTime;
-            lastTime = now;
-            demoProgress += delta / demoDuration;
-            
-            if (demoProgress >= 1) {
-                demoProgress = 1;
-                isPlaying = false;
-                iconPlay.style.display = "block";
-                iconPause.style.display = "none";
-                audioStatusText.innerHTML = '"Latido finalizado..."';
-            }
-            
-            drawWaveforms();
+            // Calculamos el progreso real basado en el archivo de audio
+            let progress = audioEl.currentTime / (audioEl.duration || 1);
+            drawWaveforms(progress);
             
             if (isPlaying) {
                 animationFrame = requestAnimationFrame(updateProgress);
             }
         }
 
+        // LÓGICA DE REPRODUCCIÓN
         customPlayBtn.addEventListener('click', () => {
             if (navigator.vibrate) navigator.vibrate(50);
             
-            if (!isPlaying) {
+            if (audioEl.paused) {
+                audioEl.play();
                 isPlaying = true;
                 iconPlay.style.display = "none";
                 iconPause.style.display = "block";
-                
-                if (demoProgress >= 1) demoProgress = 0;
-                lastTime = Date.now();
-                audioStatusText.innerHTML = '"Reproduciendo latido..."';
+                audioStatusText.innerHTML = '"Reproduciendo..."';
                 updateProgress();
             } else {
+                audioEl.pause();
                 isPlaying = false;
                 iconPlay.style.display = "block";
                 iconPause.style.display = "none";
@@ -755,7 +745,20 @@
             }
         });
 
-        window.addEventListener('resize', prepareCanvases);
+        // CUANDO EL AUDIO TERMINA
+        audioEl.addEventListener('ended', () => {
+            isPlaying = false;
+            iconPlay.style.display = "block";
+            iconPause.style.display = "none";
+            audioStatusText.innerHTML = '"Latido finalizado..."';
+            cancelAnimationFrame(animationFrame);
+            drawWaveforms(0); // Reinicia visualmente
+        });
+
+        window.addEventListener('resize', () => {
+            prepareCanvases();
+            drawWaveforms(audioEl.currentTime / (audioEl.duration || 1));
+        });
 
         /* =========================================
            BOTÓN DE TEMA OSCURO / CLARO
@@ -771,7 +774,7 @@
             lucide.createIcons();
             
             // REDIBUJAR CANVAS CON NUEVOS COLORES
-            drawWaveforms();
+            drawWaveforms(audioEl.currentTime / (audioEl.duration || 1));
         });
 
         const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
