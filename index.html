@@ -18,6 +18,8 @@
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- LIBRERÍA DE AUDIO RESTAURADA -->
+    <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
 
     <style>
         /* =========================================
@@ -142,11 +144,24 @@
         [data-theme="light"] .slide-caption { background: rgba(248, 246, 240, 0.8); color: #121212; border: 1px solid rgba(0,0,0,0.1); }
         .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
+        /* ESTILOS DEL REPRODUCTOR DE AUDIO */
+        .audio-player-wrapper { margin-top: 25px; padding: 25px; border: 1px solid var(--card-border); border-radius: 8px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+        [data-theme="light"] .audio-player-wrapper { background: rgba(255,255,255,0.4); }
+        #waveform { margin-bottom: 15px; min-height: 60px; }
+        .audio-controls { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+        .play-group { display: flex; align-items: center; gap: 12px; }
+        .play-btn { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; border: none; background: var(--title-color); color: var(--bg-color); cursor: pointer; display: flex; justify-content: center; align-items: center; aspect-ratio: 1/1; flex-shrink: 0; padding: 0; }
+        .time-display { font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* EFECTO NFC */
         .feature-wrapper { position: relative; padding: 40px; border: 1px solid var(--title-color); border-radius: 8px; background: rgba(0,0,0,0.4); text-align: center; overflow: hidden; width: 100%; }
         [data-theme="light"] .feature-wrapper { background: rgba(255,255,255,0.8); }
         .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; border-radius: 50%; background: var(--pulse-color); animation: nfc-wave 3s infinite; pointer-events: none; }
         @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(4); opacity: 0; } }
 
+        /* =========================================
+           6. ACORDEÓN DE PREGUNTAS FRECUENTES
+           ========================================= */
         .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 100px; border-bottom: 1px solid var(--accent-color); }
         .faq-container { display: flex; flex-direction: column; gap: 15px; }
         .faq-item { border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.2); }
@@ -160,6 +175,9 @@
         .faq-item.active .faq-answer { max-height: 400px; padding: 0 25px 25px 25px; }
         .faq-answer p { margin-bottom: 10px; }
 
+        /* =========================================
+           7. FOOTER Y LOGÍSTICA
+           ========================================= */
         footer { text-align: center; padding: 100px 20px 40px 20px; width: 100%; }
         .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 40px 0; width: 100%; }
         @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 25px; } }
@@ -200,7 +218,7 @@
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* =========================================
-           8. OPTIMIZACIÓN MÓVIL (NUEVO)
+           8. OPTIMIZACIÓN MÓVIL
            ========================================= */
         @media (max-width: 768px) {
             .materials-section, section.portfolio-section { padding: 60px 20px; }
@@ -335,30 +353,59 @@
             </div>
         </div>
 
-        <!-- 3. LA DIMENSIÓN OCULTA (NFC) -->
+        <!-- 3. COLECCIÓN SONORA (NUEVA INCORPORACIÓN) -->
         <div class="collection-grid fade-in">
+            <div class="img-container img-square">
+                <!-- Sube una foto de tu cuadro de onda de sonido aquí -->
+                <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
+            </div>
+            <div class="text-container">
+                <h3>Colección Sonora</h3>
+                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza visual de diseño minimalista.</p>
+                <p>El latido de tu bebé en su ultrasonido, el ladrido de tu mejor amigo, o su primer "Te amo". Solo acerca tu celular al cuadro terminado y el audio original resonará al instante a través de nuestro reproductor digital en <em>play.etereomx.com</em>.</p>
+                
+                <!-- REPRODUCTOR DEMO -->
+                <div class="audio-player-wrapper">
+                    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; opacity: 0.7;">Demo del Reproductor Oculto</p>
+                    <div id="waveform"></div>
+                    <div class="audio-controls">
+                        <div class="play-group">
+                            <button class="play-btn" id="play-btn"><i data-lucide="play" size="20" fill="currentColor"></i></button>
+                            <span style="font-family: 'Playfair Display'; font-style: italic; color: var(--title-color);">"Latido de bebé..."</span>
+                        </div>
+                        <span class="time-display" id="time-display">0:00 / 0:00</span>
+                    </div>
+                </div>
+
+                <div class="price-badge">Oferta Especial: $299 MXN <span class="price-strike">$399</span></div>
+                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
+            </div>
+        </div>
+
+        <!-- 4. LA DIMENSIÓN OCULTA (NFC) -->
+        <div class="collection-grid fade-in">
+            <div class="text-container">
+                <h3 style="font-family: 'Playfair Display'; font-style: italic;">La Dimensión Oculta</h3>
+                <p>La personalización no termina en el papel. <strong>Todas las piezas de Arte Enmarcado</strong> se convierten en un portal digital inmersivo.</p>
+                <p>Ocultamos bajo el lienzo un microchip NFC pasivo. Solo necesitas acercar tu celular desbloqueado al marco de tu cuadro y la memoria cobrará vida al instante: abriendo una canción especial, un video en la nube, o tu Colección Sonora.</p>
+            </div>
             <div class="feature-wrapper">
                 <div class="nfc-pulse"></div>
                 <i data-lucide="smartphone-nfc" size="64" style="color: var(--title-color); position: relative; z-index: 2; margin-bottom: 20px;"></i>
                 <h4 style="font-size: 1.2rem; margin-bottom: 10px; position: relative; z-index: 2; font-family: 'Playfair Display';">Tecnología NFC Integrada</h4>
                 <p style="font-size: 0.9rem; position: relative; z-index: 2; opacity: 0.8;">Incluido sin costo extra en todas las Ediciones.</p>
             </div>
-            <div class="text-container">
-                <h3 style="font-family: 'Playfair Display'; font-style: italic;">La Dimensión Oculta</h3>
-                <p>La personalización no termina en el papel. <strong>Todas las piezas de Arte Enmarcado</strong> se convierten en un portal digital inmersivo.</p>
-                <p>Ocultamos bajo el lienzo un microchip NFC pasivo. Solo necesitas acercar tu celular desbloqueado al marco de tu cuadro y la memoria cobrará vida al instante: abriendo una canción especial, un video en la nube, o una carta digital escrita por ti.</p>
-            </div>
         </div>
 
-        <!-- 4. EL EMPAQUE (VISUAL) -->
+        <!-- 5. EL EMPAQUE (VISUAL) -->
         <div class="collection-grid fade-in">
+            <div class="img-container img-square">
+                <img src="./empaque.jpg" alt="Empaque Aesthetic Etéreo Lab Studio" loading="lazy">
+            </div>
             <div class="text-container">
                 <h3>El Ritual de Apertura</h3>
                 <p>No entregamos un simple paquete, entregamos una experiencia diseñada para sorprender. Cada cápsula del tiempo viaja completamente protegida y lista para regalar.</p>
                 <p>Nuestra caja de microcorrugado kraft envuelve tu pieza en papel seda, sellada a mano con nuestro distintivo lacre de cera. Incluye una tarjeta de instrucciones para revelar la magia de la dimensión oculta al instante.</p>
-            </div>
-            <div class="img-container img-square">
-                <img src="./empaque.jpg" alt="Empaque Aesthetic Etéreo Lab Studio" loading="lazy">
             </div>
         </div>
 
@@ -368,16 +415,16 @@
             <h2>Accesorios Inteligentes</h2>
         </div>
 
-        <!-- 5. PET ID -->
+        <!-- 6. PET ID -->
         <div class="collection-grid fade-in">
-            <div class="img-container img-square">
-                <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
-            </div>
             <div class="text-container">
                 <h3>Pet ID Inteligente</h3>
                 <p>La seguridad de tu mejor amigo rediseñada bajo la estética minimalista de Etéreo Lab Studio.</p>
                 <p>Diseñamos placas de identificación de alta resistencia. Quien encuentre a tu mascota solo debe acercar su celular (NFC) o escanear el código (QR) para acceder a tu información de contacto al instante.</p>
                 <div class="price-badge">Desde $199 MXN</div>
+            </div>
+            <div class="img-container img-square">
+                <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
             </div>
         </div>
 
@@ -387,15 +434,15 @@
             <h2>Estudio Creativo</h2>
         </div>
 
-        <!-- 6. LIBRETAS ARTESANALES (PRÓXIMAMENTE) -->
+        <!-- 7. LIBRETAS ARTESANALES (PRÓXIMAMENTE) -->
         <div class="collection-grid fade-in" style="opacity: 0.6;">
+            <div class="img-container img-square">
+                <img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(100%);">
+            </div>
             <div class="text-container">
                 <span class="badge-soon">Próximamente</span>
                 <h3>Encuadernación de Autor</h3>
                 <p>Libretas y bitácoras ensambladas con estricto dominio artesanal. Papel de alta calidad, costuras expuestas y el toque Etéreo: tecnología NFC oculta en la contraportada para digitalizar tus notas o proteger tu diario con un candado virtual.</p>
-            </div>
-            <div class="img-container img-square">
-                <img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(100%);">
             </div>
         </div>
 
@@ -481,8 +528,8 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-privacidad')"><i data-lucide="x" size="24"></i></button>
             <h3>Aviso de Privacidad</h3>
-            <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas y ubicaciones geográficas que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tu cápsula del tiempo y/o placas de identificación.</p>
-            <p>Tus memorias e información de contacto son tratadas con estricta confidencialidad. No almacenamos tus archivos ni tus coordenadas en bases de datos públicas, ni comercializamos tu información con terceros.</p>
+            <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas, audios y ubicaciones geográficas que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tus piezas.</p>
+            <p>Tus memorias e información de contacto son tratadas con estricta confidencialidad. No almacenamos tus archivos en bases de datos públicas, ni comercializamos tu información con terceros.</p>
             <p>Al utilizar nuestros servicios, aceptas que procesemos los datos necesarios para entregarte un producto preciso y personalizado.</p>
         </div>
     </div>
@@ -551,12 +598,40 @@
             });
         });
 
+        /* =========================================
+           LÓGICA DEL REPRODUCTOR DE AUDIO (WAVESURFER)
+           ========================================= */
+        const wavesurfer = WaveSurfer.create({ 
+            container: '#waveform', 
+            waveColor: '#A3A3A3', 
+            progressColor: '#FFFFFF', 
+            barWidth: 3, 
+            barRadius: 3, 
+            height: 60, 
+            url: './demo.mp3' // EL ARCHIVO DE AUDIO
+        });
+        
+        const playBtn = document.getElementById('play-btn'); 
+        const timeDisp = document.getElementById('time-display');
+        const formatT = (s) => { const m = Math.floor(s / 60); const sc = Math.floor(s % 60); return `${m}:${sc < 10 ? '0' : ''}${sc}`; };
+
+        wavesurfer.on('ready', () => { timeDisp.textContent = `0:00 / ${formatT(wavesurfer.getDuration())}`; });
+        wavesurfer.on('audioprocess', () => { timeDisp.textContent = `${formatT(wavesurfer.getCurrentTime())} / ${formatT(wavesurfer.getDuration())}`; });
+
+        playBtn.addEventListener('click', () => {
+            if (navigator.vibrate) navigator.vibrate(50);
+            wavesurfer.playPause();
+            playBtn.innerHTML = wavesurfer.isPlaying() ? '<i data-lucide="pause" size="20" fill="currentColor"></i>' : '<i data-lucide="play" size="20" fill="currentColor"></i>';
+            lucide.createIcons();
+        });
+
         const themeBtn = document.getElementById('theme-btn'); const htmlElement = document.documentElement;
         themeBtn.addEventListener('click', () => {
             if (navigator.vibrate) navigator.vibrate(50);
             const isDark = htmlElement.getAttribute('data-theme') === 'dark';
             htmlElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
             themeBtn.innerHTML = isDark ? '<i data-lucide="moon" size="14"></i> Modo Oscuro' : '<i data-lucide="sun" size="14"></i> Modo Claro';
+            wavesurfer.setOptions({ waveColor: isDark ? '#DCD8CC' : '#A3A3A3', progressColor: isDark ? '#121212' : '#FFFFFF' });
             lucide.createIcons();
         });
 
