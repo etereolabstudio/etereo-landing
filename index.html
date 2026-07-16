@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- CAMBIO 1: El tema por defecto ahora es 'light' -->
 <html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +18,6 @@
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
 
     <style>
         /* =========================================
@@ -124,16 +122,7 @@
         .text-container h3 { font-size: 2rem; margin-bottom: 15px; letter-spacing: 1px; }
         .text-container p { margin-bottom: 18px; font-size: 1rem; }
 
-        /* CAMBIO 2: BOTÓN DE PRECIO CON ANIMACIÓN DE CLIC */
-        .price-badge { 
-            display: inline-flex; align-items: center; justify-content: center; 
-            background: var(--title-color); color: var(--bg-color); 
-            padding: 8px 18px; font-size: 0.9rem; font-weight: bold; border-radius: 30px; 
-            margin-top: 10px; letter-spacing: 1px; font-family: 'Lato', sans-serif; 
-            text-transform: uppercase; cursor: pointer; border: none; outline: none;
-            transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+        .price-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--title-color); color: var(--bg-color); padding: 8px 18px; font-size: 0.9rem; font-weight: bold; border-radius: 30px; margin-top: 10px; letter-spacing: 1px; font-family: 'Lato', sans-serif; text-transform: uppercase; cursor: pointer; border: none; outline: none; transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         [data-theme="light"] .price-badge { background: #121212; color: #F8F6F0; }
         .price-badge:hover { transform: translateY(-3px); opacity: 0.9; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
         .price-badge:active { transform: translateY(1px); }
@@ -156,13 +145,21 @@
         [data-theme="light"] .slide-caption { background: rgba(248, 246, 240, 0.8); color: #121212; border: 1px solid rgba(0,0,0,0.1); }
         .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
-        .audio-player-wrapper { margin-top: 25px; padding: 25px; border: 1px solid var(--card-border); border-radius: 8px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+        /* =========================================
+           NUEVO: REPRODUCTOR CUSTOM (TIPO PLAY.ETEREOMX)
+           ========================================= */
+        .audio-player-wrapper { margin-top: 25px; padding: 40px 20px 20px 20px; border: 1px solid var(--card-border); border-radius: 8px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); position: relative; display: flex; flex-direction: column; align-items: center; }
         [data-theme="light"] .audio-player-wrapper { background: rgba(255,255,255,0.4); }
-        #waveform { margin-bottom: 15px; min-height: 60px; }
-        .audio-controls { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-        .play-group { display: flex; align-items: center; gap: 12px; }
-        .play-btn { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; border: none; background: var(--title-color); color: var(--bg-color); cursor: pointer; display: flex; justify-content: center; align-items: center; aspect-ratio: 1/1; flex-shrink: 0; padding: 0; }
-        .time-display { font-size: 0.8rem; letter-spacing: 1px; }
+        
+        .waveform-wrapper { width: 100%; height: 80px; position: relative; display: block; margin-bottom: 10px; }
+        .waveform-wrapper canvas { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+        
+        .play-btn-custom { background-color: var(--title-color); border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; justify-content: center; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        [data-theme="light"] .play-btn-custom { background-color: #121212; }
+        .play-btn-custom:hover { transform: translate(-50%, -50%) scale(1.05); }
+        
+        .play-btn-custom svg { fill: var(--bg-color); width: 18px; height: 18px; }
+        [data-theme="light"] .play-btn-custom svg { fill: #F8F6F0; }
 
         .feature-wrapper { position: relative; padding: 40px; border: 1px solid var(--title-color); border-radius: 8px; background: rgba(0,0,0,0.4); text-align: center; overflow: hidden; width: 100%; }
         [data-theme="light"] .feature-wrapper { background: rgba(255,255,255,0.8); }
@@ -257,7 +254,6 @@
     
     <nav class="navbar" id="navbar">
         <div class="nav-brand">Etéreo Lab</div>
-        <!-- EL BOTÓN NACE EN MODO OSCURO (PORQUE EL FONDO ES CLARO) -->
         <button class="theme-btn" id="theme-btn"><i data-lucide="moon" size="14"></i> Modo Oscuro</button>
     </nav>
 
@@ -364,27 +360,31 @@
             </div>
         </div>
 
-        <!-- 3. COLECCIÓN SONORA -->
+        <!-- 3. COLECCIÓN SONORA (NUEVO REPRODUCTOR TIPO CANVAS) -->
         <div class="collection-grid fade-in">
             <div class="img-container img-square">
                 <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
             </div>
             <div class="text-container">
                 <h3>Colección Sonora</h3>
-                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza visual de diseño minimalista.</p>
+                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza visual de diseño matemático.</p>
                 <p>El latido de tu bebé en su ultrasonido, el ladrido de tu mejor amigo, o su primer "Te amo". Solo acerca tu celular al cuadro terminado y el audio original resonará al instante a través de nuestro reproductor digital oculto.</p>
                 
-                <!-- REPRODUCTOR DEMO -->
+                <!-- REPRODUCTOR POLIGONAL CUSTOM -->
                 <div class="audio-player-wrapper">
-                    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; opacity: 0.7;">Demo del Reproductor Oculto</p>
-                    <div id="waveform"></div>
-                    <div class="audio-controls">
-                        <div class="play-group">
-                            <button class="play-btn" id="play-btn"><i data-lucide="play" size="20" fill="currentColor"></i></button>
-                            <span style="font-family: 'Playfair Display'; font-style: italic; color: var(--title-color);">"Latido de bebé..."</span>
-                        </div>
-                        <span class="time-display" id="time-display">0:00 / 0:00</span>
+                    <p style="font-size: 0.70rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.7; width: 100%; text-align: center;">Demo del Reproductor Digital</p>
+                    
+                    <div class="waveform-wrapper" id="waveform-wrapper">
+                        <canvas id="canvas-base"></canvas>
+                        <canvas id="canvas-progress"></canvas>
+                        
+                        <button class="play-btn-custom" id="custom-play-btn">
+                            <svg class="icon-play" id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg class="icon-pause" id="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
                     </div>
+                    
+                    <p id="audio-status-text" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); font-size: 0.95rem; margin-top: 15px;">"Latido de bebé..."</p>
                 </div>
 
                 <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
@@ -538,8 +538,8 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-privacidad')"><i data-lucide="x" size="24"></i></button>
             <h3>Aviso de Privacidad</h3>
-            <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas y ubicaciones geográficas que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tu cápsula del tiempo y/o placas de identificación.</p>
-            <p>Tus memorias e información de contacto son tratadas con estricta confidencialidad. No almacenamos tus archivos ni tus coordenadas en bases de datos públicas, ni comercializamos tu información con terceros.</p>
+            <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas, audios y ubicaciones geográficas que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tus piezas.</p>
+            <p>Tus memorias e información de contacto son tratadas con estricta confidencialidad. No almacenamos tus archivos en bases de datos públicas, ni comercializamos tu información con terceros.</p>
             <p>Al utilizar nuestros servicios, aceptas que procesemos los datos necesarios para entregarte un producto preciso y personalizado.</p>
         </div>
     </div>
@@ -558,7 +558,7 @@
     <script>
         lucide.createIcons();
         window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1600);
+            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); prepareCanvases(); }, 1600);
             initParticles();
         });
 
@@ -609,60 +609,169 @@
         });
 
         /* =========================================
-           LÓGICA DEL REPRODUCTOR DE AUDIO (WAVESURFER)
-           ========================================= */
-        // CAMBIO 3: Colores iniciales para Light Mode
-        const wavesurfer = WaveSurfer.create({ 
-            container: '#waveform', 
-            waveColor: '#DCD8CC', 
-            progressColor: '#121212', 
-            barWidth: 3, 
-            barRadius: 3, 
-            height: 60, 
-            url: './demo.mp3' 
-        });
-        
-        const playBtn = document.getElementById('play-btn'); 
-        const timeDisp = document.getElementById('time-display');
-        const formatT = (s) => { const m = Math.floor(s / 60); const sc = Math.floor(s % 60); return `${m}:${sc < 10 ? '0' : ''}${sc}`; };
-
-        wavesurfer.on('ready', () => { timeDisp.textContent = `0:00 / ${formatT(wavesurfer.getDuration())}`; });
-        wavesurfer.on('audioprocess', () => { timeDisp.textContent = `${formatT(wavesurfer.getCurrentTime())} / ${formatT(wavesurfer.getDuration())}`; });
-
-        playBtn.addEventListener('click', () => {
-            if (navigator.vibrate) navigator.vibrate(50);
-            wavesurfer.playPause();
-            playBtn.innerHTML = wavesurfer.isPlaying() ? '<i data-lucide="pause" size="20" fill="currentColor"></i>' : '<i data-lucide="play" size="20" fill="currentColor"></i>';
-            lucide.createIcons();
-        });
-
-        const themeBtn = document.getElementById('theme-btn'); const htmlElement = document.documentElement;
-        themeBtn.addEventListener('click', () => {
-            if (navigator.vibrate) navigator.vibrate(50);
-            const isDark = htmlElement.getAttribute('data-theme') === 'dark';
-            htmlElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-            themeBtn.innerHTML = isDark ? '<i data-lucide="moon" size="14"></i> Modo Oscuro' : '<i data-lucide="sun" size="14"></i> Modo Claro';
-            wavesurfer.setOptions({ waveColor: isDark ? '#DCD8CC' : '#A3A3A3', progressColor: isDark ? '#121212' : '#FFFFFF' });
-            lucide.createIcons();
-        });
-
-        /* =========================================
-           CAMBIO 4: LÓGICA DE BOTONES DE PRECIO (WhatsApp)
+           LÓGICA DE BOTONES DE PRECIO (WhatsApp)
            ========================================= */
         document.querySelectorAll('.whatsapp-trigger').forEach(button => {
             button.addEventListener('click', function() {
                 if (navigator.vibrate) navigator.vibrate(50);
                 const productName = this.getAttribute('data-product');
-                
-                // Alerta nativa de confirmación
                 const userAgrees = confirm(`¿Te interesa pedir este artículo u obtener más información sobre la ${productName}?\n\nSerás redirigido a nuestro WhatsApp.`);
-                
                 if(userAgrees) {
                     const phone = "523332227033";
                     const message = encodeURIComponent(`Hola Etéreo Lab. Me interesa pedir un artículo u obtener más información sobre la ${productName}.`);
                     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
                 }
             });
+        });
+
+        /* =========================================
+           REPRODUCTOR CUSTOM (CANVAS MATEMÁTICO)
+           ========================================= */
+        const waveformWrapper = document.getElementById('waveform-wrapper');
+        const canvasBase = document.getElementById('canvas-base');
+        const canvasProgress = document.getElementById('canvas-progress');
+        const ctxBase = canvasBase.getContext('2d');
+        const ctxProgress = canvasProgress.getContext('2d');
+        const customPlayBtn = document.getElementById('custom-play-btn');
+        const iconPlay = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+        const audioStatusText = document.getElementById('audio-status-text');
+
+        let peaks = [];
+        let isPlaying = false;
+        let demoProgress = 0;
+        let lastTime = 0;
+        const demoDuration = 10000; // 10 segundos
+        let animationFrame;
+
+        // Generar matemática del diamante (Fake Wave)
+        for(let i = 0; i < 200; i++) {
+            let wave = Math.abs(Math.sin(i * 0.1) * Math.cos(i * 0.05));
+            let noise = Math.random() * 0.3;
+            let bellCurve = Math.sin(Math.PI * (i / 200)); 
+            peaks.push(((wave + noise) * bellCurve) * 0.8 + 0.05);
+        }
+
+        function getColors() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            return {
+                base: isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
+                progress: isDark ? '#FFFFFF' : '#121212'
+            };
+        }
+
+        function prepareCanvases() {
+            const dpr = window.devicePixelRatio || 1;
+            const rect = waveformWrapper.getBoundingClientRect();
+            
+            [canvasBase, canvasProgress].forEach(c => {
+                c.width = rect.width * dpr;
+                c.height = rect.height * dpr;
+                c.getContext('2d').setTransform(1, 0, 0, 1, 0, 0); // Reset
+                c.getContext('2d').scale(dpr, dpr);
+            });
+            drawWaveforms();
+        }
+
+        function drawPolygon(ctx, width, height, color) {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            
+            const centerY = height / 2;
+            const step = width / (peaks.length - 1);
+            
+            ctx.moveTo(0, centerY);
+            for (let i = 0; i < peaks.length; i++) {
+                let amp = peaks[i] * height;
+                ctx.lineTo(i * step, centerY - (amp / 2));
+            }
+            for (let i = peaks.length - 1; i >= 0; i--) {
+                let amp = peaks[i] * height;
+                ctx.lineTo(i * step, centerY + (amp / 2));
+            }
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function drawWaveforms() {
+            const colors = getColors();
+            const rect = waveformWrapper.getBoundingClientRect();
+            
+            // Dibujar base
+            drawPolygon(ctxBase, rect.width, rect.height, colors.base);
+            
+            // Dibujar progreso
+            ctxProgress.clearRect(0, 0, rect.width, rect.height);
+            ctxProgress.save();
+            ctxProgress.beginPath();
+            ctxProgress.rect(0, 0, rect.width * demoProgress, rect.height);
+            ctxProgress.clip();
+            drawPolygon(ctxProgress, rect.width, rect.height, colors.progress);
+            ctxProgress.restore();
+        }
+
+        function updateProgress() {
+            if (!isPlaying) return;
+            
+            let now = Date.now();
+            let delta = now - lastTime;
+            lastTime = now;
+            demoProgress += delta / demoDuration;
+            
+            if (demoProgress >= 1) {
+                demoProgress = 1;
+                isPlaying = false;
+                iconPlay.style.display = "block";
+                iconPause.style.display = "none";
+                audioStatusText.innerHTML = '"Latido finalizado..."';
+            }
+            
+            drawWaveforms();
+            
+            if (isPlaying) {
+                animationFrame = requestAnimationFrame(updateProgress);
+            }
+        }
+
+        customPlayBtn.addEventListener('click', () => {
+            if (navigator.vibrate) navigator.vibrate(50);
+            
+            if (!isPlaying) {
+                isPlaying = true;
+                iconPlay.style.display = "none";
+                iconPause.style.display = "block";
+                
+                if (demoProgress >= 1) demoProgress = 0;
+                lastTime = Date.now();
+                audioStatusText.innerHTML = '"Reproduciendo latido..."';
+                updateProgress();
+            } else {
+                isPlaying = false;
+                iconPlay.style.display = "block";
+                iconPause.style.display = "none";
+                audioStatusText.innerHTML = '"Pausado..."';
+                cancelAnimationFrame(animationFrame);
+            }
+        });
+
+        window.addEventListener('resize', prepareCanvases);
+
+        /* =========================================
+           BOTÓN DE TEMA OSCURO / CLARO
+           ========================================= */
+        const themeBtn = document.getElementById('theme-btn'); 
+        const htmlElement = document.documentElement;
+        
+        themeBtn.addEventListener('click', () => {
+            if (navigator.vibrate) navigator.vibrate(50);
+            const isLight = htmlElement.getAttribute('data-theme') === 'light';
+            htmlElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+            themeBtn.innerHTML = isLight ? '<i data-lucide="sun" size="14"></i> Modo Claro' : '<i data-lucide="moon" size="14"></i> Modo Oscuro';
+            lucide.createIcons();
+            
+            // REDIBUJAR CANVAS CON NUEVOS COLORES
+            drawWaveforms();
         });
 
         const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
