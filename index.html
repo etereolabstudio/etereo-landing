@@ -16,9 +16,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-    <!-- LIBRERÍAS DE ICONOS Y PARTÍCULAS (WAVESURFER ELIMINADO PARA MAYOR VELOCIDAD) -->
+    <!-- LIBRERÍAS DE ICONOS, PARTÍCULAS Y MOTOR ACÚSTICO WAVESURFER -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
 
     <style>
         /* =========================================
@@ -147,14 +148,17 @@
         .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; font-size: 0.65rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
 
         /* =========================================
-           5. REPRODUCTOR NATIVO TIPO CANVAS
+           5. REPRODUCTOR DE AUDIO REAL ESTILO CUSTOM
            ========================================= */
         .audio-player-wrapper { margin-top: 25px; padding: 40px 20px 20px 20px; border: 1px solid var(--card-border); border-radius: 8px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); position: relative; display: flex; flex-direction: column; align-items: center; }
         [data-theme="light"] .audio-player-wrapper { background: rgba(255,255,255,0.4); }
         
         .waveform-wrapper { width: 100%; height: 80px; position: relative; display: block; margin-bottom: 10px; }
-        .waveform-wrapper canvas { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
         
+        /* Contenedor del WAVESURFER REAL */
+        #waveform-real { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+        
+        /* Botón de control posicionado en absoluto al centro exacto */
         .play-btn-custom { background-color: var(--title-color); border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; justify-content: center; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         [data-theme="light"] .play-btn-custom { background-color: #121212; }
         .play-btn-custom:hover { transform: translate(-50%, -50%) scale(1.05); }
@@ -361,34 +365,32 @@
             </div>
         </div>
 
-        <!-- 3. COLECCIÓN SONORA (NUEVO REPRODUCTOR NATIVO CON AUDIO REAL) -->
+        <!-- 3. COLECCIÓN SONORA (REPRODUCTOR WAVESURFER CON DISEÑO CUSTOM) -->
         <div class="collection-grid fade-in">
             <div class="img-container img-square">
                 <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
             </div>
             <div class="text-container">
                 <h3>Colección Sonora</h3>
-                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza visual de diseño matemático.</p>
-                <p>El latido de tu bebé en su ultrasonido, el ladrido de tu mejor amigo, o su primer "Te amo". Solo acerca tu celular al cuadro terminado y el audio original resonará al instante a través de nuestro reproductor digital oculto.</p>
+                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza visual mediante el análisis algorítmico de sus frecuencias y picos de sonido reales.</p>
+                <p>El latido de tu bebé, el ladrido de tu mejor amigo, o su primer "Te amo". Solo acerca tu celular al cuadro terminado y el audio original resonará al instante a través de nuestro reproductor digital oculto.</p>
                 
-                <!-- REPRODUCTOR POLIGONAL CUSTOM VINCULADO AL AUDIO -->
+                <!-- REPRODUCTOR WAVESURFER REAL -->
                 <div class="audio-player-wrapper">
-                    <p style="font-size: 0.70rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.7; width: 100%; text-align: center;">Demo del Reproductor Digital</p>
+                    <p style="font-size: 0.70rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.7; width: 100%; text-align: center;">Prueba el Escáner Digital</p>
                     
-                    <div class="waveform-wrapper" id="waveform-wrapper">
-                        <canvas id="canvas-base"></canvas>
-                        <canvas id="canvas-progress"></canvas>
+                    <div class="waveform-wrapper">
+                        <!-- EL CÓDIGO INYECTA LA ONDA REAL AQUÍ -->
+                        <div id="waveform-real"></div>
                         
+                        <!-- TU BOTÓN CUSTOM ENCIMA -->
                         <button class="play-btn-custom" id="custom-play-btn">
                             <svg class="icon-play" id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             <svg class="icon-pause" id="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
                     </div>
                     
-                    <p id="audio-status-text" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); font-size: 0.95rem; margin-top: 15px;">"Latido de bebé..."</p>
-                    
-                    <!-- AUDIO OCULTO REAL -->
-                    <audio id="demo-audio" src="./demo.mp3" preload="metadata"></audio>
+                    <p id="audio-status-text" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); font-size: 0.95rem; margin-top: 15px;">"La voz de tu memoria..."</p>
                 </div>
 
                 <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
@@ -562,7 +564,7 @@
     <script>
         lucide.createIcons();
         window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); prepareCanvases(); }, 1600);
+            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1600);
             initParticles();
         });
 
@@ -629,135 +631,48 @@
         });
 
         /* =========================================
-           REPRODUCTOR CUSTOM CON AUDIO REAL (demo.mp3)
+           REPRODUCTOR WAVESURFER CON DISEÑO CUSTOM
            ========================================= */
-        const waveformWrapper = document.getElementById('waveform-wrapper');
-        const canvasBase = document.getElementById('canvas-base');
-        const canvasProgress = document.getElementById('canvas-progress');
-        const ctxBase = canvasBase.getContext('2d');
-        const ctxProgress = canvasProgress.getContext('2d');
+        const isDarkInitial = document.documentElement.getAttribute('data-theme') === 'dark';
+        
+        const wavesurfer = WaveSurfer.create({
+            container: '#waveform-real',
+            waveColor: isDarkInitial ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
+            progressColor: isDarkInitial ? '#FFFFFF' : '#121212',
+            barWidth: 3,
+            barRadius: 3,
+            height: 80, // Altura ajustada a tu diseño
+            url: './demo.mp3' // LEE TU AUDIO REAL
+        });
+
         const customPlayBtn = document.getElementById('custom-play-btn');
         const iconPlay = document.getElementById('icon-play');
         const iconPause = document.getElementById('icon-pause');
         const audioStatusText = document.getElementById('audio-status-text');
-        
-        const audioEl = document.getElementById('demo-audio'); // El audio nativo
 
-        let peaks = [];
-        let isPlaying = false;
-        let animationFrame;
-
-        // Generamos la onda matemática de diseño
-        for(let i = 0; i < 200; i++) {
-            let wave = Math.abs(Math.sin(i * 0.1) * Math.cos(i * 0.05));
-            let noise = Math.random() * 0.3;
-            let bellCurve = Math.sin(Math.PI * (i / 200)); 
-            peaks.push(((wave + noise) * bellCurve) * 0.8 + 0.05);
-        }
-
-        function getColors() {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            return {
-                base: isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
-                progress: isDark ? '#FFFFFF' : '#121212'
-            };
-        }
-
-        function prepareCanvases() {
-            const dpr = window.devicePixelRatio || 1;
-            const rect = waveformWrapper.getBoundingClientRect();
-            
-            [canvasBase, canvasProgress].forEach(c => {
-                c.width = rect.width * dpr;
-                c.height = rect.height * dpr;
-                c.getContext('2d').setTransform(1, 0, 0, 1, 0, 0);
-                c.getContext('2d').scale(dpr, dpr);
-            });
-            drawWaveforms();
-        }
-
-        function drawPolygon(ctx, width, height, color) {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = color;
-            ctx.beginPath();
-            
-            const centerY = height / 2;
-            const step = width / (peaks.length - 1);
-            
-            ctx.moveTo(0, centerY);
-            for (let i = 0; i < peaks.length; i++) {
-                let amp = peaks[i] * height;
-                ctx.lineTo(i * step, centerY - (amp / 2));
-            }
-            for (let i = peaks.length - 1; i >= 0; i--) {
-                let amp = peaks[i] * height;
-                ctx.lineTo(i * step, centerY + (amp / 2));
-            }
-            ctx.closePath();
-            ctx.fill();
-        }
-
-        function drawWaveforms(progress = 0) {
-            const colors = getColors();
-            const rect = waveformWrapper.getBoundingClientRect();
-            
-            drawPolygon(ctxBase, rect.width, rect.height, colors.base);
-            
-            ctxProgress.clearRect(0, 0, rect.width, rect.height);
-            ctxProgress.save();
-            ctxProgress.beginPath();
-            ctxProgress.rect(0, 0, rect.width * progress, rect.height);
-            ctxProgress.clip();
-            drawPolygon(ctxProgress, rect.width, rect.height, colors.progress);
-            ctxProgress.restore();
-        }
-
-        function updateProgress() {
-            if (!isPlaying) return;
-            
-            // Calculamos el progreso real basado en el archivo de audio
-            let progress = audioEl.currentTime / (audioEl.duration || 1);
-            drawWaveforms(progress);
-            
-            if (isPlaying) {
-                animationFrame = requestAnimationFrame(updateProgress);
-            }
-        }
-
-        // LÓGICA DE REPRODUCCIÓN
+        // Controles de Play/Pause vinculados a tu botón centrado
         customPlayBtn.addEventListener('click', () => {
             if (navigator.vibrate) navigator.vibrate(50);
-            
-            if (audioEl.paused) {
-                audioEl.play();
-                isPlaying = true;
-                iconPlay.style.display = "none";
-                iconPause.style.display = "block";
-                audioStatusText.innerHTML = '"Reproduciendo..."';
-                updateProgress();
-            } else {
-                audioEl.pause();
-                isPlaying = false;
-                iconPlay.style.display = "block";
-                iconPause.style.display = "none";
-                audioStatusText.innerHTML = '"Pausado..."';
-                cancelAnimationFrame(animationFrame);
-            }
+            wavesurfer.playPause();
         });
 
-        // CUANDO EL AUDIO TERMINA
-        audioEl.addEventListener('ended', () => {
-            isPlaying = false;
+        // Eventos nativos de WaveSurfer para cambiar los textos y SVG
+        wavesurfer.on('play', () => {
+            iconPlay.style.display = "none";
+            iconPause.style.display = "block";
+            audioStatusText.innerHTML = '"Reproduciendo memoria..."';
+        });
+
+        wavesurfer.on('pause', () => {
             iconPlay.style.display = "block";
             iconPause.style.display = "none";
-            audioStatusText.innerHTML = '"Latido finalizado..."';
-            cancelAnimationFrame(animationFrame);
-            drawWaveforms(0); // Reinicia visualmente
+            audioStatusText.innerHTML = '"Pausado..."';
         });
 
-        window.addEventListener('resize', () => {
-            prepareCanvases();
-            drawWaveforms(audioEl.currentTime / (audioEl.duration || 1));
+        wavesurfer.on('finish', () => {
+            iconPlay.style.display = "block";
+            iconPause.style.display = "none";
+            audioStatusText.innerHTML = '"Memoria finalizada..."';
         });
 
         /* =========================================
@@ -773,8 +688,12 @@
             themeBtn.innerHTML = isLight ? '<i data-lucide="sun" size="14"></i> Modo Claro' : '<i data-lucide="moon" size="14"></i> Modo Oscuro';
             lucide.createIcons();
             
-            // REDIBUJAR CANVAS CON NUEVOS COLORES
-            drawWaveforms(audioEl.currentTime / (audioEl.duration || 1));
+            // Cambiar dinámicamente el color de la onda real
+            const newIsDark = !isLight;
+            wavesurfer.setOptions({
+                waveColor: newIsDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
+                progressColor: newIsDark ? '#FFFFFF' : '#121212'
+            });
         });
 
         const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
