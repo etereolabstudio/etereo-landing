@@ -131,6 +131,7 @@
 
         .price-strike { text-decoration: line-through; font-weight: 300; opacity: 0.7; margin-left: 8px; font-size: 0.8rem; pointer-events: none; }
         .price-sizes { font-size: 0.85rem; margin-top: 12px; opacity: 0.7; font-weight: 300; line-height: 1.6; }
+        .price-digital { margin-top: 5px; color: var(--title-color); font-weight: 400; font-size: 0.85rem; }
         .badge-soon { background: transparent; border: 1px solid var(--title-color); color: var(--title-color); padding: 4px 12px; font-size: 0.7rem; border-radius: 20px; display: inline-block; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase;}
 
         .carousel-wrapper { width: 100%; position: relative; overflow: hidden; }
@@ -154,11 +155,8 @@
         [data-theme="light"] .audio-player-wrapper { background: rgba(255,255,255,0.4); }
         
         .waveform-wrapper { width: 100%; height: 80px; position: relative; display: block; margin-bottom: 10px; }
-        
-        /* Contenedor del WAVESURFER REAL */
         #waveform-real { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
         
-        /* Botón de control posicionado en absoluto al centro exacto */
         .play-btn-custom { background-color: var(--title-color); border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; justify-content: center; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         [data-theme="light"] .play-btn-custom { background-color: #121212; }
         .play-btn-custom:hover { transform: translate(-50%, -50%) scale(1.05); }
@@ -303,7 +301,38 @@
             <h2>Arte Enmarcado</h2>
         </div>
 
-        <!-- 1. COLECCIÓN ASTRONÓMICA -->
+        <!-- 1. COLECCIÓN SONORA (EL PRODUCTO ESTRELLA AL INICIO) -->
+        <div class="collection-grid fade-in">
+            <div class="img-container img-square">
+                <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
+            </div>
+            <div class="text-container">
+                <h3>Colección Sonora</h3>
+                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza de arte visual mediante el análisis algorítmico de sus frecuencias sonoras reales.</p>
+                <p>El latido de tu bebé en su ultrasonido, la voz de alguien que extrañas, el ladrido de tu mejor amigo o ese primer "Te amo". Ocultamos un microchip NFC en el lienzo; solo acerca tu celular al cuadro terminado y el audio original cobrará vida al instante a través de nuestro reproductor digital exclusivo en <strong>play.etereomx.com</strong>.</p>
+                
+                <!-- REPRODUCTOR WAVESURFER REAL -->
+                <div class="audio-player-wrapper">
+                    <p style="font-size: 0.70rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.7; width: 100%; text-align: center;">Prueba el Escáner Digital</p>
+                    
+                    <div class="waveform-wrapper">
+                        <div id="waveform-real"></div>
+                        <button class="play-btn-custom" id="custom-play-btn">
+                            <svg class="icon-play" id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg class="icon-pause" id="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                    </div>
+                    
+                    <p id="audio-status-text" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); font-size: 0.95rem; margin-top: 15px;">"La voz de tu memoria..."</p>
+                </div>
+
+                <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
+                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
+                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución + Código QR) por <strong>$99 MXN</strong>.</p>
+            </div>
+        </div>
+
+        <!-- 2. COLECCIÓN ASTRONÓMICA -->
         <div class="collection-grid fade-in">
             <div class="carousel-wrapper">
                 <div class="carousel">
@@ -333,10 +362,11 @@
                 
                 <button class="price-badge whatsapp-trigger" data-product="Colección Astronómica">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
                 <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
+                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución) por <strong>$99 MXN</strong>.</p>
             </div>
         </div>
 
-        <!-- 2. COLECCIÓN TERRENAL -->
+        <!-- 3. COLECCIÓN TERRENAL -->
         <div class="collection-grid fade-in">
             <div class="text-container">
                 <h3>Colección Terrenal</h3>
@@ -345,6 +375,7 @@
                 
                 <button class="price-badge whatsapp-trigger" data-product="Colección Terrenal">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
                 <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
+                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución) por <strong>$99 MXN</strong>.</p>
             </div>
             <div class="carousel-wrapper">
                 <div class="carousel">
@@ -365,63 +396,30 @@
             </div>
         </div>
 
-        <!-- 3. COLECCIÓN SONORA (REPRODUCTOR WAVESURFER CON DISEÑO CUSTOM) -->
-        <div class="collection-grid fade-in">
-            <div class="img-container img-square">
-                <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
-            </div>
-            <div class="text-container">
-                <h3>Colección Sonora</h3>
-                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza visual mediante el análisis algorítmico de sus frecuencias y picos de sonido reales.</p>
-                <p>El latido de tu bebé, el ladrido de tu mejor amigo, o su primer "Te amo". Solo acerca tu celular al cuadro terminado y el audio original resonará al instante a través de nuestro reproductor digital exclusivo en <strong>play.etereomx.com</strong>.</p>
-                
-                <!-- REPRODUCTOR WAVESURFER REAL -->
-                <div class="audio-player-wrapper">
-                    <p style="font-size: 0.70rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.7; width: 100%; text-align: center;">Prueba el Escáner Digital</p>
-                    
-                    <div class="waveform-wrapper">
-                        <!-- EL CÓDIGO INYECTA LA ONDA REAL AQUÍ -->
-                        <div id="waveform-real"></div>
-                        
-                        <!-- TU BOTÓN CUSTOM ENCIMA -->
-                        <button class="play-btn-custom" id="custom-play-btn">
-                            <svg class="icon-play" id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            <svg class="icon-pause" id="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                        </button>
-                    </div>
-                    
-                    <p id="audio-status-text" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); font-size: 0.95rem; margin-top: 15px;">"La voz de tu memoria..."</p>
-                </div>
-
-                <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
-                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
-            </div>
-        </div>
-
         <!-- 4. LA DIMENSIÓN OCULTA (NFC) -->
         <div class="collection-grid fade-in">
-            <div class="text-container">
-                <h3 style="font-family: 'Playfair Display'; font-style: italic;">La Dimensión Oculta</h3>
-                <p>La personalización no termina en el papel. <strong>Todas las piezas de Arte Enmarcado</strong> se convierten en un portal digital inmersivo.</p>
-                <p>Ocultamos bajo el lienzo un microchip NFC pasivo. Solo necesitas acercar tu celular desbloqueado al marco de tu cuadro y la memoria cobrará vida al instante: abriendo una canción especial, un video en la nube, o tu Colección Sonora.</p>
-            </div>
             <div class="feature-wrapper">
                 <div class="nfc-pulse"></div>
                 <i data-lucide="smartphone-nfc" size="64" style="color: var(--title-color); position: relative; z-index: 2; margin-bottom: 20px;"></i>
                 <h4 style="font-size: 1.2rem; margin-bottom: 10px; position: relative; z-index: 2; font-family: 'Playfair Display';">Tecnología NFC Integrada</h4>
-                <p style="font-size: 0.9rem; position: relative; z-index: 2; opacity: 0.8;">Incluido sin costo extra en todas las Ediciones.</p>
+                <p style="font-size: 0.9rem; position: relative; z-index: 2; opacity: 0.8;">Incluido sin costo extra en todas las piezas físicas.</p>
+            </div>
+            <div class="text-container">
+                <h3 style="font-family: 'Playfair Display'; font-style: italic;">La Dimensión Oculta</h3>
+                <p>La personalización no termina en el papel. <strong>Todas las piezas físicas de Arte Enmarcado</strong> se convierten en un portal digital inmersivo.</p>
+                <p>Ocultamos bajo el lienzo un microchip NFC pasivo. Solo necesitas acercar tu celular desbloqueado al marco de tu cuadro y la memoria cobrará vida al instante: abriendo una canción especial, un video en la nube, o tu Colección Sonora.</p>
             </div>
         </div>
 
         <!-- 5. EL EMPAQUE (VISUAL) -->
         <div class="collection-grid fade-in">
-            <div class="img-container img-square">
-                <img src="./empaque.jpg" alt="Empaque Aesthetic Etéreo Lab Studio" loading="lazy">
-            </div>
             <div class="text-container">
                 <h3>El Ritual de Apertura</h3>
                 <p>No entregamos un simple paquete, entregamos una experiencia diseñada para sorprender. Cada cápsula del tiempo viaja completamente protegida y lista para regalar.</p>
                 <p>Nuestra caja de microcorrugado kraft envuelve tu pieza en papel seda, sellada a mano con nuestro distintivo lacre de cera. Incluye una tarjeta de instrucciones para revelar la magia de la dimensión oculta al instante.</p>
+            </div>
+            <div class="img-container img-square">
+                <img src="./empaque.jpg" alt="Empaque Aesthetic Etéreo Lab Studio" loading="lazy">
             </div>
         </div>
 
@@ -433,14 +431,14 @@
 
         <!-- 6. PET ID -->
         <div class="collection-grid fade-in">
+            <div class="img-container img-square">
+                <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
+            </div>
             <div class="text-container">
                 <h3>Pet ID Inteligente</h3>
                 <p>La seguridad de tu mejor amigo rediseñada bajo la estética minimalista de Etéreo Lab Studio.</p>
                 <p>Diseñamos placas de identificación de alta resistencia. Quien encuentre a tu mascota solo debe acercar su celular (NFC) o escanear el código (QR) para acceder a tu información de contacto al instante.</p>
                 <button class="price-badge whatsapp-trigger" data-product="Pet ID Inteligente">Desde $199 MXN</button>
-            </div>
-            <div class="img-container img-square">
-                <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
             </div>
         </div>
 
@@ -452,13 +450,13 @@
 
         <!-- 7. LIBRETAS ARTESANALES (PRÓXIMAMENTE) -->
         <div class="collection-grid fade-in" style="opacity: 0.6;">
-            <div class="img-container img-square">
-                <img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(100%);">
-            </div>
             <div class="text-container">
                 <span class="badge-soon">Próximamente</span>
                 <h3>Encuadernación de Autor</h3>
                 <p>Libretas y bitácoras ensambladas con estricto dominio artesanal. Papel de alta calidad, costuras expuestas y el toque Etéreo: tecnología NFC oculta en la contraportada para digitalizar tus notas o proteger tu diario con un candado virtual.</p>
+            </div>
+            <div class="img-container img-square">
+                <img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(100%);">
             </div>
         </div>
 
@@ -474,7 +472,7 @@
             </div>
             
             <div class="faq-item">
-                <button class="faq-question">¿Cómo y cuándo se entregan los pedidos en Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <button class="faq-question">¿Cómo y cuándo se entregan los pedidos físicos en Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
                 <div class="faq-answer">
                     <p>Contamos con dos modalidades seguras para la entrega de tu pieza:</p>
                     <p><strong>1. Envío a Domicilio:</strong> Operamos nuestra logística exclusivamente a través de <em>Paquetería Casa Blanca</em> para garantizar la integridad del cristal. Los despachos se realizan todos los <strong>miércoles y sábados</strong>.</p>
@@ -484,11 +482,11 @@
 
             <div class="faq-item">
                 <button class="faq-question">¿Puedo revisar el diseño antes de imprimir? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Sí, la exactitud es nuestro pilar. Antes de pasar a manufactura física, te enviaremos una previsualización digital del diseño para tu autorización final.</p></div>
+                <div class="faq-answer"><p>Sí, la exactitud es nuestro pilar. Antes de pasar a manufactura física (o enviarte la versión digital), te enviaremos una previsualización de tu diseño para tu autorización final.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-question">¿Qué requisitos necesita mi celular para leer el NFC? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Tu smartphone debe contar con tecnología NFC activa (estándar en dispositivos iOS y Android modernos). Nuestro microchip es pasivo, no requiere baterías ni instalar aplicaciones extra; solo acerca tu teléfono desbloqueado al marco.</p></div>
+                <div class="faq-answer"><p>Tu smartphone debe contar con tecnología NFC activa (estándar en dispositivos iOS y Android modernos). Nuestro microchip es pasivo, no requiere baterías ni instalar aplicaciones extra; solo acerca tu teléfono desbloqueado al marco de tu cuadro físico.</p></div>
             </div>
             <div class="faq-item">
                 <button class="faq-question">¿Cuáles son los métodos de pago aceptados? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
@@ -554,10 +552,10 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-terminos')"><i data-lucide="x" size="24"></i></button>
             <h3>Términos y Condiciones</h3>
-            <p><strong>1. Procesamiento de Pedidos:</strong> Cada pieza es diseñada de manera única. El proceso de manufactura comienza únicamente tras la recepción del anticipo acordado.</p>
-            <p><strong>2. Revisiones de Diseño:</strong> Se proporcionará un (1) previo digital para tu revisión. Una vez aprobado, el diseño pasa a impresión y no se aceptarán modificaciones.</p>
-            <p><strong>3. Políticas de Devolución:</strong> Dada la naturaleza 100% personalizada de nuestros productos, no se aceptan cambios ni devoluciones una vez que la pieza ha sido manufacturada y entregada en óptimas condiciones.</p>
-            <p><strong>4. Tecnología NFC:</strong> Etéreo Lab Studio garantiza la funcionalidad del chip NFC al momento de la entrega. El usuario es responsable de contar con un dispositivo compatible para su lectura.</p>
+            <p><strong>1. Procesamiento de Pedidos:</strong> Cada pieza es diseñada de manera única. El proceso de manufactura (física o digital) comienza únicamente tras la recepción del anticipo o pago acordado.</p>
+            <p><strong>2. Revisiones de Diseño:</strong> Se proporcionará un (1) previo digital para tu revisión. Una vez aprobado, el diseño pasa a impresión o exportación final y no se aceptarán modificaciones.</p>
+            <p><strong>3. Políticas de Devolución:</strong> Dada la naturaleza 100% personalizada de nuestros productos, no se aceptan cambios ni devoluciones una vez que la pieza ha sido manufacturada o el archivo digital ha sido entregado.</p>
+            <p><strong>4. Tecnología NFC:</strong> Etéreo Lab Studio garantiza la funcionalidad del chip NFC al momento de la entrega de la pieza física. El usuario es responsable de contar con un dispositivo compatible para su lectura.</p>
         </div>
     </div>
 
@@ -641,8 +639,8 @@
             progressColor: isDarkInitial ? '#FFFFFF' : '#121212',
             barWidth: 3,
             barRadius: 3,
-            height: 80, // Altura ajustada a tu diseño
-            url: './demo.mp3' // LEE TU AUDIO REAL
+            height: 80,
+            url: './demo.mp3' 
         });
 
         const customPlayBtn = document.getElementById('custom-play-btn');
@@ -650,13 +648,11 @@
         const iconPause = document.getElementById('icon-pause');
         const audioStatusText = document.getElementById('audio-status-text');
 
-        // Controles de Play/Pause vinculados a tu botón centrado
         customPlayBtn.addEventListener('click', () => {
             if (navigator.vibrate) navigator.vibrate(50);
             wavesurfer.playPause();
         });
 
-        // Eventos nativos de WaveSurfer para cambiar los textos y SVG
         wavesurfer.on('play', () => {
             iconPlay.style.display = "none";
             iconPause.style.display = "block";
@@ -688,7 +684,6 @@
             themeBtn.innerHTML = isLight ? '<i data-lucide="sun" size="14"></i> Modo Claro' : '<i data-lucide="moon" size="14"></i> Modo Oscuro';
             lucide.createIcons();
             
-            // Cambiar dinámicamente el color de la onda real
             const newIsDark = !isLight;
             wavesurfer.setOptions({
                 waveColor: newIsDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
