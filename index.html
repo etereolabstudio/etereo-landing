@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Etéreo Lab Studio | Cápsulas del Tiempo</title>
+    <title>Etéreo | Cápsulas del Tiempo</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     
     <meta property="og:url" content="https://www.etereomx.com/">
-    <meta property="og:title" content="Etéreo Lab Studio">
-    <meta property="og:description" content="La ciencia detrás de un sentimiento. Arte físico y digital manufacturado en Guadalajara.">
-    <meta property="og:image" content="https://www.etereomx.com/mapa-clasico.jpg">
+    <meta property="og:title" content="Etéreo">
+    <meta property="og:description" content="A Minimal Retro Vision.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- FUENTES CINEMATOGRÁFICAS RETRO: Clash Display (Logo/Títulos) y Outfit (Cuerpo) -->
+    <!-- FUENTES CINEMATOGRÁFICAS RETRO: Clash Display (Logo/Títulos), Outfit (Cuerpo), Space Mono (Metadatos/Cámara) -->
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- LIBRERÍAS DE ICONOS, PARTÍCULAS Y MOTOR ACÚSTICO WAVESURFER -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -29,38 +28,38 @@
            1. MOTOR DE COLOR "CINE RETRO MINIMALISTA"
            ========================================= */
         :root {
-            /* MODO OSCURO: Ocaso Cósmico (Basado en la imagen) */
-            --bg-color: #121216; /* Índigo muy profundo */
-            --text-color: #A39E93; 
-            --title-color: #F4EFE6; /* Blanco cálido/crema */
-            --accent-color: rgba(255, 158, 100, 0.12); /* Luz durazno del orbe */
-            --nav-bg: rgba(18, 18, 22, 0.7);
-            --card-border: rgba(244, 239, 230, 0.08); 
-            --card-hover-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            --noise-opacity: 0.15; /* Grano fotográfico visible */
+            /* MODO OSCURO: Ocaso Cósmico */
+            --bg-color: #111114; 
+            --text-color: #9C978D; 
+            --title-color: #F4EFE6; 
+            --accent-color: rgba(255, 158, 100, 0.1); 
+            --nav-bg: rgba(17, 17, 20, 0.85);
+            --card-border: rgba(244, 239, 230, 0.15); 
+            --noise-opacity: 0.16; 
             --progress-color: #FF9E64; 
             --pulse-color: rgba(255, 158, 100, 0.25);
-            --particles-opacity: 0.5;
+            --particles-opacity: 0.4;
             --btn-gradient: linear-gradient(135deg, #FF9E64, #B4A5D1);
+            --editorial-line: 1px solid rgba(244, 239, 230, 0.15);
         }
 
         [data-theme="light"] {
-            /* MODO CLARO: Alba Cinematográfica (Papel Fotográfico) */
-            --bg-color: #E8E3D8; /* Pergamino cálido */
+            /* MODO CLARO: Alba Cinematográfica */
+            --bg-color: #E6E2D6; 
             --text-color: #5A554C; 
-            --title-color: #2A2824;
-            --accent-color: rgba(232, 122, 93, 0.12); 
-            --nav-bg: rgba(232, 227, 216, 0.7);
-            --card-border: rgba(42, 40, 36, 0.12); 
-            --card-hover-shadow: 0 20px 50px rgba(42, 40, 36, 0.08);
+            --title-color: #262420;
+            --accent-color: rgba(232, 122, 93, 0.1); 
+            --nav-bg: rgba(230, 226, 214, 0.85);
+            --card-border: rgba(38, 36, 32, 0.2); 
             --noise-opacity: 0.18; 
             --progress-color: #E87A5D; 
             --pulse-color: rgba(232, 122, 93, 0.25);
             --particles-opacity: 0.3;
             --btn-gradient: linear-gradient(135deg, #E87A5D, #8EA3C2);
+            --editorial-line: 1px solid rgba(38, 36, 32, 0.2);
         }
 
-        body, nav, header, section, footer, div, h1, h2, h3, p, button { transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease; }
+        body, nav, header, section, footer, div, h1, h2, h3, p, button { transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -70,232 +69,216 @@
             font-weight: 300; 
             line-height: 1.7; 
             overflow-x: hidden; 
-            position: relative; 
-            width: 100%; 
-            /* Resplandor del atardecer difuminado de fondo */
-            background-image: radial-gradient(circle at 50% 10%, var(--accent-color) 0%, transparent 60%);
+            background-image: radial-gradient(circle at 50% 15%, var(--accent-color) 0%, transparent 60%);
             background-attachment: fixed;
         }
 
-        #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: var(--particles-opacity); transition: opacity 1s ease; pointer-events: auto; }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: var(--particles-opacity); pointer-events: auto; }
 
-        /* EFECTO LENTE DE CÁMARA: Viñeta negra difuminada + Granulado de Película */
+        /* LENTE ANALÓGICA: Viñeta + Grano (Cine Real) */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9997;
-            box-shadow: inset 0 0 12vw rgba(0,0,0,0.5); /* Viñeta */
+            box-shadow: inset 0 0 15vw rgba(0,0,0,0.5); 
         }
         body::after {
-            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; opacity: var(--noise-opacity); transition: opacity 0.7s ease; mix-blend-mode: overlay;
-            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; opacity: var(--noise-opacity); mix-blend-mode: overlay;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); border-left: var(--editorial-line); }
+        ::-webkit-scrollbar-thumb { background: var(--title-color); }
         
-        /* TIPOGRAFÍA DE LOS TÍTULOS (Estilo Póster) */
-        h1, h2, h3, .nav-brand { font-family: 'Clash Display', sans-serif; font-weight: 600; color: var(--title-color); letter-spacing: 1px; }
+        /* TIPOGRAFÍA DE CINE */
+        h1, h2, h3, .nav-brand { font-family: 'Clash Display', sans-serif; font-weight: 600; color: var(--title-color); letter-spacing: 1px; text-transform: uppercase; }
+        .metadata { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--progress-color); }
 
         /* =========================================
            2. PANTALLA CINEMÁTICA Y NAVBAR
            ========================================= */
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 100000; display: flex; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s; }
-        .preloader-text { font-family: 'Clash Display', sans-serif; font-size: clamp(1.2rem, 3.5vw, 1.8rem); color: var(--title-color); letter-spacing: 4px; animation: pulse-glow 2.5s infinite; text-align: center; text-transform: uppercase; padding: 30px; }
-        @keyframes pulse-glow { 0%, 100% { opacity: 0.3; filter: blur(1px); } 50% { opacity: 1; filter: blur(0); text-shadow: 0 0 20px var(--progress-color); } }
+        .preloader-text { font-family: 'Clash Display', sans-serif; font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--title-color); letter-spacing: 8px; animation: pulse-glow 2.5s infinite; text-transform: uppercase; }
+        @keyframes pulse-glow { 0%, 100% { opacity: 0.3; filter: blur(2px); } 50% { opacity: 1; filter: blur(0); text-shadow: 0 0 20px var(--progress-color); } }
         .preloader-hidden { opacity: 0 !important; visibility: hidden !important; }
 
-        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--btn-gradient); z-index: 100001; }
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--title-color); z-index: 100001; }
 
-        .navbar { position: fixed; top: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); z-index: 9999; transition: transform 0.5s ease; }
+        .navbar { position: fixed; top: 0; width: 100%; padding: 25px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: var(--editorial-line); z-index: 9999; transition: transform 0.5s ease; }
         .navbar.nav-hidden { transform: translateY(-100%); }
-        .nav-brand { font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase; }
-        @media (min-width: 600px) { .navbar { padding: 20px 40px; } }
+        .nav-brand { font-size: 1.3rem; letter-spacing: 6px; }
 
-        .theme-btn { background: transparent; color: var(--title-color); border: 1px solid var(--card-border); padding: 8px 16px; font-family: 'Outfit', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 30px; display: flex; align-items: center; gap: 8px; transition: 0.4s; }
-        .theme-btn:hover { border-color: var(--progress-color); color: var(--progress-color); }
+        .theme-btn { background: transparent; color: var(--title-color); border: 1px solid var(--title-color); padding: 6px 14px; font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s; border-radius: 2px; }
+        .theme-btn:hover { background: var(--title-color); color: var(--bg-color); }
 
         /* =========================================
-           3. HERO Y FRASES (Logotipo Ensanchado)
+           3. HERO EXACTO AL RENDER
            ========================================= */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; position: relative; z-index: 10; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; z-index: 10; position: relative; }
         
         .hero h1 { 
-            font-size: clamp(3rem, 10vw, 8rem); 
-            letter-spacing: 0.08em; 
-            margin-bottom: 15px; 
-            text-transform: uppercase; 
-            transform: scaleX(1.05); /* Proporción retro del render */
-            line-height: 0.9;
+            font-size: clamp(4rem, 15vw, 11rem); 
+            letter-spacing: 0.05em; 
+            margin-bottom: 0; 
+            transform: scaleX(1.1); /* Ancho retro */
+            line-height: 1;
         }
         
-        .hero p { font-size: 1.1rem; opacity: 0.8; max-width: 600px; letter-spacing: 2px; text-transform: uppercase; }
+        .subtitle-hero { 
+            font-family: 'Outfit', sans-serif; 
+            letter-spacing: 0.6em; 
+            text-transform: uppercase; 
+            font-size: clamp(0.7rem, 2vw, 1.2rem); 
+            color: var(--title-color); 
+            margin-right: -0.6em; /* Corrección óptica del tracking */
+        }
 
-        .quote-section { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; border-bottom: 1px solid var(--card-border); }
-        .quote-text { font-family: 'Outfit', sans-serif; font-weight: 300; font-size: clamp(1.6rem, 4vw, 2.8rem); color: var(--title-color); max-width: 850px; line-height: 1.3; margin-bottom: 25px; }
-        .quote-author { font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; color: var(--progress-color); }
+        .quote-section { min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; border-bottom: var(--editorial-line); }
+        .quote-text { font-family: 'Outfit', sans-serif; font-weight: 300; font-size: clamp(1.8rem, 4vw, 3.2rem); color: var(--title-color); max-width: 900px; line-height: 1.2; margin-bottom: 30px; }
+        .quote-author { font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-color); border: 1px solid var(--card-border); padding: 4px 12px; }
 
         /* =========================================
-           4. SECCIONES Y CUADRÍCULAS GENERALES
+           4. ACOMODO EDITORIAL (Geometría afilada)
            ========================================= */
-        .materials-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--card-border); }
+        .materials-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: var(--editorial-line); }
         section.portfolio-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
         
-        .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
+        .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0; margin-top: 60px; border: var(--editorial-line); }
         
-        .pilar-card { position: relative; overflow: hidden; padding: 50px 40px; border: 1px solid var(--card-border); border-radius: 12px; text-align: left; background: rgba(255,255,255,0.01); backdrop-filter: blur(10px); transition: transform 0.4s, box-shadow 0.4s; }
-        [data-theme="light"] .pilar-card { background: rgba(0,0,0,0.02); }
-        .pilar-card:hover { transform: translateY(-5px); box-shadow: var(--card-hover-shadow); border-color: rgba(255,158,100,0.2); }
-        
-        /* Resplandor del cursor (Original tuyo adaptado a los colores) */
-        .pilar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-color), transparent 40%); opacity: 0; transition: opacity 0.5s; }
-        .pilar-card:hover::before { opacity: 1; }
-        .pilar-card > * { position: relative; z-index: 1; }
+        /* Cajas afiladas estilo revista/galería */
+        .pilar-card { padding: 60px 40px; border-right: var(--editorial-line); text-align: left; background: transparent; transition: background 0.4s; position: relative; }
+        .pilar-card:last-child { border-right: none; }
+        .pilar-card:hover { background: rgba(255,255,255,0.02); }
+        [data-theme="light"] .pilar-card:hover { background: rgba(0,0,0,0.02); }
 
-        .pilar-icon { margin-bottom: 25px; color: var(--progress-color); }
-        .pilar-card h3 { font-size: 1.6rem; margin-bottom: 15px; letter-spacing: 1px; }
-        .pilar-card p { font-size: 1.05rem; opacity: 0.85; }
+        .pilar-icon { margin-bottom: 30px; color: var(--progress-color); stroke-width: 1.5; }
+        .pilar-card h3 { font-size: 1.4rem; margin-bottom: 15px; }
+        .pilar-card p { font-size: 1rem; opacity: 0.8; line-height: 1.8; }
 
-        h2.section-title { font-size: 2.2rem; letter-spacing: 3px; margin-bottom: 80px; text-align: center; text-transform: uppercase; padding-bottom: 30px; border-bottom: 1px solid var(--card-border); }
+        h2.section-title { font-size: 2.2rem; letter-spacing: 4px; margin-bottom: 20px; text-align: center; }
+        .section-desc { text-align: center; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 80px; }
 
-        .section-divider { margin: 100px 0 60px 0; text-align: center; }
-        .section-divider h2 { font-size: 2rem; letter-spacing: 2px; text-transform: uppercase; color: var(--title-color); display: inline-block; padding-bottom: 15px; border-bottom: 1px solid var(--card-border); }
-        .section-divider span { display: block; font-size: 0.8rem; letter-spacing: 4px; color: var(--progress-color); margin-bottom: 5px; text-transform: uppercase; }
+        .section-divider { margin: 140px 0 80px 0; text-align: left; display: flex; flex-direction: column; border-top: 2px solid var(--title-color); padding-top: 15px; }
+        .section-divider h2 { font-size: 2.5rem; letter-spacing: 2px; color: var(--title-color); margin: 0; }
+        .section-divider span { font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 4px; color: var(--progress-color); }
 
-        .collection-grid { display: flex; flex-direction: column; gap: 40px; margin-bottom: 120px; align-items: center; width: 100%; }
+        .collection-grid { display: flex; flex-direction: column; gap: 60px; margin-bottom: 140px; align-items: center; width: 100%; }
         
         @media (min-width: 900px) {
-            .collection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; margin-bottom: 140px;}
+            .collection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; margin-bottom: 180px; align-items: stretch;}
             .collection-grid:nth-child(even) .img-container, 
             .collection-grid:nth-child(even) .carousel-wrapper, 
-            .collection-grid:nth-child(even) .nfc-wrapper,
             .collection-grid:nth-child(even) .feature-wrapper { order: 2; }
             .collection-grid:nth-child(even) .text-container { order: 1; }
         }
 
-        .text-container { width: 100%; }
-        .text-container h3 { font-size: 2.4rem; margin-bottom: 15px; letter-spacing: 1px; line-height: 1.1; }
-        .text-container p { margin-bottom: 18px; font-size: 1.05rem; opacity: 0.9; }
+        .text-container { display: flex; flex-direction: column; justify-content: center; }
+        .text-container h3 { font-size: 2.5rem; margin-bottom: 20px; line-height: 1; }
+        .text-container p { margin-bottom: 20px; font-size: 1.1rem; opacity: 0.8; }
 
-        /* Botón de compra retro-elegante */
-        .price-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--btn-gradient); color: #111; padding: 12px 24px; font-size: 0.9rem; font-weight: 600; border-radius: 40px; margin-top: 10px; letter-spacing: 1px; font-family: 'Outfit', sans-serif; text-transform: uppercase; cursor: pointer; border: none; outline: none; transition: transform 0.4s, box-shadow 0.4s; box-shadow: 0 10px 25px rgba(255,158,100,0.15); }
-        .price-badge:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(255,158,100,0.3); filter: brightness(1.1); }
-        .price-badge:active { transform: translateY(1px); }
+        /* Botón de compra editorial */
+        .price-badge { align-self: flex-start; background: transparent; color: var(--title-color); padding: 12px 24px; font-size: 0.85rem; border: 1px solid var(--title-color); margin-top: 10px; font-family: 'Space Mono', monospace; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 2px; }
+        .price-badge:hover { background: var(--title-color); color: var(--bg-color); }
 
-        .price-strike { text-decoration: line-through; opacity: 0.6; margin-left: 8px; font-weight: 300; }
-        .price-sizes { font-size: 0.85rem; margin-top: 15px; opacity: 0.7; line-height: 1.6; border-left: 1px solid var(--progress-color); padding-left: 15px; }
-        .price-digital { margin-top: 10px; color: var(--progress-color); font-weight: 500; font-size: 0.9rem; }
-        .badge-soon { background: transparent; border: 1px solid var(--progress-color); color: var(--progress-color); padding: 4px 12px; font-size: 0.7rem; border-radius: 20px; display: inline-block; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; }
+        .price-strike { text-decoration: line-through; opacity: 0.5; margin-left: 10px; }
+        .price-sizes { font-family: 'Space Mono', monospace; font-size: 0.75rem; margin-top: 20px; opacity: 0.6; line-height: 1.8; text-transform: uppercase; }
+        .badge-soon { background: var(--title-color); color: var(--bg-color); padding: 4px 12px; font-family: 'Space Mono', monospace; font-size: 0.7rem; display: inline-block; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
 
+        /* IMÁGENES: ESTILO MARCO FOTOGRÁFICO REAL */
         .carousel-wrapper { width: 100%; position: relative; overflow: hidden; }
-        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; padding-bottom: 15px; }
+        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; }
         .carousel::-webkit-scrollbar { display: none; }
         .carousel-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; width: 100%; }
         
-        .img-container { width: 100%; border: 1px solid var(--card-border); border-radius: 8px; position: relative; overflow: hidden; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        .img-square { height: auto; width: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        /* Tinte cálido nostálgico para las imágenes */
-        .img-square img { object-fit: contain; width: 100%; height: 100%; transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); filter: contrast(1.05) sepia(0.08); }
-        .img-square:hover img { transform: scale(1.05); }
+        .img-container { width: 100%; border: 1px solid var(--card-border); padding: 15px; background: var(--bg-color); position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border-radius: 2px; }
+        .img-square { height: auto; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border: 1px solid var(--card-border); }
+        .img-square img { object-fit: contain; width: 100%; height: 100%; filter: contrast(1.1) sepia(0.1); transition: transform 2s ease; }
+        .img-square:hover img { transform: scale(1.03); }
 
-        .slide-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(18,18,22,0.8); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 30px; border: 1px solid var(--card-border); font-family: 'Clash Display', sans-serif; color: #F4EFE6; font-size: 0.8rem; letter-spacing: 2px; white-space: nowrap; pointer-events: none; text-transform: uppercase; }
-        [data-theme="light"] .slide-caption { background: rgba(232, 227, 216, 0.8); color: #2A2824; }
-        .swipe-indicator { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; font-size: 0.75rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; }
+        .slide-caption { margin-top: 15px; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-color); letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+        .swipe-indicator { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-color); }
 
         /* =========================================
-           5. REPRODUCTOR DE AUDIO REAL
+           5. REPRODUCTOR DE AUDIO (Diseño Industrial)
            ========================================= */
-        .audio-player-wrapper { margin-top: 30px; padding: 40px 30px 30px 30px; border: 1px solid var(--card-border); border-radius: 12px; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); position: relative; display: flex; flex-direction: column; align-items: center; transition: 0.8s; }
-        [data-theme="light"] .audio-player-wrapper { background: rgba(0,0,0,0.02); }
+        .audio-player-wrapper { margin-top: 30px; padding: 30px; border: 1px solid var(--card-border); background: rgba(0,0,0,0.1); position: relative; border-radius: 2px; }
         
-        .waveform-wrapper { width: 100%; height: 80px; position: relative; display: block; margin-bottom: 15px; }
-        #waveform-real { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+        .audio-header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 20px; }
         
-        .play-btn-custom { background: var(--btn-gradient); border: none; border-radius: 50%; width: 55px; height: 55px; cursor: pointer; display: flex; justify-content: center; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; transition: transform 0.4s, box-shadow 0.4s; box-shadow: 0 10px 20px var(--accent-color); }
-        .play-btn-custom:hover { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 15px 30px var(--accent-color); }
-        .play-btn-custom svg { fill: #111; width: 20px; height: 20px; margin-left: 2px; }
+        .waveform-wrapper { width: 100%; height: 60px; margin-bottom: 20px; }
+        #waveform-real { width: 100%; height: 100%; }
+        
+        .play-controls { display: flex; align-items: center; gap: 15px; }
+        .play-btn-custom { background: transparent; border: 1px solid var(--title-color); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
+        .play-btn-custom:hover { background: var(--title-color); }
+        .play-btn-custom:hover svg { fill: var(--bg-color); }
+        .play-btn-custom svg { fill: var(--title-color); width: 16px; transition: 0.3s; }
 
-        .feature-wrapper { position: relative; padding: 60px 40px; border: 1px solid var(--card-border); border-radius: 12px; background: radial-gradient(circle at center, var(--accent-color), transparent); text-align: center; overflow: hidden; width: 100%; }
-        .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px; border-radius: 50%; background: var(--btn-gradient); opacity: 0.15; filter: blur(25px); animation: nfc-wave 3s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; }
-        @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.1; } 100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0.3; } }
+        /* Módulo NFC Cinetográfico */
+        .feature-wrapper { padding: 60px 40px; border: 1px solid var(--card-border); background: transparent; text-align: center; position: relative; overflow: hidden; border-radius: 2px; }
+        .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; border-radius: 50%; background: var(--brand-gradient); opacity: 0.1; filter: blur(30px); animation: nfc-wave 4s infinite alternate; }
+        @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.05; } 100% { transform: translate(-50%, -50%) scale(2); opacity: 0.2; } }
 
         /* =========================================
            6. ACORDEÓN DE PREGUNTAS FRECUENTES
            ========================================= */
-        .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 120px; border-bottom: 1px solid var(--card-border); }
-        .faq-container { display: flex; flex-direction: column; gap: 20px; }
-        .faq-item { border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.02); transition: 0.5s; }
-        [data-theme="light"] .faq-item { background: rgba(0,0,0,0.02); }
-        .faq-item:hover { border-color: rgba(255,255,255,0.1); }
+        .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 120px; }
+        .faq-item { border-bottom: var(--editorial-line); }
+        .faq-question { width: 100%; text-align: left; padding: 25px 0; background: transparent; border: none; color: var(--title-color); font-family: 'Clash Display', sans-serif; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; letter-spacing: 1px; }
+        .faq-icon { transition: transform 0.4s ease; color: var(--text-color); }
+        .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--progress-color); }
         
-        .faq-question { width: 100%; text-align: left; padding: 25px 30px; background: transparent; border: none; color: var(--title-color); font-family: 'Clash Display', sans-serif; font-size: 1.15rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; outline: none; letter-spacing: 1px; }
-        .faq-icon { transition: transform 0.4s ease; color: var(--progress-color); }
-        .faq-item.active .faq-icon { transform: rotate(180deg); }
-        
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 30px; font-size: 1rem; color: var(--text-color); opacity: 0.9; }
-        .faq-item.active .faq-answer { max-height: 400px; padding: 0 30px 30px 30px; }
-        .faq-answer p { margin-bottom: 12px; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0; font-size: 1rem; color: var(--text-color); }
+        .faq-item.active .faq-answer { max-height: 400px; padding-bottom: 25px; }
 
         /* =========================================
            7. FOOTER Y LOGÍSTICA
            ========================================= */
-        footer { text-align: center; padding: 120px 20px 40px 20px; width: 100%; }
-        .btn-group { display: flex; flex-direction: column; gap: 20px; align-items: center; margin: 40px 0 60px 0; width: 100%; }
-        @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 25px; } }
+        footer { text-align: center; padding: 100px 20px 40px 20px; border-top: var(--editorial-line); }
+        .btn-group { display: flex; flex-direction: column; gap: 20px; align-items: center; margin: 40px 0; }
+        @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; } }
 
-        .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 18px 35px; text-decoration: none; border-radius: 40px; font-size: 0.85rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; width: 100%; max-width: 300px; transition: 0.4s; font-family: 'Outfit', sans-serif; }
-        .primary { background: var(--title-color); color: var(--bg-color); border: 1px solid var(--title-color); }
-        .secondary { border: 1px solid var(--card-border); color: var(--title-color); }
-        .primary:hover { background: var(--btn-gradient); color: #111; border-color: transparent; transform: translateY(-3px); box-shadow: 0 10px 25px var(--accent-color); }
-        .secondary:hover { border-color: var(--title-color); transform: translateY(-3px); }
+        .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 30px; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; width: 100%; max-width: 300px; border: 1px solid var(--title-color); transition: 0.3s; border-radius: 2px; }
+        .primary { background: var(--title-color); color: var(--bg-color); }
+        .secondary { background: transparent; color: var(--title-color); }
+        .primary:hover { background: transparent; color: var(--title-color); }
+        .secondary:hover { background: var(--title-color); color: var(--bg-color); }
 
-        .delivery-info { display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center; margin: 50px auto 70px auto; max-width: 750px; padding-top: 50px; border-top: 1px solid var(--card-border); text-align: center; }
-        @media (min-width: 600px) { .delivery-info { flex-direction: row; gap: 50px; align-items: flex-start; text-align: left; } }
+        .delivery-info { display: flex; flex-direction: column; gap: 40px; margin: 60px auto; max-width: 800px; text-align: center; }
+        @media (min-width: 600px) { .delivery-info { flex-direction: row; text-align: left; } }
         
-        .delivery-item { display: flex; flex-direction: column; align-items: center; gap: 15px; flex: 1; }
-        @media (min-width: 600px) { .delivery-item { flex-direction: row; align-items: flex-start; } }
-        
-        .delivery-item h4 { font-family: 'Clash Display', sans-serif; font-size: 1.2rem; color: var(--title-color); margin-bottom: 5px; letter-spacing: 1px; }
-        .delivery-item p { font-size: 0.95rem; opacity: 0.8; line-height: 1.6; margin: 0; }
-        .delivery-item a { color: var(--progress-color); text-decoration: underline; transition: opacity 0.3s; text-underline-offset: 4px; }
-        .delivery-item a:hover { opacity: 0.7; }
-        .delivery-icon { color: var(--progress-color); margin-top: 3px; }
+        .delivery-item { flex: 1; border: var(--editorial-line); padding: 30px; border-radius: 2px; }
+        .delivery-item h4 { font-family: 'Space Mono', monospace; font-size: 0.9rem; color: var(--title-color); margin-bottom: 10px; }
+        .delivery-item p { font-size: 0.9rem; opacity: 0.8; margin: 0; }
+        .delivery-item a { color: var(--progress-color); text-decoration: underline; text-underline-offset: 3px; }
 
-        .micro-footer { padding-top: 50px; border-top: 1px solid var(--card-border); font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 15px; align-items: center; letter-spacing: 1px; }
-        .legal-links { display: flex; gap: 20px; align-items: center; }
-        .legal-links button { background: none; border: none; color: var(--text-color); font-size: 0.8rem; cursor: pointer; transition: color 0.3s; font-family: 'Outfit', sans-serif; text-decoration: underline; text-underline-offset: 4px; }
-        .legal-links button:hover { color: var(--progress-color); }
-        .made-in { font-family: 'Clash Display', sans-serif; font-size: 1rem; color: var(--title-color); margin-top: 10px; letter-spacing: 2px; }
+        .micro-footer { padding-top: 40px; border-top: var(--editorial-line); font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-color); display: flex; flex-direction: column; gap: 15px; align-items: center; letter-spacing: 1px; text-transform: uppercase; }
+        .legal-links { display: flex; gap: 20px; }
+        .legal-links button { background: none; border: none; color: inherit; font-family: inherit; font-size: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+        .legal-links button:hover { color: var(--title-color); }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 100002; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); backdrop-filter: blur(5px); z-index: 100002; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.4s; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: var(--bg-color); border: 1px solid var(--card-border); border-radius: 16px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 50px 40px; position: relative; transform: translateY(30px); transition: transform 0.4s ease; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .modal-content { background: var(--bg-color); border: 1px solid var(--card-border); width: 90%; max-width: 600px; padding: 50px 40px; position: relative; transform: translateY(20px); transition: 0.4s; border-radius: 2px; }
         .modal-overlay.active .modal-content { transform: translateY(0); }
-        .modal-close { position: absolute; top: 25px; right: 25px; background: transparent; border: none; color: var(--title-color); cursor: pointer; transition: transform 0.4s; }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: var(--title-color); cursor: pointer; transition: 0.3s; }
         .modal-close:hover { transform: rotate(90deg); color: var(--progress-color); }
-        .modal-content h3 { font-size: 2rem; margin-bottom: 25px; border-bottom: 1px solid var(--card-border); padding-bottom: 20px; font-family: 'Clash Display', sans-serif; }
-        .modal-content p { font-size: 1rem; margin-bottom: 18px; line-height: 1.7; }
+        .modal-content h3 { font-size: 2rem; margin-bottom: 25px; border-bottom: var(--editorial-line); padding-bottom: 15px; }
 
-        .fade-in { opacity: 0; transform: translateY(30px); transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* =========================================
            8. OPTIMIZACIÓN MÓVIL
            ========================================= */
         @media (max-width: 768px) {
-            .materials-section, section.portfolio-section { padding: 80px 20px; }
-            h2.section-title { font-size: 1.8rem; margin-bottom: 40px; }
-            .section-divider { margin: 80px 0 50px 0; }
-            .section-divider h2 { font-size: 1.6rem; }
+            .hero h1 { font-size: clamp(3rem, 18vw, 6rem); transform: scaleX(1); }
+            .subtitle-hero { letter-spacing: 0.4em; }
+            .pilares-grid { border: none; gap: 20px; }
+            .pilar-card { border: var(--editorial-line); padding: 30px; }
+            .section-divider { margin: 80px 0 40px 0; border-top: none; padding-top: 0; }
+            .section-divider h2 { font-size: 2rem; border-bottom: 2px solid var(--title-color); padding-bottom: 10px; }
             .collection-grid { gap: 40px; margin-bottom: 80px; }
             .text-container h3 { font-size: 2rem; }
-            .price-badge { font-size: 0.8rem; padding: 12px 22px; }
-            .feature-wrapper { padding: 50px 25px; }
-            .pilares-grid { margin-top: 40px; gap: 25px; }
-            .pilar-card { padding: 40px 30px; }
-            .faq-section { padding-bottom: 80px; }
-            footer { padding: 80px 20px 40px 20px; }
-            .btn-group { margin: 30px 0 40px 0; gap: 15px; }
-            .delivery-info { margin: 40px auto 50px auto; padding-top: 40px; gap: 30px; }
         }
     </style>
 </head>
@@ -303,82 +286,90 @@
 
     <div id="particles-js"></div>
     <div id="scroll-progress"></div>
-    <div id="preloader"><div class="preloader-text">La ciencia detrás de un sentimiento...</div></div>
+    
+    <div id="preloader"><div class="preloader-text">ETÉREO</div></div>
     
     <nav class="navbar" id="navbar">
-        <div class="nav-brand">Etéreo Lab</div>
-        <button class="theme-btn" id="theme-btn"><i data-lucide="moon" size="14"></i> Modo Oscuro</button>
+        <div class="nav-brand">ETÉREO</div>
+        <button class="theme-btn" id="theme-btn"><i data-lucide="sun" size="14"></i> MODO ALBA</button>
     </nav>
 
+    <!-- AQUÍ SE ELIMINA LA REFERENCIA A "LAB STUDIO" -->
     <header class="hero fade-in">
-        <h1>Etéreo Lab Studio</h1>
-        <p style="font-style: normal; opacity: 0.8; max-width: 600px; font-size: 1.1rem; margin-top: 20px;">La ciencia detrás de un sentimiento. Arte físico y digital manufacturado en Guadalajara.</p>
+        <h1>ETÉREO</h1>
+        <div class="subtitle-hero">A MINIMAL RETRO VISION</div>
     </header>
 
     <section class="quote-section fade-in">
-        <h2 class="quote-text">"No vendemos papel, posters ni marcos;<br> Diseñamos cápsulas del tiempo."</h2>
-        <p class="quote-author">— Etéreo Lab Studio</p>
+        <h2 class="quote-text">"No vendemos papel, posters ni marcos.<br> Diseñamos cápsulas del tiempo."</h2>
+        <p class="quote-author">Estudio Etéreo</p>
     </section>
 
     <!-- MANUFACTURA DE AUTOR -->
     <section class="materials-section fade-in">
-        <h2 class="section-title" style="border: none; margin-bottom: 10px;">Manufactura de Autor</h2>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">Cada pieza es ensamblada meticulosamente a mano, fusionando componentes físicos de alta calidad con tecnología imperceptible.</p>
+        <h2 class="section-title">Manufactura Física</h2>
+        <p class="section-desc">ENSAMBLAJE ARTESANAL / MATERIALES PREMIUM</p>
         <div class="pilares-grid">
             <div class="pilar-card">
-                <i data-lucide="image" size="28" class="pilar-icon"></i>
-                <h3>Impresión Premium</h3>
-                <p>Utilizamos Papel Fotográfico de Alta Densidad. Puedes elegir entre un acabado <strong>Glossy</strong> (para negros profundos y brillo estelar) o un acabado <strong>Mate</strong> sedoso que elimina los reflejos.</p>
+                <i data-lucide="image" size="32" class="pilar-icon"></i>
+                <h3>Impresión</h3>
+                <p>Papel Fotográfico de Alta Densidad. Acabado Mate sedoso que elimina los reflejos como un revelado de cuarto oscuro.</p>
             </div>
             <div class="pilar-card">
-                <i data-lucide="frame" size="28" class="pilar-icon"></i>
-                <h3>Enmarcado Minimalista</h3>
-                <p>Nuestras piezas se entregan listas para exhibir. Usamos un marco ligero de perfil delgado y cristal de nitidez estándar, protegiendo el papel sin robarle protagonismo al diseño.</p>
+                <i data-lucide="frame" size="32" class="pilar-icon"></i>
+                <h3>Enmarcado</h3>
+                <p>Perfil ligero, rígido y cristal estándar. Diseño estructurado para proteger el lienzo sin robar protagonismo.</p>
             </div>
             <div class="pilar-card">
-                <i data-lucide="package" size="28" class="pilar-icon"></i>
-                <h3>La Experiencia de Regalo</h3>
-                <p>Entregado en caja de microcorrugado kraft, envuelto en papel seda, cerrado con un distintivo listón y una tarjeta de instrucciones para revelar la magia del NFC.</p>
+                <i data-lucide="package" size="32" class="pilar-icon"></i>
+                <h3>Empaque</h3>
+                <p>Microcorrugado kraft, papel seda y lacre de cera. Una experiencia táctil y nostálgica desde el primer momento.</p>
             </div>
         </div>
     </section>
 
     <section class="portfolio-section">
         
-        <!-- DIVISOR LÍNEA I -->
         <div class="section-divider fade-in">
-            <span>Línea I</span>
+            <span class="metadata">LÍNEA I</span>
             <h2>Arte Enmarcado</h2>
         </div>
 
-        <!-- 1. COLECCIÓN SONORA (EL PRODUCTO ESTRELLA AL INICIO) -->
+        <!-- 1. COLECCIÓN SONORA -->
         <div class="collection-grid fade-in">
-            <div class="img-container img-square">
-                <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
+            <div class="img-container">
+                <div class="img-square"><img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy"></div>
+                <div class="slide-caption">FIG. 1 — ONDA SONORA</div>
             </div>
             <div class="text-container">
                 <h3>Colección Sonora</h3>
                 <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza de arte visual mediante el análisis algorítmico de sus frecuencias sonoras reales.</p>
-                <p>El latido de tu bebé en su ultrasonido, la voz de alguien que extrañas, el ladrido de tu mejor amigo o ese primer "Te amo". Ocultamos un microchip NFC en el lienzo; solo acerca tu celular al cuadro terminado y el audio original cobrará vida al instante a través de nuestro reproductor digital exclusivo en <strong>play.etereomx.com</strong>.</p>
                 
-                <!-- REPRODUCTOR WAVESURFER REAL -->
+                <!-- REPRODUCTOR DE AUDIO -->
                 <div class="audio-player-wrapper">
-                    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; opacity: 0.7; width: 100%; text-align: center;">Prueba el Escáner Digital</p>
+                    <div class="audio-header">
+                        <span class="metadata">ESCÁNER DIGITAL OCULTO</span>
+                        <span class="metadata">PLAY.ETEREOMX.COM</span>
+                    </div>
                     
                     <div class="waveform-wrapper">
                         <div id="waveform-real"></div>
+                    </div>
+                    
+                    <div class="play-controls">
                         <button class="play-btn-custom" id="custom-play-btn">
                             <svg class="icon-play" id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             <svg class="icon-pause" id="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
+                        <span class="metadata" id="audio-status-text">"La voz de tu memoria..."</span>
                     </div>
-                    
-                    <p id="audio-status-text" style="font-style: italic; color: var(--title-color); font-size: 0.95rem; margin-top: 15px;">"La voz de tu memoria..."</p>
                 </div>
 
-                <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
-                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
-                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución + Código QR) por <strong>$99 MXN</strong>.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Adquirir Edición $299 MXN</button>
+                <div class="price-sizes">
+                    FORMATO STUDIO (20X25) | GALERÍA (13X18) | ÍNTIMA (10X15).<br>
+                    VERSIÓN DIGITAL (ALTA RES + QR) POR $99 MXN.
+                </div>
             </div>
         </div>
 
@@ -387,63 +378,59 @@
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./mapa-clasico.jpg" alt="Mapa Estelar Minimalista" loading="lazy"></div>
-                        <div class="slide-caption">Minimalista Clásico</div>
+                        <div class="img-container">
+                            <div class="img-square"><img src="./mapa-clasico.jpg" alt="Mapa Estelar Minimalista" loading="lazy"></div>
+                            <div class="slide-caption">FIG. 2 — MINIMALISTA CLÁSICO</div>
+                        </div>
                     </div>
                     <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./mapa-cupula.jpg" alt="Mapa Estelar Cúpula" loading="lazy"></div>
-                        <div class="slide-caption">Diseño en Cúpula</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./fase-lunar.jpg" alt="Fases Lunares" loading="lazy"></div>
-                        <div class="slide-caption">Fases Lunares</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./alineacion-planetaria.jpg" alt="Alineación Planetaria" loading="lazy"></div>
-                        <div class="slide-caption">Alineación Planetaria</div>
+                        <div class="img-container">
+                            <div class="img-square"><img src="./mapa-cupula.jpg" alt="Mapa Estelar Cúpula" loading="lazy"></div>
+                            <div class="slide-caption">FIG. 3 — DISEÑO EN CÚPULA</div>
+                        </div>
                     </div>
                 </div>
-                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="12"></i> Desliza para explorar variantes</div>
+                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> DESLIZA PARA VARIANTES</div>
             </div>
             <div class="text-container">
-                <h3>Colección Astronómica</h3>
+                <h3>Col. Astronómica</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en el que tu vida cambió para siempre.</p>
-                <p>Desde el <strong>Minimalismo Clásico</strong> hasta nuestra <strong>Cúpula Superior</strong>, incluyendo la iluminación lunar y la alineación planetaria de ese día irrepetible.</p>
-                
-                <button class="price-badge whatsapp-trigger" data-product="Colección Astronómica">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
-                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
-                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución) por <strong>$99 MXN</strong>.</p>
+                <p>Desde el Minimalismo Clásico hasta la iluminación lunar y la alineación planetaria de ese día irrepetible.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Colección Astronómica">Adquirir Edición $299 MXN</button>
+                <div class="price-sizes">FORMATO STUDIO (20X25). VARIANTE DIGITAL: $99 MXN.</div>
             </div>
         </div>
 
         <!-- 3. COLECCIÓN TERRENAL -->
         <div class="collection-grid fade-in">
             <div class="text-container">
-                <h3>Colección Terrenal</h3>
+                <h3>Col. Terrenal</h3>
                 <p><strong>Geometría del Espacio:</strong> Inmortalizamos el lugar exacto o el recorrido donde sus caminos se cruzaron. Trazamos con extrema precisión las calles, avenidas y rutas de tu memoria.</p>
-                <p><strong>Tres cartografías:</strong> Póster Clásico (un punto exacto), Ruta Terrestre (el camino entre dos direcciones) o Vuelo a Distancia (amor sin fronteras).</p>
-                
-                <button class="price-badge whatsapp-trigger" data-product="Colección Terrenal">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
-                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
-                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución) por <strong>$99 MXN</strong>.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Colección Terrenal">Adquirir Edición $299 MXN</button>
+                <div class="price-sizes">FORMATO STUDIO (20X25). VARIANTE DIGITAL: $99 MXN.</div>
             </div>
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./mapa-clasico-geo.jpg" alt="Mapa Geográfico Clásico" loading="lazy"></div>
-                        <div class="slide-caption">Póster Clásico</div>
+                        <div class="img-container">
+                            <div class="img-square"><img src="./mapa-clasico-geo.jpg" alt="Mapa Geográfico Clásico" loading="lazy"></div>
+                            <div class="slide-caption">FIG. 4 — PÓSTER CLÁSICO</div>
+                        </div>
                     </div>
                     <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./ruta-terrestre.jpg" alt="Ruta Terrestre" loading="lazy"></div>
-                        <div class="slide-caption">Ruta Terrestre</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./vuelo-distancia.jpg" alt="Ruta de Vuelo" loading="lazy"></div>
-                        <div class="slide-caption">Vuelo a Distancia</div>
+                        <div class="img-container">
+                            <div class="img-square"><img src="./ruta-terrestre.jpg" alt="Ruta Terrestre" loading="lazy"></div>
+                            <div class="slide-caption">FIG. 5 — RUTA TERRESTRE</div>
+                        </div>
                     </div>
                 </div>
-                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="12"></i> Desliza para explorar variantes</div>
+                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> DESLIZA PARA VARIANTES</div>
             </div>
+        </div>
+
+        <div class="section-divider fade-in" style="margin-top: 150px;">
+            <span class="metadata">MÓDULO NFC</span>
+            <h2>Tecnología Oculta</h2>
         </div>
 
         <!-- 4. LA DIMENSIÓN OCULTA (NFC) -->
@@ -451,176 +438,143 @@
             <div class="feature-wrapper">
                 <div class="nfc-pulse"></div>
                 <i data-lucide="smartphone-nfc" size="64" style="color: var(--title-color); position: relative; z-index: 2; margin-bottom: 20px;"></i>
-                <h4 style="font-size: 1.2rem; margin-bottom: 10px; position: relative; z-index: 2;">Tecnología NFC Integrada</h4>
-                <p style="font-size: 0.9rem; position: relative; z-index: 2; opacity: 0.8;">Incluido sin costo extra en todas las piezas físicas.</p>
+                <h4 style="font-size: 1.4rem; margin-bottom: 5px; position: relative; z-index: 2;">El Microchip Pasivo</h4>
             </div>
             <div class="text-container">
-                <h3>La Dimensión Oculta</h3>
-                <p>La personalización no termina en el papel. <strong>Todas las piezas físicas de Arte Enmarcado</strong> se convierten en un portal digital inmersivo.</p>
-                <p>Ocultamos bajo el lienzo un microchip NFC pasivo. Solo necesitas acercar tu celular desbloqueado al marco de tu cuadro y la memoria cobrará vida al instante: abriendo una canción especial, un video en la nube, o tu Colección Sonora.</p>
+                <h3>Dimensión Digital</h3>
+                <p>La personalización no termina en el papel. Todas las piezas físicas albergan tecnología invisible incluida sin costo.</p>
+                <p>Ocultamos bajo el lienzo un microchip NFC. Sin apps ni baterías; solo acerca tu celular desbloqueado al marco de tu cuadro y la memoria cobrará vida al instante en tu pantalla.</p>
             </div>
         </div>
 
-        <!-- 5. EL EMPAQUE (VISUAL) -->
-        <div class="collection-grid fade-in">
-            <div class="text-container">
-                <h3>El Ritual de Apertura</h3>
-                <p>No entregamos un simple paquete, entregamos una experiencia diseñada para sorprender. Cada cápsula del tiempo viaja completamente protegida y lista para regalar.</p>
-                <p>Nuestra caja de microcorrugado kraft envuelve tu pieza en papel seda, sellada a mano con nuestro distintivo lacre de cera. Incluye una tarjeta de instrucciones para revelar la magia de la dimensión oculta al instante.</p>
-            </div>
-            <div class="img-container img-square">
-                <img src="./empaque.jpg" alt="Empaque Aesthetic Etéreo Lab Studio" loading="lazy">
-            </div>
-        </div>
-
-        <!-- DIVISOR LÍNEA II -->
         <div class="section-divider fade-in">
-            <span>Línea II</span>
+            <span class="metadata">LÍNEA II</span>
             <h2>Accesorios Inteligentes</h2>
         </div>
 
-        <!-- 6. PET ID -->
+        <!-- 5. PET ID -->
         <div class="collection-grid fade-in">
-            <div class="img-container img-square">
-                <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
+            <div class="img-container">
+                <div class="img-square"><img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy"></div>
+                <div class="slide-caption">FIG. 6 — SMART TAG</div>
             </div>
             <div class="text-container">
                 <h3>Pet ID Inteligente</h3>
-                <p>La seguridad de tu mejor amigo rediseñada bajo la estética minimalista de Etéreo Lab Studio.</p>
-                <p>Diseñamos placas de identificación de alta resistencia. Quien encuentre a tu mascota solo debe acercar su celular (NFC) o escanear el código (QR) para acceder a tu información de contacto al instante.</p>
-                <button class="price-badge whatsapp-trigger" data-product="Pet ID Inteligente">Desde $199 MXN</button>
+                <p>La seguridad de tu mejor amigo rediseñada bajo la estética minimalista de Etéreo.</p>
+                <p>Placas de identificación de alta resistencia. Quien encuentre a tu mascota solo debe acercar su celular (NFC) o escanear el código (QR) para acceder a tu información de contacto al instante.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Pet ID Inteligente">Personalizar $199 MXN</button>
             </div>
         </div>
 
-        <!-- DIVISOR LÍNEA III -->
         <div class="section-divider fade-in">
-            <span>Línea III</span>
+            <span class="metadata">LÍNEA III</span>
             <h2>Estudio Creativo</h2>
         </div>
 
-        <!-- 7. LIBRETAS ARTESANALES (PRÓXIMAMENTE) -->
+        <!-- 6. LIBRETAS ARTESANALES -->
         <div class="collection-grid fade-in" style="opacity: 0.6;">
             <div class="text-container">
-                <span class="badge-soon">Próximamente</span>
-                <h3>Encuadernación de Autor</h3>
+                <span class="badge-soon">PRÓXIMAMENTE</span>
+                <h3>Encuadernación</h3>
                 <p>Libretas y bitácoras ensambladas con estricto dominio artesanal. Papel de alta calidad, costuras expuestas y el toque Etéreo: tecnología NFC oculta en la contraportada para digitalizar tus notas o proteger tu diario con un candado virtual.</p>
             </div>
-            <div class="img-container img-square">
-                <img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(100%);">
+            <div class="img-container">
+                <div class="img-square"><img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(100%);"></div>
+                <div class="slide-caption">FIG. 7 — PROTO LIBRETA</div>
             </div>
         </div>
 
     </section>
 
-    <!-- ACORDEÓN DE PREGUNTAS FRECUENTES -->
+    <!-- FAQ -->
     <section class="faq-section fade-in">
-        <h2 class="section-title" style="border: none; margin-bottom: 40px;">Preguntas Frecuentes</h2>
+        <h2 class="section-title" style="border: none; margin-bottom: 60px;">Manual de Usuario</h2>
         <div class="faq-container">
             <div class="faq-item">
-                <button class="faq-question">¿De qué materiales están fabricados los cuadros? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Utilizamos papel fotográfico premium (Glossy o Mate) montado en un marco minimalista ligero con cristal de protección. Todo empacado meticulosamente con sellos de cera para una experiencia de regalo inolvidable.</p></div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">¿Cómo y cuándo se entregan los pedidos físicos en Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
+                <button class="faq-question">Logística de entregas (GDL) <i data-lucide="plus" class="faq-icon" size="20"></i></button>
                 <div class="faq-answer">
-                    <p>Contamos con dos modalidades seguras para la entrega de tu pieza:</p>
-                    <p><strong>1. Envío a Domicilio:</strong> Operamos nuestra logística exclusivamente a través de <em>Paquetería Casa Blanca</em> para garantizar la integridad del cristal. Los despachos se realizan todos los <strong>miércoles y sábados</strong>.</p>
-                    <p><strong>2. Recolección sin costo (Pick-Up):</strong> Puedes recoger tu cápsula directamente en nuestro punto de entrega aliado <strong>Ciberdragon</strong>. El horario de atención es de Lunes a Sábado de 10:30 AM a 8:00 PM.</p>
+                    <p><strong>Envío a Domicilio:</strong> Vía Paquetería Casa Blanca (Miércoles y Sábados).</p>
+                    <p><strong>Recolección Sin Costo:</strong> Punto aliado Ciberdragon (L-S 10:30 AM a 8:00 PM).</p>
                 </div>
             </div>
-
             <div class="faq-item">
-                <button class="faq-question">¿Puedo revisar el diseño antes de imprimir? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Sí, la exactitud es nuestro pilar. Antes de pasar a manufactura física (o enviarte la versión digital), te enviaremos una previsualización de tu diseño para tu autorización final.</p></div>
+                <button class="faq-question">Requisitos para leer el NFC <i data-lucide="plus" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>Cualquier smartphone moderno (iOS/Android) con tecnología NFC activa. No requiere baterías; solo acerca tu teléfono desbloqueado al marco.</p></div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">¿Qué requisitos necesita mi celular para leer el NFC? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Tu smartphone debe contar con tecnología NFC activa (estándar en dispositivos iOS y Android modernos). Nuestro microchip es pasivo, no requiere baterías ni instalar aplicaciones extra; solo acerca tu teléfono desbloqueado al marco de tu cuadro físico.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">¿Cuáles son los métodos de pago aceptados? <i data-lucide="chevron-down" class="faq-icon" size="20"></i></button>
-                <div class="faq-answer"><p>Aceptamos transferencias electrónicas interbancarias (SPEI), depósitos bancarios y pagos en efectivo al momento de coordinar el anticipo de tu orden.</p></div>
+                <button class="faq-question">Autorización de Diseño <i data-lucide="plus" class="faq-icon" size="20"></i></button>
+                <div class="faq-answer"><p>La exactitud es nuestro pilar. Antes de manufacturar, te enviaremos una previsualización de tu diseño para tu autorización final.</p></div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER CON BLOQUE LOGÍSTICO -->
     <footer class="fade-in">
-        <h3 style="font-size: 2rem; margin-bottom: 20px;">Enmarca tu historia</h3>
+        <h3 style="font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 20px;">ENMARCA TU HISTORIA</h3>
         
         <div class="btn-group">
-            <a href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo%20Lab.%20Vengo%20de%20etereomx.com%20y%20quiero%20enmarcar%20mi%20historia." class="cta-btn primary">
-                <i data-lucide="message-circle" size="18"></i> Contactar por WhatsApp
+            <a href="https://wa.me/523332227033?text=Hola%20Etéreo." class="cta-btn primary">
+                <i data-lucide="message-circle" size="18"></i> CONECTAR WHATSAPP
             </a>
             <a href="https://instagram.com/etereolabstudio" class="cta-btn secondary" target="_blank" id="ig-btn">
-                <i data-lucide="instagram" size="18"></i> Ver en Instagram
+                <i data-lucide="instagram" size="18"></i> VER EN INSTAGRAM
             </a>
         </div>
 
         <div class="delivery-info fade-in">
             <div class="delivery-item">
-                <i data-lucide="package" size="24" class="delivery-icon"></i>
-                <div>
-                    <h4>Envíos Locales Seguros</h4>
-                    <p>Vía Paquetería Casa Blanca.<br>Entregas los Miércoles y Sábados.</p>
-                </div>
+                <i data-lucide="package" size="24" class="pilar-icon"></i>
+                <h4>ENVÍOS LOCALES</h4>
+                <p>Vía Paquetería Casa Blanca.<br>Entregas Miércoles y Sábados.</p>
             </div>
             <div class="delivery-item">
-                <i data-lucide="map-pin" size="24" class="delivery-icon"></i>
-                <div>
-                    <h4>Pick-Up Gratuito</h4>
-                    <p>Recoge en <strong>Ciberdragon</strong> de 10:30am a 8:00pm.<br>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">Ver ubicación en el mapa</a></p>
-                </div>
+                <i data-lucide="map-pin" size="24" class="pilar-icon"></i>
+                <h4>PICK-UP GRATUITO</h4>
+                <p>Recoge en <strong>Ciberdragon</strong><br>
+                <a href="https://www.google.com/maps/search/?api=1&query=Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">VER MAPA</a></p>
             </div>
         </div>
 
         <div class="micro-footer">
-            <p>&copy; 2026 Etéreo Lab Studio. Todos los derechos reservados.</p>
+            <p>&copy; 2026 ESTUDIO ETÉREO. DERECHOS RESERVADOS.</p>
             <div class="legal-links">
-                <button onclick="openModal('modal-privacidad')">Aviso de Privacidad</button>
-                <span>|</span>
-                <button onclick="openModal('modal-terminos')">Términos y Condiciones</button>
+                <button onclick="openModal('modal-privacidad')">AVISO DE PRIVACIDAD</button>
+                <button onclick="openModal('modal-terminos')">TÉRMINOS Y CONDICIONES</button>
             </div>
-            <p class="made-in">Diseñado y manufacturado en Guadalajara, México.</p>
+            <p style="margin-top: 10px;">MANUFACTURADO EN GDL, MÉXICO.</p>
         </div>
     </footer>
 
-    <!-- VENTANAS MODALES -->
+    <!-- VENTANAS MODALES INTACTAS -->
     <div class="modal-overlay" id="modal-privacidad">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-privacidad')"><i data-lucide="x" size="24"></i></button>
-            <h3>Aviso de Privacidad</h3>
-            <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas, audios y ubicaciones geográficas que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tus piezas.</p>
-            <p>Tus memorias e información de contacto son tratadas con estricta confidencialidad. No almacenamos tus archivos en bases de datos públicas, ni comercializamos tu información con terceros.</p>
-            <p>Al utilizar nuestros servicios, aceptas que procesemos los datos necesarios para entregarte un producto preciso y personalizado.</p>
+            <h3 style="font-family: 'Clash Display';">Aviso de Privacidad</h3>
+            <p>En <strong>Estudio Etéreo</strong>, valoramos y protegemos tu privacidad. Los datos personales, audios y ubicaciones que compartes son exclusivos para la manufactura de tus piezas.</p>
         </div>
     </div>
 
     <div class="modal-overlay" id="modal-terminos">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-terminos')"><i data-lucide="x" size="24"></i></button>
-            <h3>Términos y Condiciones</h3>
-            <p><strong>1. Procesamiento de Pedidos:</strong> Cada pieza es diseñada de manera única. El proceso de manufactura (física o digital) comienza únicamente tras la recepción del anticipo o pago acordado.</p>
-            <p><strong>2. Revisiones de Diseño:</strong> Se proporcionará un (1) previo digital para tu revisión. Una vez aprobado, el diseño pasa a impresión o exportación final y no se aceptarán modificaciones.</p>
-            <p><strong>3. Políticas de Devolución:</strong> Dada la naturaleza 100% personalizada de nuestros productos, no se aceptan cambios ni devoluciones una vez que la pieza ha sido manufacturada o el archivo digital ha sido entregado.</p>
-            <p><strong>4. Tecnología NFC:</strong> Etéreo Lab Studio garantiza la funcionalidad del chip NFC al momento de la entrega de la pieza física. El usuario es responsable de contar con un dispositivo compatible para su lectura.</p>
+            <h3 style="font-family: 'Clash Display';">Términos y Condiciones</h3>
+            <p>El proceso comienza tras recibir el anticipo. Se otorgará una revisión digital. Al ser piezas personalizadas, no existen devoluciones tras la autorización.</p>
         </div>
     </div>
 
     <script>
         lucide.createIcons();
         window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1600);
+            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1200);
             initParticles();
         });
 
+        /* PARTÍCULAS: ESTILO POLVO FOTOGRÁFICO */
         function initParticles() {
             if (typeof particlesJS !== 'undefined') {
                 particlesJS('particles-js', {
-                    "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.4, "random": true }, "size": { "value": 2, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 0.5, "direction": "none", "random": true, "out_mode": "out" } },
-                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 3 } } },
+                    "particles": { "number": { "value": 40, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#F4EFE6" }, "shape": { "type": "circle" }, "opacity": { "value": 0.4, "random": true }, "size": { "value": 2, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 0.4, "direction": "top", "random": true, "out_mode": "out" } },
+                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true } },
                     "retina_detect": true
                 });
             }
@@ -634,14 +588,6 @@
             if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add('nav-hidden');
             else navbar.classList.remove('nav-hidden');
             lastScroll = currentScroll;
-        });
-
-        document.querySelectorAll('.pilar-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-            });
         });
 
         document.querySelectorAll('.faq-question').forEach(button => {
@@ -663,33 +609,30 @@
         });
 
         /* =========================================
-           LÓGICA DE BOTONES DE PRECIO (WhatsApp)
+           WHATSAPP (Intacto)
            ========================================= */
         document.querySelectorAll('.whatsapp-trigger').forEach(button => {
             button.addEventListener('click', function() {
-                if (navigator.vibrate) navigator.vibrate(50);
                 const productName = this.getAttribute('data-product');
-                const userAgrees = confirm(`¿Te interesa pedir este artículo u obtener más información sobre la ${productName}?\n\nSerás redirigido a nuestro WhatsApp.`);
+                const userAgrees = confirm(`¿Te interesa pedir o recibir información sobre la ${productName}?\n\nIremos a WhatsApp.`);
                 if(userAgrees) {
                     const phone = "523332227033";
-                    const message = encodeURIComponent(`Hola Etéreo Lab. Me interesa pedir un artículo u obtener más información sobre la ${productName}.`);
+                    const message = encodeURIComponent(`Hola Etéreo. Me interesa pedir o tener información de: ${productName}.`);
                     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
                 }
             });
         });
 
         /* =========================================
-           REPRODUCTOR WAVESURFER CON DISEÑO CUSTOM
+           REPRODUCTOR WAVESURFER
            ========================================= */
         const isDarkInitial = document.documentElement.getAttribute('data-theme') === 'dark';
         
         const wavesurfer = WaveSurfer.create({
             container: '#waveform-real',
-            waveColor: isDarkInitial ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
+            waveColor: isDarkInitial ? 'rgba(244, 239, 230, 0.2)' : 'rgba(42, 40, 36, 0.2)',
             progressColor: isDarkInitial ? '#FF9E64' : '#E87A5D',
-            barWidth: 3,
-            barRadius: 3,
-            height: 80,
+            barWidth: 3, barGap: 2, height: 60,
             url: './demo.mp3' 
         });
 
@@ -698,45 +641,44 @@
         const iconPause = document.getElementById('icon-pause');
         const audioStatusText = document.getElementById('audio-status-text');
 
-        customPlayBtn.addEventListener('click', () => {
-            if (navigator.vibrate) navigator.vibrate(50);
-            wavesurfer.playPause();
-        });
+        customPlayBtn.addEventListener('click', () => { wavesurfer.playPause(); });
 
         wavesurfer.on('play', () => {
             iconPlay.style.display = "none";
             iconPause.style.display = "block";
-            audioStatusText.innerHTML = '"Reproduciendo memoria..."';
+            audioStatusText.innerHTML = 'REPRODUCIENDO...';
+            audioStatusText.style.color = "var(--progress-color)";
         });
 
         wavesurfer.on('pause', () => {
             iconPlay.style.display = "block";
             iconPause.style.display = "none";
-            audioStatusText.innerHTML = '"Pausado..."';
+            audioStatusText.innerHTML = 'PAUSADO.';
+            audioStatusText.style.color = "var(--progress-color)";
         });
 
         wavesurfer.on('finish', () => {
             iconPlay.style.display = "block";
             iconPause.style.display = "none";
-            audioStatusText.innerHTML = '"Memoria finalizada..."';
+            audioStatusText.innerHTML = 'FINALIZADO.';
+            audioStatusText.style.color = "var(--progress-color)";
         });
 
         /* =========================================
-           BOTÓN DE TEMA OSCURO / CLARO
+           BOTÓN DE TEMA OSCURO / CLARO ORIGINAL
            ========================================= */
         const themeBtn = document.getElementById('theme-btn'); 
         const htmlElement = document.documentElement;
         
         themeBtn.addEventListener('click', () => {
-            if (navigator.vibrate) navigator.vibrate(50);
             const isLight = htmlElement.getAttribute('data-theme') === 'light';
             htmlElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
-            themeBtn.innerHTML = isLight ? '<i data-lucide="sun" size="14"></i> Modo Claro' : '<i data-lucide="moon" size="14"></i> Modo Oscuro';
+            themeBtn.innerHTML = isLight ? '<i data-lucide="sun" size="14"></i> MODO ALBA' : '<i data-lucide="moon" size="14"></i> MODO OCASO';
             lucide.createIcons();
             
             const newIsDark = !isLight;
             wavesurfer.setOptions({
-                waveColor: newIsDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
+                waveColor: newIsDark ? 'rgba(244, 239, 230, 0.2)' : 'rgba(42, 40, 36, 0.2)',
                 progressColor: newIsDark ? '#FF9E64' : '#E87A5D'
             });
         });
