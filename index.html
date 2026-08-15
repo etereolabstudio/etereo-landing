@@ -774,4 +774,780 @@
         setTimeout(lucide.createIcons, 2000);
     </script>
 </body>
+</html><!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Etéreo | Cápsulas del Tiempo</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <meta property="og:url" content="https://www.etereomx.com/">
+    <meta property="og:title" content="Etéreo">
+    <meta property="og:description" content="Cápsulas del tiempo, reveladas.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- SISTEMA TIPOGRÁFICO: Clash Display (wordmark) / Outfit (lectura) / Space Mono (sello de cámara) -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
+
+    <style>
+        /* =========================================
+           1. DIRECCIÓN DE ARTE — REVELADO ANALÓGICO 90s
+           Paleta extraída del ocaso: durazno / lavanda de bruma / crema
+           ========================================= */
+        :root {
+            /* OCASO (Dark) */
+            --bg-color: #121016;
+            --bg-raise: #18161D;
+            --text-color: #9B9488;
+            --title-color: #EDE6D6;
+            --nav-bg: rgba(18, 16, 22, 0.82);
+            --card-border: rgba(237, 230, 214, 0.10);
+
+            --accent: #DD8E5C;       /* durazno — el sol de la imagen */
+            --accent-soft: #8B84A3;  /* lavanda — la bruma */
+
+            --light-leak-1: rgba(221, 142, 92, 0.10);
+            --light-leak-2: rgba(139, 132, 163, 0.08);
+
+            --btn-bg: #EDE6D6;
+            --btn-text: #121016;
+            --film-grain: 0.13;
+            --gallery-frame: #EDE6D6;
+            --gallery-frame-text: rgba(18,16,22,0.5);
+        }
+
+        [data-theme="light"] {
+            /* ALBA (Light) */
+            --bg-color: #EAE3D3;
+            --bg-raise: #F2ECDF;
+            --text-color: #6B6459;
+            --title-color: #1B1912;
+            --nav-bg: rgba(234, 227, 211, 0.82);
+            --card-border: rgba(27, 25, 18, 0.12);
+
+            --accent: #C97440;
+            --accent-soft: #6E6688;
+
+            --light-leak-1: rgba(201, 116, 64, 0.10);
+            --light-leak-2: rgba(110, 102, 136, 0.08);
+
+            --btn-bg: #1B1912;
+            --btn-text: #EAE3D3;
+            --film-grain: 0.16;
+            --gallery-frame: #FAF8F2;
+            --gallery-frame-text: rgba(27,25,18,0.55);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 1s ease, color 1s ease;
+        }
+
+        /* LIGHT LEAKS + GRANO + VIÑETA — la textura de la foto de referencia */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -2;
+            background:
+                radial-gradient(ellipse 45% 35% at 78% 18%, var(--light-leak-1) 0%, transparent 65%),
+                radial-gradient(ellipse at -10% 115%, var(--light-leak-2) 0%, transparent 60%);
+            transition: background 1s ease;
+        }
+
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; opacity: var(--film-grain); mix-blend-mode: overlay;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            box-shadow: inset 0 0 12vw rgba(0,0,0,0.55);
+            transition: opacity 1s ease;
+        }
+
+        #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.25; pointer-events: auto; }
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+        h1, h2, h3, .nav-brand { font-family: 'Clash Display', sans-serif; font-weight: 600; color: var(--title-color); letter-spacing: 1px; text-transform: uppercase; transition: color 1s ease; }
+        .romantic-text { font-family: 'Playfair Display', serif; font-style: italic; color: var(--title-color); }
+
+        /* Fuente firma: el sello mono de cámara / timecode analógico */
+        .mono, .timestamp, .eyebrow { font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+        .eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); }
+
+        /* =========================================
+           2. NAVEGACIÓN
+           ========================================= */
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; transition: opacity 1s, visibility 1s; }
+        .preloader-text { font-family: 'Clash Display', sans-serif; font-size: clamp(1.2rem, 4vw, 2rem); color: var(--title-color); letter-spacing: 8px; animation: pulse-glow 3s infinite; text-transform: uppercase; }
+        .preloader-code { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 3px; }
+        @keyframes pulse-glow { 0%, 100% { opacity: 0.3; filter: blur(2px); } 50% { opacity: 1; filter: blur(0); } }
+        .preloader-hidden { opacity: 0 !important; visibility: hidden !important; }
+
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--accent); z-index: 100001; }
+
+        .navbar { position: fixed; top: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: 1px solid var(--card-border); z-index: 9999; transition: transform 0.5s ease; }
+        .navbar.nav-hidden { transform: translateY(-100%); }
+        .nav-brand { font-size: clamp(1rem, 2vw, 1.3rem); letter-spacing: 4px; }
+
+        .theme-btn { background: transparent; color: var(--title-color); border: 1px solid var(--card-border); padding: 6px 14px; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.4s; border-radius: 2px; }
+        .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* =========================================
+           3. HERO — FOTOGRAMA DE APERTURA
+           ========================================= */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; z-index: 10; position: relative; }
+
+        .hero-frame-mark { position: absolute; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; color: var(--text-color); opacity: 0.55; }
+        .hero-frame-mark.tl { top: 90px; left: 30px; }
+        .hero-frame-mark.br { bottom: 40px; right: 30px; text-align: right; }
+
+        .hero h1 {
+            font-size: clamp(3rem, 15vw, 10rem);
+            letter-spacing: 0.05em;
+            margin-bottom: 5px;
+            transform: scaleX(1.05);
+            line-height: 1;
+        }
+
+        .subtitle-hero {
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+            color: var(--accent);
+            margin-right: -0.5em;
+        }
+
+        .quote-section { min-height: 46vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); position: relative; }
+        .quote-text { font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(1.5rem, 5vw, 2.75rem); color: var(--title-color); max-width: 800px; line-height: 1.35; margin-bottom: 22px; }
+        .quote-author { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-color); }
+
+        /* =========================================
+           4. MANUFACTURA — LISTA EDITORIAL (no cajas)
+           ========================================= */
+        .materials-section { padding: 110px 20px 100px; max-width: 1100px; margin: 0 auto; }
+        .materials-head { text-align: center; max-width: 560px; margin: 0 auto 60px; }
+        .materials-head p { margin-top: 14px; font-size: 0.95rem; opacity: 0.85; }
+
+        .pilares-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+        .pilar-card { padding: 10px 34px; border-left: 1px solid var(--card-border); text-align: left; }
+        .pilar-card:first-child { border-left: none; padding-left: 0; }
+        .pilar-card .timestamp { display: block; font-size: 0.7rem; color: var(--accent); margin-bottom: 14px; }
+        .pilar-card h3 { font-size: 1.05rem; margin-bottom: 10px; letter-spacing: 1.5px; }
+        .pilar-card p { font-size: 0.9rem; opacity: 0.8; }
+
+        section.portfolio-section { padding: 0 20px 80px; max-width: 1200px; margin: 0 auto; }
+
+        h2.section-title { font-size: clamp(1.6rem, 4vw, 2rem); letter-spacing: 2px; margin-bottom: 10px; text-align: center; }
+
+        .section-divider { margin: 100px 0 60px 0; text-align: left; display: flex; align-items: baseline; gap: 20px; }
+        .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--card-border); }
+        .section-divider .eyebrow { white-space: nowrap; }
+        .section-divider h2 { font-size: clamp(1.5rem, 4vw, 2rem); color: var(--title-color); margin: 0; letter-spacing: 2px; }
+
+        .collection-grid { display: flex; flex-direction: column; gap: 40px; margin-bottom: 100px; align-items: center; width: 100%; }
+
+        @media (min-width: 900px) {
+            .collection-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px; margin-bottom: 140px; align-items: center;}
+            .collection-grid:nth-child(even) .img-container,
+            .collection-grid:nth-child(even) .carousel-wrapper,
+            .collection-grid:nth-child(even) .feature-wrapper { order: 2; }
+            .collection-grid:nth-child(even) .text-container { order: 1; }
+        }
+
+        .text-container { display: flex; flex-direction: column; justify-content: center; }
+        .text-container .eyebrow { margin-bottom: 12px; }
+        .text-container h3 { font-size: clamp(1.7rem, 4vw, 2.2rem); margin-bottom: 15px; line-height: 1.1; letter-spacing: 1px; }
+        .text-container p { margin-bottom: 15px; font-size: 0.98rem; opacity: 0.85; }
+
+        .price-badge { align-self: flex-start; background: var(--btn-bg); color: var(--btn-text); padding: 13px 26px; font-size: 0.75rem; font-weight: 500; border-radius: 2px; margin-top: 12px; font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; border: 1px solid var(--btn-bg); }
+        .price-badge:hover { background: transparent; color: var(--title-color); border-color: var(--title-color); }
+
+        .price-sizes { font-size: 0.78rem; margin-top: 16px; opacity: 0.6; line-height: 1.6; font-weight: 300; }
+        .badge-soon { background: transparent; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 10px; font-size: 0.65rem; border-radius: 2px; display: inline-block; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; }
+
+        /*
+           IMÁGENES: FOTOGRAMA REVELADO
+           Marco crema discreto + sello de cámara (timecode) en la esquina
+        */
+        .carousel-wrapper { width: 100%; position: relative; overflow: hidden; }
+        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 15px; }
+        .carousel::-webkit-scrollbar { display: none; }
+        .carousel-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; width: 100%; }
+
+        .img-container { width: 100%; padding: 10px; background: var(--gallery-frame); border-radius: 1px; box-shadow: 0 20px 45px rgba(0,0,0,0.45); position: relative; transition: 1s ease; }
+        .img-square { height: auto; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #000; position: relative; }
+        .img-square img { object-fit: contain; width: 100%; height: 100%; filter: sepia(0.12) contrast(1.06) saturate(0.92) brightness(0.96); transform: scale(1.035); transition: transform 2.2s cubic-bezier(0.22, 1, 0.36, 1); }
+        .img-square:hover img { transform: scale(1.03); }
+        .img-square.developed img { transform: scale(1); }
+        .img-square:hover.developed img { transform: scale(1.03); }
+
+        /* VELO DE REVELADO — la foto "aparece" como una Polaroid, en vez de solo hacer fade-in */
+        .img-develop-veil { position: absolute; inset: 0; z-index: 3; background: var(--gallery-frame); opacity: 1; pointer-events: none; transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.15s; }
+        .img-square.developed .img-develop-veil { opacity: 0; }
+
+        /* SELLO DE CÁMARA — el elemento firma: timestamp quemado en la esquina, como una foto análoga */
+        .cam-stamp { position: absolute; bottom: 10px; right: 12px; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 1px; color: var(--accent); opacity: 0.85; text-shadow: 0 0 6px rgba(0,0,0,0.4); pointer-events: none; }
+
+        .slide-caption { margin-top: 10px; padding: 0 6px; text-align: left; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--gallery-frame-text); letter-spacing: 1.5px; text-transform: uppercase; }
+        .swipe-indicator { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 0.68rem; color: var(--text-color); letter-spacing: 1px; justify-content: center; font-family: 'Space Mono', monospace; }
+
+        /* =========================================
+           5. REPRODUCTOR DE AUDIO
+           ========================================= */
+        .audio-player-wrapper { margin-top: 20px; padding: 24px; border: 1px solid var(--card-border); border-radius: 2px; background: var(--bg-raise); position: relative; }
+
+        .waveform-wrapper { width: 100%; height: 50px; margin-bottom: 15px; }
+        #waveform-real { width: 100%; height: 100%; }
+
+        .play-controls { display: flex; align-items: center; gap: 15px; }
+        .play-btn-custom { background: var(--accent); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.3s; flex-shrink: 0; }
+        .play-btn-custom:hover { transform: scale(1.05); opacity: 0.9; }
+        .play-btn-custom svg { fill: var(--bg-color); width: 14px; margin-left: 2px; transition: 0.3s; }
+
+        .audio-status { font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--title-color); opacity: 0.9; }
+
+        /* Módulo NFC */
+        .feature-wrapper { padding: 50px 30px; border: 1px solid var(--card-border); background: transparent; text-align: center; position: relative; overflow: hidden; border-radius: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; border-radius: 50%; background: var(--accent); opacity: 0.06; filter: blur(20px); animation: nfc-wave 4s infinite alternate; pointer-events: none; }
+        @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.03; } 100% { transform: translate(-50%, -50%) scale(2); opacity: 0.09; } }
+        .feature-wrapper .timestamp { margin-top: 6px; opacity: 0.5; font-size: 0.65rem; }
+
+        /* =========================================
+           6. ACORDEÓN DE PREGUNTAS FRECUENTES
+           ========================================= */
+        .faq-section { max-width: 760px; margin: 0 auto; padding: 0 20px 100px; }
+        .faq-item { border-bottom: 1px solid var(--card-border); }
+        .faq-question { width: 100%; text-align: left; padding: 20px 0; background: transparent; border: none; color: var(--title-color); font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 400; display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 20px; }
+        .faq-icon { transition: transform 0.4s ease; color: var(--accent); opacity: 0.8; flex-shrink: 0; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); opacity: 1; }
+
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0; font-size: 0.92rem; opacity: 0.8; }
+        .faq-item.active .faq-answer { max-height: 400px; padding-bottom: 20px; }
+
+        /* =========================================
+           7. FOOTER Y LOGÍSTICA
+           ========================================= */
+        footer { text-align: center; padding: 90px 20px 40px 20px; border-top: 1px solid var(--card-border); }
+        .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0; }
+        @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; } }
+
+        .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 28px; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; width: 100%; max-width: 280px; border: 1px solid var(--title-color); transition: 0.3s; border-radius: 2px; }
+        .primary { background: var(--title-color); color: var(--bg-color); }
+        .secondary { background: transparent; color: var(--title-color); }
+        .primary:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
+        .secondary:hover { background: var(--title-color); color: var(--bg-color); }
+
+        .delivery-info { display: flex; flex-direction: column; gap: 30px; margin: 55px auto; max-width: 700px; text-align: center; }
+        @media (min-width: 600px) { .delivery-info { flex-direction: row; text-align: left; gap: 50px; } }
+
+        .delivery-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        @media (min-width: 600px) { .delivery-item { align-items: flex-start; } }
+        .delivery-item h4 { font-size: 0.9rem; color: var(--title-color); margin-bottom: 6px; letter-spacing: 1.5px; }
+        .delivery-item p { font-size: 0.88rem; opacity: 0.8; margin: 0; line-height: 1.5; }
+        .delivery-item a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+        .delivery-item svg, .delivery-item i { color: var(--accent) !important; }
+
+        .micro-footer { padding-top: 40px; border-top: 1px solid var(--card-border); font-family: 'Space Mono', monospace; font-size: 0.68rem; opacity: 0.55; display: flex; flex-direction: column; gap: 12px; align-items: center; letter-spacing: 1px; text-transform: uppercase; }
+        .legal-links { display: flex; gap: 15px; }
+        .legal-links button { background: none; border: none; color: inherit; font-family: inherit; font-size: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; transition: 0.3s; }
+        .legal-links button:hover { color: var(--accent); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 100002; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.4s; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { background: var(--bg-color); border: 1px solid var(--card-border); width: 90%; max-width: 500px; padding: 40px 30px; position: relative; transform: translateY(20px); transition: 0.4s; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--title-color); cursor: pointer; transition: 0.3s; }
+        .modal-close:hover { transform: rotate(90deg); color: var(--accent); }
+        .modal-content h3 { font-size: 1.6rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; font-style: italic; text-transform: none; letter-spacing: normal; }
+        .modal-content p { font-size: 0.92rem; margin-bottom: 15px; }
+
+        .fade-in { opacity: 0; transform: translateY(20px); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* =========================================
+           8. OPTIMIZACIÓN MÓVIL
+           ========================================= */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .nav-brand { font-size: 1rem; }
+            .hero { padding-top: 10vh; }
+            .hero h1 { font-size: clamp(3rem, 16vw, 6rem); transform: scaleX(1); }
+            .hero-frame-mark { font-size: 0.55rem; }
+            .hero-frame-mark.tl { top: 78px; left: 18px; }
+            .hero-frame-mark.br { bottom: 24px; right: 18px; }
+            .subtitle-hero { letter-spacing: 0.3em; margin-right: -0.3em; font-size: 0.6rem; }
+            .quote-section { padding: 50px 20px; min-height: 40vh; }
+            .materials-section { padding: 70px 15px 60px; }
+            .pilares-grid { grid-template-columns: 1fr; gap: 30px; }
+            .pilar-card { border-left: none; border-top: 1px solid var(--card-border); padding: 26px 0 0; }
+            .pilar-card:first-child { border-top: none; padding-top: 0; }
+            section.portfolio-section { padding: 0 15px 60px; }
+            .section-divider { margin: 60px 0 40px 0; flex-direction: column; align-items: flex-start; gap: 6px; }
+            .section-divider::after { display: none; }
+            .collection-grid { gap: 30px; margin-bottom: 70px; }
+            .text-container h3 { font-size: 1.7rem; margin-bottom: 10px; }
+            .price-badge { padding: 11px 20px; font-size: 0.7rem; margin-top: 6px; }
+            .price-sizes { font-size: 0.72rem; margin-top: 10px; }
+            .feature-wrapper { padding: 40px 20px; }
+            .audio-player-wrapper { padding: 20px; }
+            footer { padding: 60px 20px 30px 20px; }
+            .btn-group { gap: 10px; margin: 20px 0; }
+            .cta-btn { padding: 12px 20px; font-size: 0.7rem; }
+            .delivery-info { margin: 30px auto; gap: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+    <div id="scroll-progress"></div>
+
+    <div id="preloader">
+        <div class="preloader-text">ETÉREO</div>
+        <div class="preloader-code mono">REVELANDO · GDL·MX</div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">ETÉREO</div>
+        <button class="theme-btn" id="theme-btn">
+            <i data-lucide="sun" size="12" id="theme-icon"></i> <span id="theme-text">Modo Alba</span>
+        </button>
+    </nav>
+
+    <header class="hero fade-in">
+        <span class="hero-frame-mark tl mono">EST. 2026</span>
+        <span class="hero-frame-mark br mono">FRAME Nº 001<br>REC ●</span>
+        <h1>ETÉREO</h1>
+        <div class="subtitle-hero">Cápsulas del tiempo</div>
+    </header>
+
+    <section class="quote-section fade-in">
+        <h2 class="quote-text">"La ciencia detrás de un sentimiento."</h2>
+        <p class="quote-author">— arte físico manufacturado en Guadalajara</p>
+    </section>
+
+    <!-- MANUFACTURA DE AUTOR -->
+    <section class="materials-section fade-in">
+        <div class="materials-head">
+            <span class="eyebrow">Proceso · 03 etapas</span>
+            <h2 class="section-title">Manufactura de Autor</h2>
+            <p>Cada pieza es ensamblada a mano, uniendo componentes físicos de archivo con tecnología imperceptible.</p>
+        </div>
+        <div class="pilares-grid">
+            <div class="pilar-card">
+                <span class="timestamp">01 — IMPRESIÓN</span>
+                <h3>Papel de Archivo</h3>
+                <p>Papel fotográfico de alta densidad, acabado mate que elimina reflejos como un revelado de cuarto oscuro.</p>
+            </div>
+            <div class="pilar-card">
+                <span class="timestamp">02 — ENMARCADO</span>
+                <h3>Perfil y Cristal</h3>
+                <p>Perfil ligero y rígido, cristal estándar. Protege el lienzo sin robarle protagonismo a la memoria.</p>
+            </div>
+            <div class="pilar-card">
+                <span class="timestamp">03 — EMPAQUE</span>
+                <h3>Ritual de Unboxing</h3>
+                <p>Microcorrugado kraft, papel seda y lacre de cera — una experiencia táctil desde el primer momento.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-section">
+
+        <div class="section-divider fade-in">
+            <span class="eyebrow">Rollo Nº 01</span>
+            <h2>Arte Enmarcado</h2>
+        </div>
+
+        <!-- 1. COLECCIÓN SONORA -->
+        <div class="collection-grid fade-in">
+            <div class="img-container">
+                <div class="img-square">
+                    <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
+                    <div class="img-develop-veil"></div>
+                    <span class="cam-stamp mono">GDL·MX 08.26</span>
+                </div>
+            </div>
+            <div class="text-container">
+                <span class="eyebrow">Colección Sonora</span>
+                <h3>La voz, en tinta</h3>
+                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una pieza visual mediante el análisis algorítmico de sus frecuencias reales.</p>
+
+                <div class="audio-player-wrapper">
+                    <div class="audio-header">
+                        <span class="mono" style="font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.7;">Escáner digital oculto</span>
+                    </div>
+
+                    <div class="waveform-wrapper">
+                        <div id="waveform-real"></div>
+                    </div>
+
+                    <div class="play-controls">
+                        <button class="play-btn-custom" id="custom-play-btn">
+                            <svg class="icon-play" id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg class="icon-pause" id="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                        <span class="audio-status" id="audio-status-text">"La voz de tu memoria..."</span>
+                    </div>
+                </div>
+
+                <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Adquirir edición · $299 MXN</button>
+                <div class="price-sizes mono">
+                    Formatos: Studio (20×25) · Galería (13×18)<br>
+                    Versión digital (alta res + QR): $99 MXN
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. COLECCIÓN ASTRONÓMICA -->
+        <div class="collection-grid fade-in">
+            <div class="carousel-wrapper">
+                <div class="carousel">
+                    <div class="carousel-slide">
+                        <div class="img-container">
+                            <div class="img-square">
+                                <img src="./mapa-clasico.jpg" alt="Mapa Estelar Minimalista" loading="lazy">
+                    <div class="img-develop-veil"></div>
+                                <span class="cam-stamp mono">GDL·MX 08.26</span>
+                            </div>
+                        </div>
+                        <div class="slide-caption">Fig. 01 — Minimalista clásico</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="img-container">
+                            <div class="img-square">
+                                <img src="./mapa-cupula.jpg" alt="Mapa Estelar Cúpula" loading="lazy">
+                    <div class="img-develop-veil"></div>
+                                <span class="cam-stamp mono">GDL·MX 08.26</span>
+                            </div>
+                        </div>
+                        <div class="slide-caption">Fig. 02 — Diseño en cúpula</div>
+                    </div>
+                </div>
+                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> Desliza para ver variantes</div>
+            </div>
+            <div class="text-container">
+                <span class="eyebrow">Colección Astronómica</span>
+                <h3>El cielo, esa noche</h3>
+                <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en que tu vida cambió para siempre.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Colección Astronómica">Adquirir edición · $299 MXN</button>
+                <div class="price-sizes mono">Formato Studio (20×25) · fases lunares y alineación planetaria</div>
+            </div>
+        </div>
+
+        <!-- 3. COLECCIÓN TERRENAL -->
+        <div class="collection-grid fade-in">
+            <div class="text-container">
+                <span class="eyebrow">Colección Terrenal</span>
+                <h3>El mapa de sus pasos</h3>
+                <p>Inmortalizamos el lugar exacto o el recorrido donde sus caminos se cruzaron. Trazamos con precisión las calles, avenidas y rutas de tu memoria.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Colección Terrenal">Adquirir edición · $299 MXN</button>
+                <div class="price-sizes mono">Formato Studio (20×25) · cartografía exacta de aniversario</div>
+            </div>
+            <div class="carousel-wrapper">
+                <div class="carousel">
+                    <div class="carousel-slide">
+                        <div class="img-container">
+                            <div class="img-square">
+                                <img src="./mapa-clasico-geo.jpg" alt="Mapa Geográfico Clásico" loading="lazy">
+                    <div class="img-develop-veil"></div>
+                                <span class="cam-stamp mono">GDL·MX 08.26</span>
+                            </div>
+                        </div>
+                        <div class="slide-caption">Fig. 01 — Póster clásico</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="img-container">
+                            <div class="img-square">
+                                <img src="./ruta-terrestre.jpg" alt="Ruta Terrestre" loading="lazy">
+                    <div class="img-develop-veil"></div>
+                                <span class="cam-stamp mono">GDL·MX 08.26</span>
+                            </div>
+                        </div>
+                        <div class="slide-caption">Fig. 02 — Ruta terrestre</div>
+                    </div>
+                </div>
+                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> Desliza para ver variantes</div>
+            </div>
+        </div>
+
+        <div class="section-divider fade-in" style="margin-top: 100px;">
+            <span class="eyebrow">Módulo oculto</span>
+            <h2>Tecnología NFC</h2>
+        </div>
+
+        <!-- 4. LA DIMENSIÓN OCULTA (NFC) -->
+        <div class="collection-grid fade-in">
+            <div class="feature-wrapper">
+                <i data-lucide="smartphone-nfc" size="52" style="color: var(--accent); position: relative; z-index: 2; margin-bottom: 15px;"></i>
+                <h4 style="font-size: 1.1rem; position: relative; z-index: 2; color: var(--title-color); letter-spacing: 1.5px;">El Microchip Pasivo</h4>
+                <span class="timestamp">TAP · SIN APPS · SIN BATERÍAS</span>
+                <div class="nfc-pulse"></div>
+            </div>
+            <div class="text-container">
+                <span class="eyebrow">Dimensión Digital</span>
+                <h3>Lo que el papel no dice</h3>
+                <p>La personalización no termina en el papel. Todas las piezas físicas albergan tecnología invisible incluida sin costo.</p>
+                <p>Ocultamos bajo el lienzo un microchip NFC. Acerca tu celular desbloqueado al cuadro y el recuerdo cobrará vida al instante en tu pantalla.</p>
+            </div>
+        </div>
+
+        <div class="section-divider fade-in">
+            <span class="eyebrow">Rollo Nº 02</span>
+            <h2>Accesorios Inteligentes</h2>
+        </div>
+
+        <!-- 5. PET ID -->
+        <div class="collection-grid fade-in">
+            <div class="img-container">
+                <div class="img-square">
+                    <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
+                    <div class="img-develop-veil"></div>
+                    <span class="cam-stamp mono">GDL·MX 08.26</span>
+                </div>
+            </div>
+            <div class="text-container">
+                <span class="eyebrow">Smart Tag</span>
+                <h3>Pet ID Inteligente</h3>
+                <p>La seguridad de tu mejor amigo, rediseñada. Placas de alta resistencia con chip NFC y código QR que revelan tus datos de contacto al ser escaneadas.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Pet ID Inteligente">Personalizar · $199 MXN</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section fade-in">
+        <h2 class="section-title" style="margin-bottom: 40px;">Manual de Asistencia</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">Logística de entregas en GDL <i data-lucide="chevron-down" size="20" class="faq-icon"></i></button>
+                <div class="faq-answer">
+                    <p><strong>Envío a domicilio:</strong> vía Paquetería Casa Blanca (miércoles y sábados).</p>
+                    <p><strong>Recolección sin costo:</strong> punto aliado Ciberdragon (lunes a sábado, 10:30 a.m. – 8:00 p.m.).</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Lectura del chip NFC <i data-lucide="chevron-down" size="20" class="faq-icon"></i></button>
+                <div class="faq-answer"><p>Requiere un smartphone (iOS/Android) con tecnología NFC activa. No requiere aplicaciones de terceros; solo acerca la parte superior de tu teléfono desbloqueado al marco.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Autorización de diseño <i data-lucide="chevron-down" size="20" class="faq-icon"></i></button>
+                <div class="faq-answer"><p>La exactitud es nuestro pilar. Antes de pasar a manufactura, te enviaremos una previsualización de tu diseño digital para tu autorización final.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="fade-in">
+        <span class="eyebrow">Fin del rollo</span>
+        <h3 class="romantic-text" style="font-size: clamp(2rem, 6vw, 3.5rem); margin: 10px 0; text-transform: none;">Enmarca tu historia</h3>
+
+        <div class="btn-group">
+            <a href="https://wa.me/523332227033?text=Hola%20Etéreo." class="cta-btn primary">
+                <i data-lucide="message-circle" size="16"></i> Contacto directo
+            </a>
+            <a href="https://instagram.com/etereolabstudio" class="cta-btn secondary" target="_blank" id="ig-btn">
+                <i data-lucide="instagram" size="16"></i> Nuestro Instagram
+            </a>
+        </div>
+
+        <div class="delivery-info fade-in">
+            <div class="delivery-item">
+                <i data-lucide="package" size="22" style="margin-bottom: 10px;"></i>
+                <h4>ENVÍOS LOCALES</h4>
+                <p>Paquetería Casa Blanca.<br>Miércoles y sábados.</p>
+            </div>
+            <div class="delivery-item">
+                <i data-lucide="map-pin" size="22" style="margin-bottom: 10px;"></i>
+                <h4>PICK-UP GRATUITO</h4>
+                <p>Recoge en <strong>Ciberdragon</strong><br>
+                <a href="https://www.google.com/maps/search/?api=1&query=Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">Ver ubicación</a></p>
+            </div>
+        </div>
+
+        <div class="micro-footer">
+            <p>© 2026 Estudio Etéreo. Derechos reservados.</p>
+            <div class="legal-links">
+                <button onclick="openModal('modal-privacidad')">Aviso de Privacidad</button>
+                <button onclick="openModal('modal-terminos')">Términos y Condiciones</button>
+            </div>
+            <p style="margin-top: 6px;">Manufacturado en Guadalajara, México.</p>
+        </div>
+    </footer>
+
+    <!-- VENTANAS MODALES -->
+    <div class="modal-overlay" id="modal-privacidad">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-privacidad')"><i data-lucide="x" size="24"></i></button>
+            <h3>Aviso de Privacidad</h3>
+            <p>En <strong>Estudio Etéreo</strong>, valoramos y protegemos tu privacidad. Los datos personales, audios y ubicaciones que compartes son exclusivos para la manufactura de tus piezas.</p>
+            <p>No almacenamos tus archivos en bases de datos públicas ni comercializamos tu información.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-terminos">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-terminos')"><i data-lucide="x" size="24"></i></button>
+            <h3>Términos y Condiciones</h3>
+            <p>El proceso de manufactura comienza únicamente tras recibir el anticipo acordado. Se otorgará una revisión digital para autorización final.</p>
+            <p>Al ser piezas 100% personalizadas, no existen devoluciones tras la autorización y manufactura.</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        window.addEventListener('load', () => {
+            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); }, 1200);
+            initParticles();
+        });
+
+        function initParticles() {
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    "particles": { "number": { "value": 26, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#EDE6D6" }, "shape": { "type": "circle" }, "opacity": { "value": 0.25, "random": true }, "size": { "value": 2, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 0.3, "direction": "top", "random": true, "out_mode": "out" } },
+                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true } },
+                    "retina_detect": true
+                });
+            }
+        }
+
+        let lastScroll = 0; const navbar = document.getElementById('navbar'), progress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            progress.style.width = (currentScroll / height) * 100 + "%";
+            if (currentScroll > lastScroll && currentScroll > 100) navbar.classList.add('nav-hidden');
+            else navbar.classList.remove('nav-hidden');
+            lastScroll = currentScroll;
+        });
+
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) { overlay.classList.remove('active'); document.body.style.overflow = 'auto'; }
+            });
+        });
+
+        document.querySelectorAll('.whatsapp-trigger').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.getAttribute('data-product');
+                const userAgrees = confirm(`Estás por crear una cápsula del tiempo.\n\n¿Deseas conectar con el estudio vía WhatsApp para tu ${productName}?`);
+                if(userAgrees) {
+                    const phone = "523332227033";
+                    const message = encodeURIComponent(`Hola Estudio Etéreo. Me interesa crear mi diseño y tener información de: ${productName}.`);
+                    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+                }
+            });
+        });
+
+        /* =========================================
+           REPRODUCTOR WAVESURFER
+           ========================================= */
+        const isDarkInitial = document.documentElement.getAttribute('data-theme') === 'dark';
+
+        const wavesurfer = WaveSurfer.create({
+            container: '#waveform-real',
+            waveColor: isDarkInitial ? 'rgba(237, 230, 214, 0.2)' : 'rgba(27, 25, 18, 0.2)',
+            progressColor: isDarkInitial ? '#DD8E5C' : '#C97440',
+            barWidth: 3, barGap: 2, height: 50,
+            url: './demo.mp3'
+        });
+
+        const customPlayBtn = document.getElementById('custom-play-btn');
+        const iconPlay = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+        const audioStatusText = document.getElementById('audio-status-text');
+
+        customPlayBtn.addEventListener('click', () => { wavesurfer.playPause(); });
+
+        wavesurfer.on('play', () => {
+            iconPlay.style.display = "none";
+            iconPause.style.display = "block";
+            audioStatusText.innerHTML = '"Reproduciendo memoria..."';
+            audioStatusText.style.color = "var(--title-color)";
+        });
+
+        wavesurfer.on('pause', () => {
+            iconPlay.style.display = "block";
+            iconPause.style.display = "none";
+            audioStatusText.innerHTML = '"Memoria en pausa."';
+            audioStatusText.style.color = "var(--text-color)";
+        });
+
+        wavesurfer.on('finish', () => {
+            iconPlay.style.display = "block";
+            iconPause.style.display = "none";
+            audioStatusText.innerHTML = '"Memoria finalizada."';
+            audioStatusText.style.color = "var(--text-color)";
+        });
+
+        /* =========================================
+           TOGGLE ALBA / OCASO
+           ========================================= */
+        const themeBtn = document.getElementById('theme-btn');
+        const htmlElement = document.documentElement;
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
+
+        themeBtn.addEventListener('click', () => {
+            const isLight = htmlElement.getAttribute('data-theme') === 'light';
+            htmlElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+
+            if(isLight) {
+                themeIcon.setAttribute('data-lucide', 'sun');
+                themeText.textContent = 'Modo Alba';
+            } else {
+                themeIcon.setAttribute('data-lucide', 'moon');
+                themeText.textContent = 'Modo Ocaso';
+            }
+            lucide.createIcons();
+
+            const newIsDark = !isLight;
+            wavesurfer.setOptions({
+                waveColor: newIsDark ? 'rgba(237, 230, 214, 0.2)' : 'rgba(27, 25, 18, 0.2)',
+                progressColor: newIsDark ? '#DD8E5C' : '#C97440'
+            });
+        });
+
+        const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(f => obs.observe(f));
+
+        /* REVELADO DE IMÁGENES — cada foto "aparece" como una Polaroid al entrar en pantalla */
+        const developObs = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('developed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.35 });
+        document.querySelectorAll('.img-square').forEach(img => developObs.observe(img));
+
+        setTimeout(lucide.createIcons, 2000);
+    </script>
+</body>
 </html>
