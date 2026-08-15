@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -10,12 +10,11 @@
     <meta property="og:url" content="https://www.etereomx.com/">
     <meta property="og:title" content="Etéreo Lab Studio">
     <meta property="og:description" content="La ciencia detrás de un sentimiento. Arte físico y digital manufacturado en Guadalajara.">
-    <meta property="og:image" content="https://www.etereomx.com/mapa-clasico.jpg">
 
-    <!-- FUENTES RETRO 90s: Grotesk (Tech) y Mono (VHS/VCR) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- TIPOGRAFÍA EXTRAÍDA DE LA IMAGEN REFERENCIA -->
+    <!-- Clash Display (Títulos Extendidos Retro) y Outfit (Lectura Elegante) -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- LIBRERÍAS DE ICONOS, PARTÍCULAS Y MOTOR ACÚSTICO WAVESURFER -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -24,121 +23,128 @@
 
     <style>
         /* =========================================
-           1. MOTOR DE COLOR Y TEXTURA (WALKMAN / VHS VIBE)
+           1. MOTOR DE COLOR "OCASO ETÉREO" (Basado en la imagen)
            ========================================= */
         :root {
-            /* MODO OSCURO (Estética VHS Negro / CRT) */
-            --bg-color: #161616; 
-            --text-color: #A3A3A3; 
-            --title-color: #E2E2E2;
-            --accent-color: #333333; 
-            --nav-bg: rgba(22, 22, 22, 0.85);
-            --card-border: #444444; 
-            --card-bg: #1C1C1C;
-            --card-hover-shadow: 4px 4px 0px rgba(198, 192, 217, 0.3); /* Sombra Lavanda */
-            --progress-color: #C6C0D9; /* Lavanda retro */
-            --pulse-color: rgba(232, 200, 181, 0.2); /* Durazno para el LED NFC */
-            --particles-opacity: 0.8;
-            --scanline-color: rgba(255, 255, 255, 0.03);
-            --btn-highlight: #C6C0D9;
+            /* Extraídos del cielo de la imagen */
+            --bg-color: #13131A; /* Indigo ultra profundo */
+            --bg-surface: rgba(255, 255, 255, 0.03); /* Cristal esmerilado oscuro */
+            
+            /* Textos cálidos extraídos de "ETEREO" */
+            --title-color: #F2EFE9; /* Crema suave fotográfico */
+            --text-color: #A39E93; /* Crema oscurecido */
+            
+            /* Acentos del orbe luminoso */
+            --orb-orange: #FF9E64;
+            --orb-lavender: #B4A5D1;
+            --orb-gradient: linear-gradient(135deg, var(--orb-orange), var(--orb-lavender));
+            
+            /* Estructura UI */
+            --card-border: rgba(242, 239, 233, 0.08);
+            --nav-bg: rgba(19, 19, 26, 0.7);
+            --noise-opacity: 0.12; /* Grano alto estilo película 35mm */
         }
 
-        [data-theme="light"] {
-            /* MODO CLARO (Estética Plástico Hardware Antiguo) */
-            --bg-color: #EBE9E1; /* Color Casio/Walkman gris-beige */
-            --text-color: #555555; 
-            --title-color: #1A1A1A;
-            --accent-color: #CCCCCC; 
-            --nav-bg: rgba(235, 233, 225, 0.85);
-            --card-border: #1A1A1A; /* Bordes duros estilo dibujo/plano */
-            --card-bg: #F4F3ED;
-            --card-hover-shadow: 6px 6px 0px #1A1A1A; /* Sombra física sólida */
-            --progress-color: #1A1A1A; 
-            --pulse-color: rgba(232, 200, 181, 0.6); 
-            --particles-opacity: 0.3;
-            --scanline-color: rgba(0, 0, 0, 0.04);
-            --btn-highlight: #E8C8B5; /* Durazno retro */
-        }
-
-        body, nav, header, section, footer, div, h1, h2, h3, p, button { transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body { 
-            background-color: var(--bg-color); color: var(--text-color); 
-            font-family: 'Space Grotesk', sans-serif; /* Tipografía Tech Minimalista */
-            font-weight: 300; line-height: 1.8; overflow-x: hidden; position: relative; width: 100%; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            font-family: 'Outfit', sans-serif; 
+            font-weight: 300; 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+            position: relative; 
+            width: 100%; 
         }
 
-        #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: var(--particles-opacity); pointer-events: auto; }
+        /* 
+          EL ORBE ETÉREO (Fondo)
+          Recreamos el brillo de tu imagen directamente en el fondo de la página
+        */
+        .ambient-orb {
+            position: fixed;
+            top: -10%; left: 60%;
+            width: 80vw; height: 80vw;
+            background: radial-gradient(circle, rgba(255,158,100,0.12) 0%, rgba(180,165,209,0.05) 40%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -2;
+            pointer-events: none;
+        }
 
-        /* SCANLINES (Efecto CRT/VHS) en lugar de ruido blanco */
+        /* VIÑETA Y GRANO DE PELÍCULA */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            box-shadow: inset 0 0 150px rgba(0,0,0,0.9); pointer-events: none; z-index: 9997;
+        }
         body::after {
             content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998;
-            background: repeating-linear-gradient( transparent, transparent 2px, var(--scanline-color) 3px, var(--scanline-color) 4px );
+            opacity: var(--noise-opacity); mix-blend-mode: overlay;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); border-left: 1px solid var(--card-border); }
-        ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 0px; } /* Scrollbar cuadrado tech */
+        #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; pointer-events: auto; }
 
-        h1, h2, h3, .nav-brand { font-weight: 700; color: var(--title-color); letter-spacing: -1px; text-transform: uppercase; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--orb-lavender); border-radius: 10px; opacity: 0.5; }
+
+        /* TIPOGRAFÍA EXTENDIDA CREADORA DE MARCA */
+        h1, h2, h3, h4, .nav-brand { font-family: 'Clash Display', sans-serif; font-weight: 600; color: var(--title-color); letter-spacing: 2px; text-transform: uppercase; }
 
         /* =========================================
-           2. PANTALLA CINEMÁTICA Y NAVBAR (VHS OSD)
+           2. PANTALLA CINEMÁTICA Y NAVBAR
            ========================================= */
-        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 100000; display: flex; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s; }
-        /* Texto OSD (On Screen Display) de reproductor de video */
-        .preloader-text { font-family: 'Space Mono', monospace; font-size: 1.5rem; color: var(--title-color); letter-spacing: 2px; animation: blink 1.2s infinite; text-transform: uppercase; }
-        .preloader-text::before { content: "PLAY ► "; }
-        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s; }
+        .preloader-text { font-family: 'Clash Display', sans-serif; font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--title-color); letter-spacing: 8px; text-transform: uppercase; animation: pulse-glow 3s infinite; }
+        @keyframes pulse-glow { 0%, 100% { opacity: 0.4; filter: blur(2px); } 50% { opacity: 1; filter: blur(0px); text-shadow: 0 0 20px var(--orb-orange); } }
         .preloader-hidden { opacity: 0 !important; visibility: hidden !important; }
 
-        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background-color: var(--progress-color); z-index: 100001; }
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--orb-gradient); z-index: 100001; }
 
-        .navbar { position: fixed; top: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: 2px solid var(--card-border); z-index: 9999; transition: transform 0.5s ease; }
+        .navbar { position: fixed; top: 0; width: 100%; padding: 25px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); z-index: 9999; transition: transform 0.5s ease; }
         .navbar.nav-hidden { transform: translateY(-100%); }
-        .nav-brand { font-family: 'Space Mono', monospace; font-size: 1.1rem; letter-spacing: 2px; }
-        @media (min-width: 600px) { .navbar { padding: 20px 40px; } }
-
-        .theme-btn { background: var(--bg-color); color: var(--title-color); border: 2px solid var(--card-border); padding: 6px 12px; font-family: 'Space Mono', monospace; font-size: 0.75rem; text-transform: uppercase; cursor: pointer; border-radius: 4px; display: flex; align-items: center; gap: 8px; box-shadow: 2px 2px 0px var(--card-border); transition: 0.1s; }
-        .theme-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--card-border); }
+        .nav-brand { font-size: 1.5rem; letter-spacing: 6px; font-weight: 700; }
 
         /* =========================================
            3. HERO Y FRASES
            ========================================= */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
-        .hero h1 { font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -3px; margin-bottom: 20px; }
-        .hero p { font-family: 'Space Mono', monospace; font-size: 1rem; opacity: 0.8; max-width: 600px; text-transform: uppercase; letter-spacing: 1px; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; position: relative; }
+        .hero h1 { font-size: clamp(3rem, 10vw, 7rem); letter-spacing: 12px; margin-bottom: 20px; line-height: 1; }
+        .hero p { font-family: 'Clash Display', sans-serif; font-size: 1rem; color: var(--orb-orange); letter-spacing: 4px; text-transform: uppercase; margin-top: 15px; font-weight: 500; }
         
-        .quote-section { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; border-bottom: 2px dashed var(--accent-color); }
-        .quote-text { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 500; color: var(--title-color); max-width: 850px; line-height: 1.3; margin-bottom: 30px; }
-        .quote-author { font-family: 'Space Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: var(--title-color); background: var(--card-border); color: var(--bg-color); padding: 4px 10px; }
+        .quote-section { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; border-bottom: 1px solid var(--card-border); }
+        .quote-text { font-size: clamp(1.8rem, 4vw, 3.5rem); font-weight: 500; color: var(--title-color); max-width: 900px; line-height: 1.2; margin-bottom: 40px; }
+        .quote-author { font-size: 0.9rem; letter-spacing: 6px; text-transform: uppercase; color: var(--text-color); }
 
         /* =========================================
            4. SECCIONES Y CUADRÍCULAS GENERALES
            ========================================= */
-        .materials-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 2px dashed var(--accent-color); }
-        section.portfolio-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .materials-section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--card-border); }
+        section.portfolio-section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
         
-        .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
+        .pilares-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 80px; }
         
-        /* TARJETAS ESTILO HARDWARE / WALKMAN */
-        .pilar-card { position: relative; padding: 40px; border: 2px solid var(--card-border); border-radius: 8px; text-align: left; background: var(--card-bg); transition: transform 0.2s, box-shadow 0.2s; box-shadow: 4px 4px 0px var(--accent-color); }
-        .pilar-card:hover { transform: translate(-2px, -2px); box-shadow: var(--card-hover-shadow); }
+        /* TARJETAS ETÉREAS (Glassmorphism sutil) */
+        .pilar-card { padding: 50px 40px; border: 1px solid var(--card-border); border-radius: 16px; text-align: left; background: var(--bg-surface); backdrop-filter: blur(10px); transition: 0.4s ease; position: relative; overflow: hidden; }
+        .pilar-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(255,158,100,0.1), transparent 50%); opacity: 0; transition: 0.4s; }
+        .pilar-card:hover { transform: translateY(-5px); border-color: rgba(255,158,100,0.3); }
+        .pilar-card:hover::before { opacity: 1; }
 
-        .pilar-icon { margin-bottom: 20px; color: var(--title-color); }
-        .pilar-card h3 { font-size: 1.3rem; margin-bottom: 15px; letter-spacing: -1px; }
-        .pilar-card p { font-size: 0.95rem; }
+        .pilar-icon { margin-bottom: 25px; color: var(--orb-orange); }
+        .pilar-card h3 { font-size: 1.5rem; margin-bottom: 15px; letter-spacing: 2px; }
+        .pilar-card p { font-size: 1rem; opacity: 0.9; }
 
-        h2.section-title { font-size: 2.2rem; margin-bottom: 60px; text-align: center; border-bottom: 4px solid var(--title-color); padding-bottom: 20px; display: inline-block; }
+        h2.section-title { font-size: 2.2rem; margin-bottom: 20px; text-align: center; }
 
-        .section-divider { margin: 100px 0 60px 0; border-top: 2px solid var(--card-border); padding-top: 20px; }
-        .section-divider h2 { font-size: 2.5rem; letter-spacing: -2px; color: var(--title-color); margin-top: 5px; }
-        .section-divider span { font-family: 'Space Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; color: var(--bg-color); background: var(--title-color); padding: 4px 10px; text-transform: uppercase; }
+        .section-divider { margin: 120px 0 80px 0; text-align: center; }
+        .section-divider h2 { font-size: 2.5rem; color: var(--title-color); padding-bottom: 15px; margin-top: 10px; }
+        .section-divider span { font-size: 0.85rem; letter-spacing: 4px; color: var(--orb-lavender); text-transform: uppercase; font-weight: 500; }
 
-        .collection-grid { display: flex; flex-direction: column; gap: 40px; margin-bottom: 100px; align-items: center; width: 100%; }
-        
+        .collection-grid { display: flex; flex-direction: column; gap: 50px; margin-bottom: 120px; align-items: center; width: 100%; }
         @media (min-width: 900px) {
-            .collection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 140px;}
+            .collection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; margin-bottom: 160px; align-items: center;}
             .collection-grid:nth-child(even) .img-container, 
             .collection-grid:nth-child(even) .carousel-wrapper, 
             .collection-grid:nth-child(even) .nfc-wrapper,
@@ -147,166 +153,173 @@
         }
 
         .text-container { width: 100%; }
-        .text-container h3 { font-size: 2.2rem; margin-bottom: 15px; }
-        .text-container p { margin-bottom: 18px; font-size: 1.05rem; }
+        .text-container h3 { font-size: 2.8rem; margin-bottom: 20px; line-height: 1.1; }
+        .text-container p { margin-bottom: 20px; font-size: 1.1rem; opacity: 0.85; }
 
-        /* BOTONES DE PRECIO ESTILO TECLAS DE CASETERA */
-        .price-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--btn-highlight); color: #111; padding: 12px 20px; font-size: 0.9rem; font-weight: 700; border: 2px solid var(--title-color); border-bottom: 6px solid var(--title-color); border-radius: 8px; margin-top: 10px; font-family: 'Space Mono', monospace; text-transform: uppercase; cursor: pointer; transition: 0.1s; }
-        .price-badge:active { transform: translateY(4px); border-bottom: 2px solid var(--title-color); }
+        /* BOTONES DE COMPRA (Atractivo Visual) */
+        .price-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--orb-gradient); color: #13131A; padding: 14px 28px; font-size: 0.9rem; font-weight: 600; border-radius: 40px; margin-top: 15px; letter-spacing: 1px; font-family: 'Outfit', sans-serif; text-transform: uppercase; border: none; cursor: pointer; transition: 0.4s; box-shadow: 0 10px 30px rgba(255, 158, 100, 0.2); }
+        .price-badge:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 158, 100, 0.4); filter: brightness(1.1); }
+        .price-badge:active { transform: translateY(1px); }
 
-        .price-strike { text-decoration: line-through; opacity: 0.6; margin-left: 8px; }
-        .price-sizes { font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: 15px; opacity: 0.8; line-height: 1.6; text-transform: uppercase; border-left: 2px solid var(--card-border); padding-left: 10px; }
-        .price-digital { margin-top: 10px; font-weight: 700; font-size: 0.9rem; color: var(--title-color); }
-        .badge-soon { background: var(--title-color); color: var(--bg-color); padding: 4px 10px; font-family: 'Space Mono', monospace; font-size: 0.75rem; border-radius: 4px; margin-bottom: 15px; text-transform: uppercase; display: inline-block; }
+        .price-strike { text-decoration: line-through; opacity: 0.6; margin-left: 10px; font-weight: 400; }
+        .price-sizes { font-size: 0.9rem; margin-top: 15px; opacity: 0.7; border-left: 1px solid var(--orb-lavender); padding-left: 15px; }
+        .price-digital { margin-top: 10px; font-weight: 500; font-size: 0.95rem; color: var(--orb-orange); }
+        .badge-soon { background: transparent; border: 1px solid var(--orb-lavender); color: var(--orb-lavender); padding: 6px 14px; font-family: 'Clash Display'; font-size: 0.8rem; border-radius: 30px; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; display: inline-block; }
 
+        /* IMÁGENES FOTOGRÁFICAS ELEGANTES */
         .carousel-wrapper { width: 100%; position: relative; overflow: hidden; }
-        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 10px; }
+        .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 20px; scrollbar-width: none; padding-bottom: 20px; }
         .carousel::-webkit-scrollbar { display: none; }
         .carousel-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; width: 100%; }
         
-        /* CONTENEDOR DE IMAGEN ESTILO PANTALLA CRT / POLAROID */
-        .img-container { width: 100%; border: 4px solid var(--card-border); border-radius: 12px; position: relative; overflow: hidden; background: var(--title-color); padding: 8px; box-shadow: 6px 6px 0px var(--accent-color); }
-        .img-square { height: auto; width: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 4px; background: #FFF; }
-        .img-square img { object-fit: contain; width: 100%; height: 100%; transition: transform 0.5s ease; filter: contrast(1.05); }
-        .img-square:hover img { transform: scale(1.03); }
+        .img-container { width: 100%; border: 1px solid var(--card-border); border-radius: 20px; position: relative; overflow: hidden; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .img-square { height: auto; width: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; }
+        /* Filtro cálido para igualar las fotos con la estética */
+        .img-square img { object-fit: contain; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); filter: contrast(1.05) sepia(0.1) brightness(0.9); }
+        .img-square:hover img { transform: scale(1.05); }
 
-        .slide-caption { position: absolute; bottom: 20px; left: 20px; background: var(--title-color); color: var(--bg-color); padding: 4px 12px; font-family: 'Space Mono', monospace; font-size: 0.8rem; text-transform: uppercase; border-radius: 4px; pointer-events: none; border: 2px solid var(--bg-color); }
-        .swipe-indicator { display: flex; align-items: center; justify-content: flex-start; gap: 10px; margin-top: 15px; font-family: 'Space Mono', monospace; font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; }
+        .slide-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(19, 19, 26, 0.8); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 30px; border: 1px solid var(--card-border); font-family: 'Clash Display', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: var(--title-color); pointer-events: none; }
+        .swipe-indicator { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 0.8rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; justify-content: center; }
 
         /* =========================================
-           5. REPRODUCTOR DE AUDIO (LCD DIGITAL ESTILO 90s)
+           5. REPRODUCTOR DE AUDIO ESTÉTICO
            ========================================= */
-        .audio-player-wrapper { margin-top: 25px; padding: 30px; border: 4px solid var(--card-border); border-radius: 12px; background: var(--card-bg); position: relative; display: flex; flex-direction: column; align-items: center; box-shadow: inset 4px 4px 0px rgba(0,0,0,0.05); }
+        .audio-player-wrapper { margin-top: 30px; padding: 40px; border: 1px solid var(--card-border); border-radius: 16px; background: var(--bg-surface); position: relative; display: flex; flex-direction: column; align-items: center; backdrop-filter: blur(10px); }
         
-        .waveform-wrapper { width: 100%; height: 80px; position: relative; display: block; margin-bottom: 15px; background: rgba(0,0,0,0.05); border: 2px inset var(--card-border); border-radius: 4px; }
+        .waveform-wrapper { width: 100%; height: 80px; position: relative; display: block; margin-bottom: 20px; }
         #waveform-real { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
         
-        /* Botón de Play estilo físico "Walkman" */
-        .play-btn-custom { background-color: var(--title-color); border: 2px solid var(--bg-color); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; justify-content: center; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; box-shadow: 0 0 0 4px var(--title-color); transition: 0.1s; }
-        .play-btn-custom:active { transform: translate(-50%, -50%) scale(0.9); }
-        .play-btn-custom svg { fill: var(--bg-color); width: 20px; height: 20px; margin-left: 2px; }
+        .play-btn-custom { background: var(--orb-gradient); border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; display: flex; justify-content: center; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; box-shadow: 0 10px 20px rgba(255,158,100,0.3); transition: 0.3s; }
+        .play-btn-custom:hover { transform: translate(-50%, -50%) scale(1.1); }
+        .play-btn-custom svg { fill: #13131A; width: 22px; height: 22px; margin-left: 3px; }
 
-        .feature-wrapper { position: relative; padding: 60px 40px; border: 4px solid var(--card-border); border-radius: 12px; background: var(--card-bg); text-align: center; overflow: hidden; width: 100%; box-shadow: 6px 6px 0px var(--accent-color); }
+        .feature-wrapper { position: relative; padding: 80px 40px; border: 1px solid var(--orb-orange); border-radius: 20px; background: radial-gradient(circle at center, rgba(255,158,100,0.05), transparent); text-align: center; overflow: hidden; width: 100%; box-shadow: inset 0 0 60px rgba(255,158,100,0.05); }
         
-        /* Led rojo de grabación / NFC */
-        .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, #F0544F 0%, transparent 70%); animation: led-blink 2s infinite steps(2); pointer-events: none; }
-        @keyframes led-blink { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.5); } }
+        .nfc-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; border-radius: 50%; background: var(--orb-gradient); opacity: 0.15; filter: blur(20px); animation: nfc-wave 3s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; }
+        @keyframes nfc-wave { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.1; } 100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0.3; } }
 
         /* =========================================
            6. ACORDEÓN DE PREGUNTAS FRECUENTES
            ========================================= */
-        .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 100px; border-bottom: 2px dashed var(--accent-color); }
-        .faq-container { display: flex; flex-direction: column; gap: 15px; }
-        .faq-item { border: 2px solid var(--card-border); border-radius: 8px; overflow: hidden; background: var(--card-bg); box-shadow: 3px 3px 0px var(--accent-color); }
+        .faq-section { max-width: 800px; margin: 0 auto; padding-bottom: 120px; border-bottom: 1px solid var(--card-border); }
+        .faq-container { display: flex; flex-direction: column; gap: 20px; }
+        .faq-item { border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; background: var(--bg-surface); transition: 0.3s; }
+        .faq-item:hover { border-color: rgba(255,255,255,0.1); }
         
-        .faq-question { width: 100%; text-align: left; padding: 20px 25px; background: transparent; border: none; color: var(--title-color); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; outline: none; }
-        .faq-icon { transition: transform 0.2s ease; color: var(--title-color); }
+        .faq-question { width: 100%; text-align: left; padding: 25px 30px; background: transparent; border: none; color: var(--title-color); font-family: 'Clash Display', sans-serif; font-weight: 500; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; outline: none; letter-spacing: 1px; }
+        .faq-icon { transition: transform 0.4s ease; color: var(--orb-orange); }
         .faq-item.active .faq-icon { transform: rotate(180deg); }
         
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 25px; font-size: 0.95rem; }
-        .faq-item.active .faq-answer { max-height: 400px; padding: 0 25px 25px 25px; border-top: 2px dashed var(--card-border); margin-top: 10px; padding-top: 20px; }
-        .faq-answer p { margin-bottom: 10px; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 30px; font-size: 1.05rem; opacity: 0.8; }
+        .faq-item.active .faq-answer { max-height: 400px; padding: 0 30px 30px 30px; }
+        .faq-answer p { margin-bottom: 12px; }
 
         /* =========================================
            7. FOOTER Y LOGÍSTICA
            ========================================= */
-        footer { text-align: center; padding: 100px 20px 40px 20px; width: 100%; }
-        .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 30px 0 50px 0; width: 100%; }
-        @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 25px; } }
+        footer { text-align: center; padding: 120px 20px 40px 20px; width: 100%; position: relative; }
+        .btn-group { display: flex; flex-direction: column; gap: 20px; align-items: center; margin: 40px 0 70px 0; width: 100%; }
+        @media (min-width: 600px) { .btn-group { flex-direction: row; justify-content: center; gap: 30px; } }
 
-        .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 30px; text-decoration: none; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; width: 100%; max-width: 290px; transition: 0.1s; border: 2px solid var(--title-color); border-bottom: 6px solid var(--title-color); }
+        .cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 35px; text-decoration: none; border-radius: 40px; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; width: 100%; max-width: 320px; transition: 0.4s; }
         .primary { background: var(--title-color); color: var(--bg-color); }
-        .secondary { background: var(--card-bg); color: var(--title-color); }
-        .cta-btn:active { transform: translateY(4px); border-bottom: 2px solid var(--title-color); }
+        .secondary { border: 1px solid var(--card-border); color: var(--title-color); background: transparent; }
+        .primary:hover { background: var(--orb-gradient); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255,158,100,0.2); }
+        .secondary:hover { border-color: var(--title-color); transform: translateY(-3px); }
 
-        .delivery-info { display: flex; flex-direction: column; gap: 30px; align-items: center; justify-content: center; margin: 40px auto 60px auto; max-width: 700px; padding-top: 40px; border-top: 2px solid var(--card-border); text-align: center; }
-        @media (min-width: 600px) { .delivery-info { flex-direction: row; gap: 40px; align-items: flex-start; text-align: left; } }
+        .delivery-info { display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center; margin: 0 auto 80px auto; max-width: 800px; padding-top: 60px; border-top: 1px solid var(--card-border); text-align: center; }
+        @media (min-width: 600px) { .delivery-info { flex-direction: row; gap: 60px; align-items: flex-start; text-align: left; } }
         
-        .delivery-item { display: flex; flex-direction: column; align-items: center; gap: 15px; flex: 1; }
+        .delivery-item { display: flex; flex-direction: column; align-items: center; gap: 20px; flex: 1; }
         @media (min-width: 600px) { .delivery-item { flex-direction: row; align-items: flex-start; } }
         
-        .delivery-item h4 { font-size: 1.1rem; color: var(--title-color); margin-bottom: 5px; text-transform: uppercase; }
-        .delivery-item p { font-family: 'Space Mono', monospace; font-size: 0.8rem; opacity: 0.8; line-height: 1.5; margin: 0; }
-        .delivery-item a { color: var(--title-color); font-weight: 700; }
-        .delivery-icon { color: var(--title-color); margin-top: 3px; }
+        .delivery-item h4 { font-family: 'Clash Display', sans-serif; font-size: 1.3rem; color: var(--title-color); margin-bottom: 5px; letter-spacing: 1px; }
+        .delivery-item p { font-size: 0.95rem; opacity: 0.7; line-height: 1.6; margin: 0; }
+        .delivery-item a { color: var(--orb-orange); font-weight: 500; text-decoration: underline; text-underline-offset: 4px; }
+        .delivery-icon { color: var(--orb-lavender); }
 
-        .micro-footer { padding-top: 40px; border-top: 2px solid var(--card-border); font-family: 'Space Mono', monospace; font-size: 0.75rem; display: flex; flex-direction: column; gap: 12px; align-items: center; text-transform: uppercase; }
-        .legal-links { display: flex; gap: 15px; align-items: center; }
-        .legal-links button { background: none; border: none; color: var(--text-color); font-family: 'Space Mono', monospace; font-size: 0.75rem; text-decoration: underline; cursor: pointer; transition: color 0.3s; }
-        .legal-links button:hover { color: var(--title-color); }
-        .made-in { font-weight: 700; color: var(--title-color); margin-top: 10px; background: var(--card-border); color: var(--bg-color); padding: 4px 8px; }
+        .micro-footer { padding-top: 50px; border-top: 1px solid var(--card-border); font-size: 0.85rem; opacity: 0.6; display: flex; flex-direction: column; gap: 15px; align-items: center; letter-spacing: 1px; }
+        .legal-links { display: flex; gap: 20px; align-items: center; }
+        .legal-links button { background: none; border: none; color: inherit; font-family: 'Outfit', sans-serif; font-size: 0.85rem; text-decoration: underline; cursor: pointer; transition: 0.3s; text-underline-offset: 4px; }
+        .legal-links button:hover { color: var(--orb-orange); }
+        .made-in { font-family: 'Clash Display', sans-serif; font-size: 1rem; color: var(--title-color); margin-top: 10px; letter-spacing: 2px; text-transform: uppercase; }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); z-index: 100002; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(19, 19, 26, 0.9); backdrop-filter: blur(10px); z-index: 100002; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.4s ease; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: var(--bg-color); border: 4px solid var(--card-border); border-radius: 8px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 40px 30px; position: relative; transform: scale(0.95); transition: transform 0.3s ease; box-shadow: 10px 10px 0px #000; }
-        .modal-overlay.active .modal-content { transform: scale(1); }
-        .modal-close { position: absolute; top: 15px; right: 15px; background: var(--title-color); border: none; color: var(--bg-color); padding: 5px; cursor: pointer; border-radius: 4px; }
-        .modal-close:hover { background: #F0544F; }
-        .modal-content h3 { font-size: 1.8rem; margin-bottom: 20px; border-bottom: 2px dashed var(--card-border); padding-bottom: 15px; }
+        .modal-content { background: var(--bg-color); border: 1px solid var(--card-border); border-radius: 20px; width: 90%; max-width: 650px; max-height: 80vh; overflow-y: auto; padding: 50px 40px; position: relative; transform: translateY(30px); transition: 0.4s ease; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-close { position: absolute; top: 25px; right: 25px; background: transparent; border: none; color: var(--title-color); padding: 5px; cursor: pointer; transition: 0.3s; }
+        .modal-close:hover { color: var(--orb-orange); transform: rotate(90deg); }
+        .modal-content h3 { font-family: 'Clash Display', sans-serif; font-size: 2.2rem; margin-bottom: 25px; border-bottom: 1px solid var(--card-border); padding-bottom: 20px; letter-spacing: 1px; }
 
-        .fade-in { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* =========================================
            8. OPTIMIZACIÓN MÓVIL
            ========================================= */
         @media (max-width: 768px) {
-            .materials-section, section.portfolio-section { padding: 60px 20px; }
-            h2.section-title { font-size: 1.6rem; margin-bottom: 40px; padding-bottom: 15px; }
-            .section-divider { margin: 60px 0 40px 0; }
-            .section-divider h2 { font-size: 1.8rem; }
-            .collection-grid { gap: 30px; margin-bottom: 60px; }
-            .text-container h3 { font-size: 1.8rem; }
-            .feature-wrapper { padding: 40px 25px; }
-            .pilares-grid { margin-top: 30px; gap: 20px; }
-            .pilar-card { padding: 30px; }
-            .faq-section { padding-bottom: 60px; }
-            footer { padding: 60px 20px 30px 20px; }
-            .btn-group { margin: 20px 0 30px 0; gap: 15px; }
-            .delivery-info { margin: 30px auto 40px auto; padding-top: 30px; gap: 20px; }
+            .materials-section, section.portfolio-section { padding: 80px 20px; }
+            h2.section-title { font-size: 1.8rem; margin-bottom: 40px; }
+            .section-divider { margin: 80px 0 50px 0; }
+            .section-divider h2 { font-size: 2rem; }
+            .collection-grid { gap: 40px; margin-bottom: 80px; }
+            .text-container h3 { font-size: 2rem; }
+            .feature-wrapper { padding: 50px 25px; }
+            .pilares-grid { margin-top: 40px; gap: 25px; }
+            .pilar-card { padding: 40px 30px; }
+            .faq-section { padding-bottom: 80px; }
+            footer { padding: 80px 20px 40px 20px; }
+            .btn-group { margin: 30px 0 40px 0; gap: 15px; }
+            .delivery-info { margin: 40px auto 50px auto; padding-top: 40px; gap: 30px; }
+            .ambient-orb { width: 150vw; height: 150vw; left: -25vw; top: 10vh; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ORBE, PARTÍCULAS Y TEXTURAS -->
+    <div class="ambient-orb"></div>
     <div id="particles-js"></div>
     <div id="scroll-progress"></div>
-    <div id="preloader"><div class="preloader-text">La ciencia detrás de un sentimiento...</div></div>
+    
+    <div id="preloader"><div class="preloader-text">Etéreo</div></div>
     
     <nav class="navbar" id="navbar">
-        <div class="nav-brand">Etéreo_Lab</div>
-        <button class="theme-btn" id="theme-btn"><i data-lucide="power" size="14"></i> Modo Oscuro</button>
+        <div class="nav-brand">ETÉREO</div>
+        <!-- Removido intencionalmente el botón de modo oscuro. Esta es la identidad. -->
     </nav>
 
     <header class="hero fade-in">
-        <h1>Etéreo Lab Studio</h1>
-        <p>La ciencia detrás de un sentimiento.<br>Arte físico y digital manufacturado en Guadalajara.</p>
+        <h1>ETÉREO</h1>
+        <p>A Minimal Retro Vision</p>
+        <div style="font-size: 1.1rem; opacity: 0.7; max-width: 600px; margin-top: 40px; font-weight: 400;">La ciencia detrás de un sentimiento. Arte físico y digital manufacturado en Guadalajara.</div>
     </header>
 
     <section class="quote-section fade-in">
-        <h2 class="quote-text">"No vendemos papel, posters ni marcos;<br> Diseñamos cápsulas del tiempo."</h2>
-        <p class="quote-author">SYS.MSG: Etéreo Lab Studio</p>
+        <h2 class="quote-text">"No vendemos papel, posters ni marcos.<br> Diseñamos cápsulas del tiempo."</h2>
+        <p class="quote-author">— Estudio Etéreo</p>
     </section>
 
     <!-- MANUFACTURA DE AUTOR -->
     <section class="materials-section fade-in">
-        <div style="text-align: center;"><h2 class="section-title">Manufactura de Autor</h2></div>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto; font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase;">Cada pieza es ensamblada meticulosamente a mano, fusionando componentes físicos de alta calidad con tecnología imperceptible.</p>
+        <h2 class="section-title">Manufactura de Autor</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto; opacity: 0.8; font-size: 1.1rem;">Cada pieza es ensamblada meticulosamente a mano, fusionando componentes físicos de alta calidad con tecnología imperceptible.</p>
         <div class="pilares-grid">
             <div class="pilar-card">
-                <i data-lucide="image" size="28" class="pilar-icon"></i>
+                <i data-lucide="image" size="36" class="pilar-icon"></i>
                 <h3>Impresión Premium</h3>
-                <p>Utilizamos Papel Fotográfico de Alta Densidad. Puedes elegir entre un acabado <strong>Glossy</strong> (para negros profundos y brillo estelar) o un acabado <strong>Mate</strong> sedoso que elimina los reflejos.</p>
+                <p>Utilizamos Papel Fotográfico de Alta Densidad. Acabados impecables para negros profundos o mates sedosos que eliminan cualquier reflejo.</p>
             </div>
             <div class="pilar-card">
-                <i data-lucide="frame" size="28" class="pilar-icon"></i>
+                <i data-lucide="frame" size="36" class="pilar-icon"></i>
                 <h3>Enmarcado Minimalista</h3>
-                <p>Nuestras piezas se entregan listas para exhibir. Usamos un marco ligero de perfil delgado y cristal de nitidez estándar, protegiendo el papel sin robarle protagonismo al diseño.</p>
+                <p>Perfil ligero, rígido y cristal estándar. Diseño estructurado para proteger el lienzo sin robarle protagonismo a la memoria.</p>
             </div>
             <div class="pilar-card">
-                <i data-lucide="package" size="28" class="pilar-icon"></i>
-                <h3>La Experiencia de Regalo</h3>
-                <p>Entregado en caja de microcorrugado kraft, envuelto en papel seda, cerrado con un distintivo listón y una tarjeta de instrucciones para revelar la magia del NFC.</p>
+                <i data-lucide="package" size="36" class="pilar-icon"></i>
+                <h3>Empaque Etéreo</h3>
+                <p>Microcorrugado kraft, papel seda y nuestro distintivo lacre de cera. Una experiencia táctil y nostálgica desde el primer momento.</p>
             </div>
         </div>
     </section>
@@ -315,7 +328,7 @@
         
         <!-- DIVISOR LÍNEA I -->
         <div class="section-divider fade-in">
-            <span>[ DIR: Línea I ]</span>
+            <span>Colección I</span>
             <h2>Arte Enmarcado</h2>
         </div>
 
@@ -323,16 +336,16 @@
         <div class="collection-grid fade-in">
             <div class="img-container img-square">
                 <img src="./onda-sonora.jpg" alt="Cuadro de Onda Sonora" loading="lazy">
-                <div class="slide-caption">SYS.AUDIO_WAVE</div>
+                <div class="slide-caption">Arte Sonoro</div>
             </div>
             <div class="text-container">
                 <h3>Colección Sonora</h3>
                 <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una elegante pieza de arte visual mediante el análisis algorítmico de sus frecuencias sonoras reales.</p>
-                <p>El latido de tu bebé en su ultrasonido, la voz de alguien que extrañas, el ladrido de tu mejor amigo o ese primer "Te amo". Ocultamos un microchip NFC en el lienzo; solo acerca tu celular al cuadro terminado y el audio original cobrará vida al instante a través de nuestro reproductor digital exclusivo en <strong>play.etereomx.com</strong>.</p>
+                <p>El latido de tu bebé en su ultrasonido, la voz de alguien que extrañas o ese primer "Te amo". Ocultamos un microchip NFC en el lienzo; solo acerca tu celular al cuadro terminado y el audio original cobrará vida.</p>
                 
                 <!-- REPRODUCTOR WAVESURFER REAL -->
                 <div class="audio-player-wrapper">
-                    <p style="font-family: 'Space Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; background: var(--title-color); color: var(--bg-color); padding: 2px 8px;">Prueba el Escáner Digital</p>
+                    <p style="font-family: 'Clash Display', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; color: var(--orb-orange);">Escáner Digital</p>
                     
                     <div class="waveform-wrapper">
                         <div id="waveform-real"></div>
@@ -342,12 +355,12 @@
                         </button>
                     </div>
                     
-                    <p id="audio-status-text" style="font-family: 'Space Mono', monospace; color: var(--title-color); font-size: 0.85rem; margin-top: 15px; text-transform: uppercase;">[ WAIT ] "La voz de tu memoria..."</p>
+                    <p id="audio-status-text" style="font-size: 1rem; margin-top: 15px; opacity: 0.8; font-style: italic;">"La voz de tu memoria..."</p>
                 </div>
 
-                <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Oferta: $299 MXN <span class="price-strike">$399</span></button>
-                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
-                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución + Código QR) por <strong>$99 MXN</strong>.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Colección Sonora">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
+                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Galería</em> (13x18) y <em>Íntima</em> (10x15).</p>
+                <p class="price-digital">Opción Digital (Alta Resolución + QR) por $99 MXN.</p>
             </div>
         </div>
 
@@ -357,19 +370,15 @@
                 <div class="carousel">
                     <div class="carousel-slide">
                         <div class="img-container img-square"><img src="./mapa-clasico.jpg" alt="Mapa Estelar Minimalista" loading="lazy"></div>
-                        <div class="slide-caption">Minimalista_Clásico.dat</div>
+                        <div class="slide-caption">Minimalista Clásico</div>
                     </div>
                     <div class="carousel-slide">
                         <div class="img-container img-square"><img src="./mapa-cupula.jpg" alt="Mapa Estelar Cúpula" loading="lazy"></div>
-                        <div class="slide-caption">Diseño_Cúpula.dat</div>
+                        <div class="slide-caption">Diseño en Cúpula</div>
                     </div>
                     <div class="carousel-slide">
                         <div class="img-container img-square"><img src="./fase-lunar.jpg" alt="Fases Lunares" loading="lazy"></div>
-                        <div class="slide-caption">Fases_Lunares.dat</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./alineacion-planetaria.jpg" alt="Alineación Planetaria" loading="lazy"></div>
-                        <div class="slide-caption">Alineación_Planetaria.dat</div>
+                        <div class="slide-caption">Fases Lunares</div>
                     </div>
                 </div>
                 <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> Desliza para explorar variantes</div>
@@ -377,11 +386,10 @@
             <div class="text-container">
                 <h3>Colección Astronómica</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en el que tu vida cambió para siempre.</p>
-                <p>Desde el <strong>Minimalismo Clásico</strong> hasta nuestra <strong>Cúpula Superior</strong>, incluyendo la iluminación lunar y la alineación planetaria de ese día irrepetible.</p>
+                <p>Desde el Minimalismo Clásico hasta nuestra Cúpula Superior, incluyendo la iluminación lunar y la alineación planetaria de ese día irrepetible.</p>
                 
-                <button class="price-badge whatsapp-trigger" data-product="Colección Astronómica">Oferta: $299 MXN <span class="price-strike">$399</span></button>
-                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
-                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución) por <strong>$99 MXN</strong>.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Colección Astronómica">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
+                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).</p>
             </div>
         </div>
 
@@ -392,26 +400,21 @@
                 <p><strong>Geometría del Espacio:</strong> Inmortalizamos el lugar exacto o el recorrido donde sus caminos se cruzaron. Trazamos con extrema precisión las calles, avenidas y rutas de tu memoria.</p>
                 <p><strong>Tres cartografías:</strong> Póster Clásico (un punto exacto), Ruta Terrestre (el camino entre dos direcciones) o Vuelo a Distancia (amor sin fronteras).</p>
                 
-                <button class="price-badge whatsapp-trigger" data-product="Colección Terrenal">Oferta: $299 MXN <span class="price-strike">$399</span></button>
-                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).<br>También disponible en <em>Edición Galería</em> de 13x18 cm ($199) y <em>Edición Íntima</em> de 10x15 cm ($179).</p>
-                <p class="price-digital">Opción a distancia: <strong>Edición Digital</strong> (Alta Resolución) por <strong>$99 MXN</strong>.</p>
+                <button class="price-badge whatsapp-trigger" data-product="Colección Terrenal">Oferta Especial: $299 MXN <span class="price-strike">$399</span></button>
+                <p class="price-sizes"><strong>Edición Studio</strong> (Formato 20x25 cm).</p>
             </div>
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <div class="carousel-slide">
                         <div class="img-container img-square"><img src="./mapa-clasico-geo.jpg" alt="Mapa Geográfico Clásico" loading="lazy"></div>
-                        <div class="slide-caption">Póster_Clásico.map</div>
+                        <div class="slide-caption">Póster Clásico</div>
                     </div>
                     <div class="carousel-slide">
                         <div class="img-container img-square"><img src="./ruta-terrestre.jpg" alt="Ruta Terrestre" loading="lazy"></div>
-                        <div class="slide-caption">Ruta_Terrestre.map</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="img-container img-square"><img src="./vuelo-distancia.jpg" alt="Ruta de Vuelo" loading="lazy"></div>
-                        <div class="slide-caption">Vuelo_Distancia.map</div>
+                        <div class="slide-caption">Ruta Terrestre</div>
                     </div>
                 </div>
-                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> Desliza para explorar variantes</div>
+                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> Desliza para variantes</div>
             </div>
         </div>
 
@@ -419,9 +422,9 @@
         <div class="collection-grid fade-in">
             <div class="feature-wrapper">
                 <div class="nfc-pulse"></div>
-                <i data-lucide="smartphone-nfc" size="72" style="color: var(--title-color); position: relative; z-index: 2; margin-bottom: 20px;"></i>
-                <h4 style="font-family: 'Space Mono', monospace; font-size: 1.2rem; margin-bottom: 10px; position: relative; z-index: 2;">Tecnología NFC Integrada</h4>
-                <p style="font-family: 'Space Mono', monospace; font-size: 0.8rem; position: relative; z-index: 2; opacity: 0.8; text-transform: uppercase;">Incluido sin costo extra en todas las piezas físicas.</p>
+                <i data-lucide="smartphone-nfc" size="80" style="color: var(--title-color); position: relative; z-index: 2; margin-bottom: 25px;"></i>
+                <h4 style="font-size: 1.5rem; margin-bottom: 10px; position: relative; z-index: 2;">Tecnología NFC Integrada</h4>
+                <p style="font-size: 1rem; position: relative; z-index: 2; opacity: 0.8; letter-spacing: 1px;">Incluido sin costo en todas las piezas físicas.</p>
             </div>
             <div class="text-container">
                 <h3>La Dimensión Oculta</h3>
@@ -439,13 +442,13 @@
             </div>
             <div class="img-container img-square">
                 <img src="./empaque.jpg" alt="Empaque Aesthetic Etéreo Lab Studio" loading="lazy">
-                <div class="slide-caption">Packaging_V1.img</div>
+                <div class="slide-caption">Empaque de Autor</div>
             </div>
         </div>
 
         <!-- DIVISOR LÍNEA II -->
         <div class="section-divider fade-in">
-            <span>[ DIR: Línea II ]</span>
+            <span>Colección II</span>
             <h2>Accesorios Inteligentes</h2>
         </div>
 
@@ -453,11 +456,10 @@
         <div class="collection-grid fade-in">
             <div class="img-container img-square">
                 <img src="./pet-id.jpg" alt="Pet ID Inteligente" loading="lazy">
-                <div class="slide-caption">Smart_Tag.img</div>
             </div>
             <div class="text-container">
                 <h3>Pet ID Inteligente</h3>
-                <p>La seguridad de tu mejor amigo rediseñada bajo la estética minimalista de Etéreo Lab Studio.</p>
+                <p>La seguridad de tu mejor amigo rediseñada bajo la estética de Etéreo Lab Studio.</p>
                 <p>Diseñamos placas de identificación de alta resistencia. Quien encuentre a tu mascota solo debe acercar su celular (NFC) o escanear el código (QR) para acceder a tu información de contacto al instante.</p>
                 <button class="price-badge whatsapp-trigger" data-product="Pet ID Inteligente">Desde $199 MXN</button>
             </div>
@@ -465,20 +467,19 @@
 
         <!-- DIVISOR LÍNEA III -->
         <div class="section-divider fade-in">
-            <span>[ DIR: Línea III ]</span>
+            <span>Colección III</span>
             <h2>Estudio Creativo</h2>
         </div>
 
         <!-- 7. LIBRETAS ARTESANALES (PRÓXIMAMENTE) -->
-        <div class="collection-grid fade-in" style="opacity: 0.8;">
+        <div class="collection-grid fade-in" style="opacity: 0.6;">
             <div class="text-container">
-                <span class="badge-soon">[ STATUS: Próximamente ]</span>
+                <span class="badge-soon">Próximamente</span>
                 <h3>Encuadernación de Autor</h3>
                 <p>Libretas y bitácoras ensambladas con estricto dominio artesanal. Papel de alta calidad, costuras expuestas y el toque Etéreo: tecnología NFC oculta en la contraportada para digitalizar tus notas o proteger tu diario con un candado virtual.</p>
             </div>
             <div class="img-container img-square">
-                <img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(100%) contrast(1.2);">
-                <div class="slide-caption">Proto_Book.img</div>
+                <img src="./libreta-artesanal.jpg" alt="Libretas Artesanales NFC" loading="lazy" style="filter: grayscale(80%) contrast(1.1) opacity(0.7);">
             </div>
         </div>
 
@@ -486,82 +487,79 @@
 
     <!-- ACORDEÓN DE PREGUNTAS FRECUENTES -->
     <section class="faq-section fade-in">
-        <div style="text-align: center;"><h2 class="section-title">Preguntas Frecuentes</h2></div>
+        <h2 class="section-title">Manual de Asistencia</h2>
         <div class="faq-container">
             <div class="faq-item">
-                <button class="faq-question">¿De qué materiales están fabricados los cuadros? <i data-lucide="chevron-down" class="faq-icon" size="24"></i></button>
+                <button class="faq-question">¿De qué materiales están fabricados los cuadros? <i data-lucide="plus" class="faq-icon" size="24"></i></button>
                 <div class="faq-answer"><p>Utilizamos papel fotográfico premium (Glossy o Mate) montado en un marco minimalista ligero con cristal de protección. Todo empacado meticulosamente con sellos de cera para una experiencia de regalo inolvidable.</p></div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-question">¿Cómo y cuándo se entregan los pedidos físicos en Guadalajara? <i data-lucide="chevron-down" class="faq-icon" size="24"></i></button>
+                <button class="faq-question">Logística de entregas en Guadalajara <i data-lucide="plus" class="faq-icon" size="24"></i></button>
                 <div class="faq-answer">
-                    <p>Contamos con dos modalidades seguras para la entrega de tu pieza:</p>
-                    <p><strong>1. Envío a Domicilio:</strong> Operamos nuestra logística exclusivamente a través de <em>Paquetería Casa Blanca</em> para garantizar la integridad del cristal. Los despachos se realizan todos los <strong>miércoles y sábados</strong>.</p>
-                    <p><strong>2. Recolección sin costo (Pick-Up):</strong> Puedes recoger tu cápsula directamente en nuestro punto de entrega aliado <strong>Ciberdragon</strong>. El horario de atención es de Lunes a Sábado de 10:30 AM a 8:00 PM.</p>
+                    <p>Contamos con dos modalidades seguras:</p>
+                    <p><strong>1. Envío a Domicilio:</strong> Vía Paquetería Casa Blanca (despachos los miércoles y sábados).</p>
+                    <p><strong>2. Recolección (Pick-Up):</strong> En nuestro punto aliado Ciberdragon (L-S 10:30 AM a 8:00 PM).</p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">¿Puedo revisar el diseño antes de imprimir? <i data-lucide="chevron-down" class="faq-icon" size="24"></i></button>
-                <div class="faq-answer"><p>Sí, la exactitud es nuestro pilar. Antes de pasar a manufactura física (o enviarte la versión digital), te enviaremos una previsualización de tu diseño para tu autorización final.</p></div>
+                <button class="faq-question">¿Puedo revisar el diseño antes de imprimir? <i data-lucide="plus" class="faq-icon" size="24"></i></button>
+                <div class="faq-answer"><p>Sí, la exactitud es nuestro pilar. Te enviaremos una previsualización de tu diseño para tu autorización final antes de pasar a manufactura.</p></div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">¿Qué requisitos necesita mi celular para leer el NFC? <i data-lucide="chevron-down" class="faq-icon" size="24"></i></button>
-                <div class="faq-answer"><p>Tu smartphone debe contar con tecnología NFC activa (estándar en dispositivos iOS y Android modernos). Nuestro microchip es pasivo, no requiere baterías ni instalar aplicaciones extra; solo acerca tu teléfono desbloqueado al marco de tu cuadro físico.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">¿Cuáles son los métodos de pago aceptados? <i data-lucide="chevron-down" class="faq-icon" size="24"></i></button>
-                <div class="faq-answer"><p>Aceptamos transferencias electrónicas interbancarias (SPEI), depósitos bancarios y pagos en efectivo al momento de coordinar el anticipo de tu orden.</p></div>
+                <button class="faq-question">Requisitos para leer el chip NFC <i data-lucide="plus" class="faq-icon" size="24"></i></button>
+                <div class="faq-answer"><p>Tu smartphone debe contar con antena NFC activa (estándar en iOS y Android modernos). No requiere baterías ni apps extra; solo acerca tu teléfono desbloqueado al cuadro físico.</p></div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER CON BLOQUE LOGÍSTICO -->
     <footer class="fade-in">
-        <h3 style="font-size: 2.2rem; margin-bottom: 20px;">Enmarca tu historia</h3>
+        <h3 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 20px; line-height: 1;">Enmarca tu historia</h3>
+        <p style="opacity: 0.8; font-size: 1.1rem; max-width: 500px; margin: 0 auto;">Inicia tu proyecto de personalización directamente con nuestro estudio.</p>
         
         <div class="btn-group">
             <a href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo%20Lab.%20Vengo%20de%20etereomx.com%20y%20quiero%20enmarcar%20mi%20historia." class="cta-btn primary">
-                <i data-lucide="message-circle" size="18"></i> Contactar por WhatsApp
+                <i data-lucide="message-circle" size="20"></i> Contacto por WhatsApp
             </a>
             <a href="https://instagram.com/etereolabstudio" class="cta-btn secondary" target="_blank" id="ig-btn">
-                <i data-lucide="instagram" size="18"></i> Ver en Instagram
+                <i data-lucide="instagram" size="20"></i> Explorar Instagram
             </a>
         </div>
 
         <div class="delivery-info fade-in">
             <div class="delivery-item">
-                <i data-lucide="package" size="24" class="delivery-icon"></i>
+                <i data-lucide="package" size="32" class="delivery-icon"></i>
                 <div>
                     <h4>Envíos Locales Seguros</h4>
-                    <p>Vía Paquetería Casa Blanca.<br>Entregas los Miércoles y Sábados.</p>
+                    <p>Vía Paquetería Casa Blanca.<br>Despachos Miércoles y Sábados.</p>
                 </div>
             </div>
             <div class="delivery-item">
-                <i data-lucide="map-pin" size="24" class="delivery-icon"></i>
+                <i data-lucide="map-pin" size="32" class="delivery-icon"></i>
                 <div>
                     <h4>Pick-Up Gratuito</h4>
-                    <p>Recoge en <strong>Ciberdragon</strong> de 10:30am a 8:00pm.<br>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">Ver ubicación en el mapa</a></p>
+                    <p>Recoge en <strong>Ciberdragon</strong><br>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Ahorro+4122,+Col.+Benito+Juarez,+Guadalajara" target="_blank">Ver ubicación satelital</a></p>
                 </div>
             </div>
         </div>
 
         <div class="micro-footer">
-            <p>COPYRIGHT &copy; 2026 ETÉREO LAB STUDIO.</p>
+            <p>&copy; 2026 ETÉREO LAB STUDIO. TODOS LOS DERECHOS RESERVADOS.</p>
             <div class="legal-links">
-                <button onclick="openModal('modal-privacidad')">[ AVISO DE PRIVACIDAD ]</button>
-                <button onclick="openModal('modal-terminos')">[ TÉRMINOS Y CONDICIONES ]</button>
+                <button onclick="openModal('modal-privacidad')">Aviso de Privacidad</button>
+                <button onclick="openModal('modal-terminos')">Términos y Condiciones</button>
             </div>
-            <p class="made-in">DISEÑADO Y MANUFACTURADO EN GDL, MX.</p>
+            <p class="made-in">DISEÑADO Y MANUFACTURADO EN GDL, MÉXICO.</p>
         </div>
     </footer>
 
     <!-- VENTANAS MODALES -->
     <div class="modal-overlay" id="modal-privacidad">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-privacidad')"><i data-lucide="x" size="24"></i></button>
+            <button class="modal-close" onclick="closeModal('modal-privacidad')"><i data-lucide="x" size="28"></i></button>
             <h3>Aviso de Privacidad</h3>
             <p>En <strong>Etéreo Lab Studio</strong>, valoramos y protegemos tu privacidad. Los datos personales, fechas, audios y ubicaciones geográficas que compartes con nosotros son utilizados única y exclusivamente para el diseño y manufactura de tus piezas.</p>
             <p>Tus memorias e información de contacto son tratadas con estricta confidencialidad. No almacenamos tus archivos en bases de datos públicas, ni comercializamos tu información con terceros.</p>
@@ -571,7 +569,7 @@
 
     <div class="modal-overlay" id="modal-terminos">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-terminos')"><i data-lucide="x" size="24"></i></button>
+            <button class="modal-close" onclick="closeModal('modal-terminos')"><i data-lucide="x" size="28"></i></button>
             <h3>Términos y Condiciones</h3>
             <p><strong>1. Procesamiento de Pedidos:</strong> Cada pieza es diseñada de manera única. El proceso de manufactura (física o digital) comienza únicamente tras la recepción del anticipo o pago acordado.</p>
             <p><strong>2. Revisiones de Diseño:</strong> Se proporcionará un (1) previo digital para tu revisión. Una vez aprobado, el diseño pasa a impresión o exportación final y no se aceptarán modificaciones.</p>
@@ -583,15 +581,16 @@
     <script>
         lucide.createIcons();
         window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1600);
+            setTimeout(() => { document.getElementById('preloader').classList.add('preloader-hidden'); lucide.createIcons(); }, 1800);
             initParticles();
         });
 
+        /* Partículas tenues emulando polvo en la lente fotográfica */
         function initParticles() {
             if (typeof particlesJS !== 'undefined') {
                 particlesJS('particles-js', {
-                    "particles": { "number": { "value": 50, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#888888" }, "shape": { "type": "square" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 2, "random": false }, "line_linked": { "enable": true, "distance": 150, "color": "#888888", "opacity": 0.2, "width": 1 }, "move": { "enable": true, "speed": 0.8, "direction": "none", "random": true, "out_mode": "out" } },
-                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 3 } } },
+                    "particles": { "number": { "value": 30, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#F2EFE9" }, "shape": { "type": "circle" }, "opacity": { "value": 0.2, "random": true }, "size": { "value": 2, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 0.3, "direction": "top", "random": true, "out_mode": "out" } },
+                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true } },
                     "retina_detect": true
                 });
             }
@@ -625,33 +624,28 @@
             });
         });
 
-        /* =========================================
-           LÓGICA DE BOTONES DE PRECIO (WhatsApp)
-           ========================================= */
+        /* LÓGICA DE WHATSAPP */
         document.querySelectorAll('.whatsapp-trigger').forEach(button => {
             button.addEventListener('click', function() {
                 if (navigator.vibrate) navigator.vibrate(50);
                 const productName = this.getAttribute('data-product');
-                const userAgrees = confirm(`SYS.MSG: ¿Conectar con soporte para la ${productName}?\n\nSerás redirigido a WhatsApp.`);
+                const userAgrees = confirm(`Estás a un paso de inmortalizar tu memoria.\n\n¿Deseas iniciar tu proyecto de ${productName} mediante nuestro WhatsApp?`);
                 if(userAgrees) {
                     const phone = "523332227033";
-                    const message = encodeURIComponent(`Hola Etéreo Lab. Me interesa pedir un artículo u obtener más información sobre la ${productName}.`);
+                    const message = encodeURIComponent(`Hola Estudio Etéreo. Me interesa crear mi cápsula del tiempo y obtener información sobre la ${productName}.`);
                     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
                 }
             });
         });
 
-        /* =========================================
-           REPRODUCTOR WAVESURFER CON DISEÑO CUSTOM
-           ========================================= */
-        const isDarkInitial = document.documentElement.getAttribute('data-theme') === 'dark';
-        
+        /* REPRODUCTOR WAVESURFER - ADAPTADO AL OCASO */
         const wavesurfer = WaveSurfer.create({
             container: '#waveform-real',
-            waveColor: isDarkInitial ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
-            progressColor: isDarkInitial ? '#C6C0D9' : '#1A1A1A',
+            waveColor: 'rgba(242, 239, 233, 0.2)', /* Crema translúcido */
+            progressColor: '#FF9E64', /* Naranja Orbe */
             barWidth: 3,
-            barGap: 2,
+            barGap: 3,
+            barRadius: 3,
             height: 80,
             url: './demo.mp3' 
         });
@@ -669,39 +663,22 @@
         wavesurfer.on('play', () => {
             iconPlay.style.display = "none";
             iconPause.style.display = "block";
-            audioStatusText.innerHTML = '[ REC ] "Reproduciendo..."';
+            audioStatusText.innerHTML = '"Reproduciendo memoria..."';
+            audioStatusText.style.color = 'var(--orb-orange)';
         });
 
         wavesurfer.on('pause', () => {
             iconPlay.style.display = "block";
             iconPause.style.display = "none";
-            audioStatusText.innerHTML = '[ PAUSE ] "Pausado..."';
+            audioStatusText.innerHTML = '"Memoria en pausa."';
+            audioStatusText.style.color = 'var(--text-color)';
         });
 
         wavesurfer.on('finish', () => {
             iconPlay.style.display = "block";
             iconPause.style.display = "none";
-            audioStatusText.innerHTML = '[ STOP ] "Memoria finalizada..."';
-        });
-
-        /* =========================================
-           BOTÓN DE TEMA OSCURO / CLARO
-           ========================================= */
-        const themeBtn = document.getElementById('theme-btn'); 
-        const htmlElement = document.documentElement;
-        
-        themeBtn.addEventListener('click', () => {
-            if (navigator.vibrate) navigator.vibrate(50);
-            const isLight = htmlElement.getAttribute('data-theme') === 'light';
-            htmlElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
-            themeBtn.innerHTML = isLight ? '<i data-lucide="power" size="14"></i> Modo Claro' : '<i data-lucide="power" size="14"></i> Modo Oscuro';
-            lucide.createIcons();
-            
-            const newIsDark = !isLight;
-            wavesurfer.setOptions({
-                waveColor: newIsDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)',
-                progressColor: newIsDark ? '#C6C0D9' : '#1A1A1A'
-            });
+            audioStatusText.innerHTML = '"Memoria finalizada."';
+            audioStatusText.style.color = 'var(--text-color)';
         });
 
         const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
