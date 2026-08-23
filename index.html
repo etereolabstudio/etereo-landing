@@ -837,9 +837,8 @@
             button.addEventListener('click', function() {
                 const productName = this.getAttribute('data-product');
                 trackContact(productName);
-                const phone = "523332227033";
-                const message = encodeURIComponent(`Hola Estudio Etéreo. Me interesa crear mi diseño y tener información de: ${productName}.`);
-                window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+                // Redirigir al nuevo formulario de captura híbrido en app.etereomx
+                window.location.href = `https://app.etereomx/ordenar?producto=${encodeURIComponent(productName)}`;
             });
         });
 
