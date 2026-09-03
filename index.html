@@ -487,11 +487,21 @@
             <div class="text-container">
                 <span class="eyebrow">Colección Sonora</span>
                 <h3>La voz, en tinta</h3>
-                <p>Lo efímero, hecho eterno. Transformamos un archivo de audio en una pieza visual mediante el análisis algorítmico de sus frecuencias reales.</p>
+                <p>Transformamos tu nota de voz o canción favorita en una onda visual única. Pero la magia reside en lo invisible: <strong>cada pieza oculta un microchip NFC y un código QR.</strong></p>
+                <p style="font-size: 0.92rem; opacity: 0.85; margin-top: -5px; margin-bottom: 25px;">Acerca tu celular al marco y el recuerdo cobrará vida al instante en <em>Play Etéreo</em>, nuestro reproductor digital exclusivo.</p>
 
-                <div class="audio-player-wrapper">
-                    <div class="audio-header">
-                        <span class="mono" style="font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.7;">Escáner digital oculto</span>
+                <!-- DEMO INTERACTIVA -->
+                <div class="audio-player-wrapper" style="border-top: 2px solid var(--accent); background: linear-gradient(180deg, var(--light-leak-1) 0%, transparent 100%);">
+                    
+                    <div class="audio-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+                        <div>
+                            <span class="mono" style="font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 6px;">
+                                <i data-lucide="smartphone-nfc" size="14"></i> Simula el escaneo
+                            </span>
+                        </div>
+                        <a href="https://play.etereomx.com" target="_blank" rel="noopener noreferrer" class="mono" style="font-size: 0.65rem; color: var(--text-color); text-decoration: underline; text-underline-offset: 4px; transition: 0.3s;" onmouseover="this.style.color='var(--title-color)'" onmouseout="this.style.color='var(--text-color)'">
+                            Ver cassette web ↗
+                        </a>
                     </div>
 
                     <div class="waveform-wrapper">
@@ -499,15 +509,18 @@
                     </div>
 
                     <div class="play-controls">
-                        <button class="play-btn-custom" id="custom-play-btn">
+                        <button class="play-btn-custom" id="custom-play-btn" style="box-shadow: 0 4px 15px rgba(221, 142, 92, 0.2);">
                             <svg class="icon-play" id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             <svg class="icon-pause" id="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
-                        <span class="audio-status" id="audio-status-text">"La voz de tu memoria..."</span>
+                        <div style="display: flex; flex-direction: column;">
+                            <span class="audio-status" id="audio-status-text">"La voz de tu memoria..."</span>
+                            <span class="mono" style="font-size: 0.65rem; opacity: 0.5; margin-top: 3px;">Demo de reproducción real</span>
+                        </div>
                     </div>
                 </div>
 
-                <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Sonora">Adquirir edición</button>
+                <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Sonora" style="margin-top: 25px;">Adquirir edición</button>
                 <div class="price-line"><span class="from">Desde</span>$179 MXN · Studio $299 MXN</div>
             </div>
         </div>
