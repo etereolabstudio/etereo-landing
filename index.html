@@ -123,9 +123,15 @@
 
         #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--accent); z-index: 100001; }
 
-        .navbar { position: fixed; top: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: 1px solid var(--card-border); z-index: 9999; transition: transform 0.5s ease; }
+        .navbar { position: fixed; top: 0; width: 100%; padding: 18px 40px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: 1px solid var(--card-border); z-index: 9999; transition: transform 0.5s ease; }
         .navbar.nav-hidden { transform: translateY(-100%); }
-        .nav-brand { font-size: clamp(1rem, 2vw, 1.3rem); letter-spacing: 4px; }
+        .nav-brand { font-size: clamp(1rem, 2vw, 1.3rem); letter-spacing: 4px; justify-self: start; text-decoration: none; }
+        .nav-links { display: flex; align-items: center; justify-content: center; gap: 24px; }
+        .nav-links a { color: var(--text-color); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-actions { justify-self: end; display: flex; align-items: center; gap: 10px; }
+        .nav-menu-btn { display: none; background: transparent; color: var(--title-color); border: 1px solid var(--card-border); width: 34px; height: 34px; align-items: center; justify-content: center; cursor: pointer; border-radius: 2px; }
+        .mobile-nav-panel { display: none; }
 
         .theme-btn { background: transparent; color: var(--title-color); border: 1px solid var(--card-border); padding: 6px 14px; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.4s; border-radius: 2px; }
         .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -155,10 +161,41 @@
             color: var(--accent);
             margin-right: -0.5em;
         }
+        .hero-copy { max-width: 720px; margin-top: 24px; font-size: clamp(0.95rem, 2vw, 1.08rem); color: var(--text-color); opacity: 0.88; }
+        .hero-actions { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; justify-content: center; }
+        .hero-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border: 1px solid var(--title-color); color: var(--title-color); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 2px; transition: 0.3s; }
+        .hero-actions a.primary { background: var(--title-color); color: var(--bg-color); }
+        .hero-actions a:hover { border-color: var(--accent); color: var(--accent); }
+        .hero-actions a.primary:hover { background: transparent; }
+
+        .about-section { max-width: 920px; margin: 0 auto; padding: 100px 20px 80px; text-align: center; }
+        .about-section p { max-width: 720px; margin: 16px auto 0; font-size: 1rem; opacity: 0.86; }
+        .about-meta { margin-top: 24px; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+
+        .catalog-intro { max-width: 820px; margin: 10px auto 70px; text-align: center; }
+        .catalog-intro p { margin-top: 14px; font-size: 0.96rem; opacity: 0.82; }
+
+        .future-section { max-width: 1200px; margin: 0 auto; padding: 20px 20px 30px; }
+        .future-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+        .future-card { border: 1px solid var(--card-border); padding: 28px 24px; background: var(--bg-raise); }
+        .future-card .eyebrow { margin-bottom: 10px; display: inline-block; }
+        .future-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
+        .future-card p { font-size: 0.9rem; opacity: 0.78; }
+        .future-label { margin-top: 18px; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-color); opacity: 0.7; }
 
         .quote-section { min-height: 46vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); position: relative; }
         .quote-text { font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(1.5rem, 5vw, 2.75rem); color: var(--title-color); max-width: 800px; line-height: 1.35; margin-bottom: 22px; }
         .quote-author { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-color); }
+
+
+        .sonora-format-grid { grid-template-columns: repeat(3, 1fr); margin-top: 0; }
+        .sonora-format-grid .pilar-card { min-height: 100%; }
+        .future-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); opacity: 0.85; }
+        @media (max-width: 768px) {
+            .sonora-format-grid { grid-template-columns: 1fr; gap: 20px; }
+            .sonora-format-grid .pilar-card { border-top: 1px solid var(--card-border); padding-top: 22px; }
+            .sonora-format-grid .pilar-card:first-child { border-top: none; padding-top: 0; }
+        }
 
         /* =========================================
            4. MANUFACTURA — LISTA EDITORIAL (no cajas)
@@ -341,8 +378,15 @@
            8. OPTIMIZACIÓN MÓVIL
            ========================================= */
         @media (max-width: 768px) {
-            .navbar { padding: 15px 20px; }
+            .navbar { padding: 15px 20px; grid-template-columns: 1fr auto; }
             .nav-brand { font-size: 1rem; }
+            .nav-links { display: none; }
+            .nav-actions { gap: 8px; }
+            .nav-menu-btn { display: inline-flex; }
+            .mobile-nav-panel { position: fixed; top: 65px; left: 12px; right: 12px; display: flex; flex-direction: column; gap: 6px; padding: 10px; background: var(--nav-bg); backdrop-filter: blur(15px); border: 1px solid var(--card-border); transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none; transition: 0.25s ease; z-index: 9998; }
+            .mobile-nav-panel.active { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
+            .mobile-nav-panel a { color: var(--title-color); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 13px 12px; border-bottom: 1px solid var(--card-border); }
+            .mobile-nav-panel a:last-child { border-bottom: none; }
             .hero { padding-top: 10vh; }
             .hero h1 { font-size: clamp(3rem, 16vw, 6rem); transform: scaleX(1); }
             .hero-frame-mark { font-size: 0.55rem; }
@@ -362,6 +406,11 @@
             .price-badge { padding: 11px 20px; font-size: 0.7rem; margin-top: 6px; }
             .price-sizes { font-size: 0.72rem; margin-top: 10px; }
             .feature-wrapper { padding: 40px 20px; }
+            .hero-copy { max-width: 92%; }
+            .hero-actions { width: 100%; }
+            .hero-actions a { width: 100%; max-width: 320px; }
+            .about-section { padding: 75px 20px 60px; }
+            .future-grid { grid-template-columns: 1fr; }
             .audio-player-wrapper { padding: 20px; }
             footer { padding: 60px 20px 30px 20px; }
             .btn-group { gap: 10px; margin: 20px 0; }
@@ -406,11 +455,30 @@
     </div>
 
     <nav class="navbar" id="navbar">
-        <div class="nav-brand">ETÉREO</div>
-        <button type="button" class="theme-btn" id="theme-btn" aria-label="Cambiar entre modo Alba y Ocaso">
-            <i data-lucide="sun" size="12" id="theme-icon"></i> <span id="theme-text">Modo Alba</span>
-        </button>
+        <a class="nav-brand" href="#inicio" aria-label="ETÉREO, inicio">ETÉREO</a>
+        <div class="nav-links" aria-label="Navegación principal">
+            <a href="#colecciones">Colecciones</a>
+            <a href="#mascotas">Mascotas</a>
+            <a href="#objetos">Objetos</a>
+            <a href="#vinculos">Vínculos</a>
+            <a href="#estudio">Estudio</a>
+        </div>
+        <div class="nav-actions">
+            <button type="button" class="nav-menu-btn" id="nav-menu-btn" aria-label="Abrir menú" aria-expanded="false">
+                <i data-lucide="menu" size="16"></i>
+            </button>
+            <button type="button" class="theme-btn" id="theme-btn" aria-label="Cambiar entre modo Alba y Ocaso">
+                <i data-lucide="sun" size="12" id="theme-icon"></i> <span id="theme-text">Modo Alba</span>
+            </button>
+        </div>
     </nav>
+    <div class="mobile-nav-panel" id="mobile-nav-panel">
+        <a href="#colecciones">Colecciones</a>
+        <a href="#mascotas">Mascotas</a>
+        <a href="#objetos">Objetos</a>
+        <a href="#vinculos">Vínculos</a>
+        <a href="#estudio">Estudio</a>
+    </div>
 
     <div class="sticky-cta">
         <a href="https://wa.me/523332227033?text=Hola%20Etéreo.%20Quiero%20información." id="sticky-wa-link">
@@ -418,49 +486,65 @@
         </a>
     </div>
 
-    <header class="hero fade-in">
+    <header class="hero fade-in" id="inicio">
         <span class="hero-frame-mark tl mono">EST. 2026</span>
         <span class="hero-frame-mark br mono">FRAME Nº 001<br>REC ●</span>
         <h1>ETÉREO</h1>
         <div class="subtitle-hero">Cápsulas del tiempo</div>
+        <p class="hero-copy">Convertimos momentos, vínculos y recuerdos en objetos físicos que pueden conservarse.</p>
+        <div class="hero-actions">
+            <a href="#colecciones" class="primary">Explorar colecciones <i data-lucide="arrow-down" size="14"></i></a>
+            <a href="https://wa.me/523332227033?text=Hola%20Etéreo.%20Quiero%20conocer%20sus%20productos." target="_blank" rel="noopener noreferrer">Hablar con Etéreo <i data-lucide="message-circle" size="14"></i></a>
+        </div>
     </header>
 
-    <section class="quote-section fade-in">
-        <h2 class="quote-text">"La ciencia detrás de un sentimiento."</h2>
-        <p class="quote-author">— arte físico manufacturado en Guadalajara</p>
+    <section class="about-section fade-in" id="estudio">
+        <span class="eyebrow">El estudio</span>
+        <h2 class="section-title">Diseño, tecnología y manufactura</h2>
+        <p>ETÉREO es un estudio independiente que desarrolla objetos físicos donde el diseño y la tecnología trabajan en silencio para conservar una historia.</p>
+        <p>No buscamos fabricar recuerdos en serie. Diseñamos piezas con intención, desde Guadalajara, y adaptamos cada idea al objeto que mejor puede contenerla.</p>
+        <div class="about-meta">Diseño · Tecnología · Manufactura · Guadalajara, México</div>
     </section>
 
-    <!-- MANUFACTURA DE AUTOR -->
+    <section class="quote-section fade-in">
+        <h2 class="quote-text">"Hay momentos que merecen quedarse."</h2>
+        <p class="quote-author">— objetos para conservar lo que importa</p>
+    </section>
+
+    <!-- MATERIALES Y PERSONALIZACIÓN -->
     <section class="materials-section fade-in">
         <div class="materials-head">
-            <span class="eyebrow">Proceso · 03 etapas</span>
-            <h2 class="section-title">Manufactura de Autor</h2>
-            <p>Cada pieza es ensamblada a mano, uniendo componentes físicos de archivo con tecnología imperceptible.</p>
+            <span class="eyebrow">Antes de fabricar</span>
+            <h2 class="section-title">Elige cómo quieres conservarlo</h2>
+            <p>Trabajamos cada pieza a partir de tu historia. En los portarretratos, puedes elegir entre nuestros acabados de impresión disponibles y consultar los modelos de marco y tamaños vigentes.</p>
         </div>
         <div class="pilares-grid">
             <div class="pilar-card">
                 <span class="timestamp">01 — IMPRESIÓN</span>
-                <h3>Papel de Archivo</h3>
-                <p>Papel fotográfico de alta densidad, acabado mate que elimina reflejos como un revelado de cuarto oscuro.</p>
+                <h3>Fotográfico Glossy</h3>
+                <p>Un acabado brillante y de mayor presencia visual, pensado para imágenes con color y contraste.</p>
             </div>
             <div class="pilar-card">
-                <span class="timestamp">02 — ENMARCADO</span>
-                <h3>Perfil y Cristal</h3>
-                <p>Perfil ligero y rígido, cristal estándar. Protege el lienzo sin robarle protagonismo a la memoria.</p>
+                <span class="timestamp">02 — IMPRESIÓN</span>
+                <h3>Fotográfico Mate</h3>
+                <p>Un acabado suave y sobrio, pensado para una apariencia más editorial y con menos reflejos.</p>
             </div>
             <div class="pilar-card">
-                <span class="timestamp">03 — EMPAQUE</span>
-                <h3>Ritual de Unboxing</h3>
-                <p>Microcorrugado kraft, papel seda y lacre de cera — una experiencia táctil desde el primer momento.</p>
+                <span class="timestamp">03 — ENMARCADO</span>
+                <h3>Marco y formato</h3>
+                <p>Los portarretratos, tamaños y disponibilidad pueden variar. Consúltanos antes de realizar tu pedido.</p>
             </div>
         </div>
     </section>
 
-    <section class="portfolio-section">
+    <section class="portfolio-section" id="colecciones">
 
         <div class="section-divider fade-in">
-            <span class="eyebrow">Rollo Nº 01</span>
-            <h2>Arte Enmarcado</h2>
+            <span class="eyebrow">Colección 01</span>
+            <h2>Arte en pared</h2>
+        </div>
+        <div class="catalog-intro fade-in">
+            <p>Cada colección conserva una clase distinta de recuerdo: sonido, cielo, vínculo, compañía o presencia física.</p>
         </div>
 
         <div style="max-width: 420px; margin: 0 auto 40px;" class="fade-in">
@@ -470,7 +554,7 @@
                 <div class="price-row"><span class="fmt">Studio<small>20×25 cm</small></span><span class="val">$299 MXN</span></div>
                 <div class="price-row digital"><span class="fmt">Digital<small>alta res + QR, sin marco</small></span><span class="val">$59 MXN</span></div>
             </div>
-            <p style="text-align: center; font-size: 0.75rem; opacity: 0.55; margin-top: 10px;">Mismos formatos y precios para Sonora, Astronómica y Terrenal</p>
+            <p style="text-align: center; font-size: 0.75rem; opacity: 0.55; margin-top: 10px;">Mismos formatos y precios para las colecciones de arte en pared disponibles</p>
         </div>
 
         <div class="scarcity-ribbon fade-in"><i data-lucide="calendar-clock" size="13"></i> Cupo de manufactura: 8 piezas por semana · Entrega en 5–7 días</div>
@@ -525,6 +609,34 @@
             </div>
         </div>
 
+        <!-- EXTENSIONES DE LA COLECCIÓN SONORA -->
+        <div class="sonora-addons fade-in">
+            <div class="section-divider" style="margin-top: 30px; margin-bottom: 40px;">
+                <span class="eyebrow">Dentro de Sonora</span>
+                <h2>Otros formatos para escuchar un recuerdo</h2>
+            </div>
+            <div class="pilares-grid sonora-format-grid">
+                <div class="pilar-card">
+                    <span class="timestamp">FORMATO 01</span>
+                    <h3>Cassette Etéreo</h3>
+                    <p>Un objeto físico con NFC para llevar una canción, un audio o una playlist dentro de la estética analógica de ETÉREO.</p>
+                    <div class="future-label" style="margin-top: 14px;">Disponible</div>
+                </div>
+                <div class="pilar-card">
+                    <span class="timestamp">FORMATO 02</span>
+                    <h3>Vinilo NFC</h3>
+                    <p>Un pequeño formato inspirado en un disco, pensado como complemento para llevar un recuerdo sonoro contigo.</p>
+                    <div class="future-label" style="margin-top: 14px;">Complemento</div>
+                </div>
+                <div class="pilar-card">
+                    <span class="timestamp">FORMATO 03</span>
+                    <h3>Llavero Cassette</h3>
+                    <p>Una versión pequeña del lenguaje cassette, ideal para acompañar una pieza principal o conservar un segundo recuerdo.</p>
+                    <div class="future-label" style="margin-top: 14px;">Complemento</div>
+                </div>
+            </div>
+        </div>
+
         <!-- 2. COLECCIÓN ASTRONÓMICA -->
         <div class="collection-grid fade-in">
             <div class="carousel-wrapper">
@@ -571,56 +683,7 @@
             </div>
         </div>
 
-        <!-- 3. COLECCIÓN TERRENAL -->
-        <div class="collection-grid fade-in">
-            <div class="text-container">
-                <span class="eyebrow">Colección Terrenal</span>
-                <h3>El mapa de sus pasos</h3>
-                <p>Inmortalizamos el lugar exacto o el recorrido donde sus caminos se cruzaron. Trazamos con precisión las calles, avenidas y rutas de tu memoria.</p>
-                <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Terrenal">Adquirir edición</button>
-                <div class="price-line"><span class="from">Desde</span>$179 MXN · Studio $299 MXN</div>
-            </div>
-            <div class="carousel-wrapper">
-                <div class="carousel">
-                    <div class="carousel-slide">
-                        <div class="img-container">
-                            <div class="img-square">
-                                <img src="./mapa-clasico-geo.jpg" alt="Mapa Geográfico Clásico" loading="lazy">
-                    <div class="img-develop-veil"></div>
-                                <span class="cam-stamp mono">GDL·MX 08.26</span>
-                            </div>
-                        </div>
-                        <div class="slide-caption">Fig. 01 — Póster clásico</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="img-container">
-                            <div class="img-square">
-                                <img src="./ruta-terrestre.jpg" alt="Ruta Terrestre" loading="lazy">
-                    <div class="img-develop-veil"></div>
-                                <span class="cam-stamp mono">GDL·MX 08.26</span>
-                            </div>
-                        </div>
-                        <div class="slide-caption">Fig. 02 — Ruta terrestre</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="img-container">
-                            <div class="img-square">
-                                <img src="./vuelo-distancia.jpg" alt="Ruta de Vuelo" loading="lazy">
-                    <div class="img-develop-veil"></div>
-                                <span class="cam-stamp mono">GDL·MX 08.26</span>
-                            </div>
-                        </div>
-                        <div class="slide-caption">Fig. 03 — Vuelo a distancia</div>
-                    </div>
-                </div>
-                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> Desliza para ver variantes</div>
-            </div>
-        </div>
-
-        <div class="section-divider fade-in" style="margin-top: 100px;">
-            <span class="eyebrow">Módulo oculto</span>
-            <h2>Tecnología NFC</h2>
-        </div>
+        <!-- 3. COLECCIÓN TERRENAL — OCULTA TEMPORALMENTE. Se conserva el código para una futura publicación. -->
 
         <!-- 4. LA DIMENSIÓN OCULTA (NFC) -->
         <div class="collection-grid fade-in">
@@ -635,6 +698,23 @@
                 <h3>Lo que el papel no dice</h3>
                 <p>La personalización no termina en el papel. Todas las piezas físicas albergan tecnología invisible incluida sin costo.</p>
                 <p>Ocultamos bajo el lienzo un microchip NFC. Acerca tu celular desbloqueado al cuadro y el recuerdo cobrará vida al instante en tu pantalla.</p>
+            </div>
+        </div>
+
+        <div class="future-section fade-in">
+            <div class="future-grid">
+                <article class="future-card">
+                    <span class="eyebrow">Objeto sonoro</span>
+                    <h3>Cassette Etéreo</h3>
+                    <p>Una pieza de formato cassette con NFC para llevar una canción, un audio o una playlist dentro de un objeto físico.</p>
+                    <div class="future-label">Próximamente · Complementa la colección Sonora</div>
+                </article>
+                <article class="future-card">
+                    <span class="eyebrow">Complementos</span>
+                    <h3>Pequeños formatos</h3>
+                    <p>Llaveros cassette y vinilos NFC pensados para acompañar una pieza principal sin competir con ella.</p>
+                    <div class="future-label">En desarrollo · Disponibilidad por colección</div>
+                </article>
             </div>
         </div>
 
@@ -656,9 +736,9 @@
         </div>
         -->
 
-        <div class="section-divider fade-in">
-            <span class="eyebrow">Rollo Nº 02</span>
-            <h2>Accesorios Inteligentes</h2>
+        <div class="section-divider fade-in" id="mascotas">
+            <span class="eyebrow">Colección 02</span>
+            <h2>Mascotas</h2>
         </div>
 
         <!-- 6. PET ID -->
@@ -695,6 +775,27 @@
             </div>
         </div>
 
+        <div class="section-divider fade-in" id="vinculos">
+            <span class="eyebrow">Colección 03</span>
+            <h2>Vínculos</h2>
+        </div>
+        <div class="future-section fade-in">
+            <div class="future-grid">
+                <article class="future-card">
+                    <span class="eyebrow">Objeto sentimental</span>
+                    <h3>Corazón</h3>
+                    <p>Pequeños objetos pensados para pareja y vínculo. Una línea más íntima, separada de la tecnología NFC.</p>
+                    <div class="future-label">Colección complementaria</div>
+                </article>
+                <article class="future-card">
+                    <span class="eyebrow">Joyería</span>
+                    <h3>Etéreo Charm</h3>
+                    <p>Una futura línea de brazaletes y piezas en metal precioso inspiradas en la lógica visual de Soundwave.</p>
+                    <div class="future-label">Próximamente · En desarrollo con colaboradores</div>
+                </article>
+            </div>
+        </div>
+
         <!-- ESTUDIO CREATIVO Y LIBRETAS OCULTOS TEMPORALMENTE 
         <div class="section-divider fade-in">
             <span class="eyebrow">Rollo Nº 03</span>
@@ -722,7 +823,7 @@
 
     <!-- FAQ -->
     <section class="faq-section fade-in">
-        <h2 class="section-title" style="margin-bottom: 40px;">Manual de Asistencia</h2>
+        <h2 class="section-title" style="margin-bottom: 40px;">Preguntas frecuentes</h2>
         <div class="faq-container">
             <div class="faq-item">
                 <button type="button" class="faq-question">Logística de entregas en GDL <i data-lucide="chevron-down" size="20" class="faq-icon"></i></button>
@@ -915,6 +1016,29 @@
             wavesurfer.on('error', (err) => { console.warn('WaveSurfer no pudo cargar el audio:', err); });
         } catch(e) {
             console.warn('WaveSurfer no cargó:', e);
+        }
+
+        /* =========================================
+           NAVEGACIÓN MÓVIL
+           ========================================= */
+        const navMenuBtn = document.getElementById('nav-menu-btn');
+        const mobileNavPanel = document.getElementById('mobile-nav-panel');
+        document.querySelectorAll('.mobile-nav-panel a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNavPanel.classList.remove('active');
+                navMenuBtn.setAttribute('aria-expanded', 'false');
+                navMenuBtn.innerHTML = '<i data-lucide="menu" size="16"></i>';
+                try { lucide.createIcons(); } catch(e) {}
+            });
+        });
+        if (navMenuBtn) {
+            navMenuBtn.addEventListener('click', () => {
+                const isOpen = mobileNavPanel.classList.toggle('active');
+                navMenuBtn.setAttribute('aria-expanded', String(isOpen));
+                navMenuBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+                navMenuBtn.innerHTML = isOpen ? '<i data-lucide="x" size="16"></i>' : '<i data-lucide="menu" size="16"></i>';
+                try { lucide.createIcons(); } catch(e) {}
+            });
         }
 
         /* =========================================
