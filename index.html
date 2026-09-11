@@ -259,6 +259,8 @@
 
         .price-badge { align-self: flex-start; background: var(--btn-bg); color: var(--btn-text); padding: 13px 26px; font-size: 0.75rem; font-weight: 500; border-radius: 2px; margin-top: 12px; font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; border: 1px solid var(--btn-bg); }
         .price-badge:hover { background: transparent; color: var(--title-color); border-color: var(--title-color); }
+        .petid-link { display:inline-flex; align-items:center; gap:7px; padding:13px 18px; color:var(--accent); text-decoration:none; border:1px solid var(--card-border); font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:1.5px; text-transform:uppercase; border-radius:2px; transition:.3s; }
+        .petid-link:hover { border-color:var(--accent); color:var(--title-color); }
 
         .price-sizes { font-size: 0.78rem; margin-top: 16px; opacity: 0.6; line-height: 1.6; font-weight: 300; }
         .badge-soon { background: transparent; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 10px; font-size: 0.65rem; border-radius: 2px; display: inline-block; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; }
@@ -426,6 +428,7 @@
             .collection-grid { gap: 30px; margin-bottom: 70px; }
             .text-container h3 { font-size: 1.7rem; margin-bottom: 10px; }
             .price-badge { padding: 11px 20px; font-size: 0.7rem; margin-top: 6px; }
+            .petid-link { padding: 11px 14px; font-size: .66rem; }
             .price-sizes { font-size: 0.72rem; margin-top: 10px; }
             .feature-wrapper { padding: 40px 20px; }
             .hero-copy { max-width: 92%; }
@@ -764,7 +767,10 @@
                     </div>
                 </div>
 
-                <button type="button" class="price-badge whatsapp-trigger" data-product="Pet ID Inteligente">Adquirir edición</button>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 2px;">
+                    <button type="button" class="price-badge whatsapp-trigger" data-product="Pet ID Inteligente">Adquirir edición</button>
+                    <a href="https://p.etereomx.com" class="petid-link" aria-label="Ver PET ID en p.etereomx.com" target="_blank" rel="noopener noreferrer">Ver PET ID <i data-lucide="arrow-up-right" size="13"></i></a>
+                </div>
                 <div class="scarcity-note" style="margin-top: 15px;"><i data-lucide="calendar-clock" size="13"></i> Manufactura 3–5 días</div>
             </div>
         </div>
@@ -772,7 +778,7 @@
         <div class="pet-future-note fade-in">
             <span class="eyebrow">En desarrollo</span>
             <strong>Huella</strong>
-            <span>Objetos 3D para conservar recuerdos de tu mascota.</span>
+            <span>Objetos 3D para conservar recuerdos de tu mascota · próximamente.</span>
         </div>
 
         <div class="section-divider fade-in" id="vinculos">
@@ -790,7 +796,7 @@
                 <article class="future-card">
                     <span class="eyebrow">Joyería · Próximamente</span>
                     <h3>Resonancia</h3>
-                    <p>Una futura línea de piezas de joyería inspiradas en la forma de una historia sonora, llevada del papel al cuerpo.</p>
+                    <p>Una futura línea de joyería inspirada en la forma de una historia sonora, llevada del papel al cuerpo.</p>
                     <div class="future-label">En desarrollo</div>
                 </article>
             </div>
