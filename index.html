@@ -181,6 +181,28 @@
         .future-card .eyebrow { margin-bottom: 10px; display: inline-block; }
         .future-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
         .future-card p { font-size: 0.9rem; opacity: 0.78; }
+        .objects-inline { max-width: 920px; margin: 20px auto 90px; padding: 20px 0 0; }
+        .objects-head { text-align: center; max-width: 620px; margin: 0 auto 30px; }
+        .objects-head h3 { font-size: 1.45rem; margin: 6px 0 8px; }
+        .objects-head p { font-size: 0.9rem; opacity: 0.75; }
+        .objects-list { border-top: 1px solid var(--card-border); }
+        .object-item { border-bottom: 1px solid var(--card-border); }
+        .object-toggle { width: 100%; background: transparent; border: 0; color: var(--title-color); padding: 18px 0; display: flex; align-items: center; justify-content: space-between; gap: 18px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 1rem; text-align: left; }
+        .object-toggle > span { display: flex; align-items: baseline; gap: 14px; min-width: 0; }
+        .object-toggle svg { color: var(--accent); flex-shrink: 0; transition: transform .3s ease; }
+        .object-item.active .object-toggle svg { transform: rotate(45deg); }
+        .object-code { font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: 1.5px; color: var(--accent); white-space: nowrap; }
+        .object-panel { display: grid; grid-template-columns: 180px 1fr; gap: 24px; align-items: center; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .45s ease, opacity .35s ease, padding .35s ease; padding: 0; }
+        .object-item.active .object-panel { max-height: 260px; opacity: 1; padding: 0 0 22px; }
+        .object-media { width: 180px; aspect-ratio: 1 / 1; overflow: hidden; border: 1px solid var(--card-border); background: var(--bg-raise); }
+        .object-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .object-copy p { font-size: .88rem; opacity: .8; margin-bottom: 10px; max-width: 520px; }
+        .object-meta { font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: 1.5px; color: var(--text-color); opacity: .65; }
+        .objects-cta { margin-top: 18px; text-align: center; font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: .7px; color: var(--text-color); opacity: .75; }
+        .pet-future-note { max-width: 920px; margin: 0 auto 70px; padding: 16px 0; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; color: var(--text-color); }
+        .pet-future-note strong { font-family: 'Clash Display', sans-serif; color: var(--title-color); font-size: 1.05rem; letter-spacing: 1px; text-transform: uppercase; }
+        .pet-future-note > span:last-child { font-size: .82rem; opacity: .72; }
+        .objects-cta a { color: var(--accent); text-underline-offset: 3px; }
         .future-label { margin-top: 18px; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-color); opacity: 0.7; }
 
         .quote-section { min-height: 46vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); position: relative; }
@@ -410,6 +432,15 @@
             .hero-actions { width: 100%; }
             .hero-actions a { width: 100%; max-width: 320px; }
             .about-section { padding: 75px 20px 60px; }
+            .objects-inline { margin: 10px auto 70px; padding: 10px 15px 0; }
+            .object-toggle { padding: 16px 0; font-size: .92rem; }
+            .object-toggle > span { gap: 10px; flex-wrap: wrap; }
+            .object-panel { grid-template-columns: 110px 1fr; gap: 16px; }
+            .object-item.active .object-panel { max-height: 180px; }
+            .object-media { width: 110px; }
+            .object-copy p { font-size: .82rem; }
+            .pet-future-note { margin: 0 15px 60px; gap: 8px 12px; }
+            .pet-future-note > span:last-child { width: 100%; }
             .future-grid { grid-template-columns: 1fr; }
             .audio-player-wrapper { padding: 20px; }
             footer { padding: 60px 20px 30px 20px; }
@@ -500,41 +531,15 @@
 
     <section class="about-section fade-in" id="estudio">
         <span class="eyebrow">El estudio</span>
-        <h2 class="section-title">Diseño, tecnología y manufactura</h2>
+        <h2 class="section-title">Un estudio para conservar historias</h2>
         <p>ETÉREO es un estudio independiente que desarrolla objetos físicos donde el diseño y la tecnología trabajan en silencio para conservar una historia.</p>
         <p>No buscamos fabricar recuerdos en serie. Diseñamos piezas con intención, desde Guadalajara, y adaptamos cada idea al objeto que mejor puede contenerla.</p>
-        <div class="about-meta">Diseño · Tecnología · Manufactura · Guadalajara, México</div>
+        <div class="about-meta">Diseño · Ingeniería · Manufactura · Guadalajara, México</div>
     </section>
 
     <section class="quote-section fade-in">
         <h2 class="quote-text">"Hay momentos que merecen quedarse."</h2>
         <p class="quote-author">— objetos para conservar lo que importa</p>
-    </section>
-
-    <!-- MATERIALES Y PERSONALIZACIÓN -->
-    <section class="materials-section fade-in">
-        <div class="materials-head">
-            <span class="eyebrow">Antes de fabricar</span>
-            <h2 class="section-title">Elige cómo quieres conservarlo</h2>
-            <p>Trabajamos cada pieza a partir de tu historia. En los portarretratos, puedes elegir entre nuestros acabados de impresión disponibles y consultar los modelos de marco y tamaños vigentes.</p>
-        </div>
-        <div class="pilares-grid">
-            <div class="pilar-card">
-                <span class="timestamp">01 — IMPRESIÓN</span>
-                <h3>Fotográfico Glossy</h3>
-                <p>Un acabado brillante y de mayor presencia visual, pensado para imágenes con color y contraste.</p>
-            </div>
-            <div class="pilar-card">
-                <span class="timestamp">02 — IMPRESIÓN</span>
-                <h3>Fotográfico Mate</h3>
-                <p>Un acabado suave y sobrio, pensado para una apariencia más editorial y con menos reflejos.</p>
-            </div>
-            <div class="pilar-card">
-                <span class="timestamp">03 — ENMARCADO</span>
-                <h3>Marco y formato</h3>
-                <p>Los portarretratos, tamaños y disponibilidad pueden variar. Consúltanos antes de realizar tu pedido.</p>
-            </div>
-        </div>
     </section>
 
     <section class="portfolio-section" id="colecciones">
@@ -605,35 +610,6 @@
                 </div>
 
                 <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Sonora" style="margin-top: 25px;">Adquirir edición</button>
-                <div class="price-line"><span class="from">Desde</span>$179 MXN · Studio $299 MXN</div>
-            </div>
-        </div>
-
-        <!-- EXTENSIONES DE LA COLECCIÓN SONORA -->
-        <div class="sonora-addons fade-in">
-            <div class="section-divider" style="margin-top: 30px; margin-bottom: 40px;">
-                <span class="eyebrow">Dentro de Sonora</span>
-                <h2>Otros formatos para escuchar un recuerdo</h2>
-            </div>
-            <div class="pilares-grid sonora-format-grid">
-                <div class="pilar-card">
-                    <span class="timestamp">FORMATO 01</span>
-                    <h3>Cassette Etéreo</h3>
-                    <p>Un objeto físico con NFC para llevar una canción, un audio o una playlist dentro de la estética analógica de ETÉREO.</p>
-                    <div class="future-label" style="margin-top: 14px;">Disponible</div>
-                </div>
-                <div class="pilar-card">
-                    <span class="timestamp">FORMATO 02</span>
-                    <h3>Vinilo NFC</h3>
-                    <p>Un pequeño formato inspirado en un disco, pensado como complemento para llevar un recuerdo sonoro contigo.</p>
-                    <div class="future-label" style="margin-top: 14px;">Complemento</div>
-                </div>
-                <div class="pilar-card">
-                    <span class="timestamp">FORMATO 03</span>
-                    <h3>Llavero Cassette</h3>
-                    <p>Una versión pequeña del lenguaje cassette, ideal para acompañar una pieza principal o conservar un segundo recuerdo.</p>
-                    <div class="future-label" style="margin-top: 14px;">Complemento</div>
-                </div>
             </div>
         </div>
 
@@ -679,44 +655,62 @@
                 <h3>El cielo, esa noche</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en que tu vida cambió para siempre.</p>
                 <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Astronómica">Adquirir edición</button>
-                <div class="price-line"><span class="from">Desde</span>$179 MXN · Studio $299 MXN</div>
             </div>
         </div>
 
         <!-- 3. COLECCIÓN TERRENAL — OCULTA TEMPORALMENTE. Se conserva el código para una futura publicación. -->
 
-        <!-- 4. LA DIMENSIÓN OCULTA (NFC) -->
-        <div class="collection-grid fade-in">
-            <div class="feature-wrapper">
-                <i data-lucide="smartphone-nfc" size="52" style="color: var(--accent); position: relative; z-index: 2; margin-bottom: 15px;"></i>
-                <h4 style="font-size: 1.1rem; position: relative; z-index: 2; color: var(--title-color); letter-spacing: 1.5px;">El Microchip Pasivo</h4>
-                <span class="timestamp">TAP · SIN APPS · SIN BATERÍAS</span>
-                <div class="nfc-pulse"></div>
-            </div>
-            <div class="text-container">
-                <span class="eyebrow">Dimensión Digital</span>
-                <h3>Lo que el papel no dice</h3>
-                <p>La personalización no termina en el papel. Todas las piezas físicas albergan tecnología invisible incluida sin costo.</p>
-                <p>Ocultamos bajo el lienzo un microchip NFC. Acerca tu celular desbloqueado al cuadro y el recuerdo cobrará vida al instante en tu pantalla.</p>
-            </div>
-        </div>
+        <!-- TECNOLOGÍA NFC SE COMUNICA DENTRO DE CADA PRODUCTO QUE LA INCORPORA -->
 
-        <div class="future-section fade-in">
-            <div class="future-grid">
-                <article class="future-card">
-                    <span class="eyebrow">Objeto sonoro</span>
-                    <h3>Cassette Etéreo</h3>
-                    <p>Una pieza de formato cassette con NFC para llevar una canción, un audio o una playlist dentro de un objeto físico.</p>
-                    <div class="future-label">Próximamente · Complementa la colección Sonora</div>
+        <section class="objects-inline fade-in" id="objetos" aria-labelledby="objetos-title">
+            <div class="objects-head">
+                <span class="eyebrow">Objetos · Sonora</span>
+                <h3 id="objetos-title">Pequeños formatos</h3>
+                <p>La misma historia puede vivir en un formato distinto. Toca cada pieza para verla.</p>
+            </div>
+            <div class="objects-list">
+                <article class="object-item">
+                    <button type="button" class="object-toggle" aria-expanded="false">
+                        <span><span class="object-code">OBJECT 01</span>Cassette Etéreo</span>
+                        <i data-lucide="plus" size="16"></i>
+                    </button>
+                    <div class="object-panel">
+                        <div class="object-media"><img src="./cassette-etereo.png" alt="Cassette Etéreo con NFC" loading="lazy" onerror="this.closest('.object-media').style.display='none'" /></div>
+                        <div class="object-copy">
+                            <p>Un objeto físico con NFC para llevar una canción, un audio o una playlist dentro de una pieza con lenguaje de archivo.</p>
+                            <span class="object-meta">NFC · SONORA</span>
+                        </div>
+                    </div>
                 </article>
-                <article class="future-card">
-                    <span class="eyebrow">Complementos</span>
-                    <h3>Pequeños formatos</h3>
-                    <p>Llaveros cassette y vinilos NFC pensados para acompañar una pieza principal sin competir con ella.</p>
-                    <div class="future-label">En desarrollo · Disponibilidad por colección</div>
+                <article class="object-item">
+                    <button type="button" class="object-toggle" aria-expanded="false">
+                        <span><span class="object-code">OBJECT 02</span>Vinilo NFC</span>
+                        <i data-lucide="plus" size="16"></i>
+                    </button>
+                    <div class="object-panel">
+                        <div class="object-media"><img src="./vinilo-nfc.png" alt="Vinilo NFC Etéreo" loading="lazy" onerror="this.closest('.object-media').style.display='none'" /></div>
+                        <div class="object-copy">
+                            <p>Un formato pequeño para llevar el vínculo sonoro contigo. Diseñado como complemento de una pieza principal.</p>
+                            <span class="object-meta">NFC · COMPLEMENTO</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="object-item">
+                    <button type="button" class="object-toggle" aria-expanded="false">
+                        <span><span class="object-code">OBJECT 03</span>Llavero Cassette</span>
+                        <i data-lucide="plus" size="16"></i>
+                    </button>
+                    <div class="object-panel">
+                        <div class="object-media"><img src="./llavero-cassette.png" alt="Llavero cassette Etéreo" loading="lazy" onerror="this.closest('.object-media').style.display='none'" /></div>
+                        <div class="object-copy">
+                            <p>Una versión portátil de la estética Sonora, pensada como detalle adicional para acompañar una pieza.</p>
+                            <span class="object-meta">COMPLEMENTO · SONORA</span>
+                        </div>
+                    </div>
                 </article>
             </div>
-        </div>
+            <p class="objects-cta">Disponibilidad y combinaciones · <a href="https://wa.me/523332227033?text=Hola%20Etéreo.%20Quiero%20conocer%20los%20formatos%20de%20la%20Colección%20Sonora." target="_blank" rel="noopener noreferrer">consultar por WhatsApp</a></p>
+        </section>
 
         <!-- 5. EL EMPAQUE (RITUAL DE APERTURA) OCULTO TEMPORALMENTE 
         <div class="collection-grid fade-in">
@@ -775,6 +769,12 @@
             </div>
         </div>
 
+        <div class="pet-future-note fade-in">
+            <span class="eyebrow">En desarrollo</span>
+            <strong>Huella</strong>
+            <span>Objetos 3D para conservar recuerdos de tu mascota.</span>
+        </div>
+
         <div class="section-divider fade-in" id="vinculos">
             <span class="eyebrow">Colección 03</span>
             <h2>Vínculos</h2>
@@ -784,14 +784,14 @@
                 <article class="future-card">
                     <span class="eyebrow">Objeto sentimental</span>
                     <h3>Corazón</h3>
-                    <p>Pequeños objetos pensados para pareja y vínculo. Una línea más íntima, separada de la tecnología NFC.</p>
-                    <div class="future-label">Colección complementaria</div>
+                    <p>Pequeños objetos pensados para pareja y vínculo. Una línea íntima, independiente de la tecnología NFC.</p>
+                    <div class="future-label">Disponible por encargo</div>
                 </article>
                 <article class="future-card">
-                    <span class="eyebrow">Joyería</span>
-                    <h3>Etéreo Charm</h3>
-                    <p>Una futura línea de brazaletes y piezas en metal precioso inspiradas en la lógica visual de Soundwave.</p>
-                    <div class="future-label">Próximamente · En desarrollo con colaboradores</div>
+                    <span class="eyebrow">Joyería · Próximamente</span>
+                    <h3>Resonancia</h3>
+                    <p>Una futura línea de piezas de joyería inspiradas en la forma de una historia sonora, llevada del papel al cuerpo.</p>
+                    <div class="future-label">En desarrollo</div>
                 </article>
             </div>
         </div>
@@ -820,6 +820,33 @@
         -->
 
     </section>
+
+    <!-- MATERIALES Y PERSONALIZACIÓN -->
+    <section class="materials-section fade-in">
+        <div class="materials-head">
+            <span class="eyebrow">Antes de fabricar</span>
+            <h2 class="section-title">Elige cómo quieres conservarlo</h2>
+            <p>Trabajamos cada pieza a partir de tu historia. En los portarretratos, puedes elegir entre nuestros acabados de impresión disponibles y consultar los modelos de marco y tamaños vigentes.</p>
+        </div>
+        <div class="pilares-grid">
+            <div class="pilar-card">
+                <span class="timestamp">01 — IMPRESIÓN</span>
+                <h3>Fotográfico Glossy</h3>
+                <p>Un acabado brillante y de mayor presencia visual, pensado para imágenes con color y contraste.</p>
+            </div>
+            <div class="pilar-card">
+                <span class="timestamp">02 — IMPRESIÓN</span>
+                <h3>Fotográfico Mate</h3>
+                <p>Un acabado suave y sobrio, pensado para una apariencia más editorial y con menos reflejos.</p>
+            </div>
+            <div class="pilar-card">
+                <span class="timestamp">03 — ENMARCADO</span>
+                <h3>Marco y formato</h3>
+                <p>Los portarretratos, tamaños y disponibilidad pueden variar. Consúltanos antes de realizar tu pedido.</p>
+            </div>
+        </div>
+    </section>
+
 
     <!-- FAQ -->
     <section class="faq-section fade-in">
