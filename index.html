@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Etéreo | Cápsulas del Tiempo</title>
+    <meta name="description" content="Objetos físicos para conservar recuerdos: arte sonoro, Mixtape, Pet ID y piezas personalizadas. Diseñados y manufacturados en Guadalajara, México.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://www.etereomx.com/">
+    <meta property="og:type" content="website">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     <meta property="og:url" content="https://www.etereomx.com/">
     <meta property="og:title" content="Etéreo">
-    <meta property="og:description" content="Cápsulas del tiempo, reveladas.">
+    <meta property="og:description" content="Objetos físicos para conservar recuerdos: arte sonoro, Mixtape, Pet ID y piezas personalizadas.">
     <meta property="og:image" content="https://www.etereomx.com/onda-sonora.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Etéreo | Cápsulas del Tiempo">
+    <meta name="twitter:description" content="Objetos físicos para conservar recuerdos, diseñados y manufacturados en Guadalajara.">
+    <meta name="twitter:image" content="https://www.etereomx.com/onda-sonora.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -309,6 +317,88 @@
         .swipe-indicator { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 0.68rem; color: var(--text-color); letter-spacing: 1px; justify-content: center; font-family: 'Space Mono', monospace; }
 
         /* =========================================
+           MIXTAPE — PRODUCTO DESTACADO
+           ========================================= */
+        .mixtape-feature {
+            scroll-margin-top: 100px;
+        }
+        .mixtape-image img {
+            object-fit: contain;
+            padding: 8%;
+            background: radial-gradient(circle at 50% 45%, var(--light-leak-1), transparent 62%);
+        }
+        .mixtape-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 14px 0 2px;
+        }
+        .mixtape-meta span {
+            font-family: 'Space Mono', monospace;
+            font-size: .62rem;
+            letter-spacing: 1.4px;
+            border: 1px solid var(--card-border);
+            color: var(--accent);
+            padding: 7px 9px;
+            background: var(--bg-raise);
+        }
+        .mixtape-detail {
+            font-size: .88rem !important;
+            opacity: .72 !important;
+            margin-top: 5px;
+        }
+        .mixtape-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .mixtape-actions .price-badge {
+            margin-top: 0;
+        }
+        .mixtape-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: .66rem;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            text-underline-offset: 4px;
+        }
+        [data-product-key].is-unavailable {
+            opacity: .48 !important;
+            pointer-events: none;
+            cursor: not-allowed !important;
+            text-decoration: none !important;
+        }
+        .availability-note {
+            display: none;
+            margin-top: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: .62rem;
+            letter-spacing: 1px;
+            color: var(--text-color);
+            opacity: .72;
+            text-transform: uppercase;
+        }
+        .availability-note.visible {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .mixtape-actions {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .mixtape-actions .price-badge {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* =========================================
            5. REPRODUCTOR DE AUDIO
            ========================================= */
         .audio-player-wrapper { margin-top: 20px; padding: 24px; border: 1px solid var(--card-border); border-radius: 2px; background: var(--bg-raise); position: relative; }
@@ -452,30 +542,6 @@
             .delivery-info { margin: 30px auto; gap: 25px; }
         }
     </style>
-    <!-- =========================================
-         ANALÍTICA — reemplaza los IDs de ejemplo por los tuyos reales
-         antes de publicar. Sin esto, el sitio funciona igual mientras tanto
-         (las llamadas a fbq/gtag están protegidas en el script principal).
-         ========================================= -->
-    <!-- Meta Pixel -->
-    <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'TU_PIXEL_ID_AQUI'); // <-- reemplaza con tu Pixel ID de Meta Business Suite
-    fbq('track', 'PageView');
-    </script>
-
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX'); // <-- reemplaza con tu Measurement ID de GA4
-    </script>
 
 </head>
 <body>
@@ -492,6 +558,7 @@
         <a class="nav-brand" href="#inicio" aria-label="ETÉREO, inicio">ETÉREO</a>
         <div class="nav-links" aria-label="Navegación principal">
             <a href="#colecciones">Colecciones</a>
+            <a href="#mixtape">Mixtape</a>
             <a href="#mascotas">Mascotas</a>
             <a href="#objetos">Objetos</a>
             <a href="#vinculos">Vínculos</a>
@@ -508,6 +575,7 @@
     </nav>
     <div class="mobile-nav-panel" id="mobile-nav-panel">
         <a href="#colecciones">Colecciones</a>
+        <a href="#mixtape">Mixtape</a>
         <a href="#mascotas">Mascotas</a>
         <a href="#objetos">Objetos</a>
         <a href="#vinculos">Vínculos</a>
@@ -525,7 +593,7 @@
         <span class="hero-frame-mark br mono">FRAME Nº 001<br>REC ●</span>
         <h1>ETÉREO</h1>
         <div class="subtitle-hero">Cápsulas del tiempo</div>
-        <p class="hero-copy">Convertimos momentos, vínculos y recuerdos en objetos físicos que pueden conservarse.</p>
+        <p class="hero-copy">Convertimos momentos, voces y vínculos en objetos físicos que pueden conservarse.</p>
         <div class="hero-actions">
             <a href="#colecciones" class="primary">Explorar colecciones <i data-lucide="arrow-down" size="14"></i></a>
             <a href="https://wa.me/523332227033?text=Hola%20Etéreo.%20Quiero%20conocer%20sus%20productos." target="_blank" rel="noopener noreferrer">Hablar con Etéreo <i data-lucide="message-circle" size="14"></i></a>
@@ -562,7 +630,7 @@
                 <div class="price-row"><span class="fmt">Studio<small>20×25 cm</small></span><span class="val">$299 MXN</span></div>
                 <div class="price-row digital"><span class="fmt">Digital<small>alta res + QR, sin marco</small></span><span class="val">$59 MXN</span></div>
             </div>
-            <p style="text-align: center; font-size: 0.75rem; opacity: 0.55; margin-top: 10px;">Mismos formatos y precios para las colecciones de arte en pared disponibles</p>
+            <p style="text-align: center; font-size: 0.75rem; opacity: 0.55; margin-top: 10px;">Mismos formatos y precios para las colecciones de arte en pared disponibles · Mixtape se cotiza por separado</p>
         </div>
 
         <div class="scarcity-ribbon fade-in"><i data-lucide="calendar-clock" size="13"></i> Cupo de manufactura: 8 piezas por semana · Entrega en 5–7 días</div>
@@ -592,7 +660,7 @@
                             </span>
                         </div>
                         <a href="https://play.etereomx.com" target="_blank" rel="noopener noreferrer" class="mono" style="font-size: 0.65rem; color: var(--text-color); text-decoration: underline; text-underline-offset: 4px; transition: 0.3s;" onmouseover="this.style.color='var(--title-color)'" onmouseout="this.style.color='var(--text-color)'">
-                            Ver cassette web ↗
+                            Probar Play Etéreo ↗
                         </a>
                     </div>
 
@@ -612,14 +680,38 @@
                     </div>
                 </div>
 
-                <a href="https://app.etereomx.com/ordenar?producto=Coleccion_Sonora" class="price-badge" style="margin-top: 25px; text-decoration:none;">
-                    Crear mi pieza
-                    <i data-lucide="arrow-up-right" size="13"></i>
-                </a>
+                <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Sonora" data-product-key="Coleccion_Sonora" style="margin-top: 25px;">Adquirir edición</button>
+                <span class="availability-note" data-availability-note="Coleccion_Sonora">Actualmente no disponible</span>
             </div>
         </div>
 
-        <!-- 2. COLECCIÓN ASTRONÓMICA -->
+        <!-- 2. MIXTAPE -->
+        <div class="collection-grid mixtape-feature fade-in" id="mixtape">
+            <div class="img-container">
+                <div class="img-square mixtape-image">
+                    <img src="./cassette-etereo.png" alt="Cassette Mixtape de Etéreo" loading="lazy">
+                    <div class="img-develop-veil"></div>
+                    <span class="cam-stamp mono">ETÉREO·MIXTAPE</span>
+                </div>
+            </div>
+            <div class="text-container">
+                <span class="eyebrow">Mixtape · Experiencia sonora</span>
+                <h3>Una playlist que se puede tocar.</h3>
+                <p>Tu selección de canciones convertida en una pieza física: cassette, NFC y una experiencia digital diseñada para volver a escucharla.</p>
+                <div class="mixtape-meta" aria-label="Características de Mixtape">
+                    <span>NFC</span>
+                    <span>PLAYLIST</span>
+                    <span>$299 MXN</span>
+                </div>
+                <p class="mixtape-detail">Pensada para regalos, recuerdos compartidos y momentos que merecen tener su propia cinta.</p>
+                <div class="mixtape-actions">
+                    <a class="price-badge mixtape-link" href="https://mixtape.etereomx.com" data-product-key="Mixtape" aria-label="Explorar la experiencia Mixtape">Explorar Mixtape <i data-lucide="arrow-up-right" size="14"></i></a>
+                    <a class="mixtape-whatsapp" href="https://wa.me/523332227033?text=Hola%20Etéreo.%20Quiero%20una%20Mixtape%20de%20$299%20MXN." data-product-key="Mixtape" target="_blank" rel="noopener noreferrer">Quiero la mía por WhatsApp <i data-lucide="message-circle" size="14"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. COLECCIÓN ASTRONÓMICA -->
         <div class="collection-grid fade-in">
             <div class="carousel-wrapper">
                 <div class="carousel">
@@ -660,33 +752,82 @@
                 <span class="eyebrow">Colección Astronómica</span>
                 <h3>El cielo, esa noche</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en que tu vida cambió para siempre.</p>
-                <a href="https://app.etereomx.com/ordenar?producto=Coleccion_Astronomica" class="price-badge" style="text-decoration:none;">
-                    Crear mi pieza
-                    <i data-lucide="arrow-up-right" size="13"></i>
-                </a>
+                <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Astronómica" data-product-key="Coleccion_Astronomica">Adquirir edición</button>
+                <span class="availability-note" data-availability-note="Coleccion_Astronomica">Actualmente no disponible</span>
             </div>
         </div>
 
-        <!-- 3. COLECCIÓN TERRENAL — OCULTA TEMPORALMENTE. Se conserva el código para una futura publicación. -->
+        <!--
+        COLECCIÓN TERRENAL — OCULTA TEMPORALMENTE
+        Se conserva íntegramente para una futura publicación.
 
-        <!-- TECNOLOGÍA NFC SE COMUNICA DENTRO DE CADA PRODUCTO QUE LA INCORPORA -->
+<!-- 4. COLECCIÓN TERRENAL -->
+        <div class="collection-grid fade-in">
+            <div class="text-container">
+                <span class="eyebrow">Colección Terrenal</span>
+                <h3>El mapa de sus pasos</h3>
+                <p>Inmortalizamos el lugar exacto o el recorrido donde sus caminos se cruzaron. Trazamos con precisión calles, rutas y distancias para convertirlas en una pieza que puedes conservar.</p>
+                <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Terrenal" data-product-key="Coleccion_Terrenal">Adquirir edición</button>
+                <span class="availability-note" data-availability-note="Coleccion_Terrenal">Actualmente no disponible</span>
+                <div class="price-line"><span class="from">Desde</span> $179 MXN · Studio $299 MXN</div>
+            </div>
+            <div class="carousel-wrapper">
+                <div class="carousel">
+                    <div class="carousel-slide">
+                        <div class="img-container">
+                            <div class="img-square">
+                                <img src="./mapa-clasico-geo.jpg" alt="Póster clásico de Colección Terrenal" loading="lazy">
+                                <div class="img-develop-veil"></div>
+                                <span class="cam-stamp mono">GDL·MX 08.26</span>
+                            </div>
+                        </div>
+                        <div class="slide-caption">Fig. 01 — Póster clásico</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="img-container">
+                            <div class="img-square">
+                                <img src="./ruta-terrestre.jpg" alt="Ruta terrestre de Colección Terrenal" loading="lazy">
+                                <div class="img-develop-veil"></div>
+                                <span class="cam-stamp mono">GDL·MX 08.26</span>
+                            </div>
+                        </div>
+                        <div class="slide-caption">Fig. 02 — Ruta terrestre</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="img-container">
+                            <div class="img-square">
+                                <img src="./vuelo-distancia.jpg" alt="Vuelo a distancia de Colección Terrenal" loading="lazy">
+                                <div class="img-develop-veil"></div>
+                                <span class="cam-stamp mono">GDL·MX 08.26</span>
+                            </div>
+                        </div>
+                        <div class="slide-caption">Fig. 03 — Vuelo a distancia</div>
+                    </div>
+                </div>
+                <div class="swipe-indicator"><i data-lucide="move-horizontal" size="14"></i> Desliza para ver variantes</div>
+            </div>
+        </div>
+
+        -->
+
+        <!-- COMPLEMENTOS SONORA -->
 
         <section class="objects-inline fade-in" id="objetos" aria-labelledby="objetos-title">
             <div class="objects-head">
-                <span class="eyebrow">Complementos · ETÉREO</span>
-                <h3 id="objetos-title">Pequeños detalles, otra dimensión</h3>
-                <p>Complementos que puedes añadir a determinadas piezas de Arte en pared para llevar la experiencia más allá del marco.</p>
+                <span class="eyebrow">Objetos · Sonora</span>
+                <h3 id="objetos-title">Pequeños formatos</h3>
+                <p>La misma historia puede vivir en un formato distinto. Toca cada pieza para verla.</p>
             </div>
             <div class="objects-list">
                 <article class="object-item">
                     <button type="button" class="object-toggle" aria-expanded="false">
-                        <span><span class="object-code">OBJECT 01</span>Cassette Etéreo</span>
+                        <span><span class="object-code">OBJECT 01</span>Cara B NFC</span>
                         <i data-lucide="plus" size="16"></i>
                     </button>
                     <div class="object-panel">
-                        <div class="object-media"><img src="./cassette-etereo.png" alt="Cassette Etéreo con NFC" loading="lazy" onerror="this.closest('.object-media').style.display='none'" /></div>
+                        <div class="object-media"><img src="./cassette-etereo.png" alt="Cara B NFC de Etéreo" loading="lazy" onerror="this.closest('.object-media').style.display='none'" /></div>
                         <div class="object-copy">
-                            <p>Un objeto físico con NFC para llevar una canción, un audio o una playlist dentro de una pieza con lenguaje de archivo.</p>
+                            <p>Un complemento físico con NFC para conservar una canción dentro de una pieza Sonora. La Mixtape de $299 MXN es nuestra experiencia completa en cassette.</p>
                             <span class="object-meta">COMPLEMENTO · NFC · $60 MXN</span>
                         </div>
                     </div>
@@ -700,7 +841,7 @@
                         <div class="object-media"><img src="./vinilo-nfc.png" alt="Vinilo NFC Etéreo" loading="lazy" onerror="this.closest('.object-media').style.display='none'" /></div>
                         <div class="object-copy">
                             <p>Un formato pequeño para llevar el vínculo sonoro contigo. Diseñado como complemento de una pieza principal.</p>
-                            <span class="object-meta">COMPLEMENTO · NFC · $70 MXN</span>
+                            <span class="object-meta">NFC · COMPLEMENTO</span>
                         </div>
                     </div>
                 </article>
@@ -712,13 +853,13 @@
                     <div class="object-panel">
                         <div class="object-media"><img src="./llavero-cassette.png" alt="Llavero cassette Etéreo" loading="lazy" onerror="this.closest('.object-media').style.display='none'" /></div>
                         <div class="object-copy">
-                            <p>Un formato portátil inspirado en la estética Sonora. Estamos preparando su disponibilidad.</p>
-                            <span class="object-meta">PRÓXIMAMENTE</span>
+                            <p>Una versión portátil de la estética Sonora, pensada como detalle adicional para acompañar una pieza.</p>
+                            <span class="object-meta">COMPLEMENTO · SONORA</span>
                         </div>
                     </div>
                 </article>
             </div>
-            <p class="objects-cta">Disponibles como complementos dentro del proceso de pedido.</p>
+            <p class="objects-cta">Disponibilidad y combinaciones · <a href="https://wa.me/523332227033?text=Hola%20Etéreo.%20Quiero%20conocer%20los%20formatos%20de%20la%20Colección%20Sonora." target="_blank" rel="noopener noreferrer">consultar por WhatsApp</a></p>
         </section>
 
         <!-- 5. EL EMPAQUE (RITUAL DE APERTURA) OCULTO TEMPORALMENTE 
@@ -774,14 +915,9 @@
                 </div>
 
                 <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 2px;">
-                    <a href="https://p.etereomx.com" class="price-badge" aria-label="Conocer PET ID" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                        Conocer PET ID
-                        <i data-lucide="arrow-up-right" size="13"></i>
-                    </a>
-                    <a href="https://app.etereomx.com/ordenar?producto=Pet_ID_Inteligente" class="petid-link" aria-label="Solicitar PET ID">
-                        Solicitar PET ID
-                        <i data-lucide="arrow-up-right" size="13"></i>
-                    </a>
+                    <button type="button" class="price-badge whatsapp-trigger" data-product="Pet ID Inteligente" data-product-key="Pet_ID_Inteligente">Adquirir edición</button>
+                    <span class="availability-note" data-availability-note="Pet_ID_Inteligente">Actualmente no disponible</span>
+                    <a href="https://p.etereomx.com" class="petid-link" aria-label="Ver PET ID en p.etereomx.com" target="_blank" rel="noopener noreferrer">Ver PET ID <i data-lucide="arrow-up-right" size="13"></i></a>
                 </div>
                 <div class="scarcity-note" style="margin-top: 15px;"><i data-lucide="calendar-clock" size="13"></i> Manufactura 3–5 días</div>
             </div>
@@ -803,7 +939,7 @@
                     <span class="eyebrow">Objeto sentimental</span>
                     <h3>Corazón</h3>
                     <p>Pequeños objetos pensados para pareja y vínculo. Una línea íntima, independiente de la tecnología NFC.</p>
-                    <div class="future-label">Disponible por encargo</div>
+                    <div class="future-label">Próximamente · disponibilidad no activa</div>
                 </article>
                 <article class="future-card">
                     <span class="eyebrow">Joyería · Próximamente</span>
@@ -1003,10 +1139,21 @@
 
         document.querySelectorAll('.whatsapp-trigger').forEach(button => {
             button.addEventListener('click', function() {
+                if (this.getAttribute('aria-disabled') === 'true') return;
                 const productName = this.getAttribute('data-product');
                 trackContact(productName);
-                // Redirigir al nuevo formulario de captura híbrido en app.etereomx
+                // Redirigir al flujo público de captura de pedido.
                 window.location.href = `https://app.etereomx.com/ordenar?producto=${encodeURIComponent(productName)}`;
+            });
+        });
+
+        document.querySelectorAll('.mixtape-link, .mixtape-whatsapp').forEach(link => {
+            link.addEventListener('click', event => {
+                if (link.getAttribute('aria-disabled') === 'true') {
+                    event.preventDefault();
+                    return;
+                }
+                trackContact('Mixtape');
             });
         });
 
@@ -1014,6 +1161,69 @@
         document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
             link.addEventListener('click', () => trackContact('link_directo'));
         });
+
+        /* =========================================
+           CATÁLOGO PÚBLICO — DISPONIBILIDAD DESDE SUPABASE
+           El backend sigue siendo la fuente de verdad; esta capa solo refleja el estado visual.
+           ========================================= */
+        const PUBLIC_CATALOG_URL = 'https://azihozkxamqthvgqfdba.supabase.co/rest/v1/catalog_products';
+        const PUBLIC_CATALOG_KEY = 'sb_publishable_0OBtYGvR-o7oqIUBd-FJKg_XWCRVV_h';
+
+        async function syncCatalogAvailability() {
+            const controls = Array.from(document.querySelectorAll('[data-product-key]'));
+            if (!controls.length) return;
+
+            try {
+                const response = await fetch(`${PUBLIC_CATALOG_URL}?select=product_key,available`, {
+                    headers: {
+                        apikey: PUBLIC_CATALOG_KEY
+                    },
+                    cache: 'no-store'
+                });
+
+                if (!response.ok) {
+                    throw new Error(`CATALOG_HTTP_${response.status}`);
+                }
+
+                const rows = await response.json();
+                const availability = Object.fromEntries(
+                    rows.map(row => [row.product_key, Boolean(row.available)])
+                );
+
+                controls.forEach(control => {
+                    const key = control.dataset.productKey;
+                    if (!(key in availability)) return;
+
+                    const available = availability[key];
+                    const note = document.querySelector(`[data-availability-note="${key}"]`);
+
+                    control.classList.toggle('is-unavailable', !available);
+                    control.setAttribute('aria-disabled', String(!available));
+
+                    if (control.tagName === 'BUTTON') {
+                        control.disabled = !available;
+                    }
+
+                    if (!available) {
+                        if (control.classList.contains('mixtape-link')) {
+                            control.textContent = 'No disponible';
+                        } else if (control.classList.contains('whatsapp-trigger')) {
+                            control.textContent = 'No disponible';
+                        } else if (control.classList.contains('mixtape-whatsapp')) {
+                            control.textContent = 'Mixtape no disponible';
+                        }
+
+                        if (note) note.classList.add('visible');
+                    }
+                });
+            } catch (error) {
+                // Fallo de lectura: no marcamos productos como no disponibles.
+                // Los RPC de pedido continúan siendo la autoridad de seguridad.
+                console.warn('No se pudo sincronizar la disponibilidad pública:', error);
+            }
+        }
+
+        syncCatalogAvailability();
 
         /* =========================================
            REPRODUCTOR WAVESURFER
