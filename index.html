@@ -213,6 +213,16 @@
         .hero-actions a:hover { border-color: var(--accent); color: var(--accent); }
         .hero-actions a.primary:hover { background: transparent; }
 
+        .hero-showcase { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 460px; width: 100%; margin-top: 24px; }
+        .hero-thumb { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border: 1px solid var(--card-border); background: var(--bg-raise); border-radius: 2px; text-decoration: none; transition: border-color 0.3s ease, transform 0.3s ease; }
+        .hero-thumb:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .hero-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hero-thumb span { position: absolute; left: 6px; bottom: 6px; padding: 2px 6px; background: rgba(18, 16, 22, 0.82); color: #EDE6D6; font-family: 'Space Mono', monospace; font-size: 0.5rem; letter-spacing: 1px; text-transform: uppercase; border-radius: 1px; }
+
+        .trust-line { margin-top: 10px; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.5px; color: var(--text-color); opacity: 0.82; }
+        .digital-direct-link { display: inline-flex; align-items: center; gap: 6px; padding: 13px 16px; border: 1px solid var(--card-border); color: var(--text-color); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; border-radius: 2px; transition: 0.3s; }
+        .digital-direct-link:hover { border-color: var(--accent); color: var(--accent); }
+
         .about-section { max-width: 920px; margin: 0 auto; padding: 80px 20px 80px; text-align: center; border-top: 1px solid var(--card-border); }
         .about-section p { max-width: 720px; margin: 16px auto 0; font-size: 1rem; opacity: 0.86; }
         .about-meta { margin-top: 24px; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
@@ -233,7 +243,18 @@
         .complements-head { text-align: center; max-width: 720px; margin: 0 auto 42px; }
         .complements-head h2 { margin-top: 6px; }
         .complements-head p { margin-top: 14px; font-size: .95rem; opacity: .8; }
-        .complements-list { border-top: 1px solid var(--card-border); }
+        .complements-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+        .complement-card { display: flex; flex-direction: column; border: 1px solid var(--card-border); background: var(--bg-raise); border-radius: 2px; overflow: hidden; transition: border-color 0.3s ease; }
+        .complement-card:hover { border-color: var(--accent); }
+        .complement-card-media { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-bottom: 1px solid var(--card-border); background: #121016; }
+        .complement-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+        .complement-card:hover .complement-card-media img { transform: scale(1.03); }
+        .complement-card-body { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+        .complement-card-body h3 { font-size: 1.15rem; margin: 6px 0 8px; }
+        .complement-card-body p { font-size: 0.84rem; opacity: 0.8; line-height: 1.5; flex: 1; }
+        .complement-card-prices { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-family: 'Space Mono', monospace; font-size: 0.62rem; }
+        .complement-card-prices strong { color: var(--title-color); font-size: 0.72rem; }
+        @media (max-width: 860px) { .complements-grid { grid-template-columns: 1fr; } }
         .complement-item { border-bottom: 1px solid var(--card-border); }
         .complement-toggle { width: 100%; border: 0; background: transparent; color: var(--title-color); padding: 19px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; cursor: pointer; text-align: left; }
         .complement-toggle:hover .complement-toggle-main strong { color: var(--accent); }
@@ -546,7 +567,6 @@
             <a href="#mixtape">Mixtape</a>
             <a href="#complementos">Llaveros</a>
             <a href="#mascotas">Mascotas</a>
-            <a href="#vinculos">Vínculos</a>
             <a href="#estudio">Estudio</a>
         </div>
         <div class="nav-actions">
@@ -563,7 +583,6 @@
         <a href="#mixtape">Mixtape NFC</a>
         <a href="#complementos">Llaveros y complementos</a>
         <a href="#mascotas">Mascotas · Pet ID</a>
-        <a href="#vinculos">Vínculos</a>
         <a href="#estudio">Estudio</a>
     </div>
 
@@ -601,6 +620,21 @@
 
         <div class="hero-actions">
             <a href="https://wa.me/523332227033?text=Hola%20Etéreo.%20Quiero%20conocer%20sus%20productos." target="_blank" rel="noopener noreferrer">Hablar con Etéreo <i data-lucide="message-circle" size="14"></i></a>
+        </div>
+
+        <div class="hero-showcase" aria-label="Vista rápida de piezas Etéreo">
+            <a href="#colecciones" class="hero-thumb">
+                <img src="./onda-sonora.png" alt="Cuadro Sonoro NFC">
+                <span>Sonora</span>
+            </a>
+            <a href="#colecciones" class="hero-thumb">
+                <img src="./mapa-clasico.png" alt="Mapa Estelar personalizado">
+                <span>Estelar</span>
+            </a>
+            <a href="#mixtape" class="hero-thumb">
+                <img src="./cassette-etereo.png" alt="Mixtape NFC">
+                <span>Mixtape</span>
+            </a>
         </div>
     </header>
 
@@ -673,8 +707,12 @@
                     </div>
                 </div>
 
-                <div class="price-line">Digital: <strong>$49</strong> · Enmarcados: <strong>$179</strong> · <strong>$199</strong> · <strong>$299 MXN</strong></div>
-                <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Sonora" data-product-key="Coleccion_Sonora" style="margin-top: 14px;">Personalizar Cuadro Sonoro</button>
+                <div class="price-line">Digital (entrega &lt;24h): <strong>$49</strong> · Enmarcados: <strong>$179</strong> · <strong>$199</strong> · <strong>$299 MXN</strong></div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 14px;">
+                    <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Sonora" data-product-key="Coleccion_Sonora" style="margin-top: 0;">Personalizar Cuadro Sonoro</button>
+                    <a class="digital-direct-link" href="https://app.etereomx.com/ordenar?producto=Coleccion_Sonora&variante=Digital">Solo Digital ($49) →</a>
+                </div>
+                <div class="trust-line">✓ Revisas y apruebas tu diseño digital antes de fabricar · Pick-up sin costo en GDL</div>
                 <span class="availability-note" data-availability-note="Coleccion_Sonora">Actualmente no disponible</span>
             </div>
         </div>
@@ -720,8 +758,12 @@
                 <span class="eyebrow">Colección Astronómica</span>
                 <h3>El cielo, esa noche</h3>
                 <p>Calculamos con exactitud matemática la posición de los cuerpos celestes en el instante exacto en que tu vida cambió para siempre.</p>
-                <div class="price-line">Digital: <strong>$49</strong> · Enmarcados: <strong>$179</strong> · <strong>$199</strong> · <strong>$299 MXN</strong></div>
-                <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Astronómica" data-product-key="Coleccion_Astronomica" style="margin-top: 14px;">Personalizar Mapa Estelar</button>
+                <div class="price-line">Digital (entrega &lt;24h): <strong>$49</strong> · Enmarcados: <strong>$179</strong> · <strong>$199</strong> · <strong>$299 MXN</strong></div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 14px;">
+                    <button type="button" class="price-badge whatsapp-trigger" data-product="Colección Astronómica" data-product-key="Coleccion_Astronomica" style="margin-top: 0;">Personalizar Mapa Estelar</button>
+                    <a class="digital-direct-link" href="https://app.etereomx.com/ordenar?producto=Coleccion_Astronomica&variante=Digital">Solo Digital ($49) →</a>
+                </div>
+                <div class="trust-line">✓ Revisas y apruebas tu diseño digital antes de fabricar · Pick-up sin costo en GDL</div>
                 <span class="availability-note" data-availability-note="Coleccion_Astronomica">Actualmente no disponible</span>
             </div>
         </div>
@@ -810,6 +852,7 @@
             </div>
         </div>
 
+        <!-- HUELLA Y VÍNCULOS/SONTER — PAUSADOS TEMPORALMENTE PARA ENFOCAR CONVERSIÓN
         <div class="pet-future-note fade-in">
             <span class="eyebrow">En desarrollo</span>
             <strong>Huella</strong>
@@ -830,6 +873,7 @@
                 </article>
             </div>
         </div>
+        -->
 
     </section>
 
@@ -841,100 +885,52 @@
             <p>Pídelos como <strong>pieza independiente</strong> (recoge en Ciberdragon desde 1 pieza, o con envío a partir de 2 piezas) o añádelos con <strong>precio especial de complemento</strong> a cualquier cuadro, Mixtape o Pet ID.</p>
         </div>
 
-        <div class="complements-list">
-            <article class="complement-item">
-                <button type="button" class="complement-toggle" aria-expanded="false">
-                    <span class="complement-toggle-main">
-                        <span class="complement-code">01</span>
-                        <span>
-                            <strong>Corazón a Dos</strong>
-                            <small>Pareja · 2 llaveros · sin NFC</small>
-                        </span>
-                    </span>
-                    <span class="complement-toggle-side">
-                        <span>$59 MXN · +$45 comp.</span>
-                        <i data-lucide="plus" size="17"></i>
-                    </span>
-                </button>
-                <div class="complement-panel">
-                    <div class="complement-media">
-                        <img src="./llavero-corazon-etereo.png" alt="Corazón tipo LEGO con dos llaveros unidos de Etéreo" loading="lazy">
+        <div class="complements-grid">
+            <article class="complement-card">
+                <div class="complement-card-media">
+                    <img src="./llavero-corazon-etereo.png" alt="Corazón tipo LEGO con dos llaveros unidos de Etéreo" loading="lazy">
+                </div>
+                <div class="complement-card-body">
+                    <span class="complement-kicker">01 · VÍNCULO · 2 PERSONAS</span>
+                    <h3>Corazón a Dos</h3>
+                    <p>Un corazón tipo LEGO que une dos llaveros, uno para cada persona. Un pequeño objeto para compartir un mismo recuerdo.</p>
+                    <div class="complement-card-prices">
+                        <span>Suelto <strong>$59 MXN</strong></span>
+                        <span>Complemento <strong>+$45 MXN</strong></span>
                     </div>
-                    <div class="complement-copy">
-                        <span class="complement-kicker">VÍNCULO · 2 PERSONAS</span>
-                        <h3>Corazón a Dos</h3>
-                        <p>Un corazón tipo LEGO que une dos llaveros, uno para cada persona. Un pequeño objeto para compartir un mismo recuerdo.</p>
-                        <div class="complement-fit">Acompaña especialmente · Sonora · Mixtape · Astronómica · Terrenal</div>
-                        <div class="complement-detail-row">
-                            <span>SIN NFC · 2 LLAVEROS UNIDOS</span>
-                            <strong>Suelto $59 · Complemento +$45 MXN</strong>
-                        </div>
-                        <a class="complement-cta-inline" href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo.%20Quiero%20pedir%20el%20llavero%20Coraz%C3%B3n%20a%20Dos%20(%2459%20MXN)." target="_blank" rel="noopener noreferrer">Pedir Corazón a Dos <i data-lucide="message-circle" size="12"></i></a>
-                    </div>
+                    <a class="complement-cta-inline" href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo.%20Quiero%20pedir%20el%20llavero%20Coraz%C3%B3n%20a%20Dos%20(%2459%20MXN)." target="_blank" rel="noopener noreferrer">Pedir Corazón a Dos <i data-lucide="message-circle" size="12"></i></a>
                 </div>
             </article>
 
-            <article class="complement-item">
-                <button type="button" class="complement-toggle" aria-expanded="false">
-                    <span class="complement-toggle-main">
-                        <span class="complement-code">02</span>
-                        <span>
-                            <strong>Surco NFC</strong>
-                            <small>Memoria digital · formato portátil</small>
-                        </span>
-                    </span>
-                    <span class="complement-toggle-side">
-                        <span>$89 MXN · +$70 comp.</span>
-                        <i data-lucide="plus" size="17"></i>
-                    </span>
-                </button>
-                <div class="complement-panel">
-                    <div class="complement-media">
-                        <img src="./vinilo-nfc.png" alt="Vinilo NFC de Etéreo" loading="lazy">
+            <article class="complement-card">
+                <div class="complement-card-media">
+                    <img src="./vinilo-nfc.png" alt="Vinilo NFC de Etéreo" loading="lazy">
+                </div>
+                <div class="complement-card-body">
+                    <span class="complement-kicker">02 · MEMORIA DIGITAL · NFC</span>
+                    <h3>Surco NFC</h3>
+                    <p>Llavero tipo vinilo con chip NFC para llevar tu canción, dedicatoria o experiencia digital contigo a todos lados.</p>
+                    <div class="complement-card-prices">
+                        <span>Suelto <strong>$89 MXN</strong></span>
+                        <span>Complemento <strong>+$70 MXN</strong></span>
                     </div>
-                    <div class="complement-copy">
-                        <span class="complement-kicker">MEMORIA DIGITAL · NFC</span>
-                        <h3>Surco NFC</h3>
-                        <p>Llavero tipo vinilo con chip NFC para llevar tu canción, dedicatoria o experiencia digital contigo a todos lados.</p>
-                        <div class="complement-fit">Acompaña especialmente · Sonora · Mixtape · Astronómica · Terrenal</div>
-                        <div class="complement-detail-row">
-                            <span>NFC · FORMATO PORTÁTIL</span>
-                            <strong>Suelto $89 · Complemento +$70 MXN</strong>
-                        </div>
-                        <a class="complement-cta-inline" href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo.%20Quiero%20pedir%20el%20llavero%20Surco%20NFC%20(%2489%20MXN)." target="_blank" rel="noopener noreferrer">Pedir Surco NFC <i data-lucide="message-circle" size="12"></i></a>
-                    </div>
+                    <a class="complement-cta-inline" href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo.%20Quiero%20pedir%20el%20llavero%20Surco%20NFC%20(%2489%20MXN)." target="_blank" rel="noopener noreferrer">Pedir Surco NFC <i data-lucide="message-circle" size="12"></i></a>
                 </div>
             </article>
 
-            <article class="complement-item">
-                <button type="button" class="complement-toggle" aria-expanded="false">
-                    <span class="complement-toggle-main">
-                        <span class="complement-code">03</span>
-                        <span>
-                            <strong>Cara B NFC</strong>
-                            <small>Sonido · llavero · formato portátil</small>
-                        </span>
-                    </span>
-                    <span class="complement-toggle-side">
-                        <span>$99 MXN · +$80 comp.</span>
-                        <i data-lucide="plus" size="17"></i>
-                    </span>
-                </button>
-                <div class="complement-panel">
-                    <div class="complement-media">
-                        <img src="./llavero-cassette.png" alt="Llavero cassette NFC de Etéreo" loading="lazy">
+            <article class="complement-card">
+                <div class="complement-card-media">
+                    <img src="./llavero-cassette.png" alt="Llavero cassette NFC de Etéreo" loading="lazy">
+                </div>
+                <div class="complement-card-body">
+                    <span class="complement-kicker">03 · SONIDO · NFC</span>
+                    <h3>Cara B NFC</h3>
+                    <p>Llavero con forma de cassette y chip NFC, pensado para llevar contigo la experiencia sonora y reproducirla al acercar tu teléfono.</p>
+                    <div class="complement-card-prices">
+                        <span>Suelto <strong>$99 MXN</strong></span>
+                        <span>Complemento <strong>+$80 MXN</strong></span>
                     </div>
-                    <div class="complement-copy">
-                        <span class="complement-kicker">SONIDO · NFC</span>
-                        <h3>Cara B NFC</h3>
-                        <p>Llavero con forma de cassette y chip NFC, pensado para llevar contigo la experiencia sonora y reproducirla al acercar tu teléfono.</p>
-                        <div class="complement-fit">Acompaña especialmente · Sonora · Mixtape</div>
-                        <div class="complement-detail-row">
-                            <span>NFC · FORMATO PORTÁTIL</span>
-                            <strong>Suelto $99 · Complemento +$80 MXN</strong>
-                        </div>
-                        <a class="complement-cta-inline" href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo.%20Quiero%20pedir%20el%20llavero%20Cara%20B%20NFC%20(%2499%20MXN)." target="_blank" rel="noopener noreferrer">Pedir Cara B NFC <i data-lucide="message-circle" size="12"></i></a>
-                    </div>
+                    <a class="complement-cta-inline" href="https://wa.me/523332227033?text=Hola%20Et%C3%A9reo.%20Quiero%20pedir%20el%20llavero%20Cara%20B%20NFC%20(%2499%20MXN)." target="_blank" rel="noopener noreferrer">Pedir Cara B NFC <i data-lucide="message-circle" size="12"></i></a>
                 </div>
             </article>
         </div>
@@ -1075,7 +1071,7 @@
             setTimeout(() => {
                 const p = document.getElementById('preloader');
                 if (p) p.classList.add('preloader-hidden');
-            }, 500);
+            }, 150);
         });
 
         try { lucide.createIcons(); } catch(e) { console.warn('Lucide no cargó:', e); }
